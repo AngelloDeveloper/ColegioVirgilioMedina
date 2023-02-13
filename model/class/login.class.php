@@ -6,6 +6,7 @@
         private $con;
         private $query;
         private $sql;
+        private $sql2;
         private $result;
 
         //constructor
@@ -35,6 +36,7 @@
         }
 
         public function session($idUser, $idUserType) {
+            session_start();
 
             switch ($idUserType) {
                 case '4':
@@ -92,6 +94,25 @@
                     WHERE 
                         usuarios.id = '{$idUser}'  
                 ";
+
+                $this->sql2 = "SELECT
+                        modulos.id as moduloId,
+                        modulos.titulo as moduloTitulo,
+                        modulos.descripcion as moduloDescripcion,
+                        sub_modulos.id as subModuloId,
+                        sub_modulos.titulo as subModuloTitulo,
+                        sub_modulos.descripcion as subModuloDescripcion,
+                        sub_modulos.url as subModuloUrl
+                    FROM
+                        tusuarios_smodulos
+                        LEFT JOIN sub_modulos ON tusuarios_smodulos.id_sub_modulo = sub_modulos.id
+                        LEFT JOIN modulos ON sub_modulos.id_modulo = modulos.id
+                    WHERE
+                        tusuarios_smodulos.id_tipo_usuario = '{$idUserType}' AND
+                        tusuarios_smodulos.access = 'Y' AND
+                        sub_modulos.status = 'Y' AND
+                        modulos.status = 'Y'
+                ";
                 break;
                 case '3':
                     # code...
@@ -107,7 +128,45 @@
             $this->query = mysqli_query($this->con, $this->sql);
             $this->result = mysqli_fetch_assoc($this->query);
             $_SESSION['user_data'] = $this->result;
-            return (!empty($_SESSION['user_data'])) ? 'SUCCESS' : 'FAIL';
+            $this->query = mysqli_query($this->con, $this->sql2);
+            $_SESSION['user_access'] = self::getStructureMenuAccess($this->query);
+            
+            return (!empty($_SESSION)) ? 'SUCCESS' : 'FAIL';
+        }
+
+        public function getModules() {
+            $this->sql = "SELECT
+                    *
+                FROM
+                    modulos
+            ";
+            $this->query = mysqli_query($this->con, $this->sql);
+            while ($row = mysqli_fetch_assoc($this->query)) { 
+                $rows[] = $row; 
+            } 
+            $this->result = $rows;
+            return $this->result;
+        }
+
+        public function getStructureMenuAccess($userTypeModules) {
+            $modulos = self::getModules();
+            while ($row = mysqli_fetch_assoc($userTypeModules)) {  
+                foreach($modulos as $modulo) {
+                    if($modulo['id'] == $row['moduloId']) {
+                        $rows[$modulo['titulo']]['subModulos'][$row['subModuloId']]['titulo'] = $row['subModuloTitulo'];
+                        $rows[$modulo['titulo']]['subModulos'][$row['subModuloId']]['descripcion'] = $row['subModuloDescripcion'];
+                        $rows[$modulo['titulo']]['subModulos'][$row['subModuloId']]['url'] = $row['subModuloUrl'];
+                    } 
+                }  
+            } 
+
+            return $rows;
+        }
+
+        public function clouse_session() {
+            session_start();
+            session_destroy();
+            header('Location: http://localhost/ColegioVirgilioMedina/');
         }
     }
 ?>

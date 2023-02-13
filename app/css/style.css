@@ -7580,7 +7580,7 @@ sub {
   left: auto; }
 
 .nav-header {
-  height: 5rem;
+  height: 15rem;
   width: 15.1875rem;
   display: inline-block;
   text-align: left;
@@ -8141,7 +8141,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
   padding-bottom: 112px;
   height: 100%;
   position: absolute;
-  top: 5rem;
+  top: 15rem;
   padding-top: 0;
   z-index: 99;
   background: #fff;
@@ -14010,7 +14010,7 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
   padding-right: 15rem; }
 
 [data-nav-headerbg="color_1"] .nav-header {
-  background-color: #7571f9; }
+  background-color: #d7d6e9; }
 
 [data-nav-headerbg="color_2"] .nav-header {
   background-color: #27394F !important; }

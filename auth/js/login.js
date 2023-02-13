@@ -101,7 +101,7 @@ $(function() {
 				})
 
 				setTimeout(() => {
-					window.location.replace('http://localhost/ColegioVirgilioMedina/app/index.html');
+					window.location.replace('http://localhost/ColegioVirgilioMedina/app/index.php');
 				}, 3100);
 			}
 
