@@ -11,9 +11,11 @@
 
         //constructor
         public function __construct($arrData='') {
-            $this->email = $arrData['email'];
-            $this->pw = md5("{$arrData['password']}");
-            $this->con = $this->conexion();
+            if(!empty($arrData)) {
+                $this->email = $arrData['email'];
+                $this->pw = md5("{$arrData['password']}");
+                $this->con = $this->conexion();
+            }
         }
         //methods
         public function validation() {
@@ -163,10 +165,9 @@
             return $rows;
         }
 
-        public function clouse_session() {
+        public function logout() {
             session_start();
             session_destroy();
-            header('Location: http://localhost/ColegioVirgilioMedina/');
         }
     }
 ?>

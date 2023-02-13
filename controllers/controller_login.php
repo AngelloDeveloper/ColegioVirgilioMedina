@@ -35,4 +35,13 @@
             ]);
         }
     }
+
+    if(!empty($_POST) && $_POST['type'] == 'logout') {
+        $objLogin = new Login();
+        $objLogin->logout();
+        echo json_encode([
+            'STATUS' => 'SUCCESS',
+            'MESSAGES' => 'Cerrando session, Vuelve pronto.'
+        ]);
+    }
 ?>
