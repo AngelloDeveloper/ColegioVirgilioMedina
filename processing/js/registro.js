@@ -17,87 +17,97 @@ $(function() {
                     <div class="container p-4">
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Nombres <span style="color: #960032;"><b>*</b></span></label>
-                                    <input id="nombre_estudiante" type="text" placeholder="Nombres" class="form-control input" required/>
+                                <div class="form-group input-field">
+                                    <input id="nombre_estudiante" type="text" class="form-control" required/>
+                                    <label for="nombre_estudiante">Nombres <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Apellidos <span style="color: #960032;"><b>*</b></span></label>
-                                    <input id="apellido_estudiante" type="text" placeholder="Apellidos" class="form-control input" required/>
+                                <div class="form-group input-field">
+                                    <input id="apellido_estudiante" type="text" class="form-control" required/>
+                                    <label for="apellido_estudiante">Apellidos <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Tipo de documento <span style="color: #960032;"><b>*</b></span></label>
-                                    <select id="tipo_documento_estudiante" class="form-control input">
+                                <div class="input-field">
+                                    <select id="tipo_documento_estudiante">
                                         <option value="V">V-</option>
                                         <option value="E">E-</option>
                                     </select>
+                                    <label>Tipo de documento <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Documento <span style="color: #960032;"><b>*</b></span></label>
-                                    <input id="documento_estudiante" type="text" placeholder="12345678" class="form-control input" required/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label>Fecha de Nacimiento <span style="color: #960032;"><b>*</b></span></label>
-                                    <input id="fechaNacimiento_estudiante" type="date" class="form-control input" required/>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label>Edad <span style="color: #960032;"><b>*</b></span></label>
-                                    <input id="edad_estudiante" type="number" placeholder="13" class="form-control input" required/>
+                                <div class="form-group input-field">
+                                    <input id="documento_estudiante" type="text" class="form-control" required/>
+                                    <label for="documento_estudiante">Documento de Identidad <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Nacionalidad <span style="color: #960032;"><b>*</b></span></label>
-                                    <select id="nacionalidad_estudiante" class="form-control input">
+                                <div class="form-group input-field">
+                                    <input id="fechaNacimiento_estudiante"  type="text" class="datepicker" required/>
+                                    <label for="fechaNacimiento_estudiante">Fecha de Nacimiento <span style="color: #960032;"><b>*</b></span></label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group input-field">
+                                    <input id="edad_estudiante" type="number" class="form-control" required/>
+                                    <label for="edad_estudiante">Edad <span style="color: #960032;"><b>*</b></span></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group input-field">
+                                    <select id="nacionalidad_estudiante">
                                         <option value="VEN">Venezolana</option>
                                         <option value="COL">Colombiana</option>
                                     </select>
+                                    <label for="nacionalidad_estudiante">Nacionalidad <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Correo Electrónico <span style="color: #960032;"><b>*</b></span></label>
-                                    <input id="email_estudiante" type="email" class="form-control input" placeholder="email@gmail.com" required/>
+                                <div class="form-group input-field">
+                                    <input id="email_estudiante" type="email" class="form-control" required/>
+                                    <label for="email_estudiante">Correo Electrónico <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Dirección de Residencia <span style="color: #960032;"><b>*</b></span></label>
-                                    <textarea id="direccion_estudiante" type="text" placeholder="urbanización calle #" class="form-control input" required></textarea>
+                                <div class="form-group input-field">
+                                    <textarea id="direccion_estudiante" type="text" class="materialize-textarea" required /></textarea>
+                                    <label for="direccion_estudiante">Dirección de Residencia <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <label>Genero <span style="color: #960032;"><b>*</b></span></label>
                                 <div class="form-group pt-2">
-                                    <input id="masculino_estudiante" type="radio" name="genero" class="radio" checked="checked" /> Masculino
-                                    <input id="femenino_estudiante" type="radio" name="genero" class="radio ml-4" /> Femenino
+                                    <span>
+                                        <label>
+                                            <input id="masculino_estudiante" name="genero" checked="checked" class="with-gap"  type="radio"  /> 
+                                            <span>Masculino</span>
+                                        </label>
+                                    </span>
+                                    <span>
+                                        <label>
+                                            <input id="femenino_estudiante" name="genero" type="radio" class="with-gap"  class="radio ml-4" />
+                                            <span>Femenino</span>
+                                        </label>
+                                    </span>
                                 </div>
                             </div>
                         </div>
+
                         <hr />
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Talla de Camisa</label>
-                                    <select id="tallaCamisa_estudiante" class="form-control input">
+                                <div class="form-group input-field">
+                                    <select id="tallaCamisa_estudiante">
                                         <option value="N">Seleccionar...</option>
                                         <option value="S">S</option>
                                         <option value="M">M</option>
@@ -105,12 +115,12 @@ $(function() {
                                         <option value="L">L</option>
                                         <option value="XL">XL</option>
                                     </select>
+                                    <label for="tallaCamisa_estudiante">Talla de Camisa</label>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Talla de Pantalon</label>
-                                    <select id="tallaPatalon_estudiante" class="form-control input">
+                                <div class="form-group input-field">
+                                    <select id="tallaPatalon_estudiante">
                                         <option value="N">Seleccionar...</option>
                                         <option value="S">S</option>
                                         <option value="M">M</option>
@@ -118,29 +128,28 @@ $(function() {
                                         <option value="L">L</option>
                                         <option value="XL">XL</option>
                                     </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                        
-                            <div class="col-4">
-                                <label>Estatura (Mts)</label>
-                                <div class="form-group">
-                                    <input id="estatura_estudiante" type="text" placeholder="ej: 1.64" class="form-control input" />
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label>Peso (Kg)</label>
-                                    <input id="peso_estudiante" type="number" placeholder="ej: 58" class="form-control input" />
+                                    <label for="tallaPatalon_estudiante">Talla de Pantalon</label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Grupo Sanguineo</label>
-                                    <select id="grupoSanguineo_estudiante" class="form-control input">
+                                <div class="form-group input-field">
+                                    <input id="estatura_estudiante" type="text" />
+                                    <label for="estatura_estudiante">Estatura (Mts)</label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group input-field">
+                                    <input id="peso_estudiante" type="number" />
+                                    <label for="peso_estudiante">Peso (Kg)</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group input-field">
+                                    <select id="grupoSanguineo_estudiante" >
                                         <option value="N">Seleccionar...</option>
                                         <option value="A+">A+</option>
                                         <option value="O+">O+</option>
@@ -151,12 +160,13 @@ $(function() {
                                         <option value="B-">B-</option>
                                         <option value="AB-">AB-</option>
                                     </select>
+                                    <label for="grupoSanguineo_estudiante">Grupo Sanguineo</label>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Discapacidad</label>
-                                    <textarea id="discapacidad_estudiante" type="text" placeholder="mencione su discapacidad" class="form-control input"></textarea>
+                                <div class="form-group input-field">
+                                    <textarea id="discapacidad_estudiante" class="materialize-textarea" ></textarea>
+                                    <label for="discapacidad_estudiante">Discapacidad</label>
                                 </div>
                             </div>
                         </div>
@@ -165,18 +175,28 @@ $(function() {
                                 <div class="form-group">
                                     <center>
                                         <label>Informe Médico</label>
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="informeMedico">
-                                            <label class="custom-control-label" for="informeMedico">No / Si</label>
+                                        <div class="switch">
+                                            <label>
+                                            No
+                                            <input type="checkbox" id="informeMedico" />
+                                            <span class="lever"></span>
+                                            Si
+                                            </label>
                                         </div>
                                     </center>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div id="content_informe_medico" style="display: none" class="form-group">
+                                <div id="content_informe_medico" style="display: none">
                                     <label>Adjuntar Informe</label>
-                                    <div class="form-group pt-2">
-                                        <input id="informeMedicoDocumento" type="file" /> 
+                                    <div class="file-field input-field pt-2">
+                                        <div class="btn materialcustom">
+                                            <span>File</span>
+                                            <input type="file" multiple>
+                                        </div>
+                                        <div class="file-path-wrapper">
+                                            <input id="informeMedicoDocumento" class="file-path validate" type="text" placeholder="Upload one or more files">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -186,18 +206,22 @@ $(function() {
                                 <div class="form-group">
                                     <center>
                                         <label>¿ Es Alergico ?</label>
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="alergico">
-                                            <label class="custom-control-label" for="alergico">No / Si</label>
+                                        <div class="switch">
+                                            <label>
+                                            No
+                                            <input type="checkbox" id="alergico" />
+                                            <span class="lever"></span>
+                                            Si
+                                            </label>
                                         </div>
                                     </center>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div id="content_alergico" style="display:none" class="form-group">
-                                    <label>¿ a que ?</label>
-                                    <div class="form-group pt-2">
-                                        <input id="alergicoDescripcion" type="text" placeholder="indicar alergia" class="form-control input"/>
+                                    <div class="form-group input-field">
+                                        <input id="alergicoDescripcion" type="text" />
+                                        <label for="alergicoDescripcion">¿ a que ?</label>
                                     </div>
                                 </div>
                             </div>
@@ -207,18 +231,22 @@ $(function() {
                                 <div class="form-group">
                                     <center>
                                         <label>¿ Padece alguna enfermedad ?</label>
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="enfermedad">
-                                            <label class="custom-control-label" for="enfermedad">No / Si</label>
+                                        <div class="switch">
+                                            <label>
+                                            No
+                                            <input type="checkbox" id="enfermedad" />
+                                            <span class="lever"></span>
+                                            Si
+                                            </label>
                                         </div>
                                     </center>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div id="content_enfermedad" style="display:none" class="form-group">
-                                    <label>¿ cual ?</label>
-                                    <div class="form-group pt-2">
-                                        <input id="enfermedadDescripcion" type="text" placeholder="indicar enfermedad" class="form-control input"/>
+                                    <div class="form-group input-field">
+                                        <input id="enfermedadDescripcion" type="text"/>
+                                        <label for="enfermedadDescripcion">¿ cual ?</label>
                                     </div>
                                 </div>
                             </div>
@@ -228,18 +256,22 @@ $(function() {
                                 <div class="form-group">
                                     <center>
                                         <label>¿ Consume Medicamentos ?</label>
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="medicamentos">
-                                            <label class="custom-control-label" for="medicamentos">No / Si</label>
+                                        <div class="switch">
+                                            <label>
+                                            No
+                                            <input type="checkbox" id="medicamentos" />
+                                            <span class="lever"></span>
+                                            Si
+                                            </label>
                                         </div>
                                     </center>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div id="content_medicamentos" style="display:none" class="form-group">
-                                    <label>Mencionelos</label>
-                                    <div class="form-group pt-2">
-                                        <textarea id="medicamentosDescripcion" placeholder="indicar Medicamentos" class="form-control input" ></textarea>
+                                    <div class="form-group input-field">
+                                        <textarea id="medicamentosDescripcion" class="materialize-textarea"></textarea>
+                                        <label for="medicamentosDescripcion">Mencionelos</label>
                                     </div>
                                 </div>
                             </div>
@@ -262,143 +294,154 @@ $(function() {
                     <div class="container p-4">
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Nombre <span style="color: #960032;"><b>*</b></span></label>
-                                    <input id="nombre_madre" type="text" placeholder="indicar Nombre de la madre" class="form-control input" required />
+                                <div class="form-group input-field">
+                                    <input id="nombre_madre" type="text" required />
+                                    <label for="nombre_madre">Nombre <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Apellido <span style="color: #960032;"><b>*</b></span></label>
-                                    <input id="apellido_madre" type="text" placeholder="indicar Apellido de la madre" class="form-control input" required />
+                                <div class="form-group input-field">
+                                    <input id="apellido_madre" type="text" required />
+                                    <label for="apellido_madre">Apellido <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Tipo de documento <span style="color: #960032;"><b>*</b></span></label>
-                                    <select id="tipo_documento_madre" class="form-control input">
+                                <div class="form-group input-field">
+                                    <select id="tipo_documento_madre">
                                         <option value="V">V-</option>
                                         <option value="E">E-</option>
                                     </select>
+                                    <label>Tipo de documento <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Documento <span style="color: #960032;"><b>*</b></span></label>
-                                    <input id="documento_madre" type="text" placeholder="12345678" class="form-control input" required/>
+                                <div class="form-group input-field">
+                                    <input id="documento_madre" type="text" required/>
+                                    <label for="documento_madre">Documento <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Fecha de Nacimiento <span style="color: #960032;"><b>*</b></span></label>
-                                    <input id="fecha_nacimiento_madre" type="date" class="form-control input" required/>
+                                <div class="form-group input-field">
+                                    <input id="fecha_nacimiento_madre" type="text" class="datepicker" required/>
+                                    <label for="fecha_nacimiento_madre">Fecha de Nacimiento <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Nacionalidad <span style="color: #960032;"><b>*</b></span></label>
-                                    <select id="nacionalidad_madre" class="form-control input">
+                                <div class="form-group input-field">
+                                    <select id="nacionalidad_madre">
                                         <option value="VEN">Venezolana</option>
                                         <option value="COL">Colombiana</option>
                                     </select>
+                                    <label for="nacionalidad_madre">Nacionalidad <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Edad <span style="color: #960032;"><b>*</b></span></label>
-                                    <input id="edad_madre" type="number" placeholder="indique edad" class="form-control input" required/>
+                                <div class="form-group input-field">
+                                    <input id="edad_madre" type="number" required/>
+                                    <label for="edad_madre">Edad <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Estado civil</label>
-                                    <select id="estado_civil_madre" class="form-control input">
+                                <div class="form-group input-field">
+                                    <select id="estado_civil_madre">
                                         <option value="N" selected>Seleccionar...</option>
                                         <option value="S">Soltero(a)</option>
                                         <option value="C">Casado(a)</option>
                                     </select>
+                                    <label for="estado_civil_madre">Estado civil</label>
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Nivel de Instruccion</label>
-                                    <select id="nivel_instruccion_madre" class="form-control input">
+                                <div class="form-group input-field">
+                                    <select id="nivel_instruccion_madre">
                                         <option value="N" selected>Seleccionar...</option>
                                         <option value="B">Bachiller</option>
                                         <option value="U">Estudios Universitarios</option>
                                         <option value="P">Post-Grado</option>
                                     </select>
+                                    <label for="nivel_instruccion_madre">Nivel de Instruccion</label>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Ocupación <span style="color: #960032;"><b>*</b></span></label>
-                                    <textarea id="ocupacion_madre" type="text" placeholder="indique su ocupacion" class="form-control input" required></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label>Lugar de trabajo <span style="color: #960032;"><b>*</b></span></label>
-                                    <textarea id="lugar_trabajo_madre" type="text" placeholder="indique su lugar de trabajo" class="form-control input" required></textarea>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label>Habilidad</label>
-                                    <textarea id="habilidad_madre" type="text" placeholder="indique su Habilidad" class="form-control input"></textarea>
+                                <div class="form-group input-field">
+                                    <textarea id="ocupacion_madre" class="materialize-textarea" required></textarea>
+                                    <label for="ocupacion_madre">Ocupación <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Direccion de residencia <span style="color: #960032;"><b>*</b></span></label>
-                                    <textarea id="direccion_residencia_madre" class="form-control input" placeholder="urb. calle #casa" required></textarea>
+                                <div class="form-group input-field">
+                                    <textarea id="lugar_trabajo_madre" class="materialize-textarea" required></textarea>
+                                    <label for="lugar_trabajo_madre">Lugar de trabajo <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Telefono Movil <span style="color: #960032;"><b>*</b></span></label>
-                                    <input id="telefono_movil_madre" type="number" placeholder="ej. 0424******" class="form-control input" required/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label>Telefono Residencial</label>
-                                    <input id="telefono_residencial_madre" type="number" placeholder="ej. 0212******" class="form-control input" />
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label>Telefono del lugar de trabajo</label>
-                                    <input id="telefono_trabajo_madre" type="number" placeholder="ej. 0212******" class="form-control input" />
+                                <div class="form-group input-field">
+                                    <textarea id="habilidad_madre" class="materialize-textarea"></textarea>
+                                    <label for="habilidad_madre">Habilidad</label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Religion</label>
-                                    <input id="religion_madre" type="text" placeholder="ej. catolico" class="form-control input" />
+                                <div class="form-group input-field">
+                                    <textarea id="direccion_residencia_madre" class="materialize-textarea" required></textarea>
+                                    <label for="direccion_residencia_madre">Direccion de residencia <span style="color: #960032;"><b>*</b></span></label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group input-field">
+                                    <input id="telefono_movil_madre" type="number" required/>
+                                    <label for="telefono_movil_madre">Telefono Movil <span style="color: #960032;"><b>*</b></span></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group input-field">
+                                    <input id="telefono_residencial_madre" type="number" />
+                                    <label for="telefono_residencial_madre">Telefono Residencial </label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group input-field">
+                                    <input id="telefono_trabajo_madre" type="number" />
+                                    <label for="telefono_trabajo_madre">Telefono del lugar de trabajo </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group input-field">
+                                    <input id="religion_madre" type="text" />
+                                    <label for="religion_madre">Religion</label>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <label>¿ Vive con el estudiante ? <span style="color: #960032;"><b>*</b></span></label>
                                 <div class="form-group pt-2">
-                                    <input id="vive_estudiante_madre" type="radio" name="vive" class="radio " checked="checked" /> Si
-                                    <input type="radio" name="vive" class="radio ml-4" /> No
+                                    <span>
+                                        <label>
+                                            <input id="vive_estudiante_madre" name="vive" checked="checked" class="with-gap"  type="radio"  /> 
+                                            <span>Si</span>
+                                        </label>
+                                    </span>
+                                    <span>
+                                        <label>
+                                            <input id="femenino_estudiante" name="vive" type="radio" class="with-gap"  class="radio ml-4" />
+                                            <span>No</span>
+                                        </label>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -422,143 +465,155 @@ $(function() {
                     <div class="container p-4">
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Nombre <span style="color: #960032;"><b>*</b></span></label>
-                                    <input id="nombre_padre" type="text" placeholder="indicar Nombre de la madre" class="form-control input" required />
+                                <div class="form-group input-field">
+                                    <input id="nombre_padre" type="text" required />
+                                    <label for="nombre_padre">Nombre <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Apellido <span style="color: #960032;"><b>*</b></span></label>
-                                    <input id="apellido_padre" type="text" placeholder="indicar Apellido de la madre" class="form-control input" required />
+                                <div class="form-group input-field">
+                                    <input id="apellido_padre" type="text" required />
+                                    <label for="apellido_padre">Apellido <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Tipo de documento <span style="color: #960032;"><b>*</b></span></label>
-                                    <select id="tipo_documento_padre" class="form-control input">
+                                <div class="form-group input-field">
+                                    <select id="tipo_documento_padre">
                                         <option value="V">V-</option>
                                         <option value="E">E-</option>
                                     </select>
+                                    <label for="tipo_documento_padre">Tipo de documento <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Documento <span style="color: #960032;"><b>*</b></span></label>
-                                    <input id="documento_padre" type="text" placeholder="12345678" class="form-control input" required/>
+                                <div class="form-group input-field">
+                                    <input id="documento_padre" type="text" required/>
+                                    <label for="documento_padre">Documento <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Fecha de Nacimiento <span style="color: #960032;"><b>*</b></span></label>
-                                    <input id="fecha_nacimiento_padre" type="date" class="form-control input" required/>
+                                <div class="form-group input-field">
+                                    <input id="fecha_nacimiento_padre" type="text" class="datepicker" required/>
+                                    <label for="fecha_nacimiento_padre">Fecha de Nacimiento <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Nacionalidad <span style="color: #960032;"><b>*</b></span></label>
-                                    <select id="nacionalidad_padre" class="form-control input">
+                                <div class="form-group input-field">
+                                    <select id="nacionalidad_padre">
                                         <option value="VEN">Venezolana</option>
                                         <option value="COL">Colombiana</option>
                                     </select>
+                                    <label for="nacionalidad_padre">Nacionalidad <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Edad <span style="color: #960032;"><b>*</b></span></label>
-                                    <input id="edad_padre" type="number" placeholder="indique edad" class="form-control input" required/>
+                                <div class="form-group input-field">
+                                    <input id="edad_padre" type="number" required/>
+                                    <label for="edad_padre">Edad <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Estado civil</label>
-                                    <select id="estado_civil_padre" class="form-control input">
+                                <div class="form-group input-field">
+                                    <select id="estado_civil_padre">
                                         <option value="N" selected>Seleccionar...</option>
                                         <option value="S">Soltero(a)</option>
                                         <option value="C">Casado(a)</option>
                                     </select>
+                                    <label for="estado_civil_padre">Estado civil</label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Nivel de Instruccion</label>
-                                    <select id="nivel_instruccion_padre" class="form-control input">
+                                <div class="form-group input-field">
+                                    <select id="nivel_instruccion_padre">
                                         <option value="N" selected>Seleccionar...</option>
                                         <option value="B">Bachiller</option>
                                         <option value="U">Estudios Universitarios</option>
                                         <option value="P">Post-Grado</option>
                                     </select>
+                                    <label for="nivel_instruccion_padre">Nivel de Instruccion</label>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Ocupación <span style="color: #960032;"><b>*</b></span></label>
-                                    <textarea id="ocupacion_padre" type="text" placeholder="indique su ocupacion" class="form-control input" required></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label>Lugar de trabajo <span style="color: #960032;"><b>*</b></span></label>
-                                    <textarea id="lugar_trabajo_padre" type="text" placeholder="indique su lugar de trabajo" class="form-control input" required></textarea>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label>Habilidad</label>
-                                    <textarea id="habilidad_padre" type="text" placeholder="indique su Habilidad" class="form-control input"></textarea>
+                                <div class="form-group input-field">
+                                    <textarea id="ocupacion_padre" class="materialize-textarea" required></textarea>
+                                    <label for="ocupacion_padre">Ocupación <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Direccion de residencia <span style="color: #960032;"><b>*</b></span></label>
-                                    <textarea id="direccion_residencia_padre" class="form-control input" placeholder="urb. calle #casa" required></textarea>
+                                <div class="form-group input-field">
+                                    <textarea id="lugar_trabajo_padre" class="materialize-textarea" required></textarea>
+                                    <label for="lugar_trabajo_padre">Lugar de trabajo <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Telefono Movil <span style="color: #960032;"><b>*</b></span></label>
-                                    <input id="telefono_movil_padre" type="number" placeholder="ej. 0424******" class="form-control input" required/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label>Telefono Residencial </label>
-                                    <input id="telefono_residencial_padre" type="number" placeholder="ej. 0212******" class="form-control input" />
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label>Telefono del lugar de trabajo </label>
-                                    <input id="telefono_trabajo_padre" type="number" placeholder="ej. 0212******" class="form-control input" />
+                                <div class="form-group input-field">
+                                    <textarea id="habilidad_padre" class="materialize-textarea" ></textarea>
+                                    <label for="habilidad_padre">Habilidad</label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Religion</label>
-                                    <input id="religion_padre" type="text" placeholder="ej. catolico" class="form-control input" />
+                                <div class="form-group input-field">
+                                    <label for="direccion_residencia_padre">Direccion de residencia <span style="color: #960032;"><b>*</b></span></label>
+                                    <textarea id="direccion_residencia_padre" class="materialize-textarea" required></textarea>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <label>¿ Vive con el estudiante ? <span style="color: #960032;"><b>*</b></span></label>
+                                <div class="form-group input-field">
+                                    <input id="telefono_movil_padre" type="number"  required/>
+                                    <label for="telefono_movil_padre">Telefono Movil <span style="color: #960032;"><b>*</b></span></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group input-field">
+                                    <input id="telefono_residencial_padre" type="number" />
+                                    <label for="telefono_residencial_padre">Telefono Residencial </label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group input-field">
+                                    <label for="telefono_trabajo_padre">Telefono del lugar de trabajo </label>
+                                    <input id="telefono_trabajo_padre" type="number" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group input-field">
+                                    <input id="religion_padre" type="text" />
+                                    <label for="religion_padre">Religion</label>
+                                </div>
+                            </div>
+                            <div class="col-4">
                                 <div class="form-group pt-2">
-                                    <input id="vive_estudiante_padre" type="radio" name="vive" class="radio " checked="checked" /> Si
-                                    <input type="radio" name="vive" class="radio ml-4" /> No
+                                    <label>¿ Vive con el estudiante ? <span style="color: #960032;"><b>*</b></span></label>
+                                    <div class="form-group pt-2">
+                                        <span>
+                                            <label>
+                                                <input id="vive_estudiante_padre" name="vive" checked="checked" class="with-gap"  type="radio"  /> 
+                                                <span>Si</span>
+                                            </label>
+                                        </span>
+                                        <span>
+                                            <label>
+                                                <input id="femenino_estudiante" name="vive" type="radio" class="with-gap"  class="radio ml-4" />
+                                                <span>No</span>
+                                            </label>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -587,9 +642,13 @@ $(function() {
                                         <div class="form-group">
                                             <center>
                                                 <label>¿ El representante es el padre o la madre ?</label>
-                                                <div class="custom-control custom-switch">
-                                                    <input type="checkbox" class="custom-control-input" id="selectRepresentante">
-                                                    <label class="custom-control-label" for="selectRepresentante">No / Si</label>
+                                                <div class="switch">
+                                                    <label>
+                                                    No
+                                                    <input type="checkbox" id="selectRepresentante" />
+                                                    <span class="lever"></span>
+                                                    Si
+                                                    </label>
                                                 </div>
                                             </center>
                                         </div>
@@ -600,25 +659,31 @@ $(function() {
                                                 <label>Selecciona el representante</label>
                                                 <div class="form-group pt-2">
                                                     <span class="pill pillLeft">
-                                                        Madre <input id="selectMadre" type="radio" name="selectRep" class="radio ml-2" checked="checked" />
+                                                        <label>
+                                                            <input id="selectMadre" name="selectRep" checked="checked" class="with-gap" type="radio"  /> 
+                                                            <span style="color: #fff;">Madre</span>
+                                                        </label>
                                                     </span>
                                                     <span class="pill pillRight">
-                                                        <input id="selectPadre" type="radio" name="selectRep" class="radio mr-2" /> Padre
+                                                        <label>
+                                                            <input id="selectPadre" name="selectRep" checked="checked" class="with-gap" type="radio"  /> 
+                                                            <span style="color: #fff;">Padre</span>
+                                                        </label>
                                                     </span>
                                                 </div>
                                             </span>
                                         </center>
                                         <center>
                                             <span id="seleccionar_parenteco">
-                                                <div class="form-group pt-2">
-                                                    <label>Parentesco <span style="color: #960032;"><b>*</b></span></label>
-                                                    <select id="parentesco" class="form-control input">
+                                                <div class="form-group input-field">
+                                                    <select id="parentesco">
                                                         <option value="Abuelo">Abuelo(a)</option>
                                                         <option value="Hermano">Hermano(a)</option>
                                                         <option value="Primo">Primo(a)</option>
                                                         <option value="Tio">Tio(a)</option>
                                                         <option value="Otro">Otro</option>
                                                     </select>
+                                                    <label for="parentesco">Parentesco <span style="color: #960032;"><b>*</b></span></label>
                                                 </div>
                                             </span>
                                         </center>
@@ -630,143 +695,154 @@ $(function() {
                         
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Nombre <span style="color: #960032;"><b>*</b></span></label>
-                                    <input id="nombre_representante" type="text" placeholder="indicar Nombre de la madre" class="form-control input" required />
+                                <div class="form-group input-field">
+                                    <input id="nombre_representante" type="text" required />
+                                    <label for="nombre_representante">Nombre <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Apellido <span style="color: #960032;"><b>*</b></span></label>
-                                    <input id="apellido_representante" type="text" placeholder="indicar Apellido de la madre" class="form-control input" required />
+                                <div class="form-group input-field">
+                                    <input id="apellido_representante" type="text" required />
+                                    <label for="apellido_representante">Apellido <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Tipo de documento <span style="color: #960032;"><b>*</b></span></label>
-                                    <select id="tipo_documento_representante" class="form-control input">
+                                <div class="form-group input-field">
+                                    <!--$(document).find('#tipo_documento_representante').siblings('ul').find('li > span')-->
+                                    <select id="tipo_documento_representante">
                                         <option value="V">V-</option>
                                         <option value="E">E-</option>
                                     </select>
+                                    <label for="tipo_documento_representante">Tipo de documento <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Documento <span style="color: #960032;"><b>*</b></span></label>
-                                    <input id="documento_representante" type="text" placeholder="12345678" class="form-control input" required/>
+                                <div class="form-group input-field">
+                                    <input id="documento_representante" type="text" required/>
+                                    <label for="documento_representante">Documento <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Fecha de Nacimiento <span style="color: #960032;"><b>*</b></span></label>
-                                    <input id="fecha_nacimiento_representante" type="date" class="form-control input" required/>
+                                <div class="form-group input-field">
+                                    <input id="fecha_nacimiento_representante" type="text" class="datepicker" required/>
+                                    <label for="fecha_nacimiento_representante">Fecha de Nacimiento <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Nacionalidad <span style="color: #960032;"><b>*</b></span></label>
-                                    <select id="nacionalidad_representante" class="form-control input">
+                                <div class="form-group input-field">
+                                    <select id="nacionalidad_representante">
                                         <option value="VEN">Venezolana</option>
                                         <option value="COL">Colombiana</option>
                                     </select>
+                                    <label for="nacionalidad_representante">Nacionalidad <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Edad <span style="color: #960032;"><b>*</b></span></label>
-                                    <input id="edad_representante" type="number" placeholder="indique edad" class="form-control input" required/>
+                                <div class="form-group input-field">
+                                    <input id="edad_representante" type="number" required/>
+                                    <label for="edad_representante">Edad <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Estado civil</label>
-                                    <select id="estado_civil_representante" class="form-control input">
+                                <div class="form-group input-field">
+                                    <select id="estado_civil_representante">
                                         <option value="N" selected>Seleccionar...</option>
                                         <option value="S">Soltero(a)</option>
                                         <option value="C">Casado(a)</option>
                                     </select>
+                                    <label for="estado_civil_representante">Estado civil</label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Nivel de Instruccion</label>
-                                    <select id="nivel_instruccion_representante" class="form-control input">
+                                <div class="form-group input-field">
+                                    <select id="nivel_instruccion_representante" >
                                         <option value="N" selected>Seleccionar...</option>
                                         <option value="B">Bachiller</option>
                                         <option value="U">Estudios Universitarios</option>
                                         <option value="P">Post-Grado</option>
                                     </select>
+                                    <label for="nivel_instruccion_representante">Nivel de Instruccion</label>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Ocupación <span style="color: #960032;"><b>*</b></span></label>
-                                    <textarea id="ocupacion_representante" type="text" placeholder="indique su ocupacion" class="form-control input" required></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label>Lugar de trabajo <span style="color: #960032;"><b>*</b></span></label>
-                                    <textarea id="lugar_trabajo_representante" type="text" placeholder="indique su lugar de trabajo" class="form-control input" required></textarea>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label>Habilidad</label>
-                                    <textarea id="habilidad_representante" type="text" placeholder="indique su Habilidad" class="form-control input"></textarea>
+                                <div class="form-group input-field">
+                                    <textarea id="ocupacion_representante" class="materialize-textarea" required></textarea>
+                                    <label for="ocupacion_representante">Ocupación <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Direccion de residencia <span style="color: #960032;"><b>*</b></span></label>
-                                    <textarea id="direccion_residencia_representante" class="form-control input" placeholder="urb. calle #casa" required></textarea>
+                                <div class="form-group input-field">
+                                    <textarea id="lugar_trabajo_representante" class="materialize-textarea" required></textarea>
+                                    <label for="lugar_trabajo_representante">Lugar de trabajo <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Telefono Movil <span style="color: #960032;"><b>*</b></span></label>
-                                    <input id="telefono_movil_representante" type="number" placeholder="ej. 0424******" class="form-control input" required/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label>Telefono Residencial</label>
-                                    <input id="telefono_residencial_representante" type="number" placeholder="ej. 0212******" class="form-control input" />
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label>Telefono del lugar de trabajo </label>
-                                    <input id="telefono_trabajo_representante" type="number" placeholder="ej. 0212******" class="form-control input" />
+                                <div class="form-group input-field">
+                                    <textarea id="habilidad_representante" class="materialize-textarea"></textarea>
+                                    <label for="habilidad_representante">Habilidad</label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group">
-                                    <label>Religion</label>
-                                    <input id="religion_representante" type="text" placeholder="ej. catolico" class="form-control input" />
+                                <div class="form-group input-field">
+                                    <label for="direccion_residencia_representante">Direccion de residencia <span style="color: #960032;"><b>*</b></span></label>
+                                    <textarea id="direccion_residencia_representante" class="materialize-textarea" required></textarea>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group input-field">
+                                    <input id="telefono_movil_representante" type="number" required/>
+                                    <label for="telefono_movil_representante">Telefono Movil <span style="color: #960032;"><b>*</b></span></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group input-field">
+                                    <input id="telefono_residencial_representante" type="number" />
+                                    <label for="telefono_residencial_representante">Telefono Residencial</label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group input-field">
+                                    <input id="telefono_trabajo_representante" type="number" />
+                                    <label for="telefono_trabajo_representante">Telefono del lugar de trabajo </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group input-field">
+                                    <input id="religion_representante" type="text" />
+                                    <label for="religion_representante">Religion</label>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <label>¿ Vive con el estudiante ? <span style="color: #960032;"><b>*</b></span></label>
-                                <div class="form-group pt-2">
-                                    <input id="vive_estudiante_representante_y" type="radio" name="vive" class="radio " checked="checked" /> Si
-                                    <input id="vive_estudiante_representante_n" type="radio" name="vive" class="radio ml-4" /> No
+                                <div class="form-group">
+                                    <span>
+                                        <label>
+                                            <input id="vive_estudiante_representante_y" name="vive" checked="checked" class="with-gap"  type="radio"  /> 
+                                            <span>Si</span>
+                                        </label>
+                                    </span>
+                                    <span>
+                                        <label>
+                                            <input id="vive_estudiante_representante_n" name="vive" type="radio" class="with-gap"  class="radio ml-4" />
+                                            <span>No</span>
+                                        </label>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -819,6 +895,21 @@ $(function() {
         `);
     }
 
+    function reloadMaterial() {
+        var header = `
+            <!--Import materialize.css-->
+            <link type="text/css" rel="stylesheet" href="../assets/materialize/css/materialize.min.css"  media="screen,projection"/>
+            <link type="text/css" rel="stylesheet" href="../assets/materialize/css/custom.css"  media="screen,projection"/>
+            <!-- CSS Files -->
+            <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+            <link rel="stylesheet" type="text/css" href="css/registro.css" />
+            <!--JavaScript at end of body for optimized loading-->
+            <script type="text/javascript" src="../assets/materialize/js/materialize.min.js"></script>
+            <script type="text/javascript" src="../assets/materialize/js/init.js"></script>
+        `;
+        $('#reloadMaterial').html(header);
+    }
+
     $(document).on('click', '#informeMedico', function(e) {
         handleSwicht ('informeMedico', 'content_informe_medico');
     })
@@ -859,7 +950,7 @@ $(function() {
             'apellido': $(document).find('#apellido_estudiante').val(),
             'tipo_documento': $(document).find('#tipo_documento_estudiante').val(),
             'documento': $(document).find('#documento_estudiante').val(),
-            'fecha_nacimiento': $(document).find('#fechaNacimiento_estudiante').val(),
+            'fecha_nacimiento': DateGuionFormat($(document).find('#fechaNacimiento_estudiante').val()),
             'edad': $(document).find('#edad_estudiante').val(),
             'nacionalidad': $(document).find('#nacionalidad_estudiante').val(),
             'email': $(document).find('#email_estudiante').val(),
@@ -906,8 +997,12 @@ $(function() {
                 "background-color" : "rgb(33 109 30)",
                 "color" : "#fff",
             })
+            
             $('.title-tap').html(arrFormularios.formulario2.title);
             $('.formularios').html(arrFormularios.formulario2.form);
+            //M.AutoInit permite inicializar todos los componentes de Materialise con una sola llamada
+            M.AutoInit();
+            initConfigDate();
             window.scroll({
                 top: 100,
                 left: 100,
@@ -927,7 +1022,7 @@ $(function() {
             'apellido': $(document).find('#apellido_madre').val(),
             'tipo_documento': $(document).find('#tipo_documento_madre').val(),
             'documento': $(document).find('#documento_madre').val(),
-            'fecha_nacimiento': $(document).find('#fecha_nacimiento_madre').val(),
+            'fecha_nacimiento': DateGuionFormat($(document).find('#fecha_nacimiento_madre').val()),
             'nacionalidad': $(document).find('#nacionalidad_madre').val(),
             'edad': $(document).find('#edad_madre').val(),
             'estado_civil' : $(document).find('#estado_civil_madre').val(),
@@ -942,6 +1037,8 @@ $(function() {
             'religion' : $(document).find('#religion_madre').val(),
             'vive_estudiante' : $(document).find('#vive_estudiante_madre').prop('checked') == true ? 'Y' : 'N'
         };
+
+        console.log(objData);
 
         setTimeout(() => {
             //recopilar datos, procesarlos y guardarlos en base de datos
@@ -967,6 +1064,9 @@ $(function() {
             })
             $('.title-tap').html(arrFormularios.formulario3.title);
             $('.formularios').html(arrFormularios.formulario3.form);
+            //M.AutoInit permite inicializar todos los componentes de Materialise con una sola llamada
+            M.AutoInit();
+            initConfigDate();
             window.scroll({
                 top: 100,
                 left: 100,
@@ -986,7 +1086,7 @@ $(function() {
             'apellido': $(document).find('#apellido_padre').val(),
             'tipo_documento': $(document).find('#tipo_documento_padre').val(),
             'documento': $(document).find('#documento_padre').val(),
-            'fecha_nacimiento': $(document).find('#fecha_nacimiento_padre').val(),
+            'fecha_nacimiento': DateGuionFormat($(document).find('#fecha_nacimiento_padre').val()),
             'nacionalidad': $(document).find('#nacionalidad_padre').val(),
             'edad': $(document).find('#edad_padre').val(),
             'estado_civil' : $(document).find('#estado_civil_padre').val(),
@@ -1001,6 +1101,8 @@ $(function() {
             'religion' : $(document).find('#religion_padre').val(),
             'vive_estudiante' : $(document).find('#vive_estudiante_padre').prop('checked') == true ? 'Y' : 'N'
         };
+
+        console.log(objData);
 
         setTimeout(() => {
             //recopilar datos, procesarlos y guardarlos en base de datos
@@ -1026,6 +1128,9 @@ $(function() {
             })
             $('.title-tap').html(arrFormularios.formulario4.title);
             $('.formularios').html(arrFormularios.formulario4.form);
+            //M.AutoInit permite inicializar todos los componentes de Materialise con una sola llamada
+            M.AutoInit();
+            initConfigDate();
             window.scroll({
                 top: 100,
                 left: 100,
@@ -1045,7 +1150,7 @@ $(function() {
                 $(document).find('#apellido_representante').val(objData.madre.apellido);
                 $(document).find('#tipo_documento_representante').val(objData.madre.tipo_documento);
                 $(document).find('#documento_representante').val(objData.madre.documento);
-                $(document).find('#fecha_nacimiento_representante').val(objData.madre.fecha_nacimiento);
+                $(document).find('#fecha_nacimiento_representante').val(DateSlashFormat(objData.madre.fecha_nacimiento));
                 $(document).find('#nacionalidad_representante').val(objData.madre.nacionalidad);
                 $(document).find('#edad_representante').val(objData.madre.edad);
                 $(document).find('#estado_civil_representante').val(objData.madre.estado_civil);
@@ -1070,7 +1175,7 @@ $(function() {
                 $(document).find('#apellido_representante').val(objData.padre.apellido);
                 $(document).find('#tipo_documento_representante').val(objData.padre.tipo_documento);
                 $(document).find('#documento_representante').val(objData.padre.documento);
-                $(document).find('#fecha_nacimiento_representante').val(objData.padre.fecha_nacimiento);
+                $(document).find('#fecha_nacimiento_representante').val(DateSlashFormat(objData.padre.fecha_nacimiento));
                 $(document).find('#nacionalidad_representante').val(objData.padre.nacionalidad);
                 $(document).find('#edad_representante').val(objData.padre.edad);
                 $(document).find('#estado_civil_representante').val(objData.padre.estado_civil);
@@ -1091,6 +1196,14 @@ $(function() {
                     $(document).find('#vive_estudiante_representante_n').attr('checked', 'checked');
                 }
             }
+            $("input[type='text']").attr('disabled', 'disabled');
+            $("input[type='email']").attr('disabled', 'disabled');
+            $("input[type='number']").attr('disabled', 'disabled');
+            $("input[type='radio']").attr('disabled', 'disabled');
+            $("textarea").attr('disabled', 'disabled');
+            $("select").attr('disabled', 'disabled');
+            $("#selectMadre").removeAttr('disabled');
+            $("#selectPadre").removeAttr('disabled');
         } else {
             $(document).find('#nombre_representante').val('');
             $(document).find('#apellido_representante').val('');
@@ -1109,7 +1222,18 @@ $(function() {
             $(document).find('#telefono_residencial_representante').val('');
             $(document).find('#telefono_trabajo_representante').val('');
             $(document).find('#religion_representante').val('');
+            
+            $("input[type='text']").removeAttr('disabled', 'disabled');
+            $("input[type='email']").removeAttr('disabled', 'disabled');
+            $("input[type='number']").removeAttr('disabled', 'disabled');
+            $("input[type='radio']").removeAttr('disabled', 'disabled');
+            $("textarea").removeAttr('disabled');
+            $("select").removeAttr('disabled');
         }
+
+        //función para reinicializar todas las etiquetas de Materialise en la página si está agregando entradas dinámicamente.
+        M.updateTextFields();
+        $('select').formSelect();
     })
 
     $(document).on('click', '#selectMadre', function(e) {
@@ -1117,7 +1241,7 @@ $(function() {
         $(document).find('#apellido_representante').val(objData.madre.apellido);
         $(document).find('#tipo_documento_representante').val(objData.madre.tipo_documento);
         $(document).find('#documento_representante').val(objData.madre.documento);
-        $(document).find('#fecha_nacimiento_representante').val(objData.madre.fecha_nacimiento);
+        $(document).find('#fecha_nacimiento_representante').val(DateSlashFormat(objData.madre.fecha_nacimiento));
         $(document).find('#nacionalidad_representante').val(objData.madre.nacionalidad);
         $(document).find('#edad_representante').val(objData.madre.edad);
         $(document).find('#estado_civil_representante').val(objData.madre.estado_civil);
@@ -1137,6 +1261,10 @@ $(function() {
             $(document).find('#vive_estudiante_representante_y').removeAttr('checked');
             $(document).find('#vive_estudiante_representante_n').attr('checked', 'checked');
         }
+
+        //función para reinicializar todas las etiquetas de Materialise en la página si está agregando entradas dinámicamente.
+        M.updateTextFields();
+        $('select').formSelect();
     })
 
     $(document).on('click', '#selectPadre', function(e) {
@@ -1144,7 +1272,7 @@ $(function() {
         $(document).find('#apellido_representante').val(objData.padre.apellido);
         $(document).find('#tipo_documento_representante').val(objData.padre.tipo_documento);
         $(document).find('#documento_representante').val(objData.padre.documento);
-        $(document).find('#fecha_nacimiento_representante').val(objData.padre.fecha_nacimiento);
+        $(document).find('#fecha_nacimiento_representante').val(DateSlashFormat(objData.padre.fecha_nacimiento));
         $(document).find('#nacionalidad_representante').val(objData.padre.nacionalidad);
         $(document).find('#edad_representante').val(objData.padre.edad);
         $(document).find('#estado_civil_representante').val(objData.padre.estado_civil);
@@ -1164,6 +1292,10 @@ $(function() {
             $(document).find('#vive_estudiante_representante_y').removeAttr('checked');
             $(document).find('#vive_estudiante_representante_n').attr('checked', 'checked');
         }
+
+        //función para reinicializar todas las etiquetas de Materialise en la página si está agregando entradas dinámicamente.
+        M.updateTextFields();
+        $('select').formSelect();
     })
 
     //form 4 submit
@@ -1186,7 +1318,7 @@ $(function() {
             'apellido': $(document).find('#apellido_representante').val(),
             'tipo_documento': $(document).find('#tipo_documento_representante').val(),
             'documento': $(document).find('#documento_representante').val(),
-            'fecha_nacimiento': $(document).find('#fecha_nacimiento_representante').val(),
+            'fecha_nacimiento': DateGuionFormat($(document).find('#fecha_nacimiento_representante').val()),
             'nacionalidad': $(document).find('#nacionalidad_representante').val(),
             'edad': $(document).find('#edad_representante').val(),
             'estado_civil' : $(document).find('#estado_civil_representante').val(),
@@ -1203,13 +1335,15 @@ $(function() {
             'parentesco' : parentesco
         };
 
+        console.log(objData);
+
         Swal.fire({
             title: 'Esta listo para continuar ?',
             text: "Los datos que ha suministrado seran guardados",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
+            confirmButtonColor: '#00B236',
+            cancelButtonColor: '#B20018',
             cancelButtonText: 'Cancelar',
             confirmButtonText: 'Continuar'
         }).then((result) => {
@@ -1217,13 +1351,14 @@ $(function() {
                 $.post("../controllers/controller_registro.php", objData, function(response) {
                     var resp = jQuery.parseJSON(response);
                     if(resp.STATUS == 'SUCCESS') {
-                        Swal.fire(
-                            resp.MESSAGES,
-                            'Los datos seran procesados, el usuario sera habilitado una vez se formalice la inscripción',
-                            'success'
-                        ).then((result2) => {
+                        Swal.fire({
+                                title: resp.MESSAGES,
+                                text: 'Los datos seran procesados, el usuario sera habilitado una vez se formalice la inscripción',
+                                icon: 'success',
+                                confirmButtonColor: '#e0bb66'
+                        }).then((result2) => {
                             if(result2.isConfirmed) {
-                                window.location.replace('http://localhost/CVM/ColegioVirgilioMedina/auth/login.php');
+                                window.location.replace('http://localhost/ColegioVirgilioMedina/auth/login.php');
                             }
                         })
                     }

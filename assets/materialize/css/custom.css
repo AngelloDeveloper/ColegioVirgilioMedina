@@ -1,0 +1,18 @@
+/* label focus color */
+.input-field input:focus + label {
+    color: #0A6507 !important;
+}
+/* label underline focus color */
+.input-field input:focus {
+    border-bottom: 1px solid #0A6507 !important;
+    box-shadow: 0 1px 0 0 #0A6507 !important;
+}
+
+.input-field textarea:focus + label {
+    color: #0A6507 !important;
+}
+/* label underline focus color */
+.input-field textarea:focus {
+    border-bottom: 1px solid #0A6507 !important;
+    box-shadow: 0 1px 0 0 #0A6507 !important;
+}

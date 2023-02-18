@@ -11,10 +11,10 @@
 
         //constructor
         public function __construct($arrData='') {
+            $this->con = $this->conexion();
             if(!empty($arrData)) {
                 $this->email = $arrData['email'];
                 $this->pw = md5("{$arrData['password']}");
-                $this->con = $this->conexion();
             }
         }
         //methods
@@ -28,7 +28,8 @@
                     FROM 
                         usuarios
                     WHERE 
-                        email = '{$this->email}' AND pass = '{$this->pw}'   
+                        email = '{$this->email}' AND 
+                        pass = '{$this->pw}' 
             ";
 
             $this->query = mysqli_query($this->con, $this->sql);
@@ -117,7 +118,41 @@
                 ";
                 break;
                 case '3':
-                    # code...
+                    $this->sql = "SELECT
+                        usuarios.id as idUser, 
+                        usuarios.estatus as estatus,
+                        usuarios.permisos as permisos,
+                        usuarios.id_tipo_usuario as userTypeId,
+                        docentes.nombre as nombre,
+                        docentes.apellido as apellido,
+                        docentes.cedula as documento,
+                        docentes.telf_movil as telefono,
+                        docentes.email as email,
+                        docentes.direccion as direccion, 
+                        docentes.nivel_instruccion as lv_instruccion
+                    FROM 
+                        usuarios
+                        LEFT JOIN docentes ON usuarios.id = docentes.id
+                    WHERE 
+                        usuarios.id = '{$idUser}'";
+
+                    $this->sql2 = "SELECT
+                        modulos.id as moduloId,
+                        modulos.titulo as moduloTitulo,
+                        modulos.descripcion as moduloDescripcion,
+                        sub_modulos.id as subModuloId,
+                        sub_modulos.titulo as subModuloTitulo,
+                        sub_modulos.descripcion as subModuloDescripcion,
+                        sub_modulos.url as subModuloUrl
+                    FROM
+                        tusuarios_smodulos
+                        LEFT JOIN sub_modulos ON tusuarios_smodulos.id_sub_modulo = sub_modulos.id
+                        LEFT JOIN modulos ON sub_modulos.id_modulo = modulos.id
+                    WHERE
+                        tusuarios_smodulos.id_tipo_usuario = '{$idUserType}' AND
+                        tusuarios_smodulos.access = 'Y' AND
+                        sub_modulos.status = 'Y' AND
+                        modulos.status = 'Y'";
                 break;
                 case '2':
                     # code...

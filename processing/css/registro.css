@@ -11,14 +11,34 @@ img {
     display: inline;
 }
 
-.btn {
+button.btn {
     display: inline;
 	background-color: #0F8B0B !important;
 	color:  white !important;
 	border-radius: 20px !important;
 }
 
-.btn:hover {
+button.btn:hover {
+    background-color: #085c05 !important;
+}
+
+a.btn {
+    display: inline;
+	background-color: #0F8B0B !important;
+	color:  white !important;
+	border-radius: 20px !important;
+}
+
+a.btn:hover {
+    background-color: #085c05 !important;
+}
+
+.materialcustom {
+    background-color: #0F8B0B !important;
+	color:  white !important;
+}
+
+.materialcustom:hover {
     background-color: #085c05 !important;
 }
 

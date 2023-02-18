@@ -24,13 +24,13 @@ $(function() {
 						</div>
 						<div class="col-6">
 							<form id="formLogin" autocomplete="off">
-								<div class="form-group">
-									<label for="email"><b>CorreoElectrónico</b></label>
-									<input type="email" name="email" id="email" placeholder="correo@gmail.com" class="form-control input" required />
+								<div class="form-group input-field">
+									<input type="email" name="email" id="email" class="form-control" required />
+									<label for="email">Correo Electrónico</label>
 								</div>
-								<div class="form-group">
-									<label for="password"><b>Cedula</b></label>
-									<input type="password" name="password" placeholder="12345678" id="password" class="form-control input" required />
+								<div class="form-group input-field">
+									<input type="password" name="password" id="password" class="form-control" required />
+									<label for="password">Cedula</label>
 								</div>
 								<div class="form-group">
 									<center>
@@ -115,7 +115,7 @@ $(function() {
 					<center><i class="fa fa-exclamation-triangle" aria-hidden="true" 
 						style="
 							position: absolute;
-							left: 150px;
+							left: 125px;
 							font-size: 200px;
 							color: orange;
 							z-index: 2;
@@ -134,7 +134,7 @@ $(function() {
 					<center><i class="fa fa-exclamation-triangle" aria-hidden="true" 
 						style="
 							position: absolute;
-							left: 150px;
+							left: 125px;
 							font-size: 200px;
 							color: orange;
 							z-index: 2;

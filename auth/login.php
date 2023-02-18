@@ -14,6 +14,13 @@
 	<!--swallAlert-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css" rel="stylesheet">
+	<!--Import materialize.css-->
+	<link type="text/css" rel="stylesheet" href="../assets/materialize/css/materialize.min.css"  media="screen,projection"/>
+	<link type="text/css" rel="stylesheet" href="../assets/materialize/css/custom.css"  media="screen,projection"/>
+	<!--JavaScript at end of body for optimized loading-->
+	<script type="text/javascript" src="../assets/materialize/js/materialize.min.js"></script>
+	<script type="text/javascript" src="../assets/materialize/js/init.js"></script>
+
 	<title>Colegio Virgilio Medina</title>
 </head>
 	<body>

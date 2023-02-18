@@ -1,6 +1,7 @@
 <div class="footer">
             <div class="copyright">
-                <p>Copyright &copy; Colegio Virgilio Medina 2023</p>
+                <center><span>Copyright &copy; Colegio Virgilio Medina 2023</span><span style="float: right;">Desarrollado por: Ing. Angello Durán</span></center>
+                
             </div>
         </div>
         <!--**********************************
@@ -14,6 +15,12 @@
     <!--**********************************
         Scripts
     ***********************************-->
+    <!--General functions JS-->
+    <script src="../assets/js/core/generalFunction.js"></script>
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="../assets/materialize/js/materialize.min.js"></script>
+    <script type="text/javascript" src="../assets/materialize/js/init.js"></script>
+    
     <script src="plugins/common/common.min.js"></script>
     <script src="js/custom.min.js"></script>
     <script src="js/settings.js"></script>

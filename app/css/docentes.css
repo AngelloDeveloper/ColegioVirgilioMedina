@@ -1,0 +1,12 @@
+
+.input-rounded {
+    height: 15px;
+}
+
+.input-rounded:focus{
+    border-color: green;
+}
+
+.hr {
+    box-shadow: 0 1px 5px 1px rgb(33 202 46 / 14%);
+}

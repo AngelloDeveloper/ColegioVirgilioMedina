@@ -6,15 +6,23 @@
 	<!--     Fonts and icons     -->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <!--JQUERY-->
+	<script src="../assets/js/core/jquery.min.js"></script>
+    <!--Import materialize.css-->
+	<link type="text/css" rel="stylesheet" href="../assets/materialize/css/materialize.min.css"  media="screen,projection"/>
+	<link type="text/css" rel="stylesheet" href="../assets/materialize/css/custom.css"  media="screen,projection"/>
   	<!-- CSS Files -->
   	<link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="css/registro.css?v="<?= rand(100, 500); ?> />
-	<!--JQUERY-->
-	<script src="../assets/js/core/jquery.min.js"></script>
 	<title>Colegio Virgilio Medina</title>
     <!--swallAlert-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css" rel="stylesheet">
+    <!--General functions JS-->
+    <script src="../assets/js/core/generalFunction.js"></script>
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="../assets/materialize/js/materialize.min.js"></script>
+    <script type="text/javascript" src="../assets/materialize/js/init.js"></script>
 </head>
 	<body>
         <header>

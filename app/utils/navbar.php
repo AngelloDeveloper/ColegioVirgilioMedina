@@ -4,15 +4,9 @@
             Nav header start
         ***********************************-->
         <div class="nav-header">
-            <div class="brand-logo">
-                <a href="index.html">
-                    <b class="logo-abbr"><img src="images/logo.png" alt=""> </b>
-                    <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
-                    <span class="brand-title">
-                        <img style="width: 175px;" src="../assets/img/escudopng2.png" alt="">
-                    </span>
-                </a>
-            </div>
+            <center>
+                <img style="width: 60px;" src="../assets/img/escudopng2.png" alt="" />
+            </center>
         </div>
         <!--**********************************
             Nav header end
