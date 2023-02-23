@@ -123,6 +123,7 @@
                         usuarios.estatus as estatus,
                         usuarios.permisos as permisos,
                         usuarios.id_tipo_usuario as userTypeId,
+                        docentes.id as idDocente,
                         docentes.nombre as nombre,
                         docentes.apellido as apellido,
                         docentes.cedula as documento,
@@ -132,7 +133,7 @@
                         docentes.nivel_instruccion as lv_instruccion
                     FROM 
                         usuarios
-                        LEFT JOIN docentes ON usuarios.id = docentes.id
+                        LEFT JOIN docentes ON usuarios.id = docentes.id_usuarios
                     WHERE 
                         usuarios.id = '{$idUser}'";
 

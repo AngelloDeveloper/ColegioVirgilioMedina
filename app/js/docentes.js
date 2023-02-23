@@ -8,7 +8,7 @@ $(function() {
         $('.secondary').show();
         M.AutoInit();
         M.updateTextFields();
-        $('select').formSelect();
+        M.FormSelect.init($('select'));
     });
 
     $(document).on('click', '#btnReturnDocente' ,function(e) {
@@ -86,7 +86,7 @@ $(function() {
             $('.secondary').show();
             M.AutoInit();
             M.updateTextFields();
-            M.textareaAutoResize($('textarea'))
+            M.textareaAutoResize($('textarea'));
             $('select').formSelect();
         })
     })

@@ -1,0 +1,99 @@
+/*.materias {
+    height: 110px !important;
+    cursor: pointer;
+}
+
+.materias:hover {
+    background-image: linear-gradient(135deg, #155297 10%, #00EAFF 100%);
+}*/
+
+.cardHeight {
+    height: 335px;
+}
+
+.cardImagesHeight {
+    height: 175px;
+}
+
+.card-images-height {
+    height: 180px;
+}
+
+.img-icons {
+    margin-top: 50px !important;
+    width: 100px !important;
+}
+
+.img-icons-baner {
+    width: 80px !important;
+}
+
+.titleMateria {
+    font-size: 18px !important;
+    line-height: 25px !important;
+}
+
+.gradient-materias {
+    background-image: linear-gradient(230deg, #fcfcfc00, #f7e7ff);
+}
+
+.gradient-moreForm {
+    background-image: linear-gradient(230deg, #fcfcfc00, #e7fff7);
+}
+
+.dinamicCard {
+    height: 18em !important;
+    border: #d0cccc 5px dashed;
+}
+
+.dinamicCard:hover {
+    cursor:pointer;
+    background-image: linear-gradient(230deg, #fcfcfc00, #baf5e1);
+    border-color: #a2a0a0;
+}
+
+.centerPlus {
+    /*position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 25px;*/
+    position: relative;
+    top: 50px;
+    font-size: 25px;
+}
+
+/*flip card efect*/
+.flip-card {
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  }
+  
+  /* This container is needed to position the front and back side */
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+  }
+  
+  /* Do an horizontal flip when you move the mouse over the flip box container */
+  .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+  
+  /* Position the front and back side */
+  .flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+  }
+  
+  /* Style the back side */
+  .flip-card-back {
+    background-color: dodgerblue;
+    color: white;
+    transform: rotateY(180deg);
+  }
