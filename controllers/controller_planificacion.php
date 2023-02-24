@@ -23,7 +23,22 @@
         $_POST['id_docente'] = $_SESSION['user_data']['idDocente'];
         $_POST['id_periodo'] = $objPeriodo->getPeriodo(['id'])['id'];
         $objPlanificacion = new Planificacion($_POST);
-        $objPlanificacion->addPlanificacion();
+        $result = $objPlanificacion->addPlanificacion();
+        if($result) {
+            echo json_encode([
+                'STATUS' => 'SUCCESS',
+                'MESSAGE' => 'Planificación creada exitosamente!',
+                'ICON' => 'fa-check',
+                'COLOR_ICON' => '#00B236'
+            ]);
+        } else {
+            echo json_encode([
+                'STATUS' => 'ERROR',
+                'MESSAGE' => 'A ocurrido un error!',
+                'ICON' => 'fa-times',
+                'COLOR_ICON' => 'red'
+            ]);
+        }
     }
 
 ?>

@@ -7,6 +7,11 @@
     background-image: linear-gradient(135deg, #155297 10%, #00EAFF 100%);
 }*/
 
+.cardCustom {
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+}
+
 .cardHeight {
     height: 335px;
 }
@@ -42,7 +47,7 @@
 }
 
 .dinamicCard {
-    height: 18em !important;
+    height: 21em !important;
     border: #d0cccc 5px dashed;
 }
 
@@ -53,47 +58,31 @@
 }
 
 .centerPlus {
-    /*position: absolute;
-    top: 50%;
-    left: 50%;
-    font-size: 25px;*/
     position: relative;
-    top: 50px;
+    top: 3em;
     font-size: 25px;
 }
 
-/*flip card efect*/
-.flip-card {
-    perspective: 1000px; /* Remove this if you don't want the 3D effect */
-  }
-  
-  /* This container is needed to position the front and back side */
-  .flip-card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: transform 0.8s;
-    transform-style: preserve-3d;
-  }
-  
-  /* Do an horizontal flip when you move the mouse over the flip box container */
-  .flip-card:hover .flip-card-inner {
-    transform: rotateY(180deg);
-  }
-  
-  /* Position the front and back side */
-  .flip-card-front, .flip-card-back {
+.gradient-card-success {
+    background-image: linear-gradient(230deg, #fcfcfc00, #baf5e1);
+}
+
+.gradient-card-error {
+    background-image: linear-gradient(230deg, #fcfcfc00, #f5bace);
+}
+
+.icon-card-success {
+    color: #00B236;
     position: absolute;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden; /* Safari */
-    backface-visibility: hidden;
-  }
-  
-  /* Style the back side */
-  .flip-card-back {
-    background-color: dodgerblue;
-    color: white;
-    transform: rotateY(180deg);
-  }
+    font-size: 22em;
+    opacity: 0.1;
+    right: 0.9em;
+}
+
+.icon-card-error {
+    color: hsl(332, 100%, 35%);
+    position: absolute;
+    font-size: 22em;
+    opacity: 0.1;
+    right: 1em;
+}

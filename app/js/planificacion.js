@@ -63,11 +63,18 @@ $(function() {
 
     $(document).on('submit', '.form-planificacion', function(e) {
         e.preventDefault();
+        var elm = $(this)[0];
+        var thisCard = $(elm).parent().parent()[0]; 
         var arrData = $(this).serializeArray(); 
         const objData = formatObj(arrData);
 
         $.post(BASE_URL+CONTROLLER_PRINCIPAL, objData, function(response) {
             var resp = jQuery.parseJSON(response);
+            M.toast({html: `<span>${resp.MESSAGE} <i class="fa ${resp.ICON}" style="color: ${resp.COLOR_ICON};"></i></span>`});
+            var styleCard = resp.STATUS == 'SUCCESS' ? 'gradient-card-success' : 'gradient-card-error';
+            var styleIcon = resp.STATUS == 'SUCCESS' ? 'icon-card-success' : 'icon-card-error';
+            $(thisCard).addClass(styleCard);
+            $(thisCard).prepend(`<i class="fa ${resp.ICON} ${styleIcon}"></i>`);
         })
     })
 
@@ -177,7 +184,7 @@ $(function() {
         const template = `
             <input id="type" type="hidden" value="${type}" />
             <input id="idPlanificacion" type="hidden" value="" />
-            <div class="card">
+            <div class="card cardCustom">
                 <div class="card-body">
                     <form class="form-planificacion">
                         <input type="hidden" name="materia" value="${idMateria}" />
