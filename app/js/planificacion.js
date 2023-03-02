@@ -1,6 +1,7 @@
 $(function() {
     const BASE_URL = "../controllers/";
     const CONTROLLER_PRINCIPAL = "controller_planificacion.php";
+    initMaterialInput();
     //nueva planificacion
     $('#btNewPlanificacion').on('click', function() {
         var btn = $(this)[0];
@@ -17,6 +18,9 @@ $(function() {
         var elm = $(this)[0];
         var seccion_open = $(elm).data('seccion-open');
         var seccion_close = $(elm).data('seccion-close');
+        if(seccion_open == 'principal' && seccion_close == 'terciary') {
+            $('.secondary').html('');  
+        }
         $('.'+seccion_open).show();
         $('.'+seccion_close).html('');
         $('.'+seccion_close).hide();
@@ -92,6 +96,7 @@ $(function() {
         M.AutoInit();
         M.updateTextFields();
         M.FormSelect.init($('select'));
+        M.Collapsible.init($('.collapsible'));
     }
 
     function formatObj(arr) {
@@ -126,15 +131,35 @@ $(function() {
         const template_forms = `
             <div class="card-body">
                 <div class="row">
-                    <div class="col-10">
+                    <div class="col-8">
                         <h3>Planificación ${prefix}</h3>
                     </div>
-                    <div class="col-2">
+                    <div class="col-4">
                         <div class="button-icon">
-                            <button data-seccion-open="secondary" data-seccion-close="terciary" id="btnReturnPlanificacion" type="button" class="btn mb-1" style="color: #fff; background-color: silver;">
+                            <button 
+                                data-seccion-open="secondary" 
+                                data-seccion-close="terciary" 
+                                id="btnReturnPlanificacion" 
+                                type="button" 
+                                class="btn mb-1 mr-2" 
+                                style="color: #fff; background-color: silver;"
+                            >
                                 Volver
                                 <span class="btn-icon-right">
                                     <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                </span>
+                            </button>
+                            <button 
+                                data-seccion-open="principal" 
+                                data-seccion-close="terciary" 
+                                id="btnReturnPlanificacion" 
+                                type="button" 
+                                class="btn mb-1" 
+                                style="color: #fff; background-color: #5c4ab8fc;"
+                            >
+                                Listar Planificaciones
+                                <span class="btn-icon-right">
+                                    <i class="fa fa-list" aria-hidden="true"></i>
                                 </span>
                             </button>
                         </div>
@@ -186,7 +211,7 @@ $(function() {
             <input id="idPlanificacion" type="hidden" value="" />
             <div class="card cardCustom">
                 <div class="card-body">
-                    <form class="form-planificacion">
+                    <form class="form-planificacion" autocomplete="off">
                         <input type="hidden" name="materia" value="${idMateria}" />
                         <div class="row">
                             <div class="col-4">

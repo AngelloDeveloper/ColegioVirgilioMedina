@@ -175,13 +175,15 @@ $(function() {
                                 <div class="form-group">
                                     <center>
                                         <label>Informe Médico</label>
-                                        <div class="switch">
-                                            <label>
-                                            No
-                                            <input type="checkbox" id="informeMedico" />
-                                            <span class="lever"></span>
-                                            Si
-                                            </label>
+                                        <div>
+                                            <div class="switch">
+                                                <label>
+                                                No
+                                                <input type="checkbox" id="informeMedico" />
+                                                <span class="lever"></span>
+                                                Si
+                                                </label>
+                                            </div>
                                         </div>
                                     </center>
                                 </div>
@@ -206,13 +208,15 @@ $(function() {
                                 <div class="form-group">
                                     <center>
                                         <label>¿ Es Alergico ?</label>
-                                        <div class="switch">
-                                            <label>
-                                            No
-                                            <input type="checkbox" id="alergico" />
-                                            <span class="lever"></span>
-                                            Si
-                                            </label>
+                                        <div>
+                                            <div class="switch">
+                                                <label>
+                                                No
+                                                <input type="checkbox" id="alergico" />
+                                                <span class="lever"></span>
+                                                Si
+                                                </label>
+                                            </div>
                                         </div>
                                     </center>
                                 </div>
@@ -231,13 +235,15 @@ $(function() {
                                 <div class="form-group">
                                     <center>
                                         <label>¿ Padece alguna enfermedad ?</label>
-                                        <div class="switch">
-                                            <label>
-                                            No
-                                            <input type="checkbox" id="enfermedad" />
-                                            <span class="lever"></span>
-                                            Si
-                                            </label>
+                                        <div>
+                                            <div class="switch">
+                                                <label>
+                                                No
+                                                <input type="checkbox" id="enfermedad" />
+                                                <span class="lever"></span>
+                                                Si
+                                                </label>
+                                            </div>
                                         </div>
                                     </center>
                                 </div>

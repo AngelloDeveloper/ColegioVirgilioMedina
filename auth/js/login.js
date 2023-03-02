@@ -42,9 +42,24 @@ $(function() {
 					</div>
 				</div>
 				<div class="card-footer">
-					<a class="mr-2" style="float: right;" href="../processing/registro.php">¿ No te haz registrado ?</a>
-					<a class="mr-2" style="float: right;" href="#">Recuperar Usuario</a>
-					<span style="color:silver; font-size:14px;">colegioprivadovirgiliomedina@gmail.com</span>
+					<div class="row">
+						<div class="col-6">
+							<p class="text-center" style="color:silver; font-size:14px;">colegioprivadovirgiliomedina@gmail.com</p>
+						</div>
+						<div class="col-6">
+							<center>
+								<a style="margin-right: 35px;" title="facebook" target="_blanck" href="https://www.facebook.com/profile.php?id=100086925978400">
+									<i style="font-size: 25px; color: #0F8B0B;" class="fa fa-facebook-square" aria-hidden="true"></i>
+								</a>
+								<a title="instagram" target="_blanck" href="https://www.instagram.com/uecolegiovirgiliomedinarz/">
+									<i style="font-size: 25px; color: #0F8B0B;" class="fa fa-instagram" aria-hidden="true"></i>
+								</a>
+								<a style="margin-left: 35px;" title="whatsapp" target="_blanck" href="https://api.whatsapp.com/send?phone=+584247253640&text=Hola, Nececito mas informacion!">
+									<i style="font-size: 25px; color: #0F8B0B;" class="fa fa-whatsapp" aria-hidden="true"></i>
+								</a>
+							</center>
+						</div>
+					</div>
 				</div>
 			</div>
 		`;

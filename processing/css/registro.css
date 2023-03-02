@@ -146,3 +146,7 @@ a.btn:hover {
 .pillRight {
     border-radius: 0px 30px 30px 0px
 }
+
+.switch {
+    width: 100% !important;
+}

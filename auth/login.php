@@ -24,6 +24,16 @@
 	<title>Colegio Virgilio Medina</title>
 </head>
 	<body>
+		<style>
+			#modal_info_login {
+				position: fixed !important;
+				left: 0 !important;
+				right: 0 !important;
+				background-color: transparent !important;
+				width: 100% !important;
+				max-height: 100% !important;
+			}
+		</style>
 		<div id="modal_info_login" class="modal" tabindex="-1">
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">

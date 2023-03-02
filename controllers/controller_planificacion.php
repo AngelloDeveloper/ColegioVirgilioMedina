@@ -23,7 +23,8 @@
         $_POST['id_docente'] = $_SESSION['user_data']['idDocente'];
         $_POST['id_periodo'] = $objPeriodo->getPeriodo(['id'])['id'];
         $objPlanificacion = new Planificacion($_POST);
-        $result = $objPlanificacion->addPlanificacion();
+        $idPlanificacion = $objPlanificacion->addPlanificacion();
+        $result = $objPlanificacion->addPlanificacionSecciones($idPlanificacion);
         if($result) {
             echo json_encode([
                 'STATUS' => 'SUCCESS',
