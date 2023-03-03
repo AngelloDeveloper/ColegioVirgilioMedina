@@ -69,7 +69,7 @@
 }
 
 .dinamicCard {
-    height: 21em !important;
+    height: 29em !important;
     border: #d0cccc 5px dashed;
 }
 
@@ -81,7 +81,7 @@
 
 .centerPlus {
     position: relative;
-    top: 3em;
+    top: 5em;
     font-size: 25px;
 }
 
@@ -96,15 +96,15 @@
 .icon-card-success {
     color: #00B236;
     position: absolute;
-    font-size: 22em;
+    font-size: 23em;
     opacity: 0.1;
-    right: 0.9em;
+    right: 1em;
 }
 
 .icon-card-error {
     color: hsl(332, 100%, 35%);
     position: absolute;
-    font-size: 22em;
+    font-size: 23em;
     opacity: 0.1;
     right: 1em;
 }

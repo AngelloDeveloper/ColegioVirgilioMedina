@@ -68,10 +68,12 @@ $(function() {
     $(document).on('submit', '.form-planificacion', function(e) {
         e.preventDefault();
         var elm = $(this)[0];
-        var thisCard = $(elm).parent().parent()[0]; 
+        var btnAdd = $(elm).find('.btnAdd')[0];
+        var thisCard = $(elm).parent()[0];
+        var thisColum = $(elm).parent().parent()[0];
         var arrData = $(this).serializeArray(); 
         const objData = formatObj(arrData);
-
+        $(btnAdd).attr('disabled', 'disabled');
         $.post(BASE_URL+CONTROLLER_PRINCIPAL, objData, function(response) {
             var resp = jQuery.parseJSON(response);
             M.toast({html: `<span>${resp.MESSAGE} <i class="fa ${resp.ICON}" style="color: ${resp.COLOR_ICON};"></i></span>`});
@@ -79,6 +81,9 @@ $(function() {
             var styleIcon = resp.STATUS == 'SUCCESS' ? 'icon-card-success' : 'icon-card-error';
             $(thisCard).addClass(styleCard);
             $(thisCard).prepend(`<i class="fa ${resp.ICON} ${styleIcon}"></i>`);
+            setTimeout(() => {
+                $(thisColum).remove();
+            },2500);
         })
     })
 
@@ -165,29 +170,6 @@ $(function() {
     })
 
     //function
-    function validacionPorcentaje(uid) {
-        var porcentaje = $(document).find('#valor_'+uid);
-        var objTaskPorcentaje = $(document).find('#actividades_'+uid).find('.task_porcentaje');
-        var collapse = $(document).find('.collapse_'+uid)[0];
-        var btnAdd = $(document).find('.btnAdd_'+uid)[0];
-        var totalPorcentaje = 0;
-        $(objTaskPorcentaje).each((index, value) => {
-            totalPorcentaje = totalPorcentaje + parseInt($(value).val());
-        })  
-
-        if($(porcentaje).val() == totalPorcentaje) {
-            M.toast({html: `<span>Los valores Indicados fueron validados correctamente <i class="fa fa-check" style="color: #00B236;"></i></span>`});
-            setTimeout(() => {
-                var instance = M.Collapsible.getInstance(collapse);
-                instance.close();
-                $(btnAdd).removeAttr('disabled');
-            }, 800);
-        } else {
-            M.toast({html: `<span>Los valores Indicados no conciden con el ${$(porcentaje).val()}% asignado <i class="fa fa-exclamation-circle" style="color: orange;"></i></span>`});
-            $(btnAdd).attr('disabled', 'disabled');
-        }
-    }
-
     function initMaterialInput() {
         M.AutoInit();
         M.updateTextFields();
@@ -196,6 +178,7 @@ $(function() {
     }
 
     function formatObj(arr) {
+        var actividad = '';
         var objData = {
             type: 'add_planificacion',
             lapso: '',
@@ -203,15 +186,29 @@ $(function() {
             secciones: [],
             titulo: '',
             descripcion: '',
-            materia: ''
+            materia: '',
+            porcentaje: '',
+            actividades: []
         };
 
         $(arr).each(function(index, value) {
-            if(value.name == 'seccion') {
-                objData.secciones.push(value.value);
-            } else {
-                objData[value.name] = value.value;
-            }
+            switch (value.name) {
+                case 'seccion':
+                    objData.secciones.push(value.value);
+                break;
+                case 'task':
+                    actividad = value.value;
+                break;
+                case 'task_porcentaje':
+                    objData.actividades.push({actividad: actividad, porcentaje: value.value});
+                break;
+                case 'valor':
+                    objData['porcentaje'] = value.value;
+                break;
+                default:
+                    objData[value.name] = value.value;
+                break;
+            }   
         }) 
 
         return objData;
@@ -401,19 +398,14 @@ $(function() {
                                 </ul>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="button-icon" style="float: right;">
-                                    <button disabled type="submit" class="btn btn-sm mb-1 btnAdd_${uid}" style="color: #fff; background-color: #00B236;">
-                                        Guardar
-                                        <span class="btn-icon-right">
-                                            <i class="fa fa-check" aria-hidden="true"></i>
-                                        </span>
-                                    </button>
-                                </div>
-                            </div>
+                        <hr />
+                        <div class="button-icon" style="float: right;">
+                            <button disabled type="submit" class="btn btn-sm mb-1 btnAdd btnAdd_${uid}" style="color: #fff; background-color: #00B236;">
+                                Guardar
+                                <span class="btn-icon-right">
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                </span>
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -524,6 +516,28 @@ $(function() {
         for(var i=0; i<32; i++)
         result += Math.floor(Math.random()*16).toString(16).toUpperCase();
         return result;
+    }
+
+    function validacionPorcentaje(uid) {
+        var porcentaje = $(document).find('#valor_'+uid);
+        var objTaskPorcentaje = $(document).find('#actividades_'+uid).find('.task_porcentaje');
+        var collapse = $(document).find('.collapse_'+uid)[0];
+        var btnAdd = $(document).find('.btnAdd_'+uid)[0];
+        var totalPorcentaje = 0;
+        $(objTaskPorcentaje).each((index, value) => {
+            totalPorcentaje = totalPorcentaje + parseInt($(value).val());
+        })
+        if($(porcentaje).val() == totalPorcentaje) {
+            M.toast({html: `<span>Los valores Indicados fueron validados correctamente <i class="fa fa-check" style="color: #00B236;"></i></span>`});
+            setTimeout(() => {
+                var instance = M.Collapsible.getInstance(collapse);
+                instance.close();
+                $(btnAdd).removeAttr('disabled');
+            }, 800);
+        } else {
+            M.toast({html: `<span>Los valores Indicados no conciden con el ${$(porcentaje).val()}% asignado <i class="fa fa-exclamation-circle" style="color: orange;"></i></span>`});
+            $(btnAdd).attr('disabled', 'disabled');
+        }
     }
    
 })

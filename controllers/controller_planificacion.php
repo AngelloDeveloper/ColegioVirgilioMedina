@@ -24,6 +24,7 @@
         $_POST['id_periodo'] = $objPeriodo->getPeriodo(['id'])['id'];
         $objPlanificacion = new Planificacion($_POST);
         $idPlanificacion = $objPlanificacion->addPlanificacion();
+        $objPlanificacion->addActividades($idPlanificacion);
         $result = $objPlanificacion->addPlanificacionSecciones($idPlanificacion);
         if($result) {
             echo json_encode([

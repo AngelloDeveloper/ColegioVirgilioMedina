@@ -22,6 +22,7 @@
                 planificacion ( 
                     titulo,
                     descripcion,
+                    porcentaje,
                     id_periodo,
                     id_materia,
                     id_docente,
@@ -31,6 +32,7 @@
                 VALUES (
                     '{$this->objData['titulo']}',
                     '{$this->objData['descripcion']}',
+                    '{$this->objData['porcentaje']}',
                     '{$this->objData['id_periodo']}',
                     '{$this->objData['materia']}',
                     '{$this->objData['id_docente']}',
@@ -61,6 +63,29 @@
                 $this->query = mysqli_query($this->con, $this->sql);
             }
             $this->result = mysqli_insert_id($this->con);
+            return $this->result;
+        }
+
+        public function addActividades($idPlanificacion) {
+            $actividades = json_decode(json_encode($this->objData['actividades']), true);
+            foreach($actividades as $data) {
+                $this->sql = "INSERT INTO 
+                    planificacion_actividades ( 
+                        actividad,
+                        porcentaje,
+                        id_planificacion
+                    ) 
+                    VALUES (
+                        '{$data['actividad']}',
+                        '{$data['porcentaje']}',
+                        '{$idPlanificacion}'
+                    )
+                ";
+
+                $this->query = mysqli_query($this->con, $this->sql);
+                $this->result = mysqli_insert_id($this->con);
+            }
+
             return $this->result;
         }
 

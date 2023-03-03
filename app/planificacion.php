@@ -107,25 +107,37 @@
                                                                 <div class="card-body">
                                                                     <form>
                                                                         <div class="row">
-                                                                            <div class="col-3">
+                                                                            <div class="col-2">
                                                                                 <div class="form-group input-field">
-                                                                                    <input value="" id="x" name="titulo" type="text" required/>
-                                                                                    <label for="x">Titulo</label>
+                                                                                    <input value="" id="planificacion" name="planificacion" type="text" required/>
+                                                                                    <label for="planificacion">Planificacion</label>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="col-3">
+                                                                            <div class="col-2">
                                                                                 <div class="form-group input-field">
-                                                                                    <input value="" id="x" name="titulo" type="text" required/>
-                                                                                    <label for="x">Titulo</label>
+                                                                                    <select id="anio" class="anio" name="anio">
+                                                                                        <option value="" disabled selected>Seleccionar...</option>
+                                                                                    </select>
+                                                                                    <label for="anio">Año</label>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="col-3">
+                                                                            <div class="col-2">
                                                                                 <div class="form-group input-field">
-                                                                                    <input value="" id="x" name="titulo" type="text" required/>
-                                                                                    <label for="x">Titulo</label>
+                                                                                    <select multiple id="seccion" class="seccion" name="seccion" >
+                                                                                        <option value="" disabled selected>Seleccionar...</option>
+                                                                                    </select>
+                                                                                    <label for="seccion">Seccion</label>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="col-3">
+                                                                            <div class="col-2">
+                                                                                <div class="form-group input-field">
+                                                                                    <select id="lapso" name="lapso">
+                                                                                        <option value="" disabled selected>Seleccionar...</option>
+                                                                                    </select>
+                                                                                    <label for="lapso">Lapso</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-4">
                                                                                 <div class="buton-icon">
                                                                                     <button 
                                                                                         id="btNewPlanificacion" 
@@ -159,7 +171,7 @@
                                                                                     <div class="card gradient-8">
                                                                                         <div class="card-body">
                                                                                             <div class="d-inline-block" style="width: 100%">
-                                                                                                <h5 class="text-white"><?= strtoupper($planificacion['titulo']); ?></h5>
+                                                                                                <h4 class="text-white"><?= strtoupper($planificacion['titulo']); ?></h4>
                                                                                                 <p class="text-white mb-0"><?= strtolower($planificacion['descripcion']); ?></p>
                                                                                             </div>
                                                                                             <span class="float-right display-5">
