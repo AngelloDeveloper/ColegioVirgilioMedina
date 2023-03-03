@@ -91,6 +91,73 @@ $(function() {
         initMaterialInput();
     })
 
+    $(document).on('click', '.btnAddActividad', function(e) {
+        var elm = $(this)[0];
+        var uid = $(elm).data('uid');
+        var inputDinamic = $(document).find('#actividades_'+uid).find('.dinamicInput')[0];
+        var porcentaje = $(document).find('#valor_'+uid).val();
+
+        if(porcentaje == '') {
+            M.toast({html: `<span>Debe asignar porcentaje a la planificación <i class="fa fa-exclamation-circle" style="color: orange;"></i></span>`});
+            $(document).find('#valor_'+uid).focus();
+        } else {
+            if(inputDinamic == undefined) {
+                var btnValidate = $(document).find('.btnValidate_'+uid)[0];
+                $(btnValidate).removeAttr('disabled');
+            }
+
+            var uidTask = uuid();
+            var badge = $(document).find('#badge_'+uid).find('.badge')[0];
+            if(badge == undefined) {
+                $(document).find('#badge_'+uid).append(`<span class="new badge ml-2" data-badge-caption="${porcentaje+'%'}">Totalice un</span>`);
+            } else {
+               var valorBadge = $(badge).data('badge-caption');
+               if(valorBadge != porcentaje+'%') {
+                    $(document).find('#badge_'+uid).html(`<b>Agregar Actividades</b><span class="new badge ml-2" data-badge-caption="${porcentaje+'%'}">Totalice un</span>`);
+               }
+            }
+            
+            $(document).find('#actividades_'+uid).append(`
+                <div class="col-6 dinamicInput ${uidTask}">
+                    <div class="form-group input-field">
+                        <textarea id="task${uidTask}_${uid}" name="task" class="materialize-textarea" required></textarea>
+                        <label for="task${uidTask}_${uid}" >Descripción</label>
+                    </div>
+                </div>
+                <div class="col-4 dinamicInput ${uidTask}">
+                    <div class="form-group input-field">
+                        <input value="" id="task_porcentaje${uidTask}_${uid}" name="task_porcentaje" type="number" required/>
+                        <label for="task_porcentaje${uidTask}_${uid}">Porcentaje %</label>
+                    </div>
+                </div>
+                <div class="col-2 ${uidTask}">
+                    <button type="button" class="btn btnDelActividad btn-sm mb-1" title="Eliminar" data-uid=${uid} data-uid-task="${uidTask}" style="
+                            color: #fff;
+                            background-color: #e92d59fc;
+                            border-radius: 100%;
+                            margin-top: 25px !important;
+                            height: 28px;
+                            float: right;">
+                            <i class="fa fa-minus" aria-hidden="true"></i>
+                    </button>
+                </div>
+            `);
+        }
+    })
+
+    $(document).on('click', '.btnDelActividad', function(e) {
+        var elm = $(this)[0];
+        var uid = $(elm).data('uid');
+        var uidDel = $(elm).data('uid-task');
+        $(document).find('.'+uidDel).remove();
+        var inputDinamic = $(document).find('#actividades_'+uid).find('.dinamicInput')[0];
+        if(inputDinamic == undefined) {
+            var btnValidate = $(document).find('.btnValidate_'+uid)[0];
+            console.log(btnValidate);
+            $(btnValidate).attr('disabled', 'disabled');
+        }
+    })
+
     //function
     function initMaterialInput() {
         M.AutoInit();
@@ -210,8 +277,8 @@ $(function() {
             <input id="type" type="hidden" value="${type}" />
             <input id="idPlanificacion" type="hidden" value="" />
             <div class="card cardCustom">
-                <div class="card-body">
-                    <form class="form-planificacion" autocomplete="off">
+                <form class="form-planificacion" autocomplete="off">
+                    <div class="card-body">
                         <input type="hidden" name="materia" value="${idMateria}" />
                         <div class="row">
                             <div class="col-4">
@@ -245,11 +312,65 @@ $(function() {
                                     <label for="descripcion_${uid}" >Descripción</label>
                                 </div>
                             </div>
+                            <hr />
+                            <div class="col-3">
+                                <div class="form-group input-field">
+                                    <input value="" id="valor_${uid}" name="valor" type="number" required/>
+                                    <label for="valor_${uid}">Porcentaje %</label>
+                                </div>
+                            </div>
+                            
+                            <div class="col-9">
+                                <ul class="collapsible popout">
+                                    <li>
+                                        <div class="collapsible-header"><i class="fa fa-tasks" aria-hidden="true"></i>Actividades</div>
+                                        <div class="collapsible-body">
+                                            <div id="actividades_${uid}" class="row">
+                                                <div class="col-12">
+                                                    <span id="badge_${uid}" style="font-size: 14px;">
+                                                        <b>Agregar Actividades</b>
+                                                    </span>
+                                                    <button 
+                                                        type="button" 
+                                                        class="btn btnAddActividad btn-sm mb-1" 
+                                                        title="Agregar"
+                                                        data-uid="${uid}"
+                                                        style="
+                                                            color: #fff;
+                                                            background-color: #5c4ab8fc;
+                                                            border-radius: 100%;
+                                                            height: 28px;
+                                                            float: right;"
+                                                    >
+                                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                                    </button>
+                                                    <hr />
+                                                </div>
+                                            </div>
+                                            <div class="row validate_${uid}">
+                                                <div class="col-12">
+                                                    <div class="button-icon" style="float: right;">
+                                                        <button disabled type="submit" class="btn btn-sm mb-1 btnValidate_${uid}" style="color: #fff; background-color: #5c4ab8fc;">
+                                                            Validar
+                                                            <span class="btn-icon-right">
+                                                                <i class="fa fa-retweet" aria-hidden="true"></i>
+                                                            </span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
+                        
+                    </div>
+                    <div class="card-footer">
                         <div class="row">
                             <div class="col-12">
                                 <div class="button-icon" style="float: right;">
-                                    <button type="submit" class="btn btn-sm mb-1" style="color: #fff; background-color: #00B236;">
+                                    <button disabled type="submit" class="btn btn-sm mb-1" style="color: #fff; background-color: #00B236;">
                                         Guardar
                                         <span class="btn-icon-right">
                                             <i class="fa fa-check" aria-hidden="true"></i>
@@ -258,8 +379,8 @@ $(function() {
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         `;
 
