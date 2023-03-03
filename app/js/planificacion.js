@@ -126,7 +126,7 @@ $(function() {
                 </div>
                 <div class="col-4 dinamicInput ${uidTask}">
                     <div class="form-group input-field">
-                        <input value="" id="task_porcentaje${uidTask}_${uid}" name="task_porcentaje" type="number" required/>
+                        <input class="task_porcentaje" value="" id="task_porcentaje${uidTask}_${uid}" name="task_porcentaje" type="number" required/>
                         <label for="task_porcentaje${uidTask}_${uid}">Porcentaje %</label>
                     </div>
                 </div>
@@ -153,12 +153,41 @@ $(function() {
         var inputDinamic = $(document).find('#actividades_'+uid).find('.dinamicInput')[0];
         if(inputDinamic == undefined) {
             var btnValidate = $(document).find('.btnValidate_'+uid)[0];
-            console.log(btnValidate);
             $(btnValidate).attr('disabled', 'disabled');
         }
+        validacionPorcentaje(uid);
+    })
+
+    $(document).on('click', '.btnValidate', function(e) {
+        var elm = $(this)[0];
+        var uid = $(elm).data('uid');
+        validacionPorcentaje(uid);
     })
 
     //function
+    function validacionPorcentaje(uid) {
+        var porcentaje = $(document).find('#valor_'+uid);
+        var objTaskPorcentaje = $(document).find('#actividades_'+uid).find('.task_porcentaje');
+        var collapse = $(document).find('.collapse_'+uid)[0];
+        var btnAdd = $(document).find('.btnAdd_'+uid)[0];
+        var totalPorcentaje = 0;
+        $(objTaskPorcentaje).each((index, value) => {
+            totalPorcentaje = totalPorcentaje + parseInt($(value).val());
+        })  
+
+        if($(porcentaje).val() == totalPorcentaje) {
+            M.toast({html: `<span>Los valores Indicados fueron validados correctamente <i class="fa fa-check" style="color: #00B236;"></i></span>`});
+            setTimeout(() => {
+                var instance = M.Collapsible.getInstance(collapse);
+                instance.close();
+                $(btnAdd).removeAttr('disabled');
+            }, 800);
+        } else {
+            M.toast({html: `<span>Los valores Indicados no conciden con el ${$(porcentaje).val()}% asignado <i class="fa fa-exclamation-circle" style="color: orange;"></i></span>`});
+            $(btnAdd).attr('disabled', 'disabled');
+        }
+    }
+
     function initMaterialInput() {
         M.AutoInit();
         M.updateTextFields();
@@ -321,9 +350,12 @@ $(function() {
                             </div>
                             
                             <div class="col-9">
-                                <ul class="collapsible popout">
+                                <ul class="collapsible popout collapse_${uid}">
                                     <li>
-                                        <div class="collapsible-header"><i class="fa fa-tasks" aria-hidden="true"></i>Actividades</div>
+                                        <div class="collapsible-header">
+                                            <i class="fa fa-tasks" aria-hidden="true"></i>
+                                            <span>Actividades</span>
+                                        </div>
                                         <div class="collapsible-body">
                                             <div id="actividades_${uid}" class="row">
                                                 <div class="col-12">
@@ -337,7 +369,7 @@ $(function() {
                                                         data-uid="${uid}"
                                                         style="
                                                             color: #fff;
-                                                            background-color: #5c4ab8fc;
+                                                            background-image: linear-gradient(230deg, #ffc480, #ff763b);
                                                             border-radius: 100%;
                                                             height: 28px;
                                                             float: right;"
@@ -350,7 +382,12 @@ $(function() {
                                             <div class="row validate_${uid}">
                                                 <div class="col-12">
                                                     <div class="button-icon" style="float: right;">
-                                                        <button disabled type="submit" class="btn btn-sm mb-1 btnValidate_${uid}" style="color: #fff; background-color: #5c4ab8fc;">
+                                                        <button disabled 
+                                                            type="button" 
+                                                            class="btn btn-sm mb-1 btnValidate btnValidate_${uid}" 
+                                                            style="color: #fff; background-color: #5c4ab8fc;"
+                                                            data-uid="${uid}"
+                                                        >
                                                             Validar
                                                             <span class="btn-icon-right">
                                                                 <i class="fa fa-retweet" aria-hidden="true"></i>
@@ -364,13 +401,12 @@ $(function() {
                                 </ul>
                             </div>
                         </div>
-                        
                     </div>
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-12">
                                 <div class="button-icon" style="float: right;">
-                                    <button disabled type="submit" class="btn btn-sm mb-1" style="color: #fff; background-color: #00B236;">
+                                    <button disabled type="submit" class="btn btn-sm mb-1 btnAdd_${uid}" style="color: #fff; background-color: #00B236;">
                                         Guardar
                                         <span class="btn-icon-right">
                                             <i class="fa fa-check" aria-hidden="true"></i>
