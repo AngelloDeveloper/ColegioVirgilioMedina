@@ -114,3 +114,11 @@ function initConfigDate() {
     instance.setDate(new Date());
     instance.gotoDate(new Date());
 }
+
+function limitar_cadena(cadena, limite, sufijo){
+    if(cadena.length > limite){
+        return cadena.substr(0, limite) + sufijo;
+    }
+
+    return cadena;
+}

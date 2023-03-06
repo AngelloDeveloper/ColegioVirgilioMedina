@@ -72,18 +72,38 @@ $(function() {
         var thisCard = $(elm).parent()[0];
         var thisColum = $(elm).parent().parent()[0];
         var arrData = $(this).serializeArray(); 
-        const objData = formatObj(arrData);
+        const objData = formatObj(arrData, {
+            type: 'add_planificacion',
+            secciones: [],
+            actividades: []
+        });
+        const objStatus = {
+            SUCCESS: {
+                card: 'gradient-card-success',
+                icon: 'icon-card-success'
+            },
+            ERROR: {
+                card: 'gradient-card-error',
+                icon: 'icon-card-error'
+            },
+            VALIDATION: {
+                card: 'gradient-card-alert',
+                icon: 'icon-card-alert'
+            }
+        };
         $(btnAdd).attr('disabled', 'disabled');
         $.post(BASE_URL+CONTROLLER_PRINCIPAL, objData, function(response) {
             var resp = jQuery.parseJSON(response);
             M.toast({html: `<span>${resp.MESSAGE} <i class="fa ${resp.ICON}" style="color: ${resp.COLOR_ICON};"></i></span>`});
-            var styleCard = resp.STATUS == 'SUCCESS' ? 'gradient-card-success' : 'gradient-card-error';
-            var styleIcon = resp.STATUS == 'SUCCESS' ? 'icon-card-success' : 'icon-card-error';
+            var styleCard = objStatus[resp.STATUS]['card'];
+            var styleIcon = objStatus[resp.STATUS]['icon'];
             $(thisCard).addClass(styleCard);
             $(thisCard).prepend(`<i class="fa ${resp.ICON} ${styleIcon}"></i>`);
-            setTimeout(() => {
-                $(thisColum).remove();
-            },2500);
+            if(resp.STATUS == 'SUCCESS') {
+                setTimeout(() => {
+                    $(thisColum).remove();
+                },2500);
+            }
         })
     })
 
@@ -169,6 +189,56 @@ $(function() {
         validacionPorcentaje(uid);
     })
 
+    $(document).on('click', '#btnReload', function(e) {
+        location.reload();
+    })
+
+    //search planificacion
+    $('.planificacion_search').on('submit', function(e) {
+        e.preventDefault();
+        var arrData = $(this).serializeArray();
+        const objData = formatObj(arrData, {
+            type: 'search_planificacion',
+            secciones: []
+        });
+
+        spinnerLoad('.materia-'+objData.materia);
+        searchPlanificacion(objData)
+            .then((template) => {
+                setTimeout(() => {
+                    $('.materia-'+objData.materia).html(template);
+                }, 1500);
+            })
+    })
+
+    $('#btnClearForm').on('click', function(e) {
+        var elm = $(this)[0];
+        var elmForm = $(elm).parent().parent().parent().parent()[0];
+        var titulo = $(elmForm).find('.planificacion')[0];
+        var lapso = $(elmForm).find('.lapso')[0];
+        var anio = $(elmForm).find('.anio')[0];
+        var seccion = $(elmForm).find('.seccion')[0];
+        var materia = $(elm).data('materia');
+        var docente = $(elm).data('docente');
+        const objData = {
+            type: 'search_planificacion', 
+            id_materia: materia, 
+            id_docente: docente
+        };
+        $(titulo).val('');
+        $(lapso).val('');
+        $(anio).val('');
+        $(seccion).val('');
+        initMaterialInput();
+        spinnerLoad('.materia-'+materia);
+        searchPlanificacion(objData)
+            .then((template) => {
+                setTimeout(() => {
+                    $('.materia-'+materia).html(template);
+                }, 1500);
+            })
+    })
+
     //function
     function initMaterialInput() {
         M.AutoInit();
@@ -177,20 +247,93 @@ $(function() {
         M.Collapsible.init($('.collapsible'));
     }
 
-    function formatObj(arr) {
-        var actividad = '';
-        var objData = {
-            type: 'add_planificacion',
-            lapso: '',
-            anio: '',
-            secciones: [],
-            titulo: '',
-            descripcion: '',
-            materia: '',
-            porcentaje: '',
-            actividades: []
-        };
+    function limitar_cadena(cadena, limite, sufijo){
+        if(cadena.length > limite){
+            return cadena.substr(0, limite) + sufijo;
+        }
+    
+        return cadena;
+    }
 
+    function spinnerLoad(elm) {
+        var spinnerLoad = `
+            <div class="col-12">
+                <center style="margin-top: 12em;">    
+                    <div class="preloader-wrapper active">
+                        <div class="spinner-layer spinner-green-only">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div><div class="gap-patch">
+                            <div class="circle"></div>
+                        </div><div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                        </div>
+                    </div>
+                    <p>Buscando...</p>
+                </center>
+            </div>
+        `;
+        $(elm).html(spinnerLoad);
+    }
+
+    function searchPlanificacion(objData) {
+        const Deferred = $.Deferred();
+        $.post(BASE_URL+CONTROLLER_PRINCIPAL, objData, function(response) {
+            var resp = jQuery.parseJSON(response);
+            var data = resp.DATA;
+            var template = '';
+            if(resp.STATUS == 'SUCCESS') {
+                $(data).each((index, value) => {
+                    template += `
+                        <div class="col-3">
+                            <div class="card gradient-8">
+                                <div class="card-body">
+                                    <h4 class="text-white">${limitar_cadena(value.titulo, 18, "...").toUpperCase()}</h4>
+                                    <div class="d-inline-block">
+                                        <h2 class="text-white">${value.porcentaje+'%'}</h2>
+                                        <p class="text-white mb-0">${limitar_cadena(value.descripcion, 21, "...").toLowerCase()}</p>
+                                    </div>
+                                    <span class="float-right display-5">
+                                        <center>
+                                            <button class="btn btn-sm btn-primary btnEdit" data-toggle="tooltip" data-placement="top" data-iddocente="10" title="" data-original-title="Editar">
+                                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger btnDelete" data-toggle="tooltip" data-placement="top" data-iddocente="10" title="" data-original-title="Eliminar">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </button>
+                                        </center>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>  
+                    `;
+                })
+                Deferred.resolve(template);
+            } else {
+                template = ` 
+                    <div class="col-12">
+                        <center style="margin-top: 10em;">  
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="text-center" style="margin-bottom: 0px; font-size: 14px;">
+                                        <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                    </p>
+                                    <p class="text-center"><b>no se encontraron resultados</b></p>
+                                </div>
+                            </div>
+                        </center>
+                    </div>
+                `;
+                Deferred.resolve(template);
+            }
+        })
+
+        return Deferred.promise();
+    }
+
+    function formatObj(arr, objData) {
+        var actividad = '';
         $(arr).each(function(index, value) {
             switch (value.name) {
                 case 'seccion':
@@ -243,9 +386,7 @@ $(function() {
                                 </span>
                             </button>
                             <button 
-                                data-seccion-open="principal" 
-                                data-seccion-close="terciary" 
-                                id="btnReturnPlanificacion" 
+                                id="btnReload"
                                 type="button" 
                                 class="btn mb-1" 
                                 style="color: #fff; background-color: #5c4ab8fc;"

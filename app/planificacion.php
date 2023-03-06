@@ -25,13 +25,20 @@
     $Secciones = $objSecciones->getAllSecciones();
     $arrMaterias = $objMaterias->getAllMaterias();
 
-   
-    
     $arrGradienteCard = [
         '1' => 'gradient-7',
         '2' => 'gradient-9',
         '3' => 'gradient-5'
     ];
+
+    //function
+    function limitar_cadena($cadena, $limite, $sufijo){
+        if(strlen($cadena) > $limite){
+            return substr($cadena, 0, $limite) . $sufijo;
+        }
+
+        return $cadena;
+    }
 ?>
 <link rel="stylesheet" type="text/css" href="css/planificacion.css" />
 <div class="content-body">
@@ -67,21 +74,17 @@
                         <div class="row">
                             <div class="col-12">
                                 <!--<div class="row">
-                                    
-                                        
-                                            <div class="card gradient-materias bannerList bannerList_radius" style="width: 100%;">
-                                                <div class="card-body bannersList_padding">
-                                                    <div class="d-inline-block">
-                                                        <img class="img-icons-listPlanificacion ml-4 mr-2" src="../assets/img/materias/icons/<?= $materia['icon'] ?>">
-                                                        <div style="display: inline-block;">
-                                                            <span class="titleMateriaList"><?= $materia['materia'] ?></span>
-                                                            <p class="mb-0"><?= $materia['descripcion'] ?></p>
-                                                        </div>
-                                                    </div>
+                                    <div class="card gradient-materias bannerList bannerList_radius" style="width: 100%;">
+                                        <div class="card-body bannersList_padding">
+                                            <div class="d-inline-block">
+                                                <img class="img-icons-listPlanificacion ml-4 mr-2" src="../assets/img/materias/icons/<?= $materia['icon'] ?>">
+                                                <div style="display: inline-block;">
+                                                    <span class="titleMateriaList"><?= $materia['materia'] ?></span>
+                                                    <p class="mb-0"><?= $materia['descripcion'] ?></p>
                                                 </div>
                                             </div>
-                                        
-                                    
+                                        </div>
+                                    </div>
                                 </div>-->
                                 <div class="row">
                                     <div class="col-12">
@@ -105,44 +108,54 @@
                                                         <?php if(!empty($arrPlanificaciones)) { ?>
                                                             <div class="card">
                                                                 <div class="card-body">
-                                                                    <form>
+                                                                    <form class="planificacion_search">
                                                                         <div class="row">
+                                                                            <input type="hidden" name="id_docente" value="<?= $_SESSION['user_data']['idDocente'] ?>" />
+                                                                            <input type="hidden" name="materia" value="<?= $materia['id'] ?>" />
                                                                             <div class="col-2">
                                                                                 <div class="form-group input-field">
-                                                                                    <input value="" id="planificacion" name="planificacion" type="text" required/>
+                                                                                    <input value="" class="planificacion" name="planificacion" type="text" />
                                                                                     <label for="planificacion">Planificacion</label>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-2">
                                                                                 <div class="form-group input-field">
-                                                                                    <select id="anio" class="anio" name="anio">
-                                                                                        <option value="" disabled selected>Seleccionar...</option>
+                                                                                    <select class="lapso" name="lapso">
+                                                                                        <option value="" selected>Seleccionar...</option>
+                                                                                        <?php foreach($lapsos as $lapso) { ?>
+                                                                                            <option value="<?= $lapso['id'] ?>"><?= $lapso['formato'].' lapso' ?></option>
+                                                                                        <?php } ?>
+                                                                                    </select>
+                                                                                    <label for="lapso">Lapso</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-2">
+                                                                                <div class="form-group input-field">
+                                                                                    <select class="anio" name="anio">
+                                                                                        <option value="" selected>Seleccionar...</option>
+                                                                                        <?php foreach($Grados as $grado) { ?>
+                                                                                            <option value="<?= $grado['id'] ?>"><?= $grado['formato'].' año' ?></option>
+                                                                                        <?php } ?>
                                                                                     </select>
                                                                                     <label for="anio">Año</label>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-2">
                                                                                 <div class="form-group input-field">
-                                                                                    <select multiple id="seccion" class="seccion" name="seccion" >
+                                                                                    <select class="seccion" name="seccion" >
                                                                                         <option value="" disabled selected>Seleccionar...</option>
+                                                                                        <?php foreach($Secciones as $seccion) { ?>
+                                                                                            <option value="<?= $seccion['id'] ?>"><?= 'seccion '.$seccion['seccion'] ?></option>
+                                                                                        <?php } ?>  
                                                                                     </select>
                                                                                     <label for="seccion">Seccion</label>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="col-2">
-                                                                                <div class="form-group input-field">
-                                                                                    <select id="lapso" name="lapso">
-                                                                                        <option value="" disabled selected>Seleccionar...</option>
-                                                                                    </select>
-                                                                                    <label for="lapso">Lapso</label>
-                                                                                </div>
-                                                                            </div>
                                                                             <div class="col-4">
                                                                                 <div class="buton-icon">
-                                                                                    <button 
-                                                                                        id="btNewPlanificacion" 
-                                                                                        type="button" 
-                                                                                        class="btn btn-sm mb-1 ml-1" 
+                                                                                    <button  
+                                                                                        type="submit" 
+                                                                                        class="btn btn-sm mt-4 ml-1" 
                                                                                         style="color: #fff; background-color: #5c4ab8fc; float:right;"
                                                                                     >
                                                                                         Buscar
@@ -151,10 +164,12 @@
                                                                                         </span>
                                                                                     </button>
                                                                                     <button 
-                                                                                        id="btNewPlanificacion" 
+                                                                                        id="btnClearForm" 
                                                                                         type="button" 
-                                                                                        class="btn btn-sm mb-1" 
+                                                                                        class="btn btn-sm mt-4" 
                                                                                         style="color: #fff; background-color: silver;float:right;"
+                                                                                        data-materia="<?= $materia['id'] ?>"
+                                                                                        data-docente="<?= $_SESSION['user_data']['idDocente'] ?>"
                                                                                     >
                                                                                         Limpiar
                                                                                         <span class="btn-icon-right">
@@ -164,32 +179,33 @@
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        <hr class="hr" />
-                                                                        <div class="row">
-                                                                            <?php foreach($arrPlanificaciones as $planificacion) { ?>
-                                                                                <div class="col-3">
-                                                                                    <div class="card gradient-8">
-                                                                                        <div class="card-body">
-                                                                                            <div class="d-inline-block" style="width: 100%">
-                                                                                                <h4 class="text-white"><?= strtoupper($planificacion['titulo']); ?></h4>
-                                                                                                <p class="text-white mb-0"><?= strtolower($planificacion['descripcion']); ?></p>
-                                                                                            </div>
-                                                                                            <span class="float-right display-5">
-                                                                                                <center>
-                                                                                                    <button class="btn btn-sm btn-primary btnEdit" data-toggle="tooltip" data-placement="top" data-iddocente="10" title="" data-original-title="Editar">
-                                                                                                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                                                                                                    </button>
-                                                                                                    <button class="btn btn-sm btn-danger btnDelete" data-toggle="tooltip" data-placement="top" data-iddocente="10" title="" data-original-title="Eliminar">
-                                                                                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                                                                                    </button>
-                                                                                                </center>
-                                                                                            </span>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>  
-                                                                            <?php } ?>
-                                                                        </div>
                                                                     </form>
+                                                                    <hr class="hr" />
+                                                                    <div class="row scroll <?= 'materia-'.$materia['id'] ?>">
+                                                                        <?php foreach($arrPlanificaciones as $planificacion) { ?>
+                                                                            <div class="col-3">
+                                                                                <div class="card gradient-8">
+                                                                                    <div class="card-body">
+                                                                                        <h4 class="text-white"><?= strtoupper(limitar_cadena($planificacion['titulo'], 18, "...")); ?></h4>
+                                                                                        <div class="d-inline-block">
+                                                                                            <h2 class="text-white"><?= $planificacion['porcentaje'].'%'; ?></h2>
+                                                                                            <p class="text-white mb-0"><?= strtolower(limitar_cadena($planificacion['descripcion'], 21, "...")); ?></p>
+                                                                                        </div>
+                                                                                        <span class="float-right display-5">
+                                                                                            <center>
+                                                                                                <button class="btn btn-sm btn-primary btnEdit" data-toggle="tooltip" data-placement="top" data-iddocente="10" title="" data-original-title="Editar">
+                                                                                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                                                                </button>
+                                                                                                <button class="btn btn-sm btn-danger btnDelete" data-toggle="tooltip" data-placement="top" data-iddocente="10" title="" data-original-title="Eliminar">
+                                                                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                                                                </button>
+                                                                                            </center>
+                                                                                        </span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>  
+                                                                        <?php } ?>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         <?php } else { ?>
