@@ -5,9 +5,17 @@
 
     require_once('../model/class/conexion.class.php');
     require_once('../model/class/docentes.class.php');
+    require_once('../model/class/materias.class.php');
+    require_once('../model/class/secciones.class.php');
 
     $objDocentes = new Docentes();
+    $objMaterias = new Materias();
+    $objSecciones = new Secciones();
+
+    $arrMaterias = $objMaterias->getAllMaterias();
     $arrDocentes = $objDocentes->getAllDocentes();
+    $arrSecciones = $objSecciones->getAllSecciones();
+
     $arrLvEstu = [
         'N' => 'Sin Estudios',
         'B' => 'Bachiller',
@@ -28,6 +36,7 @@
     </div>
     <div class="container-fluid">
         <div class="row">
+            <input id="docenteid" type="hidden" value="" />
             <div class="col-12">
                 <div class="card principal">
                     <div class="card-body">
@@ -48,83 +57,28 @@
                         </div>
                         <hr class="hr" />
                         <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th><center>Nombre</center></th>
-                                                        <th><center>Apellido</center></th>
-                                                        <th><center>Documento</center></th>
-                                                        <th><center>Correo</center></th>
-                                                        <th><center>Dirección</center></th>
-                                                        <th><center>Teléfono</center></th>
-                                                        <th><center>Lv. Instrucción</center></th>
-                                                        <th><center>Acciones</center></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php foreach($arrDocentes as $docente) { ?>
-                                                        <tr>
-                                                            <td><center><?= $docente['nombre'] ?></center></td>
-                                                            <td><center><?= $docente['apellido'] ?></center></td>
-                                                            <td><center><?= $docente['cedula'] ?></center></td>
-                                                            <td><center><?= $docente['email'] ?></center></td>
-                                                            <td><center><?= $docente['direccion'] ?></center></td>
-                                                            <td>
-                                                                <center>
-                                                                    <i class="fa fa-mobile" 
-                                                                        data-toggle="tooltip" 
-                                                                        data-placement="top" 
-                                                                        title="<?= $docente['telf_movil'] ?>" 
-                                                                        aria-hidden="true"
-                                                                        style="font-size: 25px;"
-                                                                    ></i>
-                                                                </center>
-                                                            </td>
-                                                            <td>
-                                                                <center>
-                                                                    <i class="fa fa-graduation-cap" 
-                                                                        data-toggle="tooltip" 
-                                                                        data-placement="top" 
-                                                                        title="<?= $arrLvEstu[$docente['nivel_instruccion']] ?>" 
-                                                                        aria-hidden="true"
-                                                                        style="font-size: 25px;"
-                                                                    ></i>
-                                                                </center>
-                                                            </td>
-                                                            <td>
-                                                                <center>
-                                                                    <button
-                                                                        class="btn btn-sm btn-primary btnEdit" 
-                                                                        data-toggle="tooltip" 
-                                                                        data-placement="top"
-                                                                        data-iddocente="<?= $docente['id'] ?>"  
-                                                                        title="Editar"
-                                                                    >
-                                                                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                                                                    </button>
-                                                                    <button 
-                                                                        class="btn btn-sm btn-danger btnDelete" 
-                                                                        data-toggle="tooltip" 
-                                                                        data-placement="top" 
-                                                                        data-iddocente="<?= $docente['id'] ?>"
-                                                                        title="Eliminar" 
-                                                                    >
-                                                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                                                    </button>
-                                                                </center>
-                                                            </td>
-                                                        </tr>
-                                                    <?php } ?>
-                                                </tbody>
-                                            </table>
+                            <?php foreach($arrDocentes as $docente) {     
+                            ?>
+                                <div class="col-3">
+                                    <div class="card cardHeight">
+                                        <div class="card-image card-images-height gradient-materias">
+                                            <center>
+                                                <img class="img-icons" src="../assets/img/materias/icons/educator.png" />
+                                            </center>
+                                            <a title="Asignar Materias" 
+                                                class="config_docente btn-floating halfway-fab waves-effect waves-light green"
+                                                data-iddocente="<?= $docente['id'] ?>"
+                                            >
+                                                <i class="fa fa-plus"></i>
+                                            </a>
+                                        </div>
+                                        <div class="card-content">
+                                            <span class="card-title titleMateria"><?= $docente['nombre'].' '.$docente['apellido']; ?></span>
+                                            <p>Docente</p>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -134,6 +88,11 @@
     </div>
 </div>
 
+<!--variables-->
+<script>
+    var arrMaterias = <?= json_encode($arrMaterias) ?>;
+    var arrSecciones = <?= json_encode($arrSecciones) ?>;
+</script>
 <script src="js/docentes.js"></script>
 <?php require_once('utils/footer.php'); ?>
      

@@ -73,19 +73,7 @@
                         <hr class="hr" />
                         <div class="row">
                             <div class="col-12">
-                                <!--<div class="row">
-                                    <div class="card gradient-materias bannerList bannerList_radius" style="width: 100%;">
-                                        <div class="card-body bannersList_padding">
-                                            <div class="d-inline-block">
-                                                <img class="img-icons-listPlanificacion ml-4 mr-2" src="../assets/img/materias/icons/<?= $materia['icon'] ?>">
-                                                <div style="display: inline-block;">
-                                                    <span class="titleMateriaList"><?= $materia['materia'] ?></span>
-                                                    <p class="mb-0"><?= $materia['descripcion'] ?></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>-->
+                                
                                 <div class="row">
                                     <div class="col-12">
                                         <ul class="collapsible">

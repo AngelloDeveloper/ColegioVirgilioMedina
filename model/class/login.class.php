@@ -156,7 +156,42 @@
                         modulos.status = 'Y'";
                 break;
                 case '2':
-                    # code...
+                    $this->sql = "SELECT
+                        usuarios.id as idUser, 
+                        usuarios.estatus as estatus,
+                        usuarios.permisos as permisos,
+                        usuarios.id_tipo_usuario as userTypeId,
+                        administrativos.id as idAdmin,
+                        administrativos.nombre as nombre,
+                        administrativos.apellido as apellido,
+                        administrativos.cedula as documento,
+                        administrativos.telf_movil as telefono,
+                        administrativos.email as email,
+                        administrativos.direccion as direccion, 
+                        administrativos.nivel_instruccion as lv_instruccion
+                    FROM 
+                        usuarios
+                        LEFT JOIN administrativos ON usuarios.id = administrativos.id_usuarios
+                    WHERE 
+                        usuarios.id = '{$idUser}'";
+
+                    $this->sql2 = "SELECT
+                        modulos.id as moduloId,
+                        modulos.titulo as moduloTitulo,
+                        modulos.descripcion as moduloDescripcion,
+                        sub_modulos.id as subModuloId,
+                        sub_modulos.titulo as subModuloTitulo,
+                        sub_modulos.descripcion as subModuloDescripcion,
+                        sub_modulos.url as subModuloUrl
+                    FROM
+                        tusuarios_smodulos
+                        LEFT JOIN sub_modulos ON tusuarios_smodulos.id_sub_modulo = sub_modulos.id
+                        LEFT JOIN modulos ON sub_modulos.id_modulo = modulos.id
+                    WHERE
+                        tusuarios_smodulos.id_tipo_usuario = '{$idUserType}' AND
+                        tusuarios_smodulos.access = 'Y' AND
+                        sub_modulos.status = 'Y' AND
+                        modulos.status = 'Y'";
                 break;
                 case '1':
                     # code...

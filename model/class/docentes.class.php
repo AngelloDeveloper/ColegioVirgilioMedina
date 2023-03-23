@@ -115,5 +115,13 @@
             $this->idUsuario = mysqli_insert_id($this->con);
             return $this->idUsuario;
         }
+
+        public function asignacionSeccion() {
+            $this->sql = "SELECT * FROM docentes_secciones WHERE id_docente = '{$this->objData['idDocente']}'";
+            $this->query = mysqli_query($this->con, $this->sql);
+            $this->result = mysqli_num_rows($this->query);
+            var_dump($this->result);
+            die();
+        }
     }
 ?>

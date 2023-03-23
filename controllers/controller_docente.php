@@ -38,5 +38,10 @@
             'MESSAGES' => 'Datos Eliminados!'
         ]);
     }
+
+    if(!empty($_POST) && $_POST['type'] == 'asigacion_seccion') {
+        $objDocentes = new Docentes($_POST);
+        $objDocentes->asignacionSeccion();
+    }
     
 ?>

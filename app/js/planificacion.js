@@ -5,13 +5,14 @@ $(function() {
     //nueva planificacion
     $('#btNewPlanificacion').on('click', function() {
         var btn = $(this)[0];
-        getTemplateMaterias().then((response) => {
-            const template = response;
-            $('.principal').hide();
-            $('.secondary').html(template);
-            $('.secondary').show();
-            initMaterialInput();
-        });
+        getTemplateMaterias()
+            .then((response) => {
+                const template = response;
+                $('.principal').hide();
+                $('.secondary').html(template);
+                $('.secondary').show();
+                initMaterialInput();
+            });
     })
 
     $(document).on('click', '#btnReturnPlanificacion', function(e) {
