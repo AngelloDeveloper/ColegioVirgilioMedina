@@ -93,6 +93,7 @@
     var arrMaterias = <?= json_encode($arrMaterias) ?>;
     var arrSecciones = <?= json_encode($arrSecciones) ?>;
 </script>
+<script src="../assets/js/core/generalFunction.js"></script>
 <script src="js/docentes.js"></script>
 <?php require_once('utils/footer.php'); ?>
      

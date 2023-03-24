@@ -653,13 +653,6 @@ $(function() {
         $(document).find('.contentRow').append(template);
     }
 
-    function uuid() {
-        var result='';
-        for(var i=0; i<32; i++)
-        result += Math.floor(Math.random()*16).toString(16).toUpperCase();
-        return result;
-    }
-
     function validacionPorcentaje(uid) {
         var porcentaje = $(document).find('#valor_'+uid);
         var objTaskPorcentaje = $(document).find('#actividades_'+uid).find('.task_porcentaje');

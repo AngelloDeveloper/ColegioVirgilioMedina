@@ -132,21 +132,7 @@ $(function() {
         var idMateria = $(inputCheck).data('idmateria');
         var elmCollapse = $(document).find('#select-'+idMateria)[0];
         var template = `
-            <br />
-            <div class="row">
-                <div class="col-6">
-                    <select id="anio" class="anio" name="anio">
-                        <option value="" selected>Seleccionar...</option>
-                    </select>
-                    <label for="anio">Año</label>
-                </div>
-                <div class="col-6">
-                    <select multiple id="seccion" class="seccion" name="seccion" disabled>
-                        <option value="" selected>Seleccionar...</option>
-                    </select>
-                    <label for="seccion">Seccion</label>
-                </div>
-            </div>
+           
         `;
 
         if(checked == true) {
@@ -376,11 +362,12 @@ $(function() {
                 `;
                 
                 $(arrMaterias).each((index, value) => {
+                    var uid = uuid();
                     templateMaterias += `
                         <div class="col-6">
                             <div class="card gradient-materias bannerList bannerList_radius" style="width: 100%;">
                                 <div class="card-body bannersList_padding">
-                                    <div class="row">
+                                    <div class="row mb-2">
                                         <div class="col-12">
                                             <img class="img-icons-listPlanificacion ml-4 mr-2" src="../assets/img/materias/icons/${value.icon}">
                                             <div style="display: inline-block;">
@@ -390,7 +377,7 @@ $(function() {
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-4">
+                                        <div class="col-3">
                                             <center>
                                                 <div class="switch">
                                                     <label>
@@ -400,8 +387,56 @@ $(function() {
                                                 </div>
                                             </center>
                                         </div>
-                                        <div id="select-${value.id}" class="col-8">
-                                            
+                                        <div class="col-9">
+                                            <ul class="collapsible popout collapse_${uid}">
+                                                <li>
+                                                    <div class="collapsible-header">
+                                                        <i class="fa fa-tasks" aria-hidden="true"></i>
+                                                        <span>Configuración</span>
+                                                    </div>
+                                                    <div class="collapsible-body">
+                                                        <div id="actividades_${uid}" class="row">
+                                                            <div class="col-12">
+                                                                <span id="badge_${uid}" style="font-size: 14px;">
+                                                                    <b>Agregar Actividades</b>
+                                                                </span>
+                                                                <button 
+                                                                    type="button" 
+                                                                    class="btn btnAddActividad btn-sm mb-1" 
+                                                                    title="Agregar"
+                                                                    data-uid="${uid}"
+                                                                    style="
+                                                                        color: #fff;
+                                                                        background-image: linear-gradient(230deg, #ffc480, #ff763b);
+                                                                        border-radius: 100%;
+                                                                        height: 28px;
+                                                                        float: right;"
+                                                                >
+                                                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                                                </button>
+                                                                <hr />
+                                                            </div>
+                                                        </div>
+                                                        <div class="row validate_${uid}">
+                                                            <div class="col-12">
+                                                                <div class="button-icon" style="float: right;">
+                                                                    <button disabled 
+                                                                        type="button" 
+                                                                        class="btn btn-sm mb-1 btnValidate btnValidate_${uid}" 
+                                                                        style="color: #fff; background-color: #5c4ab8fc;"
+                                                                        data-uid="${uid}"
+                                                                    >
+                                                                        Validar
+                                                                        <span class="btn-icon-right">
+                                                                            <i class="fa fa-retweet" aria-hidden="true"></i>
+                                                                        </span>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
