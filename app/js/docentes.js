@@ -161,11 +161,13 @@ $(function() {
 
     $(document).on('click', '.btnAsigancionSeccion', function(e) {
         var arrInputsCheck = $(document).find('.asignacionSeccion');
-        const arrAsignacion = [];
+        const arrAsignacion = {active: [], inactive: []};
         $(arrInputsCheck).each((index, value) => {
             var checked = $(value).prop('checked');
             if(checked == true) {
-                arrAsignacion.push($(value).data('idseccion')) ; 
+                arrAsignacion['active'].push({id: $(value).data('idseccion')});
+            } else {
+                arrAsignacion['inactive'].push({id: $(value).data('idseccion')});
             }
         })
 
@@ -188,22 +190,17 @@ $(function() {
             if(result.isConfirmed) {
                 $.post("../controllers/controller_docente.php", objData, function(response) {
                     var resp = jQuery.parseJSON(response);
+                    console.log(resp);
                     if(resp.STATUS == 'SUCCESS') {
                         Swal.fire({
-                                title: resp.MESSAGES,
-                                text: 'Los datos seran procesados, el usuario sera habilitado una vez se formalice la inscripción',
-                                icon: 'success',
-                                confirmButtonColor: '#e0bb66'
-                        }).then((result2) => {
-                            if(result2.isConfirmed) {
-                                window.location.replace('http://localhost/ColegioVirgilioMedina/auth/login.php');
-                            }
+                            title: resp.MESSAGES,
+                            icon: 'success',
+                            confirmButtonColor: '#e0bb66'
                         })
                     }
                 });
             }
         })
-        
     })
 
     $(document).on('click', '.btnAsigancionMateria', function(e) {
@@ -366,17 +363,17 @@ $(function() {
                 `;
             break;
             case 'update_docente':
+                var templateMaterias = '';
+                var templateSecciones = '';
                 var prefix = '<span class="badge badge-pill gradient-8 ml-2"><i class="fa fa-pencil" aria-hidden="true"></i> Editar y Configurar</span>';
                 var lv_instruccion = `
                     <select id="lv_instruccion">
-                        <option value="N" ${resp.DATA.nivel_instruccion == 'N' ? 'selected' : ''}>Seleccionar...</option>
-                        <option value="B" ${resp.DATA.nivel_instruccion == 'B' ? 'selected' : ''}>Bachiller</option>
-                        <option value="U" ${resp.DATA.nivel_instruccion == 'U' ? 'selected' : ''}>Estudios Universitarios</option>
-                        <option value="P" ${resp.DATA.nivel_instruccion == 'P' ? 'selected' : ''}>Post-Grado</option>
+                        <option value="N" ${resp.DATA.getDocente.nivel_instruccion == 'N' ? 'selected' : ''}>Seleccionar...</option>
+                        <option value="B" ${resp.DATA.getDocente.nivel_instruccion == 'B' ? 'selected' : ''}>Bachiller</option>
+                        <option value="U" ${resp.DATA.getDocente.nivel_instruccion == 'U' ? 'selected' : ''}>Estudios Universitarios</option>
+                        <option value="P" ${resp.DATA.getDocente.nivel_instruccion == 'P' ? 'selected' : ''}>Post-Grado</option>
                     </select>
                 `;
-                var templateMaterias = '';
-                var templateSecciones = '';
                 
                 $(arrMaterias).each((index, value) => {
                     templateMaterias += `
@@ -412,9 +409,21 @@ $(function() {
                         </div>
                     `;
                 })
-
-                console.log(arrSecciones);
+                
                 $(arrSecciones).each((index, value) => {
+                    var checked = '';
+                    var seccion = '';
+                    if(resp.DATA.getDocenteSecciones != null) {
+                        seccion = resp.DATA.getDocenteSecciones.find((elm) => elm.id_seccion == value.id);
+                        if(seccion != undefined) {
+                            checked = seccion.estatus == 'Y' ? 'checked' : '';
+                        } else {
+                            checked = '';
+                        }                        
+                    } else {
+                        checked = '';
+                    }
+                    
                     templateSecciones += `
                         <div class="col-6">
                             <div class="card gradient-materias bannerList bannerList_radius" style="width: 100%;">
@@ -431,7 +440,7 @@ $(function() {
                                         <div class="col-6">
                                             <div class="switch" style="margin-top: 20px; float: right;">
                                                 <label>
-                                                    <input data-idseccion="${value.id}" type="checkbox" class="asignacionSeccion" />
+                                                    <input data-idseccion="${value.id}" type="checkbox" class="asignacionSeccion" ${checked} />
                                                     <span class="lever"></span>
                                                 </label>
                                             </div>
@@ -480,17 +489,17 @@ $(function() {
                                 <div class="col-6 pt-4">
                                     <form id="form">
                                         <input id="type" type="hidden" value="${type}" />
-                                        <input id="idDocente" type="hidden" value="${type == 'add_docente' ? '' : resp.DATA.id}" />
+                                        <input id="idDocente" type="hidden" value="${type == 'add_docente' ? '' : resp.DATA.getDocente.id}" />
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="form-group input-field">
-                                                    <input value="${type == 'add_docente' ? '' : resp.DATA.nombre}" id="nombre" type="text" required/>
+                                                    <input value="${type == 'add_docente' ? '' : resp.DATA.getDocente.nombre}" id="nombre" type="text" required/>
                                                     <label for="nombre">Nombre</label>
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="form-group input-field">
-                                                    <input value="${type == 'add_docente' ? '' : resp.DATA.apellido}" id="apellido" type="text" required/>
+                                                    <input value="${type == 'add_docente' ? '' : resp.DATA.getDocente.apellido}" id="apellido" type="text" required/>
                                                     <label for="apellido">Apellido</label>
                                                 </div>
                                             </div>
@@ -499,12 +508,12 @@ $(function() {
                                             <div class="col-6">
                                                 <div class="form-group input-field">
                                                     <label for="documento">Documento</label>
-                                                    <input value="${type == 'add_docente' ? '' : resp.DATA.cedula}" id="documento" type="number" required/>
+                                                    <input value="${type == 'add_docente' ? '' : resp.DATA.getDocente.cedula}" id="documento" type="number" required/>
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="form-group input-field">
-                                                    <input value="${type == 'add_docente' ? '' : resp.DATA.telf_movil}" id="telefono" type="number" required/>
+                                                    <input value="${type == 'add_docente' ? '' : resp.DATA.getDocente.telf_movil}" id="telefono" type="number" required/>
                                                     <label for="telefono">Telefono Móvil</label>
                                                 </div>
                                             </div>
@@ -512,13 +521,13 @@ $(function() {
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="form-group input-field">
-                                                    <input value="${type == 'add_docente' ? '' : resp.DATA.email}" id="email" type="email" required/>
+                                                    <input value="${type == 'add_docente' ? '' : resp.DATA.getDocente.email}" id="email" type="email" required/>
                                                     <label for="email">Correo</label>
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="form-group input-field">
-                                                    <textarea id="direccion" class="materialize-textarea" required>${type == 'add_docente' ? '' : resp.DATA.direccion}</textarea>
+                                                    <textarea id="direccion" class="materialize-textarea" required>${type == 'add_docente' ? '' : resp.DATA.getDocente.direccion}</textarea>
                                                     <label for="direccion">Dirección</label>
                                                 </div>
                                             </div>

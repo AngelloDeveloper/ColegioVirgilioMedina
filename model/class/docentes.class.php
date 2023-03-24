@@ -107,8 +107,7 @@
         }
 
         public function deleteDocente() {
-            $this->sql = " UPDATE 
-                docentes
+            $this->sql = " UPDATE docentes
             SET estatus='N'
             WHERE id='{$this->objData['id']}'";
             $this->query = mysqli_query($this->con, $this->sql);
@@ -116,12 +115,100 @@
             return $this->idUsuario;
         }
 
-        public function asignacionSeccion() {
-            $this->sql = "SELECT * FROM docentes_secciones WHERE id_docente = '{$this->objData['idDocente']}'";
+        public function asignacion_docente_secciones() {
+            $active = !empty($this->objData['data']['active']) ? $this->objData['data']['active'] : null;
+            $inactive = !empty($this->objData['data']['inactive']) ? $this->objData['data']['inactive'] : null;
+            if(!empty($active)) {
+                $this->docenteSeccionConfig($active, 'active');
+            }
+            if(!empty($inactive)) {
+                $this->docenteSeccionConfig($inactive, 'inactive');
+            }            
+        }
+
+        private function docenteSeccionConfig($arr=[], $type) {
+            switch ($type) {
+                case 'active':
+                    foreach($arr as $seccion) {
+                        $this->sql = " SELECT * 
+                            FROM  docentes_secciones 
+                            WHERE id_docente = '{$this->objData['idDocente']}' 
+                            AND id_seccion = '{$seccion['id']}'
+                        ";
+        
+                        $this->query = mysqli_query($this->con, $this->sql);
+                        $this->result = mysqli_num_rows($this->query);
+                        if($this->result == 0) {
+                            $this->addDocenteSeccion($seccion['id']);
+                        } else {
+                            $this->updateDocenteSeccion($seccion['id'], 'Y');
+                        }
+                    }
+                break;
+                case 'inactive':
+                    foreach($arr as $seccion) {
+                        $this->sql = " SELECT * 
+                            FROM  docentes_secciones 
+                            WHERE id_docente = '{$this->objData['idDocente']}' 
+                            AND id_seccion = '{$seccion['id']}'
+                        ";
+        
+                        $this->query = mysqli_query($this->con, $this->sql);
+                        $this->result = mysqli_num_rows($this->query);
+                        if($this->result != 0) {
+                            $this->updateDocenteSeccion($seccion['id'], 'N');
+                        }
+                    }
+                break;
+               
+            }
+            return;
+        }
+
+        private function addDocenteSeccion($seccionId) {
+            $this->sql = "INSERT INTO 
+                docentes_secciones ( 
+                    id_docente, 
+                    id_seccion,
+                    estatus
+                ) 
+                VALUES (
+                    '{$this->objData['idDocente']}',
+                    '{$seccionId}',
+                    'Y'
+                )
+            ";
+
+            $this->query = mysqli_query($this->con, $this->sql);
+            return;
+        }
+
+        private function updateDocenteSeccion($seccionId, $status) {
+            $this->sql = "UPDATE docentes_secciones
+                SET estatus='{$status}'
+                WHERE id_docente = '{$this->objData['idDocente']}'
+                AND id_seccion = '{$seccionId}'
+            ";
+            $this->query = mysqli_query($this->con, $this->sql);
+            return;
+        }
+
+        public function getDocenteSecciones() {
+            $this->sql = "SELECT * 
+            FROM  docentes_secciones 
+            WHERE id_docente = '{$this->objData['id']}'";
             $this->query = mysqli_query($this->con, $this->sql);
             $this->result = mysqli_num_rows($this->query);
-            var_dump($this->result);
-            die();
+            if($this->result != 0) {
+                while ($row = mysqli_fetch_assoc($this->query)) { 
+                    $rows[] = $row; 
+                }
+                $this->result = $rows;
+            } else {
+                $this->result = null;
+            }
+            
+            return $this->result;
         }
-    }
+    }    
 ?>

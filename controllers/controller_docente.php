@@ -15,9 +15,14 @@
 
     if(!empty($_POST) && $_POST['type'] == 'editar_docente') {
         $objDocentes = new Docentes($_POST);
+        $result = [
+            'getDocente' => $objDocentes->getDocente(),
+            'getDocenteSecciones' => $objDocentes->getDocenteSecciones()
+        ];
+
         echo json_encode([
             'STATUS' => 'SUCCESS',
-            'DATA' => $objDocentes->getDocente()
+            'DATA' => $result
         ]);
     }
 
@@ -41,7 +46,11 @@
 
     if(!empty($_POST) && $_POST['type'] == 'asigacion_seccion') {
         $objDocentes = new Docentes($_POST);
-        $objDocentes->asignacionSeccion();
+        $objDocentes->asignacion_docente_secciones();
+        echo json_encode([
+            'STATUS' => 'SUCCESS',
+            'MESSAGES' => 'La configuración fue exitosa!'
+        ]);
     }
     
 ?>
