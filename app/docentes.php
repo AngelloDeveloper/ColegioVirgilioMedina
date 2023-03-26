@@ -57,8 +57,7 @@
                         </div>
                         <hr class="hr" />
                         <div class="row">
-                            <?php foreach($arrDocentes as $docente) {     
-                            ?>
+                            <?php foreach($arrDocentes as $docente) { ?>
                                 <div class="col-3">
                                     <div class="card cardHeight">
                                         <div class="card-image card-images-height gradient-materias">

@@ -77,6 +77,7 @@ $(function() {
         $('#docenteid').val(idDocente);
         $.post("../controllers/controller_docente.php", objData, function(response) {
             var resp = jQuery.parseJSON(response);
+            console.log('resultado....');
             console.log(resp);
             const template = getTemplate('update_docente', resp);
             $('.principal').hide();
@@ -125,23 +126,116 @@ $(function() {
         })
     })
 
-    $(document).on('click', '.switch', function(e) {
+    $(document).on('click', '.btnAddAnioSeccion', function(e) {
+        var elm = $(this)[0];
+        var uid = $(elm).data('uid');
+        var uidConfig = uuid();
+        $(document).find('#anioSeccion_'+uid).append(`
+            <div class="col-5 ${uidConfig}">
+                <div class="form-group input-field">
+                    <select multiple id="anio">
+                        <option value="V">V-</option>
+                        <option value="E">E-</option>
+                    </select>
+                    <label>Tipo de documento <span style="color: #960032;"><b>*</b></span></label>
+                </div>
+            </div>
+            <div class="col-5 ${uidConfig}">
+                <div class="form-group input-field">
+                    <select multiple id="seccion">
+                        <option value="V">V-</option>
+                        <option value="E">E-</option>
+                    </select>
+                    <label>Tipo de documento <span style="color: #960032;"><b>*</b></span></label>
+                </div>
+            </div>
+            <div class="col-2 ${uidConfig}">
+                <button type="button" 
+                    class="btn btnDelActividad btn-sm mb-1" 
+                    title="Eliminar" 
+                    data-uid=${uid} 
+                    data-uid-task="${uidConfig}" 
+                    style="
+                        color: #fff;
+                        background-color: #e92d59fc;
+                        border-radius: 100%;
+                        margin-top: 25px !important;
+                        height: 28px;
+                        float: right;">
+                        <i class="fa fa-minus" aria-hidden="true"></i>
+                </button>
+            </div>
+        `);
+
+        initMaterialInput();
+    })
+
+    $(document).on('click', '.btnDelActividad', function(e) {
+        var elm = $(this)[0];
+        var uidDel = $(elm).data('uid-task');
+        $(document).find('.'+uidDel).remove();
+    })
+
+    $(document).on('click', '.switchMateria', function(e) {
+        var uid = uuid();
         var elm = $(this)[0];
         var inputCheck = $(elm).find('.asignacion')[0];
         var checked = $(inputCheck).prop('checked');
         var idMateria = $(inputCheck).data('idmateria');
-        var elmCollapse = $(document).find('#select-'+idMateria)[0];
-        var template = `
-           
-        `;
+        var template = checked == true 
+            ? 
+                `<ul class="collapsible popout collapse_${uid}">
+                    <li>
+                        <div class="collapsible-header">
+                            <i class="fa fa-tasks" aria-hidden="true"></i>
+                            <span>Configuración</span>
+                        </div>
+                        <div class="collapsible-body">
+                            <div id="anioSeccion_${uid}" class="row">
+                                <div class="col-12">
+                                    <span id="badge_${uid}" style="font-size: 14px;">
+                                        <b>Nuevo (Año/Seccion)</b>
+                                    </span>
+                                    <button 
+                                        type="button" 
+                                        class="btn btnAddAnioSeccion btn-sm mb-1" 
+                                        title="Agregar"
+                                        data-uid="${uid}"
+                                        style="
+                                            color: #fff;
+                                            background-image: linear-gradient(230deg, #ffc480, #ff763b);
+                                            border-radius: 100%;
+                                            height: 28px;
+                                            float: right;"
+                                    >
+                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                    </button>
+                                    <hr />
+                                </div>
+                            </div>
+                            <div class="row validate_${uid}">
+                                <div class="col-12">
+                                    <div class="button-icon" style="float: right;">
+                                        <button disabled 
+                                            type="button" 
+                                            class="btn btn-sm mb-1 btnValidate btnValidate_${uid}" 
+                                            style="color: #fff; background-color: #5c4ab8fc;"
+                                            data-uid="${uid}"
+                                        >
+                                            Confirmar
+                                            <span class="btn-icon-right">
+                                                <i class="fa fa-retweet" aria-hidden="true"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>` 
+            : '';
 
-        if(checked == true) {
-            $(elmCollapse).html(template);
-        } else {
-            $(elmCollapse).html('');
-        }
-
-        
+        $(document).find('.configMateria' + idMateria).html(template);    
         initMaterialInput();
     })
 
@@ -228,8 +322,6 @@ $(function() {
                 });
             }
         })
-
-        
     })
 
     //function
@@ -362,7 +454,6 @@ $(function() {
                 `;
                 
                 $(arrMaterias).each((index, value) => {
-                    var uid = uuid();
                     templateMaterias += `
                         <div class="col-6">
                             <div class="card gradient-materias bannerList bannerList_radius" style="width: 100%;">
@@ -379,7 +470,7 @@ $(function() {
                                     <div class="row">
                                         <div class="col-3">
                                             <center>
-                                                <div class="switch">
+                                                <div class="switch switchMateria">
                                                     <label>
                                                         <input data-idmateria="${value.id}" type="checkbox" class="asignacion" />
                                                         <span class="lever"></span>
@@ -387,56 +478,8 @@ $(function() {
                                                 </div>
                                             </center>
                                         </div>
-                                        <div class="col-9">
-                                            <ul class="collapsible popout collapse_${uid}">
-                                                <li>
-                                                    <div class="collapsible-header">
-                                                        <i class="fa fa-tasks" aria-hidden="true"></i>
-                                                        <span>Configuración</span>
-                                                    </div>
-                                                    <div class="collapsible-body">
-                                                        <div id="actividades_${uid}" class="row">
-                                                            <div class="col-12">
-                                                                <span id="badge_${uid}" style="font-size: 14px;">
-                                                                    <b>Agregar Actividades</b>
-                                                                </span>
-                                                                <button 
-                                                                    type="button" 
-                                                                    class="btn btnAddActividad btn-sm mb-1" 
-                                                                    title="Agregar"
-                                                                    data-uid="${uid}"
-                                                                    style="
-                                                                        color: #fff;
-                                                                        background-image: linear-gradient(230deg, #ffc480, #ff763b);
-                                                                        border-radius: 100%;
-                                                                        height: 28px;
-                                                                        float: right;"
-                                                                >
-                                                                        <i class="fa fa-plus" aria-hidden="true"></i>
-                                                                </button>
-                                                                <hr />
-                                                            </div>
-                                                        </div>
-                                                        <div class="row validate_${uid}">
-                                                            <div class="col-12">
-                                                                <div class="button-icon" style="float: right;">
-                                                                    <button disabled 
-                                                                        type="button" 
-                                                                        class="btn btn-sm mb-1 btnValidate btnValidate_${uid}" 
-                                                                        style="color: #fff; background-color: #5c4ab8fc;"
-                                                                        data-uid="${uid}"
-                                                                    >
-                                                                        Validar
-                                                                        <span class="btn-icon-right">
-                                                                            <i class="fa fa-retweet" aria-hidden="true"></i>
-                                                                        </span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
+                                        <div class="col-9 ${'configMateria' + value.id}">
+                                            
                                         </div>
                                     </div>
                                 </div>
