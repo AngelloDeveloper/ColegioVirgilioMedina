@@ -7,14 +7,17 @@
     require_once('../model/class/docentes.class.php');
     require_once('../model/class/materias.class.php');
     require_once('../model/class/secciones.class.php');
+    require_once('../model/class/grados.class.php');
 
     $objDocentes = new Docentes();
     $objMaterias = new Materias();
     $objSecciones = new Secciones();
+    $objGrados = new Grados();
 
     $arrMaterias = $objMaterias->getAllMaterias();
     $arrDocentes = $objDocentes->getAllDocentes();
     $arrSecciones = $objSecciones->getAllSecciones();
+    $arrGrados = $objGrados->getAllGrados();
 
     $arrLvEstu = [
         'N' => 'Sin Estudios',
@@ -91,6 +94,7 @@
 <script>
     var arrMaterias = <?= json_encode($arrMaterias) ?>;
     var arrSecciones = <?= json_encode($arrSecciones) ?>;
+    var arrGrados = <?= json_encode($arrGrados) ?>;
 </script>
 <script src="../assets/js/core/generalFunction.js"></script>
 <script src="js/docentes.js"></script>

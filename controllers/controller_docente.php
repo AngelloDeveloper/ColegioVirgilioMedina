@@ -1,6 +1,7 @@
 <?php 
      require('../model/class/conexion.class.php');
      require('../model/class/docentes.class.php');
+     require('../model/class/grados.class.php');
 
     if(!empty($_POST) && $_POST['type'] == 'add_docente') {
         $objDocentes = new Docentes($_POST);
@@ -13,7 +14,7 @@
         ]);
     }
 
-    if(!empty($_POST) && $_POST['type'] == 'editar_docente') {
+    if(!empty($_POST) && $_POST['type'] == 'configurar_docente') {
         $objDocentes = new Docentes($_POST);
         $result = [
             'getDocente' => $objDocentes->getDocente(),

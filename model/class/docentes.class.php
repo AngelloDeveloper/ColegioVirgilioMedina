@@ -194,8 +194,13 @@
         }
 
         public function getDocenteSecciones() {
-            $this->sql = "SELECT * 
+            $this->sql = "SELECT 
+                docentes_secciones.id_docente,
+                docentes_secciones.id_seccion,
+                docentes_secciones.estatus,
+                secciones.seccion
             FROM  docentes_secciones 
+            LEFT JOIN secciones ON docentes_secciones.id_seccion = secciones.id
             WHERE id_docente = '{$this->objData['id']}'";
             $this->query = mysqli_query($this->con, $this->sql);
             $this->result = mysqli_num_rows($this->query);
