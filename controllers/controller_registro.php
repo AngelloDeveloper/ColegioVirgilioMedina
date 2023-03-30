@@ -9,11 +9,17 @@
         $objPreRegistro->reg_representante();
         $objPreRegistro->reg_detalle_estudiante();
         $objPreRegistro->reg_usuario_estudiante();
-        $objPreRegistro->reg_estudiante();
+        $idEstudiante = $objPreRegistro->reg_estudiante();
         
         echo json_encode([
             'STATUS' => 'SUCCESS',
-            'MESSAGES' => 'Registro Exitoso!'
+            'MESSAGES' => 'Registro Exitoso!',
+            'DATA' => $idEstudiante
         ]);
+    }
+
+    if(!empty($_POST) && $_POST['type'] == 'downloadPlanillaPreRegistro') {
+        $objPreRegistro = new Pre_Registro($_POST);
+        $objPreRegistro->downloadPlanillaPreRegistro();
     }
 ?>

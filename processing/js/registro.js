@@ -1364,7 +1364,16 @@ $(function() {
                                 confirmButtonColor: '#e0bb66'
                         }).then((result2) => {
                             if(result2.isConfirmed) {
-                                window.location.replace('http://localhost/ColegioVirgilioMedina/auth/login.php');
+                                $.post("../controllers/controller_registro.php", {type: 'downloadPlanillaPreRegistro',  id_estudiante: resp.DATA}, function(response) {
+                                    Swal.fire({
+                                        title: 'Se ha descargado automaticamente su planilla de Pre-Inscripcion.',
+                                        text: 'si no se realizo la descarga puede hacerlo manualmente oprimiendo el boton "Descargar"',
+                                        icon: 'success',
+                                        confirmButtonColor: '#e0bb66'
+                                    }).then((finish) => {
+                                        //window.location.replace('http://localhost/ColegioVirgilioMedina/auth/login.php');
+                                    })
+                                })
                             }
                         })
                     }

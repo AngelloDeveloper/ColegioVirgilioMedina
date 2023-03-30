@@ -13,6 +13,7 @@
         private $idRepresentante;
         private $idDetalleEstudiante;
         private $pw;
+        private $result;
 
         //Constructor
         public function __construct($arrData='') {
@@ -275,6 +276,84 @@
             $this->query = mysqli_query($this->con, $this->sql);
             $this->idRepresentante = mysqli_insert_id($this->con);
             return $this->idRepresentante;
+        }
+
+        public function downloadPlanillaPreRegistro() {
+            $this->sql = "SELECT 
+                estudiantes.nombre as estudiante_nombre, 
+                estudiantes.apellido as estudiante_apellido, 
+                estudiantes.cedula as estudiante_cedula, 
+                estudiantes.tipo_documento as estudiante_tipo_documento,
+                estudiantes.nacionalidad as estudiante_nacionalidad,
+                estudiantes.edad as estudiante_edad,
+                estudiantes.genero as estudiante_genero,
+                estudiantes.email as estudiante_email,
+                estudiantes.direccion as estudiante_direccion,
+                estudiantes.fecha_nacimiento as estudiante_fecha_nacimiento,
+                estudiantes_detalles.*,
+                madres.nombre as madre_nombre,
+                madres.apellido as madre_apellido,
+                madres.cedula as madre_cedula,
+                madres.tipo_documento as madre_tipo_documento,
+                madres.fecha_nacimiento as madre_fecha_nacimiento,
+                madres.edad as madre_edad,
+                madres.nacionalidad as madre_nacionalidad,
+                madres.estado_civil as madre_estado_civil,
+                madres.nivel_instruccion as madre_nivel_instruccion,
+                madres.ocupacion as madre_ocupacion,
+                madres.lugar_trabajo as madre_lugar_trabajo,
+                madres.habilidad as madre_habilidad,
+                madres.direccion_residencia as madre_direccion_residencia,
+                madres.telf_movil as madre_telf_movil,
+                madres.telf_residencia as madre_telf_residencia,
+                madres.telf_trabajo as madre_telf_trabajo,
+                madres.religion as madre_religion,
+                madres.vive_estudiante as madre_vive_estudiante,
+                padres.nombre as padre_nombre,
+                padres.apellido as padre_apellido,
+                padres.cedula as padre_cedula,
+                padres.tipo_documento as padre_tipo_documento,
+                padres.fecha_nacimiento as padre_fecha_nacimiento,
+                padres.edad as padre_edad,
+                padres.nacionalidad as padre_nacionalidad,
+                padres.estado_civil as padre_estado_civil,
+                padres.nivel_instruccion as padre_nivel_instruccion,
+                padres.ocupacion as padre_ocupacion,
+                padres.lugar_trabajo as padre_lugar_trabajo,
+                padres.habilidad as padre_habilidad,
+                padres.direccion_residencia as padre_direccion_residencia,
+                padres.telf_movil as padre_telf_movil,
+                padres.telf_residencia as padre_telf_residencia,
+                padres.telf_trabajo as padre_telf_trabajo,
+                padres.religion as padre_religion,
+                padres.vive_estudiante as padre_vive_estudiante,
+                representantes.nombre as representantes_nombre,
+                representantes.apellido as representantes_apellido,
+                representantes.cedula as representantes_cedula,
+                representantes.tipo_documento as representantes_tipo_documento,
+                representantes.fecha_nacimiento as representantes_fecha_nacimiento,
+                representantes.edad as representantes_edad,
+                representantes.nacionalidad as representantes_nacionalidad,
+                representantes.estado_civil as representantes_estado_civil,
+                representantes.nivel_instruccion as representantes_nivel_instruccion,
+                representantes.ocupacion as representantes_ocupacion,
+                representantes.lugar_trabajo as representantes_lugar_trabajo,
+                representantes.habilidad as representantes_habilidad,
+                representantes.direccion_residencia as representantes_direccion_residencia,
+                representantes.telf_movil as representantes_telf_movil,
+                representantes.telf_residencia as representantes_telf_residencia,
+                representantes.telf_trabajo as representantes_telf_trabajo,
+                representantes.religion as representantes_religion,
+                representantes.vive_estudiante as representantes_vive_estudiante
+                FROM estudiantes
+                    LEFT JOIN estudiantes_detalles ON estudiantes.id_detalles_estudiante = estudiantes_detalles.id
+                    LEFT JOIN madres ON estudiantes.id_mama = madres.id
+                    LEFT JOIN padres ON estudiantes.id_papa = padres.id
+                    LEFT JOIN representantes ON estudiantes.id_representante = representantes.id
+                WHERE estudiantes.id = {$this->objData['estudianteID']}";
+             $this->query = mysqli_query($this->con, $this->sql);
+             $this->result = mysqli_fetch_assoc($this->query);
+             return $this->result;
         }
 
     }
