@@ -59,10 +59,6 @@ $(function() {
                             text: 'Los datos se guardaron Exitosamente',
                             icon: 'success',
                             confirmButtonColor: '#e0bb66'
-                        }).then((result2) => {
-                            if(result2.isConfirmed) {
-                                location.reload();
-                            }
                         })
                     }
                 });
@@ -77,23 +73,264 @@ $(function() {
     $('.config_docente').on('click', function(e) {
         var elm = $(this)[0];
         var idDocente = $(elm).data('iddocente');
-        const objData = {
-            type: 'configurar_docente',
-            id: idDocente
+        const objDocente = {
+            nombre: $(elm).data('nombre'),
+            apellido: $(elm).data('apellido'),
+            img: $(elm).data('img')
         };
+        
         $('#docenteid').val(idDocente);
+        const template = getTemplate('update_docente', '', objDocente);
+        $('.principal').hide();
+        $('.secondary').html(template);
+        $('.secondary').show();
+        initMaterialInput();
+    })
 
+    //TAPS
+    $(document).on('click', '#tap_DatosDocente', function(e) {
+        var template = '';
+        const objData = {type: 'configurar_docente', id: $('#docenteid').val()};
         getDocenteData(objData)
             .then((response) => $.parseJSON(response))
-            .then((objData) => {
-                setState(objData);
-                const template = getTemplate('update_docente');
-                $('.principal').hide();
-                $('.secondary').html(template);
-                $('.secondary').show();
+            .then((data) => {
+                console.log(data);
+                var lv_instruccion = `
+                    <select id="lv_instruccion">
+                        <option value="N" ${data.DATA.getDocente.nivel_instruccion == 'N' ? 'selected' : ''}>Seleccionar...</option>
+                        <option value="B" ${data.DATA.getDocente.nivel_instruccion == 'B' ? 'selected' : ''}>Bachiller</option>
+                        <option value="U" ${data.DATA.getDocente.nivel_instruccion == 'U' ? 'selected' : ''}>Estudios Universitarios</option>
+                        <option value="P" ${data.DATA.getDocente.nivel_instruccion == 'P' ? 'selected' : ''}>Post-Grado</option>
+                    </select>
+                `;
+                template = `
+                    <div id="DatosDocente" class="col s12">
+                        <div class="col-12 pt-4">
+                            <form id="form">
+                                <input id="type" type="hidden" value="update_docente" />
+                                <input id="idDocente" type="hidden" value="${data.DATA.getDocente.id}" />
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="form-group input-field">
+                                            <input value="${data.DATA.getDocente.nombre}" id="nombre" type="text" required/>
+                                            <label for="nombre">Nombre</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group input-field">
+                                            <input value="${data.DATA.getDocente.apellido}" id="apellido" type="text" required/>
+                                            <label for="apellido">Apellido</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group input-field">
+                                            <label for="documento">Documento</label>
+                                            <input value="${data.DATA.getDocente.cedula}" id="documento" type="number" required/>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group input-field">
+                                            <input value="${data.DATA.getDocente.telf_movil}" id="telefono" type="number" required/>
+                                            <label for="telefono">Telefono Móvil</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group input-field">
+                                            <input value="${data.DATA.getDocente.email}" id="email" type="email" required/>
+                                            <label for="email">Correo</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group input-field">
+                                            <textarea id="direccion" class="materialize-textarea" required>${data.DATA.getDocente.direccion}</textarea>
+                                            <label for="direccion">Dirección</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group input-field">
+                                            ${lv_instruccion}
+                                            <label for="lv_instruccion">Nivel de Instruccion</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br /><br /><hr />
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="button-icon" style="float: right;">
+                                            <button type="submit" class="btn mb-1" style="color: #fff; background-color: #00B236;">
+                                                Guardar
+                                                <span class="btn-icon-right">
+                                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                `;
+
+                $(document).find('#contentTap').html(template);
+                initMaterialInput();
+            }) 
+        
+    })
+    $(document).on('click', '#tap_AsignarSecciones', function(e) {
+        var template = '';
+        var templateSecciones = '';
+        const objData = {type: 'configurar_docente', id: $('#docenteid').val()};
+        getDocenteData(objData)
+            .then((response) => $.parseJSON(response))
+            .then((data) => {
+                console.log(data);
+                $(arrSecciones).each((index, value) => {
+                    var checked = '';
+                    var seccion = '';
+                    if(data.DATA.getDocenteSecciones != null) {
+                        seccion = data.DATA.getDocenteSecciones.find((elm) => elm.id_seccion == value.id);
+                        if(seccion != undefined) {
+                            checked = seccion.estatus == 'Y' ? 'checked' : '';
+                        } else {
+                            checked = '';
+                        }                        
+                    } else {
+                        checked = '';
+                    }
+                    
+                    templateSecciones += `
+                        <div class="col-6">
+                            <div class="card gradient-materias bannerList bannerList_radius" style="width: 100%;">
+                                <div class="card-body bannersList_padding">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <img class="img-icons-listPlanificacion ml-4 mr-2" src="../assets/img/materias/icons/desk.png">
+                                            <h2 style="display: inline-block;
+                                                font-size: 50px;
+                                                color: green;
+                                                position: absolute;
+                                            ">${value.seccion}</h2>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="switch" style="margin-top: 20px; float: right;">
+                                                <label>
+                                                    <input data-idseccion="${value.id}" type="checkbox" class="asignacionSeccion" ${checked} />
+                                                    <span class="lever"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                })
+
+                template = `
+                    <div id="AsignarSecciones" class="col s12">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-warning" role="alert">
+                                    Asignar secciones al Docente.
+                                </div>
+                            </div>
+                            ${templateSecciones}
+                            <div class="col-12">
+                                <br /><br /><hr />
+                                <div class="button-icon" style="float: right;">
+                                    <button type="button" class="btnAsigancionSeccion btn mb-1" style="color: #fff; background-color: #00B236;">
+                                        Guardar
+                                        <span class="btn-icon-right">
+                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                $(document).find('#contentTap').html(template);
                 initMaterialInput();
             })
     })
+    $(document).on('click', '#tap_AsignarMaterias', function(e) {
+        var template = '';
+        var templateMaterias = '';
+        const objData = {type: 'configurar_docente', id: $('#docenteid').val()};
+        getDocenteData(objData)
+            .then((response) => $.parseJSON(response))
+            .then((data) => {
+                console.log(data);
+                $(arrMaterias).each((index, value) => {
+                    templateMaterias += `
+                        <div class="col-6">
+                            <div class="card gradient-materias bannerList bannerList_radius" style="width: 100%;">
+                                <div class="card-body bannersList_padding">
+                                    <div class="row mb-2">
+                                        <div class="col-12">
+                                            <img class="img-icons-listPlanificacion ml-4 mr-2" src="../assets/img/materias/icons/${value.icon}">
+                                            <div style="display: inline-block;">
+                                                <span class="titleMateriaList">${value.materia}</span>
+                                                <p class="mb-0">${value.descripcion}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <center>
+                                                <div class="switch switchMateria">
+                                                    <label>
+                                                        <input data-idmateria="${value.id}" type="checkbox" class="asignacion" />
+                                                        <span class="lever"></span>
+                                                    </label>
+                                                </div>
+                                            </center>
+                                        </div>
+                                        <div class="col-9 ${'configMateria' + value.id}">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                })
+
+                template = `
+                    <div id="AsignarMaterias" class="col s12">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-warning" role="alert">
+                                    Asignar Materias al Docente.
+                                </div>
+                            </div>
+                            ${templateMaterias}
+                            <div class="col-12">
+                                <br /><br /><hr />
+                                <div class="button-icon" style="float: right;">
+                                    <button type="button" class="btnAsigancionMateria btn mb-1" style="color: #fff; background-color: #00B236;">
+                                        Guardar
+                                        <span class="btn-icon-right">
+                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                $(document).find('#contentTap').html(template);
+                initMaterialInput();
+            })
+    })
+    $(document).on('click', '#tap_permisos', function(e) {
+
+    })
+    
+    
 
     $('.btnDelete').on('click', function(e) {
         var elm = $(this)[0];
@@ -138,48 +375,62 @@ $(function() {
         var elm = $(this)[0];
         var uid = $(elm).data('uid');
         var uidConfig = uuid();
+        var temp_secciones = '';
         var temp_anios = '';
-        arrGrados.map((elm) => {
-            temp_anios += `<option value="${elm.id}">${elm.formato + 'Año'}</option>`
-        })
+        var template = '';
+        const objData = {type: 'configurar_docente', id: $('#docenteid').val()};
 
-        $(document).find('#anioSeccion_'+uid).append(`
-            <div class="col-5 ${uidConfig}">
-                <div class="form-group input-field">
-                    <select id="anio">
-                        ${temp_anios}
-                    </select>
-                    <label>Años</label>
-                </div>
-            </div>
-            <div class="col-5 ${uidConfig}">
-                <div class="form-group input-field">
-                    <select multiple id="seccion">
-                        ${temp_secciones}
-                    </select>
-                    <label>Secciones</label>
-                </div>
-            </div>
-            <div class="col-2 ${uidConfig}">
-                <button type="button" 
-                    class="btn btnDelActividad btn-sm mb-1" 
-                    title="Eliminar" 
-                    data-uid=${uid} 
-                    data-uid-task="${uidConfig}" 
-                    style="
-                        color: #fff;
-                        background-color: #e92d59fc;
-                        border-radius: 100%;
-                        margin-top: 25px !important;
-                        height: 28px;
-                        float: right;">
-                        <i class="fa fa-minus" aria-hidden="true"></i>
-                </button>
-            </div>
-        `);
+        getDocenteData(objData)
+            .then((response) => $.parseJSON(response))
+            .then((data) => {
+                data.DATA.getDocenteSecciones.map((elm) => {
+                    temp_secciones += `
+                        <option value="${elm.id_seccion}">${elm.seccion}</option>
+                    `;
+                })  
+                arrGrados.map((elm) => {
+                    temp_anios += `
+                        <option value="${elm.id}">${elm.formato+' Año'}</option>
+                    `;
+                })
 
-        initMaterialInput();
-            
+                $(document).find('#anioSeccion_'+uid).append(`
+                    <div class="col-5 ${uidConfig}">
+                        <div class="form-group input-field">
+                            <select id="anio">
+                                ${temp_anios}
+                            </select>
+                            <label>Años</label>
+                        </div>
+                    </div>
+                    <div class="col-5 ${uidConfig}">
+                        <div class="form-group input-field">
+                            <select multiple id="seccion">
+                                ${temp_secciones}
+                            </select>
+                            <label>Secciones</label>
+                        </div>
+                    </div>
+                    <div class="col-2 ${uidConfig}">
+                        <button type="button" 
+                            class="btn btnDelActividad btn-sm mb-1" 
+                            title="Eliminar" 
+                            data-uid=${uid} 
+                            data-uid-task="${uidConfig}" 
+                            style="
+                                color: #fff;
+                                background-color: #e92d59fc;
+                                border-radius: 100%;
+                                margin-top: 25px !important;
+                                height: 28px;
+                                float: right;">
+                                <i class="fa fa-minus" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                `);
+
+                initMaterialInput();
+            })    
     })
 
     $(document).on('click', '.btnDelActividad', function(e) {
@@ -360,7 +611,7 @@ $(function() {
         state.asignarSecciones = obj.DATA.getDocenteSecciones;
     }
 
-    function getTemplate(type, resp='') {
+    function getTemplate(type, resp='', props='') {
         var template = '';
         switch (type) {
             case 'add_docente':
@@ -468,97 +719,7 @@ $(function() {
                 `;
             break;
             case 'update_docente':
-                var templateMaterias = '';
-                var templateSecciones = '';
                 var prefix = '<span class="badge badge-pill gradient-8 ml-2"><i class="fa fa-pencil" aria-hidden="true"></i> Editar y Configurar</span>';
-                var lv_instruccion = `
-                    <select id="lv_instruccion">
-                        <option value="N" ${state.datosDocente.nivel_instruccion == 'N' ? 'selected' : ''}>Seleccionar...</option>
-                        <option value="B" ${state.datosDocente.nivel_instruccion == 'B' ? 'selected' : ''}>Bachiller</option>
-                        <option value="U" ${state.datosDocente.nivel_instruccion == 'U' ? 'selected' : ''}>Estudios Universitarios</option>
-                        <option value="P" ${state.datosDocente.nivel_instruccion == 'P' ? 'selected' : ''}>Post-Grado</option>
-                    </select>
-                `;
-                
-                $(arrMaterias).each((index, value) => {
-                    templateMaterias += `
-                        <div class="col-6">
-                            <div class="card gradient-materias bannerList bannerList_radius" style="width: 100%;">
-                                <div class="card-body bannersList_padding">
-                                    <div class="row mb-2">
-                                        <div class="col-12">
-                                            <img class="img-icons-listPlanificacion ml-4 mr-2" src="../assets/img/materias/icons/${value.icon}">
-                                            <div style="display: inline-block;">
-                                                <span class="titleMateriaList">${value.materia}</span>
-                                                <p class="mb-0">${value.descripcion}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-3">
-                                            <center>
-                                                <div class="switch switchMateria">
-                                                    <label>
-                                                        <input data-idmateria="${value.id}" type="checkbox" class="asignacion" />
-                                                        <span class="lever"></span>
-                                                    </label>
-                                                </div>
-                                            </center>
-                                        </div>
-                                        <div class="col-9 ${'configMateria' + value.id}">
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                })
-                
-                $(arrSecciones).each((index, value) => {
-                    var checked = '';
-                    var seccion = '';
-                    if(state.asignarSecciones != null) {
-                        seccion = state.asignarSecciones.find((elm) => elm.id_seccion == value.id);
-                        console.log('prueba');
-                        console.log(seccion);
-                        if(seccion != undefined) {
-                            checked = seccion.estatus == 'Y' ? 'checked' : '';
-                        } else {
-                            checked = '';
-                        }                        
-                    } else {
-                        checked = '';
-                    }
-                    
-                    templateSecciones += `
-                        <div class="col-6">
-                            <div class="card gradient-materias bannerList bannerList_radius" style="width: 100%;">
-                                <div class="card-body bannersList_padding">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <img class="img-icons-listPlanificacion ml-4 mr-2" src="../assets/img/materias/icons/desk.png">
-                                            <h2 style="display: inline-block;
-                                                font-size: 50px;
-                                                color: green;
-                                                position: absolute;
-                                            ">${value.seccion}</h2>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="switch" style="margin-top: 20px; float: right;">
-                                                <label>
-                                                    <input data-idseccion="${value.id}" type="checkbox" class="asignacionSeccion" ${checked} />
-                                                    <span class="lever"></span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                })
-
                 template = `
                     <div class="card-body">
                         <div class="row">
@@ -578,145 +739,33 @@ $(function() {
                         </div>
                         <hr />
                         <div class="row">
+                            <div class="col-3"></div>
+                            <div class="col-6">
+                                <center>
+                                    <img class="rounded-circle" style="width:150px;" src="${'../assets/img/materias/icons/'+props.img}" />
+                                </center>
+                            </div>
+                            <div class="col-3"></div>
+                        </div>
+                        <div class="row">
                             <div class="col s12">
                                 <div class="card">
                                     <div class="card-body">
                                         <ul class="tabs">
-                                            <li class="tab col s3"><a href="#DatosDocente">Datos del Docente</a></li>
-                                            <li class="tab col s3"><a href="#AsignarSecciones" >Asignar Secciones</a></li>
-                                            <li class="tab col s3"><a href="#AsignarMaterias" >Asignar Materias</a></li>
-                                            <li class="tab col s3"><a href="#permisos">Permisos</a></li>
+                                            <li id="tap_DatosDocente" class="tab col s3"><a href="#DatosDocente">Datos del Docente</a></li>
+                                            <li id="tap_AsignarSecciones" class="tab col s3"><a href="#AsignarSecciones" >Asignar Secciones</a></li>
+                                            <li id="tap_AsignarMaterias" class="tab col s3"><a href="#AsignarMaterias" >Asignar Materias</a></li>
+                                            <li id="tap_permisos" class="tab col s3"><a href="#permisos">Permisos</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row p-4">
-                            <div id="DatosDocente" class="col s12">
-                                <div class="col-6 pt-4">
-                                    <form id="form">
-                                        <input id="type" type="hidden" value="${type}" />
-                                        <input id="idDocente" type="hidden" value="${type == 'add_docente' ? '' : state.datosDocente.id}" />
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class="form-group input-field">
-                                                    <input value="${type == 'add_docente' ? '' : state.datosDocente.nombre}" id="nombre" type="text" required/>
-                                                    <label for="nombre">Nombre</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="form-group input-field">
-                                                    <input value="${type == 'add_docente' ? '' : state.datosDocente.apellido}" id="apellido" type="text" required/>
-                                                    <label for="apellido">Apellido</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class="form-group input-field">
-                                                    <label for="documento">Documento</label>
-                                                    <input value="${type == 'add_docente' ? '' : state.datosDocente.cedula}" id="documento" type="number" required/>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="form-group input-field">
-                                                    <input value="${type == 'add_docente' ? '' : state.datosDocente.telf_movil}" id="telefono" type="number" required/>
-                                                    <label for="telefono">Telefono Móvil</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class="form-group input-field">
-                                                    <input value="${type == 'add_docente' ? '' : state.datosDocente.email}" id="email" type="email" required/>
-                                                    <label for="email">Correo</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="form-group input-field">
-                                                    <textarea id="direccion" class="materialize-textarea" required>${type == 'add_docente' ? '' : state.datosDocente.direccion}</textarea>
-                                                    <label for="direccion">Dirección</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class="form-group input-field">
-                                                    ${lv_instruccion}
-                                                    <label for="lv_instruccion">Nivel de Instruccion</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <br /><br /><hr />
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="button-icon" style="float: right;">
-                                                    <button type="submit" class="btn mb-1" style="color: #fff; background-color: #00B236;">
-                                                        Guardar
-                                                        <span class="btn-icon-right">
-                                                            <i class="fa fa-check" aria-hidden="true"></i>
-                                                        </span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div id="AsignarSecciones" class="col s12">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="alert alert-warning" role="alert">
-                                            Asignar secciones al Docente.
-                                        </div>
-                                    </div>
-                                    ${templateSecciones}
-                                    <div class="col-12">
-                                        <br /><br /><hr />
-                                        <div class="button-icon" style="float: right;">
-                                            <button type="button" class="btnAsigancionSeccion btn mb-1" style="color: #fff; background-color: #00B236;">
-                                                Guardar
-                                                <span class="btn-icon-right">
-                                                    <i class="fa fa-check" aria-hidden="true"></i>
-                                                </span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="AsignarMaterias" class="col s12">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="alert alert-warning" role="alert">
-                                            Asignar Materias al Docente.
-                                        </div>
-                                    </div>
-                                    ${templateMaterias}
-                                    
-                                    <div class="col-12">
-                                        <br /><br /><hr />
-                                        <div class="button-icon" style="float: right;">
-                                            <button type="button" class="btnAsigancionMateria btn mb-1" style="color: #fff; background-color: #00B236;">
-                                                Guardar
-                                                <span class="btn-icon-right">
-                                                    <i class="fa fa-check" aria-hidden="true"></i>
-                                                </span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="permisos" class="col s12">
-                                <div class="card">
-                                    <div class="card-body"><b><h3>Modulo en DESARROLLO</h3></b></div>
-                                <div>
-                            </div>
-                        </div>
+                        <div id="contentTap" class="row p-4"></div>
                     </div>
                 `;
             break;
         }
-
 
         return template;
     }

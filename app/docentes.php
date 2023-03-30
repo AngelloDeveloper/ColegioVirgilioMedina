@@ -70,6 +70,9 @@
                                             <a title="Asignar Materias" 
                                                 class="config_docente btn-floating halfway-fab waves-effect waves-light green"
                                                 data-iddocente="<?= $docente['id'] ?>"
+                                                data-img="educator.png"
+                                                data-nombre="<?= $docente['nombre'] ?>"
+                                                data-apellido="<?= $docente['apellido'] ?>"
                                             >
                                                 <i class="fa fa-plus"></i>
                                             </a>

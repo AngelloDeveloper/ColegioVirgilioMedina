@@ -201,7 +201,7 @@
                 secciones.seccion
             FROM  docentes_secciones 
             LEFT JOIN secciones ON docentes_secciones.id_seccion = secciones.id
-            WHERE id_docente = '{$this->objData['id']}'";
+            WHERE id_docente = '{$this->objData['id']}' AND estatus = 'Y'";
             $this->query = mysqli_query($this->con, $this->sql);
             $this->result = mysqli_num_rows($this->query);
             if($this->result != 0) {
