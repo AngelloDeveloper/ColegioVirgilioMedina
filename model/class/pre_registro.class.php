@@ -278,7 +278,7 @@
             return $this->idRepresentante;
         }
 
-        public function downloadPlanillaPreRegistro() {
+        public function getDataPlanillaPreRegistro() {
             $this->sql = "SELECT 
                 estudiantes.nombre as estudiante_nombre, 
                 estudiantes.apellido as estudiante_apellido, 
@@ -350,10 +350,10 @@
                     LEFT JOIN madres ON estudiantes.id_mama = madres.id
                     LEFT JOIN padres ON estudiantes.id_papa = padres.id
                     LEFT JOIN representantes ON estudiantes.id_representante = representantes.id
-                WHERE estudiantes.id = {$this->objData['estudianteID']}";
-             $this->query = mysqli_query($this->con, $this->sql);
-             $this->result = mysqli_fetch_assoc($this->query);
-             return $this->result;
+                WHERE estudiantes.id = {$this->objData['id_estudiante']}";
+            $this->query = mysqli_query($this->con, $this->sql);
+            $this->result = mysqli_fetch_assoc($this->query);
+            return $this->result;
         }
 
     }

@@ -1365,6 +1365,8 @@ $(function() {
                         }).then((result2) => {
                             if(result2.isConfirmed) {
                                 $.post("../controllers/controller_registro.php", {type: 'downloadPlanillaPreRegistro',  id_estudiante: resp.DATA}, function(response) {
+                                    var dataPreRegistro = jQuery.parseJSON(response);
+                                    console.log(dataPreRegistro);
                                     Swal.fire({
                                         title: 'Se ha descargado automaticamente su planilla de Pre-Inscripcion.',
                                         text: 'si no se realizo la descarga puede hacerlo manualmente oprimiendo el boton "Descargar"',

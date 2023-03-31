@@ -1,6 +1,7 @@
 <?php 
     require('../model/class/conexion.class.php');
     require('../model/class/pre_registro.class.php');
+    require('../reports/reportes.php');
 
     if(!empty($_POST) && $_POST['type'] == 'setPreRegistro') {
         $objPreRegistro = new Pre_Registro($_POST);
@@ -20,6 +21,7 @@
 
     if(!empty($_POST) && $_POST['type'] == 'downloadPlanillaPreRegistro') {
         $objPreRegistro = new Pre_Registro($_POST);
-        $objPreRegistro->downloadPlanillaPreRegistro();
+        $dataPreRegistro = $objPreRegistro->getDataPlanillaPreRegistro();        
+        pre_registro($dataPreRegistro);
     }
 ?>
