@@ -278,7 +278,7 @@
             return $this->idRepresentante;
         }
 
-        public function getDataPlanillaPreRegistro() {
+        public function getDataPreRegistro() {
             $this->sql = "SELECT 
                 estudiantes.nombre as estudiante_nombre, 
                 estudiantes.apellido as estudiante_apellido, 

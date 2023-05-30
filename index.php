@@ -1,7 +1,7 @@
 <?php 
  /**
  	Inicializador de la aplicacion 
-	Redireccionamiento a auth -> login
+	Redireccionamiento a pagina de aterrizaje
  **/
-	header("Location: auth/login.php");
+	header("Location: landing-page/home.php");
 ?>

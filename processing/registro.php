@@ -1,3 +1,14 @@
+<?php 
+    require_once('../model/class/conexion.class.php');
+    require_once('../model/class/parametros.class.php');
+    
+    $objParameter = new Parametros();
+    $result =  $objParameter->getParameter('PRE_REGISTRO');
+    if($result['status'] != 'Y') {
+        header("Location: notAvailable.php");
+    }
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +43,7 @@
                         <img width="80" src="../assets/img/escudopng2.png" />
                     </div>
                     <div class="col-md-6">
-                        <a id="btn-session" class="btn btn-md mt-4" href="../auth/login.php">Iniciar Sesión</a>
+                        <a id="btn-session" class="btn btn-md mt-4" href="../landing-page/home.php">VOLVER</a>
                     </div>
                 </div>
             </div>

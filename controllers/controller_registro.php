@@ -1,7 +1,8 @@
+
 <?php 
     require('../model/class/conexion.class.php');
     require('../model/class/pre_registro.class.php');
-    require('../reports/reportes.php');
+    require('../reports/reportes.class.php');
 
     if(!empty($_POST) && $_POST['type'] == 'setPreRegistro') {
         $objPreRegistro = new Pre_Registro($_POST);
@@ -19,9 +20,12 @@
         ]);
     }
 
-    if(!empty($_POST) && $_POST['type'] == 'downloadPlanillaPreRegistro') {
+    if(!empty($_POST) && $_POST['type'] == 'downloadTemplatePreRegistro') {
+        $gReports = new GeneralReports(['format' => 'Legal']);
         $objPreRegistro = new Pre_Registro($_POST);
-        $dataPreRegistro = $objPreRegistro->getDataPlanillaPreRegistro();        
-        pre_registro($dataPreRegistro);
+        $dataPreRegistro = $objPreRegistro->getDataPreRegistro(); 
+        $template = $gReports->prepareTemplate('pre_registro', $dataPreRegistro);     
+        $stylesheet = $gReports->prepareStelesheet('pre_registro');
+        $gReports->generateReport($template, $stylesheet);
     }
 ?>

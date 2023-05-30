@@ -1,0 +1,25 @@
+.container {
+    width: 100%;
+}
+
+.table {
+    width: 100%;
+}
+
+.header {
+    width: 100%;
+}
+
+.headers {
+    display: inline-block !important; 
+    width: 33%;
+    text-align: center;
+}
+
+.republica {
+    margin: 2px;
+}
+
+.logos {
+    width: 15%;
+}

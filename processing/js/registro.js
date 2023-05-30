@@ -28,6 +28,22 @@ $(function() {
                                     <label for="apellido_estudiante">Apellidos <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
+                            <div class="col-4">
+                                <div class="form-group formBox">
+                                    <h4>Foto</h4>
+                                    <div class="grid">
+                                        <div class="form-element">
+                                            <input type="file" id="file-1" accept="image/*" />
+                                            <label for="file-1" id="file-1-preview">
+                                                <img src="https://bit.ly/3ubuq5o" alt=""/>
+                                                <div>
+                                                    <span>+</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
@@ -311,6 +327,22 @@ $(function() {
                                     <label for="apellido_madre">Apellido <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
+                            <div class="col-4">
+                                <div class="form-group formBox">
+                                    <h4>Foto</h4>
+                                    <div class="grid">
+                                        <div class="form-element">
+                                            <input type="file" id="file-2" accept="image/*" />
+                                            <label for="file-2" id="file-2-preview">
+                                                <img src="https://bit.ly/3ubuq5o" alt=""/>
+                                                <div>
+                                                    <span>+</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
@@ -480,6 +512,22 @@ $(function() {
                                 <div class="form-group input-field">
                                     <input id="apellido_padre" type="text" required />
                                     <label for="apellido_padre">Apellido <span style="color: #960032;"><b>*</b></span></label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group formBox">
+                                    <h4>Foto</h4>
+                                    <div class="grid">
+                                        <div class="form-element">
+                                            <input type="file" id="file-3" accept="image/*" />
+                                            <label for="file-3" id="file-3-preview">
+                                                <img src="https://bit.ly/3ubuq5o" alt=""/>
+                                                <div>
+                                                    <span>+</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -710,6 +758,22 @@ $(function() {
                                 <div class="form-group input-field">
                                     <input id="apellido_representante" type="text" required />
                                     <label for="apellido_representante">Apellido <span style="color: #960032;"><b>*</b></span></label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group formBox">
+                                    <h4>Foto</h4>
+                                    <div class="grid">
+                                        <div class="form-element">
+                                            <input type="file" id="file-4" accept="image/*" />
+                                            <label for="file-4" id="file-4-preview">
+                                                <img src="https://bit.ly/3ubuq5o" alt=""/>
+                                                <div>
+                                                    <span>+</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1014,6 +1078,7 @@ $(function() {
                 left: 100,
                 behavior: 'smooth'
             });
+            previewBeforeUpload("file-2");
         },1500);
     });
 
@@ -1078,6 +1143,7 @@ $(function() {
                 left: 100,
                 behavior: 'smooth'
             });
+            previewBeforeUpload("file-3");
         },1500);
     })
 
@@ -1142,6 +1208,7 @@ $(function() {
                 left: 100,
                 behavior: 'smooth'
             });
+            previewBeforeUpload("file-4");
         },1500);
     })
 
@@ -1364,18 +1431,11 @@ $(function() {
                                 confirmButtonColor: '#e0bb66'
                         }).then((result2) => {
                             if(result2.isConfirmed) {
-                                $.post("../controllers/controller_registro.php", {type: 'downloadPlanillaPreRegistro',  id_estudiante: resp.DATA}, function(response) {
-                                    var dataPreRegistro = jQuery.parseJSON(response);
-                                    console.log(dataPreRegistro);
-                                    Swal.fire({
-                                        title: 'Se ha descargado automaticamente su planilla de Pre-Inscripcion.',
-                                        text: 'si no se realizo la descarga puede hacerlo manualmente oprimiendo el boton "Descargar"',
-                                        icon: 'success',
-                                        confirmButtonColor: '#e0bb66'
-                                    }).then((finish) => {
-                                        //window.location.replace('http://localhost/ColegioVirgilioMedina/auth/login.php');
-                                    })
+                                console.log('aqui vamos');
+                                $.post("../controllers/controller_registro.php", {type : 'downloadTemplatePreRegistro', id_estudiante : resp.DATA}, function(response) {
+                                    console.log(response);
                                 })
+                                //window.location.replace('http://localhost/ColegioVirgilioMedina/auth/login.php');
                             }
                         })
                     }
@@ -1386,4 +1446,20 @@ $(function() {
 
     })
 
+    /*funcion de preview foto*/
+    function previewBeforeUpload(id) {
+        document.querySelector("#"+id).addEventListener("change", function(e) {
+            console.log('changue');
+            if(e.target.files.lenght == 0) {
+                return;
+            }
+            let file = e.target.files[0];
+            let url = URL.createObjectURL(file);
+            document.querySelector("#"+id+"-preview div").innerHTML = file.name;
+            document.querySelector("#"+id+"-preview img").src = url;
+        })
+    }
+
+    previewBeforeUpload("file-1");
+    
 })

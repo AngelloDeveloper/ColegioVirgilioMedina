@@ -150,3 +150,59 @@ a.btn:hover {
 .switch {
     width: 100% !important;
 }
+
+/*estilos foto estudiantil*/
+.formBox {
+    margin: 80px 0px 20px;
+    padding: 0px 50px;
+    position: absolute;
+}
+
+.formBox h4 {
+    text-align: center;
+    color: #acacac;
+    font-size: 40px;
+    font-weight: 400;
+}
+
+.formBox .grid {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.formBox .grid .form-element {
+    width: 200px;
+    height: 200px;
+}
+    
+.formBox .grid .form-element input {
+    display: none;
+}
+
+.formBox .grid .form-element label {
+    width: 100%;
+    height: 100%;
+}
+
+.formBox .grid .form-element img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.formBox .grid .form-element div {
+    position: relative;
+    height: 40px;
+    margin-top: -40px;
+    background:rgb(0,0,0,0.5);
+    text-align: center;
+    line-height: 40px;
+    font-size: 13px;
+    color: #f5f5f5;
+    font-weight: 600;
+}
+
+.formBox .grid .form-element div span {
+    font-size: 40px;
+}
