@@ -1,8 +1,13 @@
 <?php 
     require_once('../model/class/conexion.class.php');
     require_once('../model/class/parametros.class.php');
+    require('../model/class/estado.class.php');
     
+    //intancias
     $objParameter = new Parametros();
+    $objEstados = new Estado();
+
+    $arrEstados = $objEstados->getAllEstados();
     $result =  $objParameter->getParameter('PRE_REGISTRO');
     if($result['status'] != 'Y') {
         header("Location: notAvailable.php");
@@ -94,6 +99,10 @@
 		<script src="../assets/js/core/popper.min.js"></script>
 		<script src="../assets/js/core/bootstrap.min.js"></script>
 		<script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+        <!--variables-->
+        <script type="text/javascript">
+            var objEstados =  <?= json_encode($arrEstados); ?>;
+        </script>
 		<script type="text/javascript" src="js/registro.js?v="<?= rand(100, 500); ?>></script>
 	</body>
 </html>

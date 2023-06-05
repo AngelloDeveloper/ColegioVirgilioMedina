@@ -9,6 +9,8 @@ $(function() {
         'type' : 'setPreRegistro'
     }
 
+    var template_estados = generateTemplate_estados();
+
     const arrFormularios = {
         formulario1: {
             title : 'Datos del Estudiante',
@@ -30,18 +32,19 @@ $(function() {
                             </div>
                             <div class="col-4">
                                 <div class="form-group formBox">
-                                    <h4>Foto</h4>
+                                    <h4>Fotografia</h4>
                                     <div class="grid">
                                         <div class="form-element">
                                             <input type="file" id="file-1" accept="image/*" />
                                             <label for="file-1" id="file-1-preview">
-                                                <img src="https://bit.ly/3ubuq5o" alt=""/>
+                                                <img src="../assets/img/images-empty.jpg" alt=""/>
                                                 <div>
                                                     <span>+</span>
                                                 </div>
                                             </label>
                                         </div>
                                     </div>
+                                    <p style="color: red;">Foto tipo carnet 13x13</p>
                                 </div>
                             </div>
                         </div>
@@ -101,6 +104,64 @@ $(function() {
                                 </div>
                             </div>
                             <div class="col-4">
+                                <div class="form-group input-field">
+                                    <textarea id="punto_referencia_estudiante" type="text" class="materialize-textarea" required /></textarea>
+                                    <label for="punto_referencia_estudiante">Punto de referencia <span style="color: #960032;"><b>*</b></span></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group input-field">
+                                    <select id="estado_estudiante">
+                                        <option value="">--Selecciona un Estado--</option>
+                                        ${template_estados}
+                                    </select>
+                                    <label for="estado_estudiante">Procedente del Estado <span style="color: #960032;"><b>*</b></span></label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group input-field">
+                                    <select id="municipio_estudiante">
+                                        <option value=""></option>
+                                    </select>
+                                    <label for="municipio_estudiante">Procedente del Municipio <span style="color: #960032;"><b>*</b></span></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group input-field">
+                                    <input id="telefono_movil_estudiante" type="number" />
+                                    <label for="telefono_movil_estudiante">Telefono Movil </label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group input-field">
+                                    <input id="telefono_residencial_estudiante" type="number" />
+                                    <label for="telefono_residencial_estudiante">Telefono Residencial </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group input-field">
+                                    <input id="habilidades_estudiante" type="text" class="form-control" required/>
+                                    <label for="habilidades_estudiante">Habilidades <span style="color: #960032;"><b>*</b></span></label>
+                                </div>
+                            </div> 
+                            <div class="col-4">
+                                <div class="form-group input-field">
+                                    <input id="religion_estudiante" type="text" class="form-control" required/>
+                                    <label for="religion_estudiante">Religión <span style="color: #960032;"><b>*</b></span></label>
+                                </div>
+                            </div> 
+                        </div>
+
+                        <div class="row">
+                            <div class="col-4">
                                 <label>Genero <span style="color: #960032;"><b>*</b></span></label>
                                 <div class="form-group pt-2">
                                     <span>
@@ -117,8 +178,27 @@ $(function() {
                                     </span>
                                 </div>
                             </div>
+                            <div class="col-4">
+                                <label>Diestro o Zurdo ? <span style="color: #960032;"><b>*</b></span></label>
+                                <div class="form-group pt-2">
+                                    <span>
+                                        <label>
+                                            <input id="diestro_estudiante" name="lateralidad" checked="checked" class="with-gap"  type="radio"  /> 
+                                            <span>Diestro</span>
+                                        </label>
+                                    </span>
+                                    <span>
+                                        <label>
+                                            <input id="zurdo_estudiante" name="lateralidad" type="radio" class="with-gap"  class="radio ml-4" />
+                                            <span>Zurdo</span>
+                                        </label>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
-
+                        
+                            
+                        
                         <hr />
                         <div class="row">
                             <div class="col-4">
@@ -179,12 +259,6 @@ $(function() {
                                     <label for="grupoSanguineo_estudiante">Grupo Sanguineo</label>
                                 </div>
                             </div>
-                            <div class="col-4">
-                                <div class="form-group input-field">
-                                    <textarea id="discapacidad_estudiante" class="materialize-textarea" ></textarea>
-                                    <label for="discapacidad_estudiante">Discapacidad</label>
-                                </div>
-                            </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
@@ -219,6 +293,35 @@ $(function() {
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <center>
+                                        <label>¿ Posee alguna discapacidad ?</label>
+                                        <div>
+                                            <div class="switch">
+                                                <label>
+                                                No
+                                                <input type="checkbox" id="discapacidad" />
+                                                <span class="lever"></span>
+                                                Si
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </center>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div id="content_discapacidad" style="display:none" class="form-group">
+                                    <div class="form-group input-field">
+                                        <input id="discapacidadDescripcion" type="text" />
+                                        <label for="discapacidadDescripcion">Indique cual</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group">
@@ -297,6 +400,87 @@ $(function() {
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <center>
+                                        <label>¿ Ha convulsionado ?</label>
+                                        <div>
+                                            <div class="switch">
+                                                <label>
+                                                No
+                                                <input type="checkbox" id="convulsion" />
+                                                <span class="lever"></span>
+                                                Si
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </center>
+                                </div>
+                            </div>
+
+                            <div class="col-4">
+                                <div id="content_convulsion" style="display:none" class="form-group">
+                                    <div class="form-group input-field">
+                                        <input id="convulsionDescripcion" type="text" />
+                                        <label for="convulsionDescripcion">Observaciones</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <center>
+                                        <label>¿ Algun familiar dentro del colegio ?</label>
+                                        <div>
+                                            <div class="switch">
+                                                <label>
+                                                No
+                                                <input type="checkbox" id="familiar_colegio" />
+                                                <span class="lever"></span>
+                                                Si
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </center>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div id="content_familiar_colegio" style="display:none" class="form-group">
+                                    <div class="form-group input-field">
+                                        <input id="familiar_colegioNombre" type="text" />
+                                        <label for="familiar_colegioNombre">Nombre</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div id="content_familiar_colegio2" style="display:none" class="form-group">
+                                    <div class="form-group input-field">
+                                        <select id="familiar_colegioParentesco">
+                                            <option value="Padre">Padre</option>
+                                            <option value="Madre">Madre</option>
+                                            <option value="Abuelo">Abuelo(a)</option>
+                                            <option value="Hermano">Hermano(a)</option>
+                                            <option value="Primo">Primo(a)</option>
+                                            <option value="Tio">Tio(a)</option>
+                                            <option value="Otro">Otro</option>
+                                        </select>
+                                        <label for="familiar_colegioParentesco">Parentesco</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div id="content_familiar_colegio3" style="display:none" class="form-group">
+                                    <div class="form-group input-field">
+                                        <textarea  id="familiar_colegioDescripcion" class="materialize-textarea"></textarea>
+                                        <label for="familiar_colegioDescripcion">Especifíque</label>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="col-8">
                                 <div class="form-group pt-5">
                                     <center>
@@ -931,20 +1115,18 @@ $(function() {
         }
     }
 
-    function handleSwicht (input, content, ret=false, content2='') {
+    function handleSwicht (input, content, content2='', ret=false) {
         var swicth = $(document).find('#'+input)[0];
         var checked = $(swicth).prop('checked');
         
         if(checked) {
-            $('#'+content).css({'display':'block'});
-            if(content2 != '') {
-                $('#'+content2).css({'display':'none'});
-            }
+            $(content).each((index, value) => {
+                $('#'+value).css({'display':'block'});
+            })
         } else {
-            $('#'+content).css({'display':'none'});
-            if(content2 != '') {
-                $('#'+content2).css({'display':'block'});
-            }
+            $(content).each((index, value) => {
+                $('#'+value).css({'display':'none'});
+            })
         }
 
         return ret == true ? checked : '';
@@ -965,36 +1147,45 @@ $(function() {
         `);
     }
 
-    function reloadMaterial() {
-        var header = `
-            <!--Import materialize.css-->
-            <link type="text/css" rel="stylesheet" href="../assets/materialize/css/materialize.min.css"  media="screen,projection"/>
-            <link type="text/css" rel="stylesheet" href="../assets/materialize/css/custom.css"  media="screen,projection"/>
-            <!-- CSS Files -->
-            <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
-            <link rel="stylesheet" type="text/css" href="css/registro.css" />
-            <!--JavaScript at end of body for optimized loading-->
-            <script type="text/javascript" src="../assets/materialize/js/materialize.min.js"></script>
-            <script type="text/javascript" src="../assets/materialize/js/init.js"></script>
-        `;
-        $('#reloadMaterial').html(header);
-    }
-
     $(document).on('click', '#informeMedico', function(e) {
-        handleSwicht ('informeMedico', 'content_informe_medico');
+        handleSwicht ('informeMedico', ['content_informe_medico']);
     })
 
     $(document).on('click', '#alergico', function(e) {
-        handleSwicht ('alergico', 'content_alergico');
+        handleSwicht ('alergico', ['content_alergico']);
     })
 
     $(document).on('click', '#enfermedad', function(e) {
-        handleSwicht ('enfermedad', 'content_enfermedad');
+        handleSwicht ('enfermedad', ['content_enfermedad']);
     })
 
     $(document).on('click', '#medicamentos', function(e) {
-        handleSwicht ('medicamentos', 'content_medicamentos');
+        handleSwicht ('medicamentos', ['content_medicamentos']);
     })
+
+    $(document).on('click', '#convulsion', function(e) {
+        handleSwicht ('convulsion', ['content_convulsion']);
+    })
+
+    $(document).on('click', '#discapacidad', function(e) {
+        handleSwicht ('discapacidad', ['content_discapacidad']);
+    })
+
+    $(document).on('click', '#familiar_colegio', function(e) {
+        handleSwicht ('familiar_colegio', 
+            [
+                'content_familiar_colegio', 
+                'content_familiar_colegio2',
+                'content_familiar_colegio3'
+            ]
+        );
+    })
+
+    
+
+    
+
+    
 
     $('.title-tap').html(arrFormularios.formulario1.title);
     $('.formularios').html(arrFormularios.formulario1.form);
@@ -1446,6 +1637,22 @@ $(function() {
 
     })
 
+    $(document).on('change', '#estado_estudiante', function(e) {
+        var idEstado = e.target.value;
+        var template = '';
+        getMunicipio(idEstado)
+            .then((response) => {
+                $(response).each((index, municipio) => {
+                    template += `
+                        <option value="${municipio.id_municipio}">${municipio.municipio}</option>
+                    `;
+                })
+
+                $(document).find('#municipio_estudiante').html(template);
+                $('select').formSelect();
+            });
+    })
+
     /*funcion de preview foto*/
     function previewBeforeUpload(id) {
         document.querySelector("#"+id).addEventListener("change", function(e) {
@@ -1461,5 +1668,25 @@ $(function() {
     }
 
     previewBeforeUpload("file-1");
+
+    function generateTemplate_estados() {
+        var template = '';
+        $(objEstados).each((index, estado) => {
+            template += `<option value="${estado.id_estado}">${estado.estado}</option>`;
+        });
+
+        return template;
+    }
+
+    /*funcion fetch estado*/
+    const getMunicipio = async (idEstado) => {
+        var response =  await fetch('http://localhost/ColegioVirgilioMedina/controllers/controller_coordenadas.php?type=municipio&id_estado='+idEstado);
+        var arrData = await response.json();
+        return arrData
+    } 
+   
+
     
-})
+        
+})   
+     
