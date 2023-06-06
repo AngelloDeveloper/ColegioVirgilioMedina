@@ -2,7 +2,7 @@
  <div class="container-fluid bg-dark text-light footer mt-5 py-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container py-5">
             <div class="row g-5">
-                <div class="col-lg-6 col-md-6">
+                <div class="col-lg-6 col-md-6 mb-4" style="margin-top: 80px;">
                     <h4 class="text-white mb-4">Nuestra Institución</h4>
                     <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Sector Libertador, Santa Ana, Táchira, Venezuela</p>
                     <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>0276-7668102/0424-7253640</p>
@@ -13,26 +13,11 @@
                         <a class="btn btn-square btn-outline-light rounded-circle me-2" target="_blank" href="https://www.instagram.com/uecolegiovirgiliomedinarz/"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
-
-                <!--<div class="col-lg-3 col-md-6">
-                    <h4 class="text-white mb-4">Services</h4>
-                    <a class="btn btn-link" href="">Landscaping</a>
-                    <a class="btn btn-link" href="">Pruning plants</a>
-                    <a class="btn btn-link" href="">Urban Gardening</a>
-                    <a class="btn btn-link" href="">Garden Maintenance</a>
-                    <a class="btn btn-link" href="">Green Technology</a>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-white mb-4">Quick Links</h4>
-                    <a class="btn btn-link" href="">About Us</a>
-                    <a class="btn btn-link" href="">Contact Us</a>
-                    <a class="btn btn-link" href="">Our Services</a>
-                    <a class="btn btn-link" href="">Terms & Condition</a>
-                    <a class="btn btn-link" href="">Support</a>
-                </div>-->
                 <div class="col-lg-6 col-md-6">
-                    <img src="../assets/img/escudopng2.png" style="width:200px;" />
-                    <span style="font-size:20px;">U.E. Colegio Virgilio Medína Ramirez</span>
+                    <center>
+                        <img src="../assets/img/escudopng2.png" style="width:200px;" />
+                    </center>
+                    <p class="text-center" style="font-size:25px;">U.E. Colegio Virgilio Medína Ramírez</p>
                 </div>
             </div>
         </div>
@@ -44,10 +29,10 @@
     <div class="container-fluid copyright py-4">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                <div class="col-md-8 text-center text-md-start mb-3 mb-md-0">
                     &copy; <a class="border-bottom" href="#">U.E. Colegio Virgilio Medína Ramirez</a>, tiene todos los derechos reservados.
                 </div>
-                <div class="col-md-6 text-center">
+                <div class="col-md-4 text-center">
                     <span>Desarrollado por <u>Ing. Angello Durán</u></span> 
                     <a style="display: inline-block;" class="btn btn-outline-light rounded-circle me-2" target="_blank" href="https://api.whatsapp.com/send?phone=+584264720250&text=Hola, Nececito mas informacion!">
                         <i class="fab fa-whatsapp"></i>

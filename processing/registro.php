@@ -8,8 +8,8 @@
     $objEstados = new Estado();
 
     $arrEstados = $objEstados->getAllEstados();
-    $result =  $objParameter->getParameter('PRE_REGISTRO');
-    if($result['status'] != 'Y') {
+    $param_pre_registro =  $objParameter->getParameter('PRE_REGISTRO');
+    if($param_pre_registro['status'] != 'Y') {
         header("Location: notAvailable.php");
     }
 ?>

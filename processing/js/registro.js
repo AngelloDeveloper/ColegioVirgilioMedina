@@ -167,13 +167,15 @@ $(function() {
                                     <span>
                                         <label>
                                             <input id="masculino_estudiante" name="genero" checked="checked" class="with-gap"  type="radio"  /> 
-                                            <span>Masculino</span>
+                                            <span for="masculino_estudiante">Masculino</span>
+                                            <div for="masculino_estudiante"><img class="ml-4" style="width: 80px; cursor:pointer;" src="../assets/img/pre-registro/estudiante-masculino.png" /></div>
                                         </label>
                                     </span>
                                     <span>
                                         <label>
                                             <input id="femenino_estudiante" name="genero" type="radio" class="with-gap"  class="radio ml-4" />
-                                            <span>Femenino</span>
+                                            <span for="femenino_estudiante">Femenino</span>
+                                            <div for="femenino_estudiante" ><img class="ml-4" style="width: 80px; cursor:pointer;" src="../assets/img/pre-registro/estudiante-femenina.png" /></div>
                                         </label>
                                     </span>
                                 </div>
@@ -185,20 +187,19 @@ $(function() {
                                         <label>
                                             <input id="diestro_estudiante" name="lateralidad" checked="checked" class="with-gap"  type="radio"  /> 
                                             <span>Diestro</span>
+                                            <div id="mano-derecha"><img style="width: 80px; cursor:pointer;" src="../assets/img/pre-registro/mano.png" /></div>
                                         </label>
                                     </span>
                                     <span>
                                         <label>
                                             <input id="zurdo_estudiante" name="lateralidad" type="radio" class="with-gap"  class="radio ml-4" />
                                             <span>Zurdo</span>
+                                            <div id="mano-izquierda"><img style="width: 80px; transform: scaleX(-1); cursor:pointer;" src="../assets/img/pre-registro/mano.png" /></div>
                                         </label>
                                     </span>
                                 </div>
                             </div>
                         </div>
-                        
-                            
-                        
                         <hr />
                         <div class="row">
                             <div class="col-4">
@@ -1181,12 +1182,6 @@ $(function() {
         );
     })
 
-    
-
-    
-
-    
-
     $('.title-tap').html(arrFormularios.formulario1.title);
     $('.formularios').html(arrFormularios.formulario1.form);
 
@@ -1678,7 +1673,7 @@ $(function() {
         return template;
     }
 
-    /*funcion fetch estado*/
+    /*funcion fetch municipios*/
     const getMunicipio = async (idEstado) => {
         var response =  await fetch('http://localhost/ColegioVirgilioMedina/controllers/controller_coordenadas.php?type=municipio&id_estado='+idEstado);
         var arrData = await response.json();

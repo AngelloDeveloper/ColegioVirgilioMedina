@@ -1,31 +1,41 @@
-<?php require('utils/header.php'); ?>
+<?php 
+    require('utils/header.php'); 
+    require_once('../model/class/conexion.class.php');
+    require_once('../model/class/parametros.class.php');
+
+     //intancias
+     $objParameter = new Parametros();
+     $param_pre_registro =  $objParameter->getParameter('PRE_REGISTRO');
+?>
 
 <body>
      <!--nav bar-->
-     <?php require('utils/navbar.php') ?>
+    <?php require('utils/navbar.php') ?>
 
-     <!--modal preregistro-->
-     <div id="modal_pre_inscripcion" class="modal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header" style="display:block !important;">
-                    <center><h2 class="text-center">Incripciones Abiertas !!!</h2></center>
-                </div>
-                <div class="modal-body">
-                    <center><img src="../assets/img/escudopng2.png" style="width:100px;" /></center>
-                    <br />
-                    <p style="text-align: justify;">
-                        El proceso estará disponibles los dias <b>1, 2 y 5 de Junio</b>, No pierdas esta <b>Gran Oportunidad.</b>
-                        <br /><br /> Recuerda, al completar tu pre-inscripción se <b>descargará de manera automatica tu planilla</b>, la cual deberás imprimir y llevar como recaudo a la institución para formalizar la inscripción
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button id="btn_close_pre_inscripcion" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <a target="_blank" href="http://localhost/ColegioVirgilioMedina/processing/registro.php" class="btn btn-primary">Ir a la Pre-Inscripción</a>
+    <?php if($param_pre_registro['status'] != 'N') { ?>
+        <!--modal preregistro-->
+        <div id="modal_pre_inscripcion" class="modal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header" style="display:block !important;">
+                        <center><h2 class="text-center">Incripciones Abiertas !!!</h2></center>
+                    </div>
+                    <div class="modal-body">
+                        <center><img src="../assets/img/escudopng2.png" style="width:100px;" /></center>
+                        <br />
+                        <p style="text-align: justify;">
+                            El proceso estará disponibles los dias <b>1, 2 y 5 de Junio</b>, No pierdas esta <b>Gran Oportunidad.</b>
+                            <br /><br /> Recuerda, al completar tu pre-inscripción se <b>descargará de manera automatica tu planilla</b>, la cual deberás imprimir y llevar como recaudo a la institución para formalizar la inscripción
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btn_close_pre_inscripcion" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <a target="_blank" href="http://localhost/ColegioVirgilioMedina/processing/registro.php" class="btn btn-primary">Ir a la Pre-Inscripción</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    <?php  } ?>
 
     <!-- Carousel Start -->
     <div class="container-fluid p-0 wow fadeIn" data-wow-delay="0.1s">
@@ -121,7 +131,32 @@
     </div>
     <!-- Top Feature End -->
 
-
+    <?php if($param_pre_registro['status'] != 'N') { ?>
+        <!-- pre registro section -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="col-12 wow fadeIn" data-wow-delay="0.3s" style="    background: linear-gradient(303deg, rgba(17,121,9,1) 3%, rgba(14,138,54,1) 10%, rgba(255,255,255,1) 48%, rgba(255,255,255,1) 100%);">
+                    <div class="text-center rounded py-5 px-4" style="box-shadow: 0 0 45px rgba(0,0,0,.08);">
+                        <div class="row">
+                            <div class="col-4">
+                                <img src="../assets/img/escudopng2.png" style="width:200px;" />
+                            </div>
+                            <div class="col-8">
+                                <h2>Inscripciones abiertas, no pierdas esta gran oportunidad.</h2>
+                                <a  
+                                    style="padding: 20px; margin-top: 50px;" 
+                                    target="_blank" 
+                                    href="http://localhost/ColegioVirgilioMedina/processing/registro.php" 
+                                    class="btn btn-primary">
+                                        Ir a la Pre-Inscripción
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
     <!-- About Start -->
     <div class="container-xxl py-5">
         <div class="container">
