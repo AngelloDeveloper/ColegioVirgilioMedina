@@ -35,7 +35,7 @@ $(function() {
                                     <h4>Fotografia</h4>
                                     <div class="grid">
                                         <div class="form-element">
-                                            <input type="file" id="file-1" accept="image/*" />
+                                            <input type="file" id="file-1" accept="image/*" required/>
                                             <label for="file-1" id="file-1-preview">
                                                 <img src="../assets/img/images-empty.jpg" alt=""/>
                                                 <div>
@@ -133,14 +133,14 @@ $(function() {
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="telefono_movil_estudiante" type="number" />
-                                    <label for="telefono_movil_estudiante">Telefono Movil </label>
+                                    <input id="telefono_movil_estudiante" type="number" required/>
+                                    <label for="telefono_movil_estudiante">Telefono Movil <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="telefono_residencial_estudiante" type="number" />
-                                    <label for="telefono_residencial_estudiante">Telefono Residencial </label>
+                                    <input id="telefono_residencial_estudiante" type="number" required/>
+                                    <label for="telefono_residencial_estudiante">Telefono Residencial <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                         </div>
@@ -212,7 +212,7 @@ $(function() {
                                         <option value="L">L</option>
                                         <option value="XL">XL</option>
                                     </select>
-                                    <label for="tallaCamisa_estudiante">Talla de Camisa</label>
+                                    <label for="tallaCamisa_estudiante">Talla de Camisa <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
@@ -225,21 +225,21 @@ $(function() {
                                         <option value="L">L</option>
                                         <option value="XL">XL</option>
                                     </select>
-                                    <label for="tallaPatalon_estudiante">Talla de Pantalon</label>
+                                    <label for="tallaPatalon_estudiante">Talla de Pantalon <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="estatura_estudiante" type="text" />
-                                    <label for="estatura_estudiante">Estatura (Mts)</label>
+                                    <input id="estatura_estudiante" type="text" required />
+                                    <label for="estatura_estudiante">Estatura (Mts) <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="peso_estudiante" type="number" />
-                                    <label for="peso_estudiante">Peso (Kg)</label>
+                                    <input id="peso_estudiante" type="number" required/>
+                                    <label for="peso_estudiante">Peso (Kg) <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                         </div>
@@ -257,7 +257,7 @@ $(function() {
                                         <option value="B-">B-</option>
                                         <option value="AB-">AB-</option>
                                     </select>
-                                    <label for="grupoSanguineo_estudiante">Grupo Sanguineo</label>
+                                    <label for="grupoSanguineo_estudiante">Grupo Sanguineo <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                         </div>
@@ -281,7 +281,7 @@ $(function() {
                             </div>
                             <div class="col-4">
                                 <div id="content_informe_medico" style="display: none">
-                                    <label>Adjuntar Informe</label>
+                                    <label>Adjuntar Informe <span style="color: #960032;"><b>*</b></span></label>
                                     <div class="file-field input-field pt-2">
                                         <div class="btn materialcustom">
                                             <span>File</span>
@@ -372,7 +372,7 @@ $(function() {
                                 <div id="content_enfermedad" style="display:none" class="form-group">
                                     <div class="form-group input-field">
                                         <input id="enfermedadDescripcion" type="text"/>
-                                        <label for="enfermedadDescripcion">¿ cual ?</label>
+                                        <label for="enfermedadDescripcion">¿ indique enfermedad ?</label>
                                     </div>
                                 </div>
                             </div>
@@ -1211,7 +1211,15 @@ $(function() {
             'nacionalidad': $(document).find('#nacionalidad_estudiante').val(),
             'email': $(document).find('#email_estudiante').val(),
             'direccion': $(document).find('#direccion_estudiante').val(),
-            'genero' : $(document).find('#masculino_estudiante').prop('checked') == true ? 'M' : 'F'
+            'punto_referencia': $(document).find('#punto_referencia_estudiante').val(),
+            'estado': $(document).find('#estado_estudiante').val(),
+            'municipio': $(document).find('#municipio_estudiante').val(),
+            'telf_movil': $(document).find('#telefono_movil_estudiante').val(),
+            'telf_residencia': $(document).find('#telefono_residencial_estudiante').val(),
+            'habilidades' : $(document).find('#habilidades_estudiante').val(),
+            'religion' : $(document).find('#religion_estudiante').val(),
+            'genero' : $(document).find('#masculino_estudiante').prop('checked') == true ? 'M' : 'F',
+            'lateralidad' : $(document).find('#diestro_estudiante').prop('checked') == true ? 'D' : 'I'
         };
 
         objData.detalle_estudiante = {
@@ -1220,7 +1228,8 @@ $(function() {
             'estatura': $(document).find('#estatura_estudiante').val(),
             'peso': $(document).find('#peso_estudiante').val(),
             'grupo_sanguineo': $(document).find('#grupoSanguineo_estudiante').val(),
-            'discapacidad': $(document).find('#discapacidad_estudiante').val(),
+            'discapacidad': $(document).find('#discapacidad').prop('checked') == true ? 'Y' : 'N',
+            'discapacidad_descripcion' : $(document).find('#discapacidadDescripcion').val(),
             'informeMedico': $(document).find('#informeMedico').prop('checked') == true ? 'Y' : 'N',
             'url_informe_medico' :  $(document).find('#informeMedicoDocumento').val(),
             'alergico' : $(document).find('#alergico').prop('checked') == true ? 'Y' : 'N',
@@ -1228,8 +1237,16 @@ $(function() {
             'enfermo' : $(document).find('#enfermedad').prop('checked') == true ? 'Y' : 'N',
             'enfermedad' : $(document).find('#enfermedadDescripcion').val(),
             'medicado' : $(document).find('#medicamentos').prop('checked') == true ? 'Y' : 'N',
-            'medicamento' : $(document).find('#medicamentosDescripcion').val()
+            'medicamento' : $(document).find('#medicamentosDescripcion').val(),
+            'convulsion' : $(document).find('#convulsion').prop('checked') == true ? 'Y' : 'N',
+            'convulsion_observaciones' : $(document).find('#convulsionDescripcion').val(),
+            'familiar_colegio' : $(document).find('#familiar_colegio').prop('checked') == true ? 'Y' : 'N',
+            'familiar_colegioNombre' : $(document).find('#familiar_colegioNombre').val(),
+            'familiar_colegioParentesco' : $(document).find('#familiar_colegioParentesco').val(),
+            'familiar_colegioDescripcion' : $(document).find('#familiar_colegioDescripcion').val()
         }
+
+        console.log(objData);
 
         setTimeout(() => {
             //recopilar datos, procesarlos y guardarlos en base de datos
