@@ -1,5 +1,6 @@
 $(function() {
 
+    const formData = new FormData();
     const objData = {
         'estudiante' : {},
         'detalle_estudiante' : {},
@@ -10,6 +11,7 @@ $(function() {
     }
 
     var template_estados = generateTemplate_estados();
+    var template_religion = generateTemplate_religion();
 
     const arrFormularios = {
         formulario1: {
@@ -35,8 +37,8 @@ $(function() {
                                     <h4>Fotografia</h4>
                                     <div class="grid">
                                         <div class="form-element">
-                                            <input type="file" id="file-1" accept="image/*" required/>
-                                            <label for="file-1" id="file-1-preview">
+                                            <input type="file" id="foto-estudiante" accept="image/*" required/>
+                                            <label for="foto-estudiante" id="foto-estudiante-preview">
                                                 <img src="../assets/img/images-empty.jpg" alt=""/>
                                                 <div>
                                                     <span>+</span>
@@ -154,7 +156,10 @@ $(function() {
                             </div> 
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="religion_estudiante" type="text" class="form-control" required/>
+                                    <select id="religion_estudiante">
+                                        <option value="">--Selecciona una Religíon--</option>
+                                        ${template_religion}
+                                    </select>
                                     <label for="religion_estudiante">Religión <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div> 
@@ -517,8 +522,8 @@ $(function() {
                                     <h4>Foto</h4>
                                     <div class="grid">
                                         <div class="form-element">
-                                            <input type="file" id="file-2" accept="image/*" />
-                                            <label for="file-2" id="file-2-preview">
+                                            <input type="file" id="foto-madre" accept="image/*" />
+                                            <label for="foto-madre" id="foto-madre-preview">
                                                 <img src="https://bit.ly/3ubuq5o" alt=""/>
                                                 <div>
                                                     <span>+</span>
@@ -704,8 +709,8 @@ $(function() {
                                     <h4>Foto</h4>
                                     <div class="grid">
                                         <div class="form-element">
-                                            <input type="file" id="file-3" accept="image/*" />
-                                            <label for="file-3" id="file-3-preview">
+                                            <input type="file" id="foto-padre" accept="image/*" />
+                                            <label for="foto-padre" id="foto-padre-preview">
                                                 <img src="https://bit.ly/3ubuq5o" alt=""/>
                                                 <div>
                                                     <span>+</span>
@@ -950,8 +955,8 @@ $(function() {
                                     <h4>Foto</h4>
                                     <div class="grid">
                                         <div class="form-element">
-                                            <input type="file" id="file-4" accept="image/*" />
-                                            <label for="file-4" id="file-4-preview">
+                                            <input type="file" id="foto-representante" accept="image/*" />
+                                            <label for="foto-representante" id="foto-representante-preview">
                                                 <img src="https://bit.ly/3ubuq5o" alt=""/>
                                                 <div>
                                                     <span>+</span>
@@ -1209,6 +1214,9 @@ $(function() {
     $(document).on('submit', '#form1', function(e) {
         e.preventDefault();
         handleSpinnerLoad('.btnform');
+        
+        //foto estudiante
+        formData.append("foto_estudiante",  $(document).find('#foto-estudiante')[0].files[0]);
 
         //guardando datos
         objData.estudiante = {
@@ -1229,7 +1237,9 @@ $(function() {
             'habilidades' : $(document).find('#habilidades_estudiante').val(),
             'religion' : $(document).find('#religion_estudiante').val(),
             'genero' : $(document).find('#masculino_estudiante').prop('checked') == true ? 'M' : 'F',
-            'lateralidad' : $(document).find('#diestro_estudiante').prop('checked') == true ? 'D' : 'I'
+            'lateralidad' : $(document).find('#diestro_estudiante').prop('checked') == true ? 'D' : 'I',
+            'foto_estudiante' : formData,
+            'preview_foto' : $(document).find('#foto-estudiante')[0].files[0]
         };
 
         objData.detalle_estudiante = {
@@ -1255,6 +1265,8 @@ $(function() {
             'familiar_colegioParentesco' : $(document).find('#familiar_colegioParentesco').val(),
             'familiar_colegioDescripcion' : $(document).find('#familiar_colegioDescripcion').val()
         }
+
+        console.log(objData);
 
         setTimeout(() => {
             //recopilar datos, procesarlos y guardarlos en base de datos
@@ -1289,7 +1301,7 @@ $(function() {
                 left: 100,
                 behavior: 'smooth'
             });
-            previewBeforeUpload("file-2");
+            previewBeforeUpload("foto-madre");
         },1500);
     });
 
@@ -1297,6 +1309,9 @@ $(function() {
     $(document).on('submit', '#form2', function(e) {
         e.preventDefault();
         handleSpinnerLoad('.btnform');
+
+         //foto madre
+         formData.append("foto_madre",  $(document).find('#foto-madre')[0].files[0]);
 
         //datos
         objData.madre = {
@@ -1317,8 +1332,12 @@ $(function() {
             'telefono_residencia' : $(document).find('#telefono_residencial_madre').val(),
             'telefono_trabajo' : $(document).find('#telefono_trabajo_madre').val(),
             'religion' : $(document).find('#religion_madre').val(),
-            'vive_estudiante' : $(document).find('#vive_estudiante_madre').prop('checked') == true ? 'Y' : 'N'
+            'vive_estudiante' : $(document).find('#vive_estudiante_madre').prop('checked') == true ? 'Y' : 'N',
+            'foto_madre' : formData,
+            'preview_foto' : $(document).find('#foto-madre')[0].files[0]
         };
+
+        console.log(objData);
 
         setTimeout(() => {
             //recopilar datos, procesarlos y guardarlos en base de datos
@@ -1352,7 +1371,7 @@ $(function() {
                 left: 100,
                 behavior: 'smooth'
             });
-            previewBeforeUpload("file-3");
+            previewBeforeUpload("foto-padre");
         },1500);
     })
 
@@ -1360,6 +1379,9 @@ $(function() {
     $(document).on('submit', '#form3', function(e) {
         e.preventDefault();
         handleSpinnerLoad('.btnform');
+
+        //foto madre
+        formData.append("foto_padre",  $(document).find('#foto-padre')[0].files[0]);
 
         //datos
         objData.padre = {
@@ -1380,8 +1402,12 @@ $(function() {
             'telefono_residencia' : $(document).find('#telefono_residencial_padre').val(),
             'telefono_trabajo' : $(document).find('#telefono_trabajo_padre').val(),
             'religion' : $(document).find('#religion_padre').val(),
-            'vive_estudiante' : $(document).find('#vive_estudiante_padre').prop('checked') == true ? 'Y' : 'N'
+            'vive_estudiante' : $(document).find('#vive_estudiante_padre').prop('checked') == true ? 'Y' : 'N',
+            'foto_padre' : formData,
+            'preview_foto' : $(document).find('#foto-padre')[0].files[0]
         };
+
+        console.log(objData);
 
         setTimeout(() => {
             //recopilar datos, procesarlos y guardarlos en base de datos
@@ -1415,7 +1441,7 @@ $(function() {
                 left: 100,
                 behavior: 'smooth'
             });
-            previewBeforeUpload("file-4");
+            previewBeforeUpload("foto-representante");
         },1500);
     })
 
@@ -1423,6 +1449,8 @@ $(function() {
     $(document).on('click', '#selectRepresentante', function(e) {
         var swicth = handleSwicht ('selectRepresentante', ['seleccionar_representante'], ['seleccionar_parenteco'], true);
         var selectMadre = $(document).find('#selectMadre').prop('checked');
+        var divFoto = '';
+        var divImg = '';
 
         if(swicth) {
             if(selectMadre) {
@@ -1443,6 +1471,11 @@ $(function() {
                 $(document).find('#telefono_residencial_representante').val(objData.madre.telefono_residencia);
                 $(document).find('#telefono_trabajo_representante').val(objData.madre.telefono_trabajo);
                 $(document).find('#religion_representante').val(objData.madre.religion);
+
+                //preview foto
+                $(document).find("#foto-representante-preview div").html(objData.madre.preview_foto.name);
+                $(document).find("#foto-representante-preview img").attr('src', URL.createObjectURL(objData.madre.preview_foto));
+
                 if(objData.madre.vive_estudiante == 'Y') {
                     $(document).find('#vive_estudiante_representante_n').removeAttr('checked');
                     $(document).find('#vive_estudiante_representante_y').attr('checked', 'checked');
@@ -1468,6 +1501,10 @@ $(function() {
                 $(document).find('#telefono_residencial_representante').val(objData.padre.telefono_residencia);
                 $(document).find('#telefono_trabajo_representante').val(objData.padre.telefono_trabajo);
                 $(document).find('#religion_representante').val(objData.padre.religion);
+
+                $(document).find("#foto-representante-preview div").html(objData.padre.preview_foto.name);
+                $(document).find("#foto-representante-preview img").attr('src', URL.createObjectURL(objData.padre.preview_foto));
+
                 if(objData.padre.vive_estudiante == 'Y') {
                     $(document).find('#vive_estudiante_representante_n').removeAttr('checked');
                     $(document).find('#vive_estudiante_representante_y').attr('checked', 'checked');
@@ -1502,6 +1539,9 @@ $(function() {
             $(document).find('#telefono_residencial_representante').val('');
             $(document).find('#telefono_trabajo_representante').val('');
             $(document).find('#religion_representante').val('');
+            //preview foto
+            $(document).find("#foto-representante-preview div").html('<span>+</span>');
+            $(document).find("#foto-representante-preview img").attr('src', '../assets/img/images-empty.jpg');
             
             $("input[type='text']").removeAttr('disabled', 'disabled');
             $("input[type='email']").removeAttr('disabled', 'disabled');
@@ -1534,6 +1574,11 @@ $(function() {
         $(document).find('#telefono_residencial_representante').val(objData.madre.telefono_residencia);
         $(document).find('#telefono_trabajo_representante').val(objData.madre.telefono_trabajo);
         $(document).find('#religion_representante').val(objData.madre.religion);
+
+        //preview foto
+        $(document).find("#foto-representante-preview div").html(objData.madre.preview_foto.name);
+        $(document).find("#foto-representante-preview img").attr('src', URL.createObjectURL(objData.madre.preview_foto));
+
         if(objData.madre.vive_estudiante == 'Y') {
             $(document).find('#vive_estudiante_representante_n').removeAttr('checked');
             $(document).find('#vive_estudiante_representante_y').attr('checked', 'checked');
@@ -1565,6 +1610,11 @@ $(function() {
         $(document).find('#telefono_residencial_representante').val(objData.padre.telefono_residencia);
         $(document).find('#telefono_trabajo_representante').val(objData.padre.telefono_trabajo);
         $(document).find('#religion_representante').val(objData.padre.religion);
+
+        //preview foto
+        $(document).find("#foto-representante-preview div").html(objData.padre.preview_foto.name);
+        $(document).find("#foto-representante-preview img").attr('src', URL.createObjectURL(objData.padre.preview_foto));
+
         if(objData.padre.vive_estudiante == 'Y') {
             $(document).find('#vive_estudiante_representante_n').removeAttr('checked');
             $(document).find('#vive_estudiante_representante_y').attr('checked', 'checked');
@@ -1582,14 +1632,23 @@ $(function() {
     $(document).on('submit', '#form4', function(e) {
         e.preventDefault();
 
+        var foto_preview = '';
+        var foto_representante = '';
+
         var swicth = handleSwichtGet('selectRepresentante');
         var option_madre = handleSwichtGet('selectMadre');
         var parentesco = '';
 
         if(swicth) {
             parentesco = option_madre == true ? 'Madre' : 'Padre';
+            foto_preview = option_madre == true ? objData.madre.preview_foto : objData.padre.preview_foto;
+            foto_representante = option_madre == true ? objData.madre.foto_madre : objData.padre.foto_padre;
         } else {
+            //foto representante
+            formData.append("foto_representante",  $(document).find('#foto-representante')[0].files[0]);
             parentesco = $(document).find('#parentesco').val();
+            foto_preview = $(document).find('#foto-representante')[0].files[0];
+            foto_representante = formData;
         }
 
         //datos
@@ -1612,8 +1671,12 @@ $(function() {
             'telefono_trabajo' : $(document).find('#telefono_trabajo_representante').val(),
             'religion' : $(document).find('#religion_representante').val(),
             'vive_estudiante' : $(document).find('#vive_estudiante_representante').prop('checked') == true ? 'Y' : 'N',
-            'parentesco' : parentesco
+            'parentesco' : parentesco,
+            'foto_representante' : foto_representante,
+            'preview_foto' : foto_preview
         };
+
+        console.log(objData);
 
         Swal.fire({
             title: 'Esta listo para continuar ?',
@@ -1678,12 +1741,24 @@ $(function() {
         })
     }
 
-    previewBeforeUpload("file-1");
+    previewBeforeUpload("foto-estudiante");
+    /*previewBeforeUpload("foto-madre");
+    previewBeforeUpload("foto-padre");
+    previewBeforeUpload("foto-representante");*/
 
     function generateTemplate_estados() {
         var template = '';
         $(objEstados).each((index, estado) => {
             template += `<option value="${estado.id_estado}">${estado.estado}</option>`;
+        });
+
+        return template;
+    }
+
+    function generateTemplate_religion() {
+        var template = '';
+        $(objReligiones).each((index, religion) => {
+            template += `<option value="${religion.id}">${religion.religion}</option>`;
         });
 
         return template;
@@ -1695,8 +1770,7 @@ $(function() {
         var response =  await fetch('../controllers/controller_coordenadas.php?type=municipio&id_estado='+idEstado);
         var arrData = await response.json();
         return arrData
-    } 
-   
+    }    
         
 })   
      

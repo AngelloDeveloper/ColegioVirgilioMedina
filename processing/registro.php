@@ -2,12 +2,15 @@
     require_once('../model/class/conexion.class.php');
     require_once('../model/class/parametros.class.php');
     require('../model/class/estado.class.php');
+    require('../model/class/religion.class.php');
 
     //intancias
     $objParameter = new Parametros();
     $objEstados = new Estado();
+    $objReligion = new Religion();
 
     $arrEstados = $objEstados->getAllEstados();
+    $arrReligiones = $objReligion->getAllReligiones();
 
     $param_pre_registro =  $objParameter->getParameter('PRE_REGISTRO');
     if($param_pre_registro['status'] != 'Y') {
@@ -138,6 +141,7 @@
         ?>
         <script type="text/javascript"> 
             var objEstados =  <?= json_encode($arrEstados);?>;
+            var objReligiones = <?= json_encode($arrReligiones);?>;
         </script>
 		<script type="text/javascript" src="js/registro.js?v="<?= rand(100, 500); ?>></script>
 	</body>
