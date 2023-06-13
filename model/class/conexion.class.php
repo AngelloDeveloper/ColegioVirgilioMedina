@@ -1,16 +1,30 @@
 <?php 
-    class Conexion {
+    require_once  '../vendor/autoload.php';
+
+    class Conexion extends Dotenv\Dotenv {
         //properties
-        private $host = 'localhost';
-        private $users = 'root';
-        private $password = '';
-        private $db = 'cvm';
+        private $host;
+        private $user;
+        private $password;
+        private $db;
         
         //methods
-        public function conexion() {
-            $con = mysqli_connect($this->host,$this->users,$this->password, $this->db);
-            $conect = mysqli_select_db($con, $this->db);
+        private function ENV() {
+            $this->createImmutable('../')->load();
+        }
 
+        private function setCredentials() {
+            $this->ENV();
+            $this->host     = $_ENV['HOST_DB'];
+            $this->user     = $_ENV['USER_DB'];
+            $this->password = $_ENV['PASS_DB'];
+            $this->db       = $_ENV['DATABASE_DB']; 
+        }
+
+        public function conexion() {
+            $this->setCredentials();
+            $con = mysqli_connect($this->host,$this->user,$this->password, $this->db);
+            mysqli_set_charset($con, "utf8mb4");
             return $con;
         }
     }

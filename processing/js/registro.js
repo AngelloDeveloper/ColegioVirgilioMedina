@@ -1116,7 +1116,7 @@ $(function() {
         }
     }
 
-    function handleSwicht (input, content, content2='', ret=false) {
+    function handleSwicht (input, content, content2=false, ret=false) {
         var swicth = $(document).find('#'+input)[0];
         var checked = $(swicth).prop('checked');
         
@@ -1124,10 +1124,20 @@ $(function() {
             $(content).each((index, value) => {
                 $('#'+value).css({'display':'block'});
             })
+            if(content2 != false) {
+                $(content2).each((index, value) => {
+                    $('#'+value).css({'display':'none'});
+                })
+            }
         } else {
             $(content).each((index, value) => {
                 $('#'+value).css({'display':'none'});
             })
+            if(content2 != false) {
+                $(content2).each((index, value) => {
+                    $('#'+value).css({'display':'block'});
+                })
+            }
         }
 
         return ret == true ? checked : '';
@@ -1246,8 +1256,6 @@ $(function() {
             'familiar_colegioDescripcion' : $(document).find('#familiar_colegioDescripcion').val()
         }
 
-        console.log(objData);
-
         setTimeout(() => {
             //recopilar datos, procesarlos y guardarlos en base de datos
             $('#lineatap1').css({
@@ -1312,8 +1320,6 @@ $(function() {
             'vive_estudiante' : $(document).find('#vive_estudiante_madre').prop('checked') == true ? 'Y' : 'N'
         };
 
-        console.log(objData);
-
         setTimeout(() => {
             //recopilar datos, procesarlos y guardarlos en base de datos
             $('#lineatap2').css({
@@ -1377,8 +1383,6 @@ $(function() {
             'vive_estudiante' : $(document).find('#vive_estudiante_padre').prop('checked') == true ? 'Y' : 'N'
         };
 
-        console.log(objData);
-
         setTimeout(() => {
             //recopilar datos, procesarlos y guardarlos en base de datos
             $('#lineatap3').css({
@@ -1417,7 +1421,7 @@ $(function() {
 
     //form 4 intercative
     $(document).on('click', '#selectRepresentante', function(e) {
-        var swicth = handleSwicht ('selectRepresentante', 'seleccionar_representante', true, 'seleccionar_parenteco');
+        var swicth = handleSwicht ('selectRepresentante', ['seleccionar_representante'], ['seleccionar_parenteco'], true);
         var selectMadre = $(document).find('#selectMadre').prop('checked');
 
         if(swicth) {
@@ -1611,8 +1615,6 @@ $(function() {
             'parentesco' : parentesco
         };
 
-        console.log(objData);
-
         Swal.fire({
             title: 'Esta listo para continuar ?',
             text: "Los datos que ha suministrado seran guardados",
@@ -1634,11 +1636,9 @@ $(function() {
                                 confirmButtonColor: '#e0bb66'
                         }).then((result2) => {
                             if(result2.isConfirmed) {
-                                console.log('aqui vamos');
                                 $.post("../controllers/controller_registro.php", {type : 'downloadTemplatePreRegistro', id_estudiante : resp.DATA}, function(response) {
                                     console.log(response);
                                 })
-                                //window.location.replace('http://localhost/ColegioVirgilioMedina/auth/login.php');
                             }
                         })
                     }
@@ -1668,7 +1668,6 @@ $(function() {
     /*funcion de preview foto*/
     function previewBeforeUpload(id) {
         document.querySelector("#"+id).addEventListener("change", function(e) {
-            console.log('changue');
             if(e.target.files.lenght == 0) {
                 return;
             }
@@ -1690,15 +1689,14 @@ $(function() {
         return template;
     }
 
+
     /*funcion fetch municipios*/
     const getMunicipio = async (idEstado) => {
-        var response =  await fetch('http://localhost/ColegioVirgilioMedina/controllers/controller_coordenadas.php?type=municipio&id_estado='+idEstado);
+        var response =  await fetch('../controllers/controller_coordenadas.php?type=municipio&id_estado='+idEstado);
         var arrData = await response.json();
         return arrData
     } 
    
-
-    
         
 })   
      

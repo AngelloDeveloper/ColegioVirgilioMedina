@@ -4,9 +4,15 @@
     require('../model/class/pre_registro.class.php');
     require('../reports/reportes.class.php');
 
+    
+
     if(!empty($_POST) && $_POST['type'] == 'setPreRegistro') {
+        
         $objPreRegistro = new Pre_Registro($_POST);
+        
         $objPreRegistro->reg_madre();
+        var_dump($_POST);
+        die();
         $objPreRegistro->reg_padre();
         $objPreRegistro->reg_representante();
         $objPreRegistro->reg_detalle_estudiante();
