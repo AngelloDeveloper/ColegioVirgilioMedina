@@ -56,12 +56,10 @@
                 <div class="card principal">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-10">
-                                <h3>Planificación</h3>
-                            </div>
-                            <div class="col-2">
-                                <div class="buton-icon">
-                                    <button id="btNewPlanificacion" type="button" class="btn btn-success mb-1" style="color: #fff; background-color: #00B236;">
+                            <div class="col-12">
+                                <h3 style="display: inline;">Planificación</h3>
+                                <div class="buton-icon" style="float:right;">
+                                    <button id="btNewPlanificacion" type="button" class="btn btn-success mb-1" style="color: #fff; background-color: #00B236; width:100%;">
                                         Nueva Planificación
                                         <span class="btn-icon-right">
                                             <i class="fa fa-plus" aria-hidden="true"></i>

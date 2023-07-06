@@ -361,11 +361,9 @@ $(function() {
         const template_forms = `
             <div class="card-body">
                 <div class="row">
-                    <div class="col-8">
-                        <h3>Planificación ${prefix}</h3>
-                    </div>
-                    <div class="col-4">
-                        <div class="button-icon">
+                    <div class="col-12">
+                        <h3 style="display:inline;">Planificación ${prefix}</h3>
+                        <div class="button-icon" style="float:right;">
                             <button 
                                 data-seccion-open="secondary" 
                                 data-seccion-close="terciary" 
@@ -586,11 +584,9 @@ $(function() {
             const template_materias = `
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-10">
-                            <h3>Planificación ${prefix}</h3>
-                        </div>
-                        <div class="col-2">
-                            <div class="button-icon">
+                        <div class="col-12">
+                            <h3 style="display:inline;">Planificación ${prefix}</h3>
+                            <div class="button-icon" style="float:right;">
                                 <button data-seccion-open="principal" data-seccion-close="secondary" id="btnReturnPlanificacion" type="button" class="btn mb-1" style="color: #fff; background-color: silver;">
                                     Volver
                                     <span class="btn-icon-right">
