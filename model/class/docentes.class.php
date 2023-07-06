@@ -21,10 +21,16 @@
         public function getAllDocentes() {
             $this->sql = "SELECT * FROM docentes WHERE estatus='Y' ORDER BY id DESC";
             $this->query = mysqli_query($this->con, $this->sql);
-            while($row = mysqli_fetch_assoc($this->query)) {
-                $rows[] = $row;
+            $this->result = mysqli_num_rows($this->query);
+            if($this->result != 0) {
+                while ($row = mysqli_fetch_assoc($this->query)) { 
+                    $rows[] = $row; 
+                }
+                $this->result = $rows;
+            } else {
+                $this->result = false;
             }
-            $this->result = $rows;
+
             return $this->result;
         }
 

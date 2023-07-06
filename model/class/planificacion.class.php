@@ -124,7 +124,7 @@
                 }
                 $this->result = $rows;
             } else {
-                $this->result = null;
+                $this->result = false;
             }
 
             return $this->result;

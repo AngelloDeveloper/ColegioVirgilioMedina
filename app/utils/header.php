@@ -24,12 +24,19 @@
     <link rel="stylesheet" href="./plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css">
     <!-- Custom Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <!--General Css-->
+    <link href="css/general.css" rel="stylesheet">
     <!--jquery-->
     <script src="../assets/js/core/jquery.min.js"></script>
-    <script src="js/header.js"></script>
+    <!--General functions JS-->
+    <script src="../assets/js/src/generalFunction.js"></script>
+    <!--Materialize-->
+    <script type="text/javascript" src="../assets/materialize/js/materialize.min.js"></script>
+    <script type="text/javascript" src="../assets/materialize/js/init.js"></script>
     <!--swallAlert-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css" rel="stylesheet">
+    <script src="js/header.js"></script>
 </head>
 <body>
     <div id="preloader">

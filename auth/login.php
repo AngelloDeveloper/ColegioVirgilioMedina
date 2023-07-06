@@ -17,9 +17,10 @@
 	<!--Import materialize.css-->
 	<link type="text/css" rel="stylesheet" href="../assets/materialize/css/materialize.min.css"  media="screen,projection"/>
 	<link type="text/css" rel="stylesheet" href="../assets/materialize/css/custom.css"  media="screen,projection"/>
+	<!--General functions JS-->
+    <script src="../assets/js/src/generalFunction.js"></script>
 	<!--JavaScript at end of body for optimized loading-->
 	<script type="text/javascript" src="../assets/materialize/js/materialize.min.js"></script>
-	<script type="text/javascript" src="../assets/materialize/js/init.js"></script>
 
 	<title>Colegio Virgilio Medina</title>
 </head>

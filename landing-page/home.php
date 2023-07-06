@@ -53,7 +53,7 @@
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
-                                    <h1 class="display-1 text-white mb-5 animated slideInDown">Educación de Calidad Valores y Familia</h1>
+                                    <h1 class="display-1 text-white mb-5 animated slideInDown">Educación de Calidad, Valores y Familia</h1>
                                     <a href="" class="btn btn-primary py-sm-3 px-sm-4">Ver más</a>
                                 </div>
                             </div>
@@ -114,7 +114,7 @@
                             </div>
                             <div class="ps-3">
                                 <h4>Maestros De Calidad</h4>
-                                <span>Docentes experimentados con vocacion a la enseñanza en las diversas diciplinas academicas</span>
+                                <span>Docentes experimentados con vocacion a la enseñanza en las diversas disciplinas academicas</span>
                             </div>
                         </div>
                     </div>
@@ -236,7 +236,7 @@
                     <span class="fs-5 fw-semi-bold text-light">Docentes</span>
                 </div>
                 <div class="col-sm-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.5s">
-                    <h1 class="display-4 text-white" data-toggle="counter-up">24</h1>
+                    <h1 class="display-4 text-white" data-toggle="counter-up">1</h1>
                     <span class="fs-5 fw-semi-bold text-light">Estudiantes Becados</span>
                 </div>
                 <div class="col-sm-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.7s">
@@ -256,7 +256,7 @@
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                     <p class="fs-5 fw-bold text-primary">Porque debe Elegirnos!</p>
                     <h1 class="display-5 mb-4">¡Razones por la que nos eligen!</h1>
-                    <p class="mb-4">Contamos con el mejor proyecto educativo del municipio córdoba, somos innovadores y visionarios, llevamos la educacion al siguiente nivel, beneficiando a todos los jovenes que desean una educación de calidad</p>
+                    <p class="mb-4">Contamos con el mejor proyecto educativo del Municipio Córdoba, somos innovadores y visionarios, llevamos la educacion al siguiente nivel, beneficiando a todos los jovenes que desean una educación de calidad</p>
                     <a class="btn btn-primary py-3 px-4" href="">Ver más</a>
                 </div>
                 <div class="col-lg-6">
@@ -286,7 +286,7 @@
                                 <div class="btn-square bg-light rounded-circle mx-auto mb-4" style="width: 90px; height: 90px;">
                                     <i class="fa fa-school fa-3x text-primary"></i>
                                 </div>
-                                <h4 class="mb-0">Excelente Hambiente Educativo</h4>
+                                <h4 class="mb-0">Excelente Ambiente Educativo</h4>
                             </div>
                         </div>
                     </div>

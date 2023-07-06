@@ -39,7 +39,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css" rel="stylesheet">
     <!--General functions JS-->
-    <script src="../assets/js/core/generalFunction.js"></script>
+    <script src="../assets/js/src/generalFunction.js"></script>
     <!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="../assets/materialize/js/materialize.min.js"></script>
     <script type="text/javascript" src="../assets/materialize/js/init.js"></script>
@@ -104,45 +104,12 @@
 		<script src="../assets/js/core/bootstrap.min.js"></script>
 		<script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
         <!--variables-->
-        <?php 
-            /*function obtenerErrorDeJSON()
-            {
-                switch (json_last_error()) {
-                    case JSON_ERROR_NONE:
-                        return "No ha ocurrido ningún error";
-                    case JSON_ERROR_DEPTH:
-                        return "Se ha excedido la profundidad máxima de la pila.";
-                    case JSON_ERROR_STATE_MISMATCH:
-                        return "Error por desbordamiento de buffer o los modos no coinciden";
-                    case JSON_ERROR_CTRL_CHAR:
-                        return "Error del carácter de control, posiblemente se ha codificado de forma incorrecta.";
-                    case JSON_ERROR_SYNTAX:
-                        return "Error de sintaxis.";
-                    case JSON_ERROR_UTF8:
-                        return "Caracteres UTF-8 mal formados, posiblemente codificados incorrectamente.";
-                    case JSON_ERROR_RECURSION:
-                        return "El objeto o array pasado a json_encode() incluye referencias recursivas y no se puede codificar.";
-                    case JSON_ERROR_INF_OR_NAN:
-                        return "El valor pasado a json_encode() incluye NAN (Not A Number) o INF (infinito)";
-                    case JSON_ERROR_UNSUPPORTED_TYPE:
-                        return "Se proporcionó un valor de un tipo no admitido para json_encode(), tal como un resource.";
-                    default:
-                        return "Error desconocido";
-                }
-            };
-
-            $codificado = json_encode($arrEstados);
-            if ($codificado === false) {
-                echo "Ocurrió un error al codificar: " . obtenerErrorDeJSON();
-            } else {
-                echo $codificado;
-            }
-            die();*/
-        ?>
         <script type="text/javascript"> 
             var objEstados =  <?= json_encode($arrEstados);?>;
             var objReligiones = <?= json_encode($arrReligiones);?>;
         </script>
+        <script src="../assets/face-api/face-api.min.js"></script>
+        <script src="../assets/js/src/validador-images.js?v="<?= rand(100, 500); ?>></script>
 		<script type="text/javascript" src="js/registro.js?v="<?= rand(100, 500); ?>></script>
 	</body>
 </html>

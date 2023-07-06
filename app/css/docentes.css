@@ -24,10 +24,6 @@
     height: 180px;
 }
 
-.gradient-materias {
-    background-image: linear-gradient(230deg, #fcfcfc00, #f7e7ff);
-}
-
 .titleMateria {
     font-size: 18px !important;
     line-height: 25px !important;
@@ -35,13 +31,4 @@
 
 .img-icons-listPlanificacion {
     width: 50px !important;
-}
-
-.bannerList_radius {
-    border-radius: 80px !important;
-}
-
-.bannerList:hover {
-    cursor: pointer;
-    background-image: linear-gradient(230deg, #fcfcfc00, #edd0fb);
 }

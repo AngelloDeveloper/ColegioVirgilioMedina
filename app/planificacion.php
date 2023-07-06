@@ -227,6 +227,5 @@
     const Grados = <?= json_encode($Grados); ?>;
     const Secciones = <?= json_encode($Secciones); ?>;
 </script>
-<script src="../assets/js/core/generalFunction.js"></script>
 <script src="js/planificacion.js"></script>
 <?php require_once('utils/footer.php'); ?>

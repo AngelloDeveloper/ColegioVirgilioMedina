@@ -60,30 +60,34 @@
                         </div>
                         <hr class="hr" />
                         <div class="row">
-                            <?php foreach($arrDocentes as $docente) { ?>
-                                <div class="col-3">
-                                    <div class="card cardHeight">
-                                        <div class="card-image card-images-height gradient-materias">
-                                            <center>
-                                                <img class="img-icons" src="../assets/img/materias/icons/educator.png" />
-                                            </center>
-                                            <a title="Asignar Materias" 
-                                                class="config_docente btn-floating halfway-fab waves-effect waves-light green"
-                                                data-iddocente="<?= $docente['id'] ?>"
-                                                data-img="educator.png"
-                                                data-nombre="<?= $docente['nombre'] ?>"
-                                                data-apellido="<?= $docente['apellido'] ?>"
-                                            >
-                                                <i class="fa fa-plus"></i>
-                                            </a>
+
+                            <?php 
+                                if($arrDocentes) {
+                                    foreach($arrDocentes as $docente) { ?>
+                                        <div class="col-3">
+                                            <div class="card cardHeight">
+                                                <div class="card-image card-images-height gradient-materias">
+                                                    <center>
+                                                        <img class="img-icons" src="../assets/img/materias/icons/educator.png" />
+                                                    </center>
+                                                    <a title="Asignar Materias" 
+                                                        class="config_docente btn-floating halfway-fab waves-effect waves-light green"
+                                                        data-iddocente="<?= $docente['id'] ?>"
+                                                        data-img="educator.png"
+                                                        data-nombre="<?= $docente['nombre'] ?>"
+                                                        data-apellido="<?= $docente['apellido'] ?>"
+                                                    >
+                                                        <i class="fa fa-plus"></i>
+                                                    </a>
+                                                </div>
+                                                <div class="card-content">
+                                                    <span class="card-title titleMateria"><?= $docente['nombre'].' '.$docente['apellido']; ?></span>
+                                                    <p>Docente</p>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="card-content">
-                                            <span class="card-title titleMateria"><?= $docente['nombre'].' '.$docente['apellido']; ?></span>
-                                            <p>Docente</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php } ?>
+                                   <?php }
+                                } ?>
                         </div>
                     </div>
                 </div>
@@ -99,7 +103,6 @@
     var arrSecciones = <?= json_encode($arrSecciones) ?>;
     var arrGrados = <?= json_encode($arrGrados) ?>;
 </script>
-<script src="../assets/js/core/generalFunction.js"></script>
 <script src="js/docentes.js"></script>
 <?php require_once('utils/footer.php'); ?>
      

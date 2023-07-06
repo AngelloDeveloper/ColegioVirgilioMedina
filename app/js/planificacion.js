@@ -241,13 +241,6 @@ $(function() {
     })
 
     //function
-    function initMaterialInput() {
-        M.AutoInit();
-        M.updateTextFields();
-        M.FormSelect.init($('select'));
-        M.Collapsible.init($('.collapsible'));
-    }
-
     function limitar_cadena(cadena, limite, sufijo){
         if(cadena.length > limite){
             return cadena.substr(0, limite) + sufijo;

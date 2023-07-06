@@ -173,9 +173,6 @@
                 )
             ";
 
-            var_dump($this->sql);
-            die();
-
             $this->query = mysqli_query($this->con, $this->sql);
             $this->idMadre = mysqli_insert_id($this->con);
             return $this->idMadre;

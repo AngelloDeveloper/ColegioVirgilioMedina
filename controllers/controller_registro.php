@@ -4,8 +4,6 @@
     require('../model/class/pre_registro.class.php');
     require('../reports/reportes.class.php');
 
-    
-
     if(!empty($_POST) && $_POST['type'] == 'setPreRegistro') {
         
         $objPreRegistro = new Pre_Registro($_POST);

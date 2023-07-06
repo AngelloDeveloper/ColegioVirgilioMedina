@@ -6,6 +6,93 @@ $(function() {
 		</center>
 	`;
 
+	render('canvas', templateini);
+	runScale();
+	loadForm();
+
+	$(document).on('submit', '#formLogin', (evt) => {
+		evt.preventDefault();
+		const btn = $(document).find('#btnSubmit')[0];
+		//$(btn).html(spinner());
+		const objData = {
+			'type' : 'login',
+			'email': $(document).find('#email').val(),
+			'password' : $(document).find('#password').val()
+		};
+
+		console.log(objData);
+
+		$.post("../controllers/controller_login.php", objData, function(response) {
+			var resp = jQuery.parseJSON(response);
+
+			if(resp['STATUS'] == 'LOGIN_SUCCESS') {
+				const Toast = Swal.mixin({
+					toast: true,
+					position: 'top-end',
+					showConfirmButton: false,
+					timer: 3000,
+					timerProgressBar: true,
+					didOpen: (toast) => {
+					  toast.addEventListener('mouseenter', Swal.stopTimer)
+					  toast.addEventListener('mouseleave', Swal.resumeTimer)
+					}
+				})
+				  
+				Toast.fire({
+					icon: 'success',
+					title: resp.MESSAGES
+				})
+
+				setTimeout(() => {
+					window.location.replace('http://localhost/ColegioVirgilioMedina/app/index.php');
+				}, 3100);
+			}
+
+			if(resp['STATUS'] == 'LOGIN_FAIL') {
+
+			}
+
+
+			if(resp['STATUS'] == 'BLOQUED_USER') {
+				$(document).find('.modal-body').html(`
+					<center><i class="fa fa-exclamation-triangle" aria-hidden="true" 
+						style="
+							position: absolute;
+							left: 125px;
+							font-size: 200px;
+							color: orange;
+							z-index: 2;
+							opacity: .2;
+						">
+					</i></center>
+					<center><img width="50" src="../assets/img/escudopng2.png"></center>
+					<p class="text-center mt-4" style="position:relative; z-index:3;">${resp.MESSAGES}</p>
+				`);
+				$(document).find('.btn-primary').hide();
+				$(document).find('#modal_info_login').modal('show');
+			}
+			
+			if(resp['STATUS'] == 'NOTFOUND_USER') {
+				$(document).find('.modal-body').html(`
+					<center><i class="fa fa-exclamation-triangle" aria-hidden="true" 
+						style="
+							position: absolute;
+							left: 125px;
+							font-size: 200px;
+							color: orange;
+							z-index: 2;
+							opacity: .2;
+						">
+					</i></center>
+					<center><img width="50" src="../assets/img/escudopng2.png"></center>
+					<p class="text-center mt-4" style="position:relative; z-index:3;">${resp.MESSAGES}</p>
+				`);
+				$(document).find('.btn-primary').hide();
+				$(document).find('#modal_info_login').modal('show');
+			}
+		})
+	})
+
 	function runScale() {
 		setTimeout(() => {
 			$('.scale').css("transform", "scale(1.5)");
@@ -83,89 +170,4 @@ $(function() {
 			</div>
 		`;
 	}
-
-	$(document).on('submit', '#formLogin', (evt) => {
-		evt.preventDefault();
-		const btn = $(document).find('#btnSubmit')[0];
-		//$(btn).html(spinner());
-		const objData = {
-			'type' : 'login',
-			'email': $(document).find('#email').val(),
-			'password' : $(document).find('#password').val()
-		};
-
-		$.post("../controllers/controller_login.php", objData, function(response) {
-			var resp = jQuery.parseJSON(response);
-
-			if(resp['STATUS'] == 'LOGIN_SUCCESS') {
-				const Toast = Swal.mixin({
-					toast: true,
-					position: 'top-end',
-					showConfirmButton: false,
-					timer: 3000,
-					timerProgressBar: true,
-					didOpen: (toast) => {
-					  toast.addEventListener('mouseenter', Swal.stopTimer)
-					  toast.addEventListener('mouseleave', Swal.resumeTimer)
-					}
-				})
-				  
-				Toast.fire({
-					icon: 'success',
-					title: resp.MESSAGES
-				})
-
-				setTimeout(() => {
-					window.location.replace('http://localhost/ColegioVirgilioMedina/app/index.php');
-				}, 3100);
-			}
-
-			if(resp['STATUS'] == 'LOGIN_FAIL') {
-
-			}
-
-
-			if(resp['STATUS'] == 'BLOQUED_USER') {
-				$(document).find('.modal-body').html(`
-					<center><i class="fa fa-exclamation-triangle" aria-hidden="true" 
-						style="
-							position: absolute;
-							left: 125px;
-							font-size: 200px;
-							color: orange;
-							z-index: 2;
-							opacity: .2;
-						">
-					</i></center>
-					<center><img width="50" src="../assets/img/escudopng2.png"></center>
-					<p class="text-center mt-4" style="position:relative; z-index:3;">${resp.MESSAGES}</p>
-				`);
-				$(document).find('.btn-primary').hide();
-				$(document).find('#modal_info_login').modal('show');
-			}
-			
-			if(resp['STATUS'] == 'NOTFOUND_USER') {
-				$(document).find('.modal-body').html(`
-					<center><i class="fa fa-exclamation-triangle" aria-hidden="true" 
-						style="
-							position: absolute;
-							left: 125px;
-							font-size: 200px;
-							color: orange;
-							z-index: 2;
-							opacity: .2;
-						">
-					</i></center>
-					<center><img width="50" src="../assets/img/escudopng2.png"></center>
-					<p class="text-center mt-4" style="position:relative; z-index:3;">${resp.MESSAGES}</p>
-				`);
-				$(document).find('.btn-primary').hide();
-				$(document).find('#modal_info_login').modal('show');
-			}
-		})
-	})
-
-	render('canvas', templateini);
-	runScale();
-	loadForm()
 })

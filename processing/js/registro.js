@@ -1,5 +1,5 @@
 $(function() {
-
+    init();
     const formData = new FormData();
     const objData = {
         'estudiante' : {},
@@ -12,7 +12,7 @@ $(function() {
 
     var template_estados = generateTemplate_estados();
     var template_religion = generateTemplate_religion();
-
+    
     const arrFormularios = {
         formulario1: {
             title : 'Datos del Estudiante',
@@ -34,19 +34,7 @@ $(function() {
                             </div>
                             <div class="col-4">
                                 <div class="form-group formBox">
-                                    <h4>Fotografia</h4>
-                                    <div class="grid">
-                                        <div class="form-element">
-                                            <input type="file" id="foto-estudiante" accept="image/*" required/>
-                                            <label for="foto-estudiante" id="foto-estudiante-preview">
-                                                <img src="../assets/img/images-empty.jpg" alt=""/>
-                                                <div>
-                                                    <span>+</span>
-                                                </div>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <p style="color: red;">Foto tipo carnet 13x13</p>
+                                    ${template_uploadPhotograpy('foto-estudiante')}
                                 </div>
                             </div>
                         </div>
@@ -54,8 +42,9 @@ $(function() {
                             <div class="col-4">
                                 <div class="input-field">
                                     <select id="tipo_documento_estudiante">
-                                        <option value="V">V-</option>
-                                        <option value="E">E-</option>
+                                        <option value="V">V- (Venezoláno)</option>
+                                        <option value="E">E- (Extrangéro)</option>
+                                        <option value="CE">CE- (Cédula Escolar)</option>
                                     </select>
                                     <label>Tipo de documento <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
@@ -113,21 +102,39 @@ $(function() {
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-4">
-                                <div class="form-group input-field">
-                                    <select id="estado_estudiante">
-                                        <option value="">--Selecciona un Estado--</option>
-                                        ${template_estados}
-                                    </select>
-                                    <label for="estado_estudiante">Procedente del Estado <span style="color: #960032;"><b>*</b></span></label>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-group input-field">
-                                    <select id="municipio_estudiante">
-                                        <option value=""></option>
-                                    </select>
-                                    <label for="municipio_estudiante">Procedente del Municipio <span style="color: #960032;"><b>*</b></span></label>
+                            
+                            <div class="card" style="width: 65%;">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <span style="color: #960032;"><b>Origen</b></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="form-group input-field">
+                                                <textarea id="lugar_nacimiento_estudiante" type="text" class="materialize-textarea" required/></textarea>
+                                                <label for="lugar_nacimiento_estudiante">Lugar de Nacimiento <span style="color: #960032;"><b>*</b></span></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group input-field">
+                                                <select id="estado_estudiante">
+                                                    <option value="">--Selecciona un Estado--</option>
+                                                    ${template_estados}
+                                                </select>
+                                                <label for="estado_estudiante">Estado <span style="color: #960032;"><b>*</b></span></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group input-field">
+                                                <select id="municipio_estudiante">
+                                                    <option value=""></option>
+                                                </select>
+                                                <label for="municipio_estudiante">Municipio <span style="color: #960032;"><b>*</b></span></label>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -163,6 +170,12 @@ $(function() {
                                     <label for="religion_estudiante">Religión <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div> 
+                            <div class="col-4">
+                                <div id="religion_estudiante_otro_container" style="display:none" class="form-group input-field">
+                                    <input id="otra_religion_estudiante" type="text" class="form-control" />
+                                    <label for="otra_religion_estudiante">Mencione religión <span style="color: #960032;"><b>*</b></span></label>
+                                </div>
+                            </div> 
                         </div>
 
                         <div class="row">
@@ -186,19 +199,19 @@ $(function() {
                                 </div>
                             </div>
                             <div class="col-4">
-                                <label>Diestro o Zurdo ? <span style="color: #960032;"><b>*</b></span></label>
+                                <label>Lateralidad <span style="color: #960032;"><b>*</b></span></label>
                                 <div class="form-group pt-2">
                                     <span>
                                         <label>
                                             <input id="diestro_estudiante" name="lateralidad" checked="checked" class="with-gap"  type="radio"  /> 
-                                            <span>Diestro</span>
+                                            <span>Derecho</span>
                                             <div id="mano-derecha"><img style="width: 80px; cursor:pointer;" src="../assets/img/pre-registro/mano.png" /></div>
                                         </label>
                                     </span>
                                     <span>
                                         <label>
                                             <input id="zurdo_estudiante" name="lateralidad" type="radio" class="with-gap"  class="radio ml-4" />
-                                            <span>Zurdo</span>
+                                            <span>Izquierdo</span>
                                             <div id="mano-izquierda"><img style="width: 80px; transform: scaleX(-1); cursor:pointer;" src="../assets/img/pre-registro/mano.png" /></div>
                                         </label>
                                     </span>
@@ -519,18 +532,7 @@ $(function() {
                             </div>
                             <div class="col-4">
                                 <div class="form-group formBox">
-                                    <h4>Foto</h4>
-                                    <div class="grid">
-                                        <div class="form-element">
-                                            <input type="file" id="foto-madre" accept="image/*" />
-                                            <label for="foto-madre" id="foto-madre-preview">
-                                                <img src="https://bit.ly/3ubuq5o" alt=""/>
-                                                <div>
-                                                    <span>+</span>
-                                                </div>
-                                            </label>
-                                        </div>
-                                    </div>
+                                    ${template_uploadPhotograpy('foto-madre')}
                                 </div>
                             </div>
                         </div>
@@ -651,10 +653,19 @@ $(function() {
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="religion_madre" type="text" />
-                                    <label for="religion_madre">Religion</label>
+                                    <select id="religion_madre">
+                                        <option value="">--Selecciona una Religíon--</option>
+                                        ${template_religion}
+                                    </select>
+                                    <label for="religion_madre">Religión <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
+                            <div class="col-4">
+                                <div id="religion_madre_otro_container" style="display:none" class="form-group input-field">
+                                    <input id="otra_religion_madre" type="text" class="form-control" />
+                                    <label for="otra_religion_madre">Mencione religión <span style="color: #960032;"><b>*</b></span></label>
+                                </div>
+                            </div> 
                             <div class="col-4">
                                 <label>¿ Vive con el estudiante ? <span style="color: #960032;"><b>*</b></span></label>
                                 <div class="form-group pt-2">
@@ -706,18 +717,7 @@ $(function() {
                             </div>
                             <div class="col-4">
                                 <div class="form-group formBox">
-                                    <h4>Foto</h4>
-                                    <div class="grid">
-                                        <div class="form-element">
-                                            <input type="file" id="foto-padre" accept="image/*" />
-                                            <label for="foto-padre" id="foto-padre-preview">
-                                                <img src="https://bit.ly/3ubuq5o" alt=""/>
-                                                <div>
-                                                    <span>+</span>
-                                                </div>
-                                            </label>
-                                        </div>
-                                    </div>
+                                    ${template_uploadPhotograpy('foto-padre')}
                                 </div>
                             </div>
                         </div>
@@ -837,10 +837,19 @@ $(function() {
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="religion_padre" type="text" />
-                                    <label for="religion_padre">Religion</label>
+                                    <select id="religion_padre">
+                                        <option value="">--Selecciona una Religíon--</option>
+                                        ${template_religion}
+                                    </select>
+                                    <label for="religion_padre">Religión <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
+                            <div class="col-4">
+                                <div id="religion_padre_otro_container" style="display:none" class="form-group input-field">
+                                    <input id="otra_religion_padre" type="text" class="form-control" />
+                                    <label for="otra_religion_padre">Mencione religión <span style="color: #960032;"><b>*</b></span></label>
+                                </div>
+                            </div> 
                             <div class="col-4">
                                 <div class="form-group pt-2">
                                     <label>¿ Vive con el estudiante ? <span style="color: #960032;"><b>*</b></span></label>
@@ -952,18 +961,7 @@ $(function() {
                             </div>
                             <div class="col-4">
                                 <div class="form-group formBox">
-                                    <h4>Foto</h4>
-                                    <div class="grid">
-                                        <div class="form-element">
-                                            <input type="file" id="foto-representante" accept="image/*" />
-                                            <label for="foto-representante" id="foto-representante-preview">
-                                                <img src="https://bit.ly/3ubuq5o" alt=""/>
-                                                <div>
-                                                    <span>+</span>
-                                                </div>
-                                            </label>
-                                        </div>
-                                    </div>
+                                    ${template_uploadPhotograpy('foto-representante')}
                                 </div>
                             </div>
                         </div>
@@ -1084,8 +1082,17 @@ $(function() {
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="religion_representante" type="text" />
-                                    <label for="religion_representante">Religion</label>
+                                    <select id="religion_representante">
+                                        <option value="">--Selecciona una Religíon--</option>
+                                        ${template_religion}
+                                    </select>
+                                    <label for="religion_representante">Religión <span style="color: #960032;"><b>*</b></span></label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div id="religion_representante_otro_container" style="display:none" class="form-group input-field">
+                                    <input id="otra_religion_representante" type="text" class="form-control" />
+                                    <label for="otra_religion_representante">Mencione religión <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
@@ -1199,6 +1206,7 @@ $(function() {
 
     $('.title-tap').html(arrFormularios.formulario1.title);
     $('.formularios').html(arrFormularios.formulario1.form);
+    uploadPhotography("foto-estudiante");
 
     //inicio lineTap
     $('#lineatap1').css({
@@ -1210,242 +1218,339 @@ $(function() {
         "background-color" : "rgb(33 109 30)",
         "color" : "#fff",
     })
+
     //form 1
+
+    //otra religion estudiante
+    $(document).on('change', '#religion_estudiante' ,function() {
+        let religion = $(document).find('#religion_estudiante').val();
+        if(religion == 9) {
+            $(document).find('#religion_estudiante_otro_container').css({'display' : 'block'});
+            $(document).find('#otra_religion_estudiante').attr('required', 'required');
+        } else {
+            $(document).find('#religion_estudiante_otro_container').css({'display' : 'none'});
+            $(document).find('#otra_religion_estudiante').removeAttr('required');
+        }
+    })
+
+    //calculo y set de edad segun fecha de nacimiento.
+    $(document).on('change', '#fechaNacimiento_estudiante', function() {
+        var age = calculateAge($(document).find('#fechaNacimiento_estudiante').val());
+        /*var rang = rangeAge(edad, {
+            start: 10,
+            end: 
+        });*/
+        $(document).find('#edad_estudiante').val(age);
+        M.updateTextFields();
+    })
+
     $(document).on('submit', '#form1', function(e) {
         e.preventDefault();
         handleSpinnerLoad('.btnform');
-        
-        //foto estudiante
-        formData.append("foto_estudiante",  $(document).find('#foto-estudiante')[0].files[0]);
 
-        //guardando datos
-        objData.estudiante = {
-            'nombre' : $(document).find('#nombre_estudiante').val(),
-            'apellido': $(document).find('#apellido_estudiante').val(),
-            'tipo_documento': $(document).find('#tipo_documento_estudiante').val(),
-            'documento': $(document).find('#documento_estudiante').val(),
-            'fecha_nacimiento': DateGuionFormat($(document).find('#fechaNacimiento_estudiante').val()),
-            'edad': $(document).find('#edad_estudiante').val(),
-            'nacionalidad': $(document).find('#nacionalidad_estudiante').val(),
-            'email': $(document).find('#email_estudiante').val(),
-            'direccion': $(document).find('#direccion_estudiante').val(),
-            'punto_referencia': $(document).find('#punto_referencia_estudiante').val(),
-            'estado': $(document).find('#estado_estudiante').val(),
-            'municipio': $(document).find('#municipio_estudiante').val(),
-            'telf_movil': $(document).find('#telefono_movil_estudiante').val(),
-            'telf_residencia': $(document).find('#telefono_residencial_estudiante').val(),
-            'habilidades' : $(document).find('#habilidades_estudiante').val(),
-            'religion' : $(document).find('#religion_estudiante').val(),
-            'genero' : $(document).find('#masculino_estudiante').prop('checked') == true ? 'M' : 'F',
-            'lateralidad' : $(document).find('#diestro_estudiante').prop('checked') == true ? 'D' : 'I',
-            'foto_estudiante' : formData,
-            'preview_foto' : $(document).find('#foto-estudiante')[0].files[0]
-        };
-
-        objData.detalle_estudiante = {
-            'talla_camisa' : $(document).find('#tallaCamisa_estudiante').val(),
-            'talla_pantalon': $(document).find('#tallaPatalon_estudiante').val(),
-            'estatura': $(document).find('#estatura_estudiante').val(),
-            'peso': $(document).find('#peso_estudiante').val(),
-            'grupo_sanguineo': $(document).find('#grupoSanguineo_estudiante').val(),
-            'discapacidad': $(document).find('#discapacidad').prop('checked') == true ? 'Y' : 'N',
-            'discapacidad_descripcion' : $(document).find('#discapacidadDescripcion').val(),
-            'informeMedico': $(document).find('#informeMedico').prop('checked') == true ? 'Y' : 'N',
-            'url_informe_medico' :  $(document).find('#informeMedicoDocumento').val(),
-            'alergico' : $(document).find('#alergico').prop('checked') == true ? 'Y' : 'N',
-            'alergia' : $(document).find('#alergicoDescripcion').val(),
-            'enfermo' : $(document).find('#enfermedad').prop('checked') == true ? 'Y' : 'N',
-            'enfermedad' : $(document).find('#enfermedadDescripcion').val(),
-            'medicado' : $(document).find('#medicamentos').prop('checked') == true ? 'Y' : 'N',
-            'medicamento' : $(document).find('#medicamentosDescripcion').val(),
-            'convulsion' : $(document).find('#convulsion').prop('checked') == true ? 'Y' : 'N',
-            'convulsion_observaciones' : $(document).find('#convulsionDescripcion').val(),
-            'familiar_colegio' : $(document).find('#familiar_colegio').prop('checked') == true ? 'Y' : 'N',
-            'familiar_colegioNombre' : $(document).find('#familiar_colegioNombre').val(),
-            'familiar_colegioParentesco' : $(document).find('#familiar_colegioParentesco').val(),
-            'familiar_colegioDescripcion' : $(document).find('#familiar_colegioDescripcion').val()
-        }
-
-        console.log(objData);
-
-        setTimeout(() => {
-            //recopilar datos, procesarlos y guardarlos en base de datos
-            $('#lineatap1').css({
-                "background-color" : "#302E2C",
-                "color" : "#F6CD15",
-                "border-color" : "#F6CD15",
-                "padding" : "14px 15px"
+        var lengthFoto = $(document).find('#foto-estudiante')[0].files.length;
+        if(lengthFoto == 0) {
+            $(document).find('.btnform').html('SIGUIENTE');
+            $(document).find('#alerta_foto').html(alert_Images('Debe Ingresar una foto, es requicito obligatorio, Por favor verificar que la imagen cumple con los requerimientos indicados', 'danger'))
+            window.scrollTo({
+                top: 500,
+                behavior: "smooth"
             });
-            $('.lt1').css({
-                "background-color" : "#F6CD15",
-                "color" : "#302E2C",
-            })
-            $('#lineatap1').html(`<i style="font-size: 20px;" class="fa fa-check" aria-hidden="true"></i>`);
-            $('#lineatap2').css({
-                "background-color" : "#960032",
-                "color" : "#fff",
-                "border-color" : "#960032"
-            });
-            $('.lt2').css({
-                "background-color" : "rgb(33 109 30)",
-                "color" : "#fff",
-            })
+        } else {
+                //foto estudiante
+                formData.append("foto_estudiante",  $(document).find('#foto-estudiante')[0].files[0]);
+
+                //guardando datos
+                objData.estudiante = {
+                    'nombre' : $(document).find('#nombre_estudiante').val(),
+                    'apellido': $(document).find('#apellido_estudiante').val(),
+                    'tipo_documento': $(document).find('#tipo_documento_estudiante').val(),
+                    'documento': $(document).find('#documento_estudiante').val(),
+                    'fecha_nacimiento': DateGuionFormat($(document).find('#fechaNacimiento_estudiante').val()),
+                    'edad': $(document).find('#edad_estudiante').val(),
+                    'nacionalidad': $(document).find('#nacionalidad_estudiante').val(),
+                    'email': $(document).find('#email_estudiante').val(),
+                    'direccion': $(document).find('#direccion_estudiante').val(),
+                    'punto_referencia': $(document).find('#punto_referencia_estudiante').val(),
+                    'lugar_nacimiento' : $(document).find('#lugar_nacimiento_estudiante').val(),
+                    'estado': $(document).find('#estado_estudiante').val(),
+                    'municipio': $(document).find('#municipio_estudiante').val(),
+                    'telf_movil': $(document).find('#telefono_movil_estudiante').val(),
+                    'telf_residencia': $(document).find('#telefono_residencial_estudiante').val(),
+                    'habilidades' : $(document).find('#habilidades_estudiante').val(),
+                    'religion' : $(document).find('#religion_estudiante').val(),
+                    'otra_religion' : $(document).find('#otra_religion_representante').val(),
+                    'genero' : $(document).find('#masculino_estudiante').prop('checked') == true ? 'M' : 'F',
+                    'lateralidad' : $(document).find('#diestro_estudiante').prop('checked') == true ? 'D' : 'I',
+                    //'foto_estudiante' : formData,
+                    //'preview_foto' : $(document).find('#foto-estudiante')[0].files[0]
+                };
+
+                objData.detalle_estudiante = {
+                    'talla_camisa' : $(document).find('#tallaCamisa_estudiante').val(),
+                    'talla_pantalon': $(document).find('#tallaPatalon_estudiante').val(),
+                    'estatura': $(document).find('#estatura_estudiante').val(),
+                    'peso': $(document).find('#peso_estudiante').val(),
+                    'grupo_sanguineo': $(document).find('#grupoSanguineo_estudiante').val(),
+                    'discapacidad': $(document).find('#discapacidad').prop('checked') == true ? 'Y' : 'N',
+                    'discapacidad_descripcion' : $(document).find('#discapacidadDescripcion').val(),
+                    'informeMedico': $(document).find('#informeMedico').prop('checked') == true ? 'Y' : 'N',
+                    'url_informe_medico' :  $(document).find('#informeMedicoDocumento').val(),
+                    'alergico' : $(document).find('#alergico').prop('checked') == true ? 'Y' : 'N',
+                    'alergia' : $(document).find('#alergicoDescripcion').val(),
+                    'enfermo' : $(document).find('#enfermedad').prop('checked') == true ? 'Y' : 'N',
+                    'enfermedad' : $(document).find('#enfermedadDescripcion').val(),
+                    'medicado' : $(document).find('#medicamentos').prop('checked') == true ? 'Y' : 'N',
+                    'medicamento' : $(document).find('#medicamentosDescripcion').val(),
+                    'convulsion' : $(document).find('#convulsion').prop('checked') == true ? 'Y' : 'N',
+                    'convulsion_observaciones' : $(document).find('#convulsionDescripcion').val(),
+                    'familiar_colegio' : $(document).find('#familiar_colegio').prop('checked') == true ? 'Y' : 'N',
+                    'familiar_colegioNombre' : $(document).find('#familiar_colegioNombre').val(),
+                    'familiar_colegioParentesco' : $(document).find('#familiar_colegioParentesco').val(),
+                    'familiar_colegioDescripcion' : $(document).find('#familiar_colegioDescripcion').val()
+                }
+
+                console.log(objData);
+
+                setTimeout(() => {
+                    //recopilar datos, procesarlos y guardarlos en base de datos
+                    $('#lineatap1').css({
+                        "background-color" : "#302E2C",
+                        "color" : "#F6CD15",
+                        "border-color" : "#F6CD15",
+                        "padding" : "14px 15px"
+                    });
+                    $('.lt1').css({
+                        "background-color" : "#F6CD15",
+                        "color" : "#302E2C",
+                    })
+                    $('#lineatap1').html(`<i style="font-size: 20px;" class="fa fa-check" aria-hidden="true"></i>`);
+                    $('#lineatap2').css({
+                        "background-color" : "#960032",
+                        "color" : "#fff",
+                        "border-color" : "#960032"
+                    });
+                    $('.lt2').css({
+                        "background-color" : "rgb(33 109 30)",
+                        "color" : "#fff",
+                    })
+                    
+                    $('.title-tap').html(arrFormularios.formulario2.title);
+                    $('.formularios').html(arrFormularios.formulario2.form);
+                    //M.AutoInit permite inicializar todos los componentes de Materialise con una sola llamada
+                    M.AutoInit();
+                    initConfigDate();
+                    window.scroll({
+                        top: 100,
+                        left: 100,
+                        behavior: 'smooth'
+                    });
+                    uploadPhotography("foto-madre");
+                },1500);
             
-            $('.title-tap').html(arrFormularios.formulario2.title);
-            $('.formularios').html(arrFormularios.formulario2.form);
-            //M.AutoInit permite inicializar todos los componentes de Materialise con una sola llamada
-            M.AutoInit();
-            initConfigDate();
-            window.scroll({
-                top: 100,
-                left: 100,
-                behavior: 'smooth'
-            });
-            previewBeforeUpload("foto-madre");
-        },1500);
+        }
     });
 
     //form 2
+    $(document).on('change', '#religion_madre' ,function() {
+        let religion = $(document).find('# religion_madre').val();
+        if(religion == 9) {
+            $(document).find('#religion_madre_otro_container').css({'display' : 'block'});
+            $(document).find('#religion_madre_estudiante').attr('required', 'required');
+        } else {
+            $(document).find('#religion_madre_otro_container').css({'display' : 'none'});
+            $(document).find('#otra_ religion_madre').removeAttr('required');
+            $(document).find('#otra_ religion_madre').val('');
+        }
+    })
+
     $(document).on('submit', '#form2', function(e) {
         e.preventDefault();
         handleSpinnerLoad('.btnform');
 
-         //foto madre
-         formData.append("foto_madre",  $(document).find('#foto-madre')[0].files[0]);
+        //foto madre
+        formData.append("foto_madre",  $(document).find('#foto-madre')[0].files[0]);
 
-        //datos
-        objData.madre = {
-            'nombre' : $(document).find('#nombre_madre').val(),
-            'apellido': $(document).find('#apellido_madre').val(),
-            'tipo_documento': $(document).find('#tipo_documento_madre').val(),
-            'documento': $(document).find('#documento_madre').val(),
-            'fecha_nacimiento': DateGuionFormat($(document).find('#fecha_nacimiento_madre').val()),
-            'nacionalidad': $(document).find('#nacionalidad_madre').val(),
-            'edad': $(document).find('#edad_madre').val(),
-            'estado_civil' : $(document).find('#estado_civil_madre').val(),
-            'nivel_instruccion' : $(document).find('#nivel_instruccion_madre').val(),
-            'ocupacion' : $(document).find('#ocupacion_madre').val(),
-            'lugar_trabajo' : $(document).find('#lugar_trabajo_madre').val(),
-            'habilidad' : $(document).find('#habilidad_madre').val(),
-            'direccion' : $(document).find('#direccion_residencia_madre').val(),
-            'telefono_movil' : $(document).find('#telefono_movil_madre').val(), 
-            'telefono_residencia' : $(document).find('#telefono_residencial_madre').val(),
-            'telefono_trabajo' : $(document).find('#telefono_trabajo_madre').val(),
-            'religion' : $(document).find('#religion_madre').val(),
-            'vive_estudiante' : $(document).find('#vive_estudiante_madre').prop('checked') == true ? 'Y' : 'N',
-            'foto_madre' : formData,
-            'preview_foto' : $(document).find('#foto-madre')[0].files[0]
-        };
+        var lengthFoto = $(document).find('#foto-madre')[0].files.length;
+        if(lengthFoto == 0) {
+            $(document).find('.btnform').html('SIGUIENTE');
+            $(document).find('#alerta_foto').html(alert_Images('Debe Ingresar una foto, es requicito obligatorio', 'danger'))
+            window.scrollTo({
+                top: 500,
+                behavior: "smooth"
+            });
+        } else {
+            //datos
+            objData.madre = {
+                'nombre' : $(document).find('#nombre_madre').val(),
+                'apellido': $(document).find('#apellido_madre').val(),
+                'tipo_documento': $(document).find('#tipo_documento_madre').val(),
+                'documento': $(document).find('#documento_madre').val(),
+                'fecha_nacimiento': DateGuionFormat($(document).find('#fecha_nacimiento_madre').val()),
+                'nacionalidad': $(document).find('#nacionalidad_madre').val(),
+                'edad': $(document).find('#edad_madre').val(),
+                'estado_civil' : $(document).find('#estado_civil_madre').val(),
+                'nivel_instruccion' : $(document).find('#nivel_instruccion_madre').val(),
+                'ocupacion' : $(document).find('#ocupacion_madre').val(),
+                'lugar_trabajo' : $(document).find('#lugar_trabajo_madre').val(),
+                'habilidad' : $(document).find('#habilidad_madre').val(),
+                'direccion' : $(document).find('#direccion_residencia_madre').val(),
+                'telefono_movil' : $(document).find('#telefono_movil_madre').val(), 
+                'telefono_residencia' : $(document).find('#telefono_residencial_madre').val(),
+                'telefono_trabajo' : $(document).find('#telefono_trabajo_madre').val(),
+                'religion' : $(document).find('#religion_madre').val(),
+                'otra_religion' : $(document).find('#otra_religion_madre').val(),
+                'vive_estudiante' : $(document).find('#vive_estudiante_madre').prop('checked') == true ? 'Y' : 'N',
+                //'foto_madre' : formData,
+                //'preview_foto' : $(document).find('#foto-madre')[0].files[0]
+            };
 
-        console.log(objData);
+            console.log(objData);
 
-        setTimeout(() => {
-            //recopilar datos, procesarlos y guardarlos en base de datos
-            $('#lineatap2').css({
-                "background-color" : "#302E2C",
-                "color" : "#F6CD15",
-                "border-color" : "#F6CD15",
-                "padding" : "14px 15px"
-            });
-            $('.lt2').css({
-                "background-color" : "#F6CD15",
-                "color" : "#302E2C",
-            })
-            $('#lineatap2').html(`<i style="font-size: 20px;" class="fa fa-check" aria-hidden="true"></i>`);
-            $('#lineatap3').css({
-                "background-color" : "#960032",
-                "color" : "#fff",
-                "border-color" : "#960032"
-            });
-            $('.lt3').css({
-                "background-color" : "rgb(33 109 30)",
-                "color" : "#fff",
-            })
-            $('.title-tap').html(arrFormularios.formulario3.title);
-            $('.formularios').html(arrFormularios.formulario3.form);
-            //M.AutoInit permite inicializar todos los componentes de Materialise con una sola llamada
-            M.AutoInit();
-            initConfigDate();
-            window.scroll({
-                top: 100,
-                left: 100,
-                behavior: 'smooth'
-            });
-            previewBeforeUpload("foto-padre");
-        },1500);
+            setTimeout(() => {
+                //recopilar datos, procesarlos y guardarlos en base de datos
+                $('#lineatap2').css({
+                    "background-color" : "#302E2C",
+                    "color" : "#F6CD15",
+                    "border-color" : "#F6CD15",
+                    "padding" : "14px 15px"
+                });
+                $('.lt2').css({
+                    "background-color" : "#F6CD15",
+                    "color" : "#302E2C",
+                })
+                $('#lineatap2').html(`<i style="font-size: 20px;" class="fa fa-check" aria-hidden="true"></i>`);
+                $('#lineatap3').css({
+                    "background-color" : "#960032",
+                    "color" : "#fff",
+                    "border-color" : "#960032"
+                });
+                $('.lt3').css({
+                    "background-color" : "rgb(33 109 30)",
+                    "color" : "#fff",
+                })
+                $('.title-tap').html(arrFormularios.formulario3.title);
+                $('.formularios').html(arrFormularios.formulario3.form);
+                //M.AutoInit permite inicializar todos los componentes de Materialise con una sola llamada
+                M.AutoInit();
+                initConfigDate();
+                window.scroll({
+                    top: 100,
+                    left: 100,
+                    behavior: 'smooth'
+                });
+                uploadPhotography("foto-padre");
+            },1500);
+        }
     })
 
     //form 3
+    $(document).on('change', '#religion_padre' ,function() {
+        let religion = $(document).find('#religion_padre').val();
+        if(religion == 9) {
+            $(document).find('#religion_padre_otro_container').css({'display' : 'block'});
+            $(document).find('#otra_religion_padre').attr('required', 'required');
+        } else {
+            $(document).find('#religion_padre_otro_container').css({'display' : 'none'});
+            $(document).find('#otra_religion_padre').removeAttr('required');
+            $(document).find('#otra_religion_padre').val('');
+        }
+    })
+
     $(document).on('submit', '#form3', function(e) {
         e.preventDefault();
         handleSpinnerLoad('.btnform');
 
-        //foto madre
+        //foto padre
         formData.append("foto_padre",  $(document).find('#foto-padre')[0].files[0]);
 
-        //datos
-        objData.padre = {
-            'nombre' : $(document).find('#nombre_padre').val(),
-            'apellido': $(document).find('#apellido_padre').val(),
-            'tipo_documento': $(document).find('#tipo_documento_padre').val(),
-            'documento': $(document).find('#documento_padre').val(),
-            'fecha_nacimiento': DateGuionFormat($(document).find('#fecha_nacimiento_padre').val()),
-            'nacionalidad': $(document).find('#nacionalidad_padre').val(),
-            'edad': $(document).find('#edad_padre').val(),
-            'estado_civil' : $(document).find('#estado_civil_padre').val(),
-            'nivel_instruccion' : $(document).find('#nivel_instruccion_padre').val(),
-            'ocupacion' : $(document).find('#ocupacion_padre').val(),
-            'lugar_trabajo' : $(document).find('#lugar_trabajo_padre').val(),
-            'habilidad' : $(document).find('#habilidad_padre').val(),
-            'direccion' : $(document).find('#direccion_residencia_padre').val(),
-            'telefono_movil' : $(document).find('#telefono_movil_padre').val(), 
-            'telefono_residencia' : $(document).find('#telefono_residencial_padre').val(),
-            'telefono_trabajo' : $(document).find('#telefono_trabajo_padre').val(),
-            'religion' : $(document).find('#religion_padre').val(),
-            'vive_estudiante' : $(document).find('#vive_estudiante_padre').prop('checked') == true ? 'Y' : 'N',
-            'foto_padre' : formData,
-            'preview_foto' : $(document).find('#foto-padre')[0].files[0]
-        };
+        var lengthFoto = $(document).find('#foto-padre')[0].files.length;
+        if(lengthFoto == 0) {
+            $(document).find('.btnform').html('SIGUIENTE');
+            $(document).find('#alerta_foto').html(alert_Images('Debe Ingresar una foto, es requicito obligatorio', 'danger'))
+            window.scrollTo({
+                top: 500,
+                behavior: "smooth"
+            });
+        } else {
+            //datos
+            objData.padre = {
+                'nombre' : $(document).find('#nombre_padre').val(),
+                'apellido': $(document).find('#apellido_padre').val(),
+                'tipo_documento': $(document).find('#tipo_documento_padre').val(),
+                'documento': $(document).find('#documento_padre').val(),
+                'fecha_nacimiento': DateGuionFormat($(document).find('#fecha_nacimiento_padre').val()),
+                'nacionalidad': $(document).find('#nacionalidad_padre').val(),
+                'edad': $(document).find('#edad_padre').val(),
+                'estado_civil' : $(document).find('#estado_civil_padre').val(),
+                'nivel_instruccion' : $(document).find('#nivel_instruccion_padre').val(),
+                'ocupacion' : $(document).find('#ocupacion_padre').val(),
+                'lugar_trabajo' : $(document).find('#lugar_trabajo_padre').val(),
+                'habilidad' : $(document).find('#habilidad_padre').val(),
+                'direccion' : $(document).find('#direccion_residencia_padre').val(),
+                'telefono_movil' : $(document).find('#telefono_movil_padre').val(), 
+                'telefono_residencia' : $(document).find('#telefono_residencial_padre').val(),
+                'telefono_trabajo' : $(document).find('#telefono_trabajo_padre').val(),
+                'religion' : $(document).find('#religion_padre').val(),
+                'otra_religion' : $(document).find('#otra_religion_padre').val(),
+                'vive_estudiante' : $(document).find('#vive_estudiante_padre').prop('checked') == true ? 'Y' : 'N',
+                //'foto_padre' : formData,
+                //'preview_foto' : $(document).find('#foto-padre')[0].files[0]
+            };
 
-        console.log(objData);
+            console.log(objData);
 
-        setTimeout(() => {
-            //recopilar datos, procesarlos y guardarlos en base de datos
-            $('#lineatap3').css({
-                "background-color" : "#302E2C",
-                "color" : "#F6CD15",
-                "border-color" : "#F6CD15",
-                "padding" : "14px 15px"
-            });
-            $('.lt3').css({
-                "background-color" : "#F6CD15",
-                "color" : "#302E2C",
-            })
-            $('#lineatap3').html(`<i style="font-size: 20px;" class="fa fa-check" aria-hidden="true"></i>`);
-            $('#lineatap4').css({
-                "background-color" : "#960032",
-                "color" : "#fff",
-                "border-color" : "#960032"
-            });
-            $('.lt4').css({
-                "background-color" : "rgb(33 109 30)",
-                "color" : "#fff",
-            })
-            $('.title-tap').html(arrFormularios.formulario4.title);
-            $('.formularios').html(arrFormularios.formulario4.form);
-            //M.AutoInit permite inicializar todos los componentes de Materialise con una sola llamada
-            M.AutoInit();
-            initConfigDate();
-            window.scroll({
-                top: 100,
-                left: 100,
-                behavior: 'smooth'
-            });
-            previewBeforeUpload("foto-representante");
-        },1500);
+            setTimeout(() => {
+                //recopilar datos, procesarlos y guardarlos en base de datos
+                $('#lineatap3').css({
+                    "background-color" : "#302E2C",
+                    "color" : "#F6CD15",
+                    "border-color" : "#F6CD15",
+                    "padding" : "14px 15px"
+                });
+                $('.lt3').css({
+                    "background-color" : "#F6CD15",
+                    "color" : "#302E2C",
+                })
+                $('#lineatap3').html(`<i style="font-size: 20px;" class="fa fa-check" aria-hidden="true"></i>`);
+                $('#lineatap4').css({
+                    "background-color" : "#960032",
+                    "color" : "#fff",
+                    "border-color" : "#960032"
+                });
+                $('.lt4').css({
+                    "background-color" : "rgb(33 109 30)",
+                    "color" : "#fff",
+                })
+                $('.title-tap').html(arrFormularios.formulario4.title);
+                $('.formularios').html(arrFormularios.formulario4.form);
+                //M.AutoInit permite inicializar todos los componentes de Materialise con una sola llamada
+                M.AutoInit();
+                initConfigDate();
+                window.scroll({
+                    top: 100,
+                    left: 100,
+                    behavior: 'smooth'
+                });
+                uploadPhotography("foto-representante");
+            },1500);
+        }
     })
 
     //form 4 intercative
+
+    /*$(document).on('change', '#religion_representante' ,function() {
+        let religion = $(document).find('#religion_representante').val();
+        if(religion == 9) {
+            $(document).find('#religion_representante_otro_container').css({'display' : 'block'});
+            $(document).find('#religion_representante_estudiante').attr('required', 'required');
+        } else {
+            $(document).find('#religion_representante_otro_container').css({'display' : 'none'});
+            $(document).find('#otra_religion_representante').removeAttr('required');
+            $(document).find('#otra_religion_representante').val();
+        }
+    })*/
+
     $(document).on('click', '#selectRepresentante', function(e) {
         var swicth = handleSwicht ('selectRepresentante', ['seleccionar_representante'], ['seleccionar_parenteco'], true);
         var selectMadre = $(document).find('#selectMadre').prop('checked');
@@ -1651,65 +1756,100 @@ $(function() {
             foto_representante = formData;
         }
 
-        //datos
-        objData.representante = {
-            'nombre' : $(document).find('#nombre_representante').val(),
-            'apellido': $(document).find('#apellido_representante').val(),
-            'tipo_documento': $(document).find('#tipo_documento_representante').val(),
-            'documento': $(document).find('#documento_representante').val(),
-            'fecha_nacimiento': DateGuionFormat($(document).find('#fecha_nacimiento_representante').val()),
-            'nacionalidad': $(document).find('#nacionalidad_representante').val(),
-            'edad': $(document).find('#edad_representante').val(),
-            'estado_civil' : $(document).find('#estado_civil_representante').val(),
-            'nivel_instruccion' : $(document).find('#nivel_instruccion_representante').val(),
-            'ocupacion' : $(document).find('#ocupacion_representante').val(),
-            'lugar_trabajo' : $(document).find('#lugar_trabajo_representante').val(),
-            'habilidad' : $(document).find('#habilidad_representante').val(),
-            'direccion' : $(document).find('#direccion_residencia_representante').val(),
-            'telefono_movil' : $(document).find('#telefono_movil_representante').val(), 
-            'telefono_residencia' : $(document).find('#telefono_residencial_representante').val(),
-            'telefono_trabajo' : $(document).find('#telefono_trabajo_representante').val(),
-            'religion' : $(document).find('#religion_representante').val(),
-            'vive_estudiante' : $(document).find('#vive_estudiante_representante').prop('checked') == true ? 'Y' : 'N',
-            'parentesco' : parentesco,
-            'foto_representante' : foto_representante,
-            'preview_foto' : foto_preview
-        };
+        var lengthFoto = $(document).find('#foto-representante')[0].files.length;
+        if(lengthFoto == 0) {
+            $(document).find('#alerta_foto').html(alert_Images('Debe Ingresar una foto, es requicito obligatorio', 'danger'))
+            window.scrollTo({
+                top: 500,
+                behavior: "smooth"
+            });
+        } else {
+            //datos
+            objData.representante = {
+                'nombre' : $(document).find('#nombre_representante').val(),
+                'apellido': $(document).find('#apellido_representante').val(),
+                'tipo_documento': $(document).find('#tipo_documento_representante').val(),
+                'documento': $(document).find('#documento_representante').val(),
+                'fecha_nacimiento': DateGuionFormat($(document).find('#fecha_nacimiento_representante').val()),
+                'nacionalidad': $(document).find('#nacionalidad_representante').val(),
+                'edad': $(document).find('#edad_representante').val(),
+                'estado_civil' : $(document).find('#estado_civil_representante').val(),
+                'nivel_instruccion' : $(document).find('#nivel_instruccion_representante').val(),
+                'ocupacion' : $(document).find('#ocupacion_representante').val(),
+                'lugar_trabajo' : $(document).find('#lugar_trabajo_representante').val(),
+                'habilidad' : $(document).find('#habilidad_representante').val(),
+                'direccion' : $(document).find('#direccion_residencia_representante').val(),
+                'telefono_movil' : $(document).find('#telefono_movil_representante').val(), 
+                'telefono_residencia' : $(document).find('#telefono_residencial_representante').val(),
+                'telefono_trabajo' : $(document).find('#telefono_trabajo_representante').val(),
+                'religion' : $(document).find('#religion_representante').val(),
+                'otra_religion' : $(document).find('#otra_religion_representante').val(),
+                'vive_estudiante' : $(document).find('#vive_estudiante_representante').prop('checked') == true ? 'Y' : 'N',
+                'parentesco' : parentesco,
+                //'foto_representante' : foto_representante,
+                //'preview_foto' : foto_preview
+            };
 
-        console.log(objData);
+            console.log(objData);
 
-        Swal.fire({
-            title: 'Esta listo para continuar ?',
-            text: "Los datos que ha suministrado seran guardados",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#00B236',
-            cancelButtonColor: '#B20018',
-            cancelButtonText: 'Cancelar',
-            confirmButtonText: 'Continuar'
-        }).then((result) => {
-            if(result.isConfirmed) {
-                $.post("../controllers/controller_registro.php", objData, function(response) {
-                    var resp = jQuery.parseJSON(response);
-                    if(resp.STATUS == 'SUCCESS') {
-                        Swal.fire({
-                                title: resp.MESSAGES,
-                                text: 'Los datos seran procesados, el usuario sera habilitado una vez se formalice la inscripción',
-                                icon: 'success',
-                                confirmButtonColor: '#e0bb66'
-                        }).then((result2) => {
-                            if(result2.isConfirmed) {
-                                $.post("../controllers/controller_registro.php", {type : 'downloadTemplatePreRegistro', id_estudiante : resp.DATA}, function(response) {
-                                    console.log(response);
+            Swal.fire({
+                title: 'Esta listo para continuar ?',
+                text: "Los datos que ha suministrado seran guardados",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#00B236',
+                cancelButtonColor: '#B20018',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Continuar'
+            }).then((result) => {
+                if(result.isConfirmed) {
+                    console.log('entramos');
+                    $.post("../controllers/controller_registro.php", objData, function(response) {
+                        var resp = jQuery.parseJSON(response);
+                        if(resp.STATUS == 'SUCCESS') {
+                            Swal.fire({
+                                    title: resp.MESSAGES,
+                                    text: 'Los datos seran procesados, el usuario sera habilitado una vez se formalice la inscripción',
+                                    icon: 'success',
+                                    confirmButtonColor: '#e0bb66'
+                            }).then((result2) => {
+                                if(result2.isConfirmed) {
+                                    $.post("../controllers/controller_registro.php", {type : 'downloadTemplatePreRegistro', id_estudiante : resp.DATA}, function(response) {
+                                        console.log(response);
+                                    })
+                                }
+                            })
+                        }
+                    });
+
+                    /*$.ajax({
+                        type: "POST",
+                        enctype: 'multipart/form-data',
+                        url: '../controllers/controller_registro.php',
+                        data: objData,
+                        success: function(resp) {
+                            if(resp.STATUS == 'SUCCESS') {
+                                Swal.fire({
+                                        title: resp.MESSAGES,
+                                        text: 'Los datos seran procesados, el usuario sera habilitado una vez se formalice la inscripción',
+                                        icon: 'success',
+                                        confirmButtonColor: '#e0bb66'
+                                }).then((result2) => {
+                                    if(result2.isConfirmed) {
+                                        $.post("../controllers/controller_registro.php", {type : 'downloadTemplatePreRegistro', id_estudiante : resp.DATA}, function(response) {
+                                            console.log(response);
+                                        })
+                                    }
                                 })
                             }
-                        })
-                    }
-                });
-                
-            }
-        })
-
+                        },
+                        error: function(error) {
+                          console.log(error);
+                        }
+                      });*/
+                }
+            })
+        }
     })
 
     $(document).on('change', '#estado_estudiante', function(e) {
@@ -1728,23 +1868,104 @@ $(function() {
             });
     })
 
-    /*funcion de preview foto*/
-    function previewBeforeUpload(id) {
-        document.querySelector("#"+id).addEventListener("change", function(e) {
-            if(e.target.files.lenght == 0) {
-                return;
-            }
-            let file = e.target.files[0];
+
+    //refactor foto estudiante
+    function uploadPhotography(idBoxImages) {
+        document.querySelector("#"+idBoxImages).addEventListener("change", function(elm) {
+            //ELEMENTOS
+            let file = elm.target.files[0];
             let url = URL.createObjectURL(file);
-            document.querySelector("#"+id+"-preview div").innerHTML = file.name;
-            document.querySelector("#"+id+"-preview img").src = url;
+            const loadFaceDetection = $(document).find('#load_facedetection');
+    
+            //DINAMICS
+            handleSpinnerLoad(loadFaceDetection);
+            $(document).find('#alerta_foto').html('');
+            canvas.width = canvas.width;
+            $(document).find('#alerta_foto').html('');
+            $(document).find('#fitem1').css({
+                "background-color" : '#fff',
+                "color" : '#856404'
+            });
+            $(document).find('#fitem2').css({
+                "background-color" : '#fff',
+                "color" : '#856404'
+            });
+            $(document).find('#fitem3').css({
+                "background-color" : '#fff',
+                "color" : '#856404'
+            });
+            $(document).find('#fitem4').css({
+                "background-color" : '#fff',
+                "color" : '#856404'
+            });
+            
+    
+            //VALIDATIONS
+            if(formatImages(elm, file)) {
+                previewBeforeUpload(idBoxImages, elm); //PREVIEW
+                $(document).find('#fitem1').css({
+                    "background-color" : '#d4edda',
+                    "color" : '#155724'
+                });
+                dimentionsImages(file, (result) => {
+                    if(result) {
+                        $(document).find('#fitem2').css({
+                            "background-color" : '#d4edda',
+                            "color" : '#155724'
+                        });
+                        if(sizeImages(elm)) {
+                            $(document).find('#fitem3').css({
+                                "background-color" : '#d4edda',
+                                "color" : '#155724'
+                            });
+                            verifyFaces('foto_img', 'canvas')
+                                .then((response) => {
+                                    $(loadFaceDetection).html('');
+                                    if(response.length == 1) {
+                                        $(document).find('#fitem4').css({
+                                            "background-color" : '#d4edda',
+                                            "color" : '#155724'
+                                        });
+                                        $(document).find('#alerta_foto').html(alert_Images('Imagen validada correctamente', 'success'));
+                                    } else {
+                                        elm.target.value = '';
+                                        $(document).find('#fitem4').css({
+                                            "background-color" : '#f8d7da',
+                                            "color" : '#721c24'
+                                        });
+                                        $(document).find('#alerta_foto').html(alert_Images('Se requiere maximo un rostro en la imagen', 'danger'));
+                                    }
+                                });
+                        } else {
+                            elm.target.value = '';
+                            $(loadFaceDetection).html('');
+                            $(document).find('#alerta_foto').html(alert_Images('El tamaño de la imagen supera el limite permitido', 'danger'));
+                            $(document).find('#fitem3').css({
+                                "background-color" : '#f8d7da',
+                                "color" : '#721c24'
+                            });
+                        }
+                    } else {
+                        elm.target.value = '';
+                        $(loadFaceDetection).html('');
+                        $(document).find('#alerta_foto').html(alert_Images('Las medidas deben ser: 3 x 4 cm o 354x473 pixeles', 'danger'));
+                        $(document).find('#fitem2').css({
+                            "background-color" : '#f8d7da',
+                            "color" : '#721c24'
+                        });
+                    }
+                })
+            } else {
+                elm.target.value = '';
+                $(loadFaceDetection).html('');
+                $(document).find('#alerta_foto').html(alert_Images('debe subir una imagen .jpg | .png | .jpeg', 'danger'));
+                $(document).find('#fitem1').css({
+                    "background-color" : '#f8d7da',
+                    "color" : '#721c24'
+                });
+            }
         })
     }
-
-    previewBeforeUpload("foto-estudiante");
-    /*previewBeforeUpload("foto-madre");
-    previewBeforeUpload("foto-padre");
-    previewBeforeUpload("foto-representante");*/
 
     function generateTemplate_estados() {
         var template = '';
@@ -1770,7 +1991,40 @@ $(function() {
         var response =  await fetch('../controllers/controller_coordenadas.php?type=municipio&id_estado='+idEstado);
         var arrData = await response.json();
         return arrData
-    }    
+    }  
+    
+    //template upload foto
+    function template_uploadPhotograpy(id) {
+        var template = `
+            <h4>Fotografia</h4>
+            <span id="alerta_foto"></span>
+            <div class="grid">
+                <div class="form-element">
+                    <input type="file" id="${id}" accept="image/*" />
+                    <label for="${id}" id="${id + '-preview'}">
+                        <img id="foto_img" src="../assets/img/images-empty.jpg" alt=""/>
+                        <span id="load_facedetection"></span>
+                        <canvas id="canvas" width="200" height="200"></canvas>
+                        <div>
+                            <span>+</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <div class="alert alert-warning" role="alert" style="margin-top: 10px;">
+                <span style="color: black;"><b>La fotografia debe cumplir con los siguientes términos:</b></span>
+                <br /><br />
+                <ul>
+                    <li id="fitem1" class="items_foto"> <b>* Formato .jpg | .jpeg | .png</b></li>
+                    <li id="fitem2" class="items_foto"> <b>* Medidas 200x200 pixeles. </b></li>
+                    <li id="fitem3" class="items_foto"> <b>* Peso MAX ( 100KB )</b></li>
+                    <li id="fitem4" class="items_foto"> <b>* Un rostro verificable </b></li>
+                </ul>
+            </div>
+        `;
+
+        return template;
+    }
         
 })   
      
