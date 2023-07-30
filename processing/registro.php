@@ -111,5 +111,6 @@
         <script src="../assets/face-api/face-api.min.js"></script>
         <script src="../assets/js/src/validador-images.js?v="<?= rand(100, 500); ?>></script>
 		<script type="text/javascript" src="js/registro.js?v="<?= rand(100, 500); ?>></script>
+        <script src="../assets/js/src/validador-inputs.js?v="<?= rand(100, 500); ?>></script>
 	</body>
 </html>

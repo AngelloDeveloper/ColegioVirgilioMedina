@@ -22,13 +22,13 @@ $(function() {
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="nombre_estudiante" type="text" class="form-control" required/>
+                                    <input id="nombre_estudiante" type="text" class="form-control verificationData" data-datatype="text" required/>
                                     <label for="nombre_estudiante">Nombres <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="apellido_estudiante" type="text" class="form-control" required/>
+                                    <input id="apellido_estudiante" type="text" class="form-control verificationData" data-datatype="text" required/>
                                     <label for="apellido_estudiante">Apellidos <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
