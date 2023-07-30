@@ -616,22 +616,20 @@ $(function() {
         switch (type) {
             case 'add_docente':
                 var prefix = '<span class="badge badge-pill gradient-3 ml-2"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo</span>';
-                    var lv_instruccion = `
-                        <select id="lv_instruccion">
-                            <option value="N" selected>Seleccionar...</option>
-                            <option value="B">Bachiller</option>
-                            <option value="U">Estudios Universitarios</option>
-                            <option value="P">Post-Grado</option>
-                        </select>
+                var lv_instruccion = `
+                    <select id="lv_instruccion">
+                        <option value="N" selected>Seleccionar...</option>
+                        <option value="B">Bachiller</option>
+                        <option value="U">Estudios Universitarios</option>
+                        <option value="P">Post-Grado</option>
+                    </select>
                 `;
                 template = `
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-10">
-                                <h3>Docentes ${prefix}</h3>
-                            </div>
-                            <div class="col-2">
-                                <div class="button-icon">
+                            <div class="col-12">
+                                <h3 style="display:inline;">Docentes ${prefix}</h3>
+                                <div class="button-icon" style="float:right;">
                                     <button id="btnReturnDocente" type="button" class="btn mb-1" style="color: #fff; background-color: silver;">
                                         Volver
                                         <span class="btn-icon-right">

@@ -44,11 +44,9 @@
                 <div class="card principal">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-10">
-                                <h3>Docentes</h3>
-                            </div>
-                            <div class="col-2">
-                                <div class="button-icon">
+                            <div class="col-12">
+                                <h3 style="display:inline;">Docentes</h3>
+                                <div class="button-icon" style="float:right;">
                                     <button id="btNewDocente" type="button" class="btn btn-success mb-1" style="color: #fff; background-color: #00B236;">
                                         Nuevo Docente
                                         <span class="btn-icon-right">
