@@ -2,7 +2,7 @@
 
 const arrDataPatterntype = {
     'text' : {reg: new RegExp("^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$"), message: 'Solo se admiten letras'},
-    'num' : '',
+    'num' : {reg: new RegExp("^[0-9]+$"), message: 'Solo se admiten numeros'},
     'date' : '',
     'email' : '',
     'url' : '',
@@ -22,7 +22,10 @@ function styleValidation(elm, value ,validation, dataType) {
         } else {   
             let span = $(elm).parent().children('span').length;
             if(span == 0) {
-                $(elm).parent().append(`<span style="color: #D9131C;">${arrDataPatterntype[dataType]['message']}</span>`);
+                let validmessage = $(elm).data('validmessage');
+                console.log(validmessage);
+                let message = validmessage != undefined ? validmessage : arrDataPatterntype[dataType]['message'];
+                $(elm).parent().append(`<span style="color: #D9131C;">${message}</span>`);
             }
         }
     } else {

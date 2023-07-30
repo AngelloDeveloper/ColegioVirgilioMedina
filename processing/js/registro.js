@@ -51,7 +51,7 @@ $(function() {
                             </div>
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="documento_estudiante" type="text" class="form-control" required/>
+                                    <input id="documento_estudiante" type="text" class="form-control verificationData" data-datatype="num" required/>
                                     <label for="documento_estudiante">Documento de Identidad <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
@@ -59,7 +59,7 @@ $(function() {
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="fechaNacimiento_estudiante"  type="text" class="datepicker" required/>
+                                    <input id="fechaNacimiento_estudiante" type="text" class="datepicker" required/>
                                     <label for="fechaNacimiento_estudiante">Fecha de Nacimiento <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
