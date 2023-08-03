@@ -3,14 +3,17 @@
     require_once('../model/class/parametros.class.php');
     require('../model/class/estado.class.php');
     require('../model/class/religion.class.php');
+    require('../model/class/paises.class.php');
 
     //intancias
     $objParameter = new Parametros();
     $objEstados = new Estado();
     $objReligion = new Religion();
+    $objPaises = new Paises();
 
     $arrEstados = $objEstados->getAllEstados();
     $arrReligiones = $objReligion->getAllReligiones();
+    $arrPaises = $objPaises->getAllPaises();
 
     $param_pre_registro =  $objParameter->getParameter('PRE_REGISTRO');
     if($param_pre_registro['status'] != 'Y') {
@@ -107,6 +110,7 @@
         <script type="text/javascript"> 
             var objEstados =  <?= json_encode($arrEstados);?>;
             var objReligiones = <?= json_encode($arrReligiones);?>;
+            var objPaises =  <?= json_encode($arrPaises);?>;
         </script>
         <script src="../assets/face-api/face-api.min.js"></script>
         <script src="../assets/js/src/validador-images.js?v="<?= rand(100, 500); ?>></script>

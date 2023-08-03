@@ -12,6 +12,7 @@ $(function() {
 
     var template_estados = generateTemplate_estados();
     var template_religion = generateTemplate_religion();
+    var template_codigos = generateTemplate_codigos();
     
     const arrFormularios = {
         formulario1: {
@@ -58,14 +59,23 @@ $(function() {
                         </div>
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group input-field">
-                                    <input id="fechaNacimiento_estudiante" type="text" class="datepicker" required/>
-                                    <label for="fechaNacimiento_estudiante">Fecha de Nacimiento <span style="color: #960032;"><b>*</b></span></label>
+                                <div class="form-group input-field" style="margin-top: 0;">
+                                    <p style="display: inline; color: #9e9e9e;">fecha de nacimiento <span style="color: #960032;"><b>*</b></span></p>
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <input id="fechaNacimiento_estudiante" type="text" required disabled />
+                                        </div>
+                                        <div class="col-4">
+                                            <button type="button" class="btn btn-primary ml-2 datepicker">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="edad_estudiante" type="number" class="form-control" required/>
+                                    <input id="edad_estudiante" type="number" class="form-control" required disabled/>
                                     <label for="edad_estudiante">Edad <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
@@ -82,7 +92,7 @@ $(function() {
                             </div>
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="email_estudiante" type="email" class="form-control" required/>
+                                    <input id="email_estudiante" type="email" class="form-control verificationData" data-datatype="email" required/>
                                     <label for="email_estudiante">Correo Electrónico <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
@@ -90,7 +100,7 @@ $(function() {
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <textarea id="direccion_estudiante" type="text" class="materialize-textarea" required /></textarea>
+                                    <textarea id="direccion_estudiante" type="text" class="materialize-textarea verificationData" data-typedata="dir" required /></textarea>
                                     <label for="direccion_estudiante">Dirección de Residencia <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
@@ -141,14 +151,27 @@ $(function() {
 
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group input-field">
-                                    <input id="telefono_movil_estudiante" type="number" required/>
-                                    <label for="telefono_movil_estudiante">Telefono Movil <span style="color: #960032;"><b>*</b></span></label>
+                                <div class="row">
+                                    <div class="col-+">
+                                        <div class="form-group input-field">
+                                            <select id="cod_phone_numbre">
+                                                <option value="">--Selecciona Codigo--</option>
+                                                ${template_codigos}
+                                            </select>
+                                            <label for="municipio_estudiante">Codigo País <span style="color: #960032;"><b>*</b></span></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-5">
+                                        <div class="form-group input-field">
+                                            <input id="telefono_movil_estudiante" class="form-control verificationData" data-datatype="num" type="number" required/>
+                                            <label for="telefono_movil_estudiante">Telefono Movil <span style="color: #960032;"><b>*</b></span></label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="telefono_residencial_estudiante" type="number" required/>
+                                    <input id="telefono_residencial_estudiante" class="form-control verificationData" data-datatype="num" type="number" required/>
                                     <label for="telefono_residencial_estudiante">Telefono Residencial <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
@@ -229,6 +252,7 @@ $(function() {
                                         <option value="U">U</option>
                                         <option value="L">L</option>
                                         <option value="XL">XL</option>
+                                        <option value="XL">XXL</option>
                                     </select>
                                     <label for="tallaCamisa_estudiante">Talla de Camisa <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
@@ -236,12 +260,13 @@ $(function() {
                             <div class="col-4">
                                 <div class="form-group input-field">
                                     <select id="tallaPatalon_estudiante">
-                                        <option value="N">Seleccionar...</option>
+                                        <option value="">Seleccionar...</option>
+                                        <option value="12">12</option>
+                                        <option value="14">14</option>
+                                        <option value="16">16</option>
                                         <option value="S">S</option>
                                         <option value="M">M</option>
-                                        <option value="U">U</option>
                                         <option value="L">L</option>
-                                        <option value="XL">XL</option>
                                     </select>
                                     <label for="tallaPatalon_estudiante">Talla de Pantalon <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
@@ -250,13 +275,13 @@ $(function() {
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="estatura_estudiante" type="text" required />
+                                    <input id="estatura_estudiante" type="text" class="form-control verificationData" data-datatype="mts" required />
                                     <label for="estatura_estudiante">Estatura (Mts) <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="peso_estudiante" type="number" required/>
+                                    <input id="peso_estudiante" type="number" class="form-control verificationData" data-datatype="kgs" required/>
                                     <label for="peso_estudiante">Peso (Kg) <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
@@ -1128,6 +1153,14 @@ $(function() {
         }
     }
 
+    $(document).on('click', '.datepicker-done', function(e) {
+        let date = $(document).find('.datepicker').val();
+        var age = calculateAge(date);
+        $(document).find('#fechaNacimiento_estudiante').val(date);
+        $(document).find('#edad_estudiante').val(age);
+        M.updateTextFields();
+    })
+
     function handleSwicht (input, content, content2=false, ret=false) {
         var swicth = $(document).find('#'+input)[0];
         var checked = $(swicth).prop('checked');
@@ -1234,15 +1267,11 @@ $(function() {
     })
 
     //calculo y set de edad segun fecha de nacimiento.
-    $(document).on('change', '#fechaNacimiento_estudiante', function() {
+    /*$(document).on('change', '#fechaNacimiento_estudiante', function() {
         var age = calculateAge($(document).find('#fechaNacimiento_estudiante').val());
-        /*var rang = rangeAge(edad, {
-            start: 10,
-            end: 
-        });*/
         $(document).find('#edad_estudiante').val(age);
         M.updateTextFields();
-    })
+    })*/
 
     $(document).on('submit', '#form1', function(e) {
         e.preventDefault();
@@ -1980,6 +2009,15 @@ $(function() {
         var template = '';
         $(objReligiones).each((index, religion) => {
             template += `<option value="${religion.id}">${religion.religion}</option>`;
+        });
+
+        return template;
+    }
+
+    function generateTemplate_codigos() {
+        var template = '';
+        $(objPaises).each((index, pais) => {
+            template += `<option value="${pais.phonecode}">${'('+pais.phonecode +') '+pais.nicename}</option>`;
         });
 
         return template;
