@@ -13,6 +13,7 @@ $(function() {
     var template_estados = generateTemplate_estados();
     var template_religion = generateTemplate_religion();
     var template_codigos = generateTemplate_codigos();
+    var template_latam = generateTemplate_latam();
     
     const arrFormularios = {
         formulario1: {
@@ -84,8 +85,8 @@ $(function() {
                             <div class="col-4">
                                 <div class="form-group input-field">
                                     <select id="nacionalidad_estudiante">
-                                        <option value="VEN">Venezolana</option>
-                                        <option value="COL">Colombiana</option>
+                                        <option value="">--Selecciona Nacionalidad--</option>
+                                        ${template_latam}
                                     </select>
                                     <label for="nacionalidad_estudiante">Nacionalidad <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
@@ -100,7 +101,7 @@ $(function() {
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <textarea id="direccion_estudiante" type="text" class="materialize-textarea verificationData" data-typedata="dir" required /></textarea>
+                                    <textarea id="direccion_estudiante" type="text" class="materialize-textarea" required /></textarea>
                                     <label for="direccion_estudiante">Dirección de Residencia <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
@@ -359,7 +360,7 @@ $(function() {
                             <div class="col-4">
                                 <div id="content_discapacidad" style="display:none" class="form-group">
                                     <div class="form-group input-field">
-                                        <input id="discapacidadDescripcion" type="text" />
+                                        <textarea id="discapacidadDescripcion" type="text" class="materialize-textarea" /></textarea>
                                         <label for="discapacidadDescripcion">Indique cual</label>
                                     </div>
                                 </div>
@@ -387,7 +388,7 @@ $(function() {
                             <div class="col-4">
                                 <div id="content_alergico" style="display:none" class="form-group">
                                     <div class="form-group input-field">
-                                        <input id="alergicoDescripcion" type="text" />
+                                        <textarea id="alergicoDescripcion" type="text" class="materialize-textarea" ></textarea>
                                         <label for="alergicoDescripcion">¿ a que ?</label>
                                     </div>
                                 </div>
@@ -414,7 +415,7 @@ $(function() {
                             <div class="col-4">
                                 <div id="content_enfermedad" style="display:none" class="form-group">
                                     <div class="form-group input-field">
-                                        <input id="enfermedadDescripcion" type="text"/>
+                                        <textarea id="enfermedadDescripcion" type="text" class="materialize-textarea"></textarea>
                                         <label for="enfermedadDescripcion">¿ indique enfermedad ?</label>
                                     </div>
                                 </div>
@@ -467,7 +468,7 @@ $(function() {
                             <div class="col-4">
                                 <div id="content_convulsion" style="display:none" class="form-group">
                                     <div class="form-group input-field">
-                                        <input id="convulsionDescripcion" type="text" />
+                                        <textarea id="convulsionDescripcion" type="text" class="materialize-textarea"></textarea>
                                         <label for="convulsionDescripcion">Observaciones</label>
                                     </div>
                                 </div>
@@ -495,7 +496,7 @@ $(function() {
                             <div class="col-2">
                                 <div id="content_familiar_colegio" style="display:none" class="form-group">
                                     <div class="form-group input-field">
-                                        <input id="familiar_colegioNombre" type="text" />
+                                        <textarea id="familiar_colegioNombre" type="text" class="materialize-textarea"></textarea>
                                         <label for="familiar_colegioNombre">Nombre</label>
                                     </div>
                                 </div>
@@ -519,7 +520,7 @@ $(function() {
                             <div class="col-3">
                                 <div id="content_familiar_colegio3" style="display:none" class="form-group">
                                     <div class="form-group input-field">
-                                        <textarea  id="familiar_colegioDescripcion" class="materialize-textarea"></textarea>
+                                        <textarea id="familiar_colegioDescripcion" class="materialize-textarea"></textarea>
                                         <label for="familiar_colegioDescripcion">Especifíque</label>
                                     </div>
                                 </div>
@@ -1257,7 +1258,7 @@ $(function() {
     //otra religion estudiante
     $(document).on('change', '#religion_estudiante' ,function() {
         let religion = $(document).find('#religion_estudiante').val();
-        if(religion == 9) {
+        if(religion == 10) {
             $(document).find('#religion_estudiante_otro_container').css({'display' : 'block'});
             $(document).find('#otra_religion_estudiante').attr('required', 'required');
         } else {
@@ -1278,7 +1279,13 @@ $(function() {
         handleSpinnerLoad('.btnform');
 
         var lengthFoto = $(document).find('#foto-estudiante')[0].files.length;
-        if(lengthFoto == 0) {
+        if(getInvalidData()) { //si es true entonces hay campos invalidos
+            $(document).find('.btnform').html('SIGUIENTE');
+            window.scrollTo({
+                top: 500,
+                behavior: "smooth"
+            });
+        } else if(lengthFoto == 0) {
             $(document).find('.btnform').html('SIGUIENTE');
             $(document).find('#alerta_foto').html(alert_Images('Debe Ingresar una foto, es requicito obligatorio, Por favor verificar que la imagen cumple con los requerimientos indicados', 'danger'))
             window.scrollTo({
@@ -1304,11 +1311,12 @@ $(function() {
                     'lugar_nacimiento' : $(document).find('#lugar_nacimiento_estudiante').val(),
                     'estado': $(document).find('#estado_estudiante').val(),
                     'municipio': $(document).find('#municipio_estudiante').val(),
+                    'telf_code' : $(document).find('#cod_phone_numbre').val(),
                     'telf_movil': $(document).find('#telefono_movil_estudiante').val(),
                     'telf_residencia': $(document).find('#telefono_residencial_estudiante').val(),
                     'habilidades' : $(document).find('#habilidades_estudiante').val(),
                     'religion' : $(document).find('#religion_estudiante').val(),
-                    'otra_religion' : $(document).find('#otra_religion_representante').val(),
+                    'otra_religion' : $(document).find('#otra_religion_estudiante').val(),
                     'genero' : $(document).find('#masculino_estudiante').prop('checked') == true ? 'M' : 'F',
                     'lateralidad' : $(document).find('#diestro_estudiante').prop('checked') == true ? 'D' : 'I',
                     //'foto_estudiante' : formData,
@@ -2009,6 +2017,15 @@ $(function() {
         var template = '';
         $(objReligiones).each((index, religion) => {
             template += `<option value="${religion.id}">${religion.religion}</option>`;
+        });
+
+        return template;
+    }
+
+    function generateTemplate_latam() {
+        var template = '';
+        $(objLatam).each((index, pais) => {
+            template += `<option value="${pais.iso3}">${pais.nicename}</option>`;
         });
 
         return template;

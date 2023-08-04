@@ -9,11 +9,12 @@
     $objParameter = new Parametros();
     $objEstados = new Estado();
     $objReligion = new Religion();
-    $objPaises = new Paises();
+    $objPaises = new Paises(["zona" => 'LATAM']);
 
     $arrEstados = $objEstados->getAllEstados();
     $arrReligiones = $objReligion->getAllReligiones();
     $arrPaises = $objPaises->getAllPaises();
+    $arrLatam = $objPaises->getPisesZone();
 
     $param_pre_registro =  $objParameter->getParameter('PRE_REGISTRO');
     if($param_pre_registro['status'] != 'Y') {
@@ -111,6 +112,7 @@
             var objEstados =  <?= json_encode($arrEstados);?>;
             var objReligiones = <?= json_encode($arrReligiones);?>;
             var objPaises =  <?= json_encode($arrPaises);?>;
+            var objLatam = <?= json_encode($arrLatam); ?>;
         </script>
         <script src="../assets/face-api/face-api.min.js"></script>
         <script src="../assets/js/src/validador-images.js?v="<?= rand(100, 500); ?>></script>

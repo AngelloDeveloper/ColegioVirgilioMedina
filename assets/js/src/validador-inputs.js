@@ -42,16 +42,19 @@ function validateData(value, dataType) {
 function styleValidation(elm, value ,validation, dataType) {
     if(value != '') {
         if(validation) {
+            $(elm).removeClass('invalid');
             $(elm).parent().find('span').remove();
         } else {   
             let span = $(elm).parent().children('span').length; 
             if(span == 0) {
+                $(elm).addClass('invalid');
                 let validmessage = $(elm).data('validmessage');
                 let message = validmessage != undefined ? validmessage : arrDataPatterntype[dataType]['message'];
                 $(elm).parent().append(`<span style="color: #D9131C;">${message}</span>`);
             }
         }
     } else {
+        $(elm).removeClass('invalid');
         $(elm).parent().find('span').remove();
     }
 }
@@ -63,7 +66,13 @@ function asyncVerificationDataInput() {
         let dataType = $(elm).data('datatype');
         let validation = validateData(value, dataType);
         styleValidation(elm, value, validation, dataType);
-})
+    })
+}
+
+function getInvalidData() {
+   const invalidData = $(document).find('.invalid');
+   const result = invalidData.length > 0 ? true : false;
+   return result;
 }
 
 asyncVerificationDataInput();
