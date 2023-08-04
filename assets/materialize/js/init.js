@@ -25,10 +25,10 @@ function initConfigDate() {
             done: 'Listo',
             cancel: 'Cancelar',
             monthsShort: [
-                'Jan',
+                'Ene',
                 'Feb',
                 'Mar',
-                'Apr',
+                'Abr',
                 'May',
                 'Jun',
                 'Jul',
@@ -36,7 +36,7 @@ function initConfigDate() {
                 'Sep',
                 'Oct',
                 'Nov',
-                'Dec'
+                'Dic'
             ],
             months: [
                 'Enero',

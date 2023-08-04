@@ -352,11 +352,11 @@ $(function() {
                                     <label>Adjuntar Informe <span style="color: #960032;"><b>*</b></span></label>
                                     <div class="file-field input-field pt-2">
                                         <div class="btn materialcustom">
-                                            <span>File</span>
-                                            <input type="file" multiple>
+                                            <span>Adjuntar</span>
+                                            <input id="testFile" type="file" multiple>
                                         </div>
                                         <div class="file-path-wrapper">
-                                            <input id="informeMedicoDocumento" class="file-path verificationFiles" data-datatype="pdf" type="text" placeholder="Upload one or more files">
+                                            <input id="informeMedicoDocumento" class="file-path verificationFiles" data-datatype="pdf" type="text" placeholder="Adjuntar Documento">
                                         </div>
                                     </div>
                                 </div>
@@ -1192,10 +1192,14 @@ $(function() {
                 $('#'+index).css({'display':display});
                 let objprops = value[index];
                 if(!$.isEmptyObject(objprops)) {
+                    let element = $(document).find(objprops.elm)[0];
                     switch (objprops.key) {
                         case 'checked':
-                            let element = $(document).find(objprops.elm)[0];
                             $(element).prop(objprops.key, objprops.value);
+                        break;
+                        case 'setValue':
+                            $(element).val(objprops.value);
+                            M.AutoInit();
                         break;
                     }
                 }
@@ -1247,7 +1251,7 @@ $(function() {
 
     $(document).on('click', '#informeMedico_digital', function(e) {
         handleSwicht ('informeMedico_digital', 
-            [{'content_informe_medico' : {}}], 
+            [{'content_informe_medico' : {elm: '#informeMedicoDocumento', key: 'setValue'}}], 
             {
                 true : {'content_informe_medico_message' : 'none', 'content_informe_medico' : 'block'},
                 false: {'content_informe_medico_message' : 'block', 'content_informe_medico' : 'none'}
