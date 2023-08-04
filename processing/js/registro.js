@@ -309,7 +309,7 @@ $(function() {
                             <div class="col-4">
                                 <div class="form-group">
                                     <center>
-                                        <label>Informe Médico</label>
+                                        <label>¿ Posee Informe Médico ?</label>
                                         <div>
                                             <div class="switch">
                                                 <label>
@@ -324,6 +324,30 @@ $(function() {
                                 </div>
                             </div>
                             <div class="col-4">
+                                <div id="content_swicth_posee_informe_medico" style="display: none">
+                                    <div class="form-group">
+                                        <center>
+                                            <label>¿ Cuenta con el informe en digital ?</label>
+                                            <div>
+                                                <div class="switch">
+                                                    <label>
+                                                    No
+                                                    <input type="checkbox" id="informeMedico_digital" />
+                                                    <span class="lever"></span>
+                                                    Si
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div id="content_informe_medico_message" style="display: none">
+                                    <div class="alert alert-warning" role="alert">
+                                        Por favor llevar el documento en fisico a la institución al momento de formalizar la inscripción
+                                    </div>
+                                </div>
                                 <div id="content_informe_medico" style="display: none">
                                     <label>Adjuntar Informe <span style="color: #960032;"><b>*</b></span></label>
                                     <div class="file-field input-field pt-2">
@@ -332,7 +356,7 @@ $(function() {
                                             <input type="file" multiple>
                                         </div>
                                         <div class="file-path-wrapper">
-                                            <input id="informeMedicoDocumento" class="file-path validate" type="text" placeholder="Upload one or more files">
+                                            <input id="informeMedicoDocumento" class="file-path verificationFiles" data-datatype="pdf" type="text" placeholder="Upload one or more files">
                                         </div>
                                     </div>
                                 </div>
@@ -1162,29 +1186,36 @@ $(function() {
         M.updateTextFields();
     })
 
-    function handleSwicht (input, content, content2=false, ret=false) {
+    function procesSwitchs(checked, display, content, obj) {
+        $(content).each((index, value) => {
+            for(index in value) {
+                $('#'+index).css({'display':display});
+                let objprops = value[index];
+                if(!$.isEmptyObject(objprops)) {
+                    switch (objprops.key) {
+                        case 'checked':
+                            let element = $(document).find(objprops.elm)[0];
+                            $(element).prop(objprops.key, objprops.value);
+                        break;
+                    }
+                }
+            }
+        })
+        if(obj != false) {
+            $(obj).each((index, value) => {
+                const objFunction = value[checked];
+                for(index in objFunction) {
+                    $('#'+index).css({'display':objFunction[index]})
+                }
+            })
+        }
+    }
+
+    function handleSwicht (input, content, obj={}, ret=false) {
         var swicth = $(document).find('#'+input)[0];
         var checked = $(swicth).prop('checked');
-        
-        if(checked) {
-            $(content).each((index, value) => {
-                $('#'+value).css({'display':'block'});
-            })
-            if(content2 != false) {
-                $(content2).each((index, value) => {
-                    $('#'+value).css({'display':'none'});
-                })
-            }
-        } else {
-            $(content).each((index, value) => {
-                $('#'+value).css({'display':'none'});
-            })
-            if(content2 != false) {
-                $(content2).each((index, value) => {
-                    $('#'+value).css({'display':'block'});
-                })
-            }
-        }
+        var display = checked == true ? 'block' : 'none';
+        procesSwitchs(checked, display, content, obj);
 
         return ret == true ? checked : '';
     }
@@ -1205,35 +1236,51 @@ $(function() {
     }
 
     $(document).on('click', '#informeMedico', function(e) {
-        handleSwicht ('informeMedico', ['content_informe_medico']);
+        handleSwicht ('informeMedico', 
+            [{'content_swicth_posee_informe_medico' : {elm: '#informeMedico_digital', key: 'checked', value: false}}], 
+            {
+                true : {'content_informe_medico_message' : 'block', 'content_informe_medico' : 'none'},
+                false: {'content_informe_medico_message' : 'none', 'content_informe_medico' : 'none'}
+            }
+        );
+    })
+
+    $(document).on('click', '#informeMedico_digital', function(e) {
+        handleSwicht ('informeMedico_digital', 
+            [{'content_informe_medico' : {}}], 
+            {
+                true : {'content_informe_medico_message' : 'none', 'content_informe_medico' : 'block'},
+                false: {'content_informe_medico_message' : 'block', 'content_informe_medico' : 'none'}
+            }
+        );
     })
 
     $(document).on('click', '#alergico', function(e) {
-        handleSwicht ('alergico', ['content_alergico']);
+        handleSwicht ('alergico', [{'content_alergico' : {}}]);
     })
 
     $(document).on('click', '#enfermedad', function(e) {
-        handleSwicht ('enfermedad', ['content_enfermedad']);
+        handleSwicht ('enfermedad', [{'content_enfermedad' : {}}]);
     })
 
     $(document).on('click', '#medicamentos', function(e) {
-        handleSwicht ('medicamentos', ['content_medicamentos']);
+        handleSwicht ('medicamentos', [{'content_medicamentos' : {}}]);
     })
 
     $(document).on('click', '#convulsion', function(e) {
-        handleSwicht ('convulsion', ['content_convulsion']);
+        handleSwicht ('convulsion', [{'content_convulsion' : {}}]);
     })
 
     $(document).on('click', '#discapacidad', function(e) {
-        handleSwicht ('discapacidad', ['content_discapacidad']);
+        handleSwicht ('discapacidad', [{'content_discapacidad' : {}}]);
     })
 
     $(document).on('click', '#familiar_colegio', function(e) {
         handleSwicht ('familiar_colegio', 
             [
-                'content_familiar_colegio', 
-                'content_familiar_colegio2',
-                'content_familiar_colegio3'
+                {'content_familiar_colegio' : {}}, 
+                {'content_familiar_colegio2' : {}},
+                {'content_familiar_colegio3' : {}}
             ]
         );
     })

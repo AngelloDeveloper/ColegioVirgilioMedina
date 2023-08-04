@@ -29,6 +29,14 @@ const arrDataPatterntype = {
         reg: /^[0-9]{2,3}$/, 
         message: 'se admite un valor de 2 o 3 digitos, ejem: (53 o 102)'
     },
+    'files' : {
+        reg: /^.+\.(pdf|doc|docx)$/i,
+        message: 'Solo se admiten documentos PDF Y WORD'
+    },
+    'pdf' : {
+        reg: /^.+\.(pdf)$/i,
+        message: 'Solo se admiten documentos PDF'
+    },
     'url' : '',
     'boolean' : ''
 };
@@ -36,6 +44,9 @@ const arrDataPatterntype = {
 function validateData(value, dataType) {
     let pattern = arrDataPatterntype[dataType]['reg'];
     validation = pattern.test(value) ? true : false;
+    console.log(value);
+    console.log(pattern);
+    console.log(validation);
     return validation;
 }
 
@@ -59,8 +70,20 @@ function styleValidation(elm, value ,validation, dataType) {
     }
 }
 
+//funcion principal valida todo tipo de inputs
 function asyncVerificationDataInput() {
     $(document).on('keyup', '.verificationData', function() {
+        let elm = $(this)[0];
+        let value = $(elm).val();
+        let dataType = $(elm).data('datatype');
+        let validation = validateData(value, dataType);
+        styleValidation(elm, value, validation, dataType);
+    })
+}
+
+//funcion valida inputs files.
+function asyncVerificationDataFiles() {
+    $(document).on('change', '.verificationFiles', function() {
         let elm = $(this)[0];
         let value = $(elm).val();
         let dataType = $(elm).data('datatype');
@@ -76,3 +99,4 @@ function getInvalidData() {
 }
 
 asyncVerificationDataInput();
+asyncVerificationDataFiles();
