@@ -5,6 +5,9 @@
     require('../reports/reportes.class.php');
 
     if(!empty($_POST) && $_POST['type'] == 'setPreRegistro') {
+
+        echo "<pre>".json_encode($_POST, JSON_PRETTY_PRINT)."<pre>";
+        die();
         
         $objPreRegistro = new Pre_Registro($_POST);
         

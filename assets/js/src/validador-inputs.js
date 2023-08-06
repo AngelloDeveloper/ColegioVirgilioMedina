@@ -44,9 +44,6 @@ const arrDataPatterntype = {
 function validateData(value, dataType) {
     let pattern = arrDataPatterntype[dataType]['reg'];
     validation = pattern.test(value) ? true : false;
-    console.log(value);
-    console.log(pattern);
-    console.log(validation);
     return validation;
 }
 
@@ -61,7 +58,7 @@ function styleValidation(elm, value ,validation, dataType) {
                 $(elm).addClass('invalid');
                 let validmessage = $(elm).data('validmessage');
                 let message = validmessage != undefined ? validmessage : arrDataPatterntype[dataType]['message'];
-                $(elm).parent().append(`<span style="color: #D9131C;">${message}</span>`);
+                $(elm).parent().append(`<span style="color: #D9131C; font-size:14px;">${message}</span>`);
             }
         }
     } else {

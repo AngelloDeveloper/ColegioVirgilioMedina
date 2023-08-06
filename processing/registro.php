@@ -13,7 +13,6 @@
 
     $arrEstados = $objEstados->getAllEstados();
     $arrReligiones = $objReligion->getAllReligiones();
-    $arrPaises = $objPaises->getAllPaises();
     $arrLatam = $objPaises->getPisesZone();
 
     $param_pre_registro =  $objParameter->getParameter('PRE_REGISTRO');
@@ -111,7 +110,6 @@
         <script type="text/javascript"> 
             var objEstados =  <?= json_encode($arrEstados);?>;
             var objReligiones = <?= json_encode($arrReligiones);?>;
-            var objPaises =  <?= json_encode($arrPaises);?>;
             var objLatam = <?= json_encode($arrLatam); ?>;
         </script>
         <script src="../assets/face-api/face-api.min.js"></script>

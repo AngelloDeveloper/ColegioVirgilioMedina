@@ -19,7 +19,7 @@ $(function() {
         formulario1: {
             title : 'Datos del Estudiante',
             form: `
-                <form id="form1">
+                <form id="form1" enctype="multipart/form-data">
                     <div class="container p-4">
                         <div class="row">
                             <div class="col-4">
@@ -64,10 +64,10 @@ $(function() {
                                     <p style="display: inline; color: #9e9e9e;">fecha de nacimiento <span style="color: #960032;"><b>*</b></span></p>
                                     <div class="row">
                                         <div class="col-8">
-                                            <input id="fechaNacimiento_estudiante" type="text" required disabled />
+                                            <input id="fecha_nacimiento_estudiante" type="text" required disabled />
                                         </div>
                                         <div class="col-4">
-                                            <button type="button" class="btn btn-primary ml-2 datepicker">
+                                            <button type="button" class="btn btn-primary ml-2 datepicker" data-actor="estudiante">
                                                 <i class="fa fa-calendar"></i>
                                             </button>
                                         </div>
@@ -153,18 +153,18 @@ $(function() {
                         <div class="row">
                             <div class="col-4">
                                 <div class="row">
-                                    <div class="col-+">
+                                    <div class="col-7">
                                         <div class="form-group input-field">
-                                            <select id="cod_phone_numbre">
+                                            <select id="cod_phone_numbre_estudiante">
                                                 <option value="">--Selecciona Codigo--</option>
                                                 ${template_codigos}
                                             </select>
-                                            <label for="municipio_estudiante">Codigo País <span style="color: #960032;"><b>*</b></span></label>
+                                            <label for="cod_phone_numbre_estudiante">Codigo País <span style="color: #960032;"><b>*</b></span></label>
                                         </div>
                                     </div>
                                     <div class="col-5">
                                         <div class="form-group input-field">
-                                            <input id="telefono_movil_estudiante" class="form-control verificationData" data-datatype="num" type="number" required/>
+                                            <input id="telefono_movil_estudiante" class="form-control verificationData" data-datatype="telf_movil" type="number" required/>
                                             <label for="telefono_movil_estudiante">Telefono Movil <span style="color: #960032;"><b>*</b></span></label>
                                         </div>
                                     </div>
@@ -181,7 +181,7 @@ $(function() {
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="habilidades_estudiante" type="text" class="form-control" required/>
+                                    <input id="habilidades_estudiante" type="text" class="form-control  verificationData" data-datatype="text" required/>
                                     <label for="habilidades_estudiante">Habilidades <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div> 
@@ -196,7 +196,7 @@ $(function() {
                             </div> 
                             <div class="col-4">
                                 <div id="religion_estudiante_otro_container" style="display:none" class="form-group input-field">
-                                    <input id="otra_religion_estudiante" type="text" class="form-control" />
+                                    <input id="otra_religion_estudiante" type="text" class="form-control verificationData" data-datatype="text" />
                                     <label for="otra_religion_estudiante">Mencione religión <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div> 
@@ -570,13 +570,13 @@ $(function() {
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="nombre_madre" type="text" required />
+                                    <input id="nombre_madre" type="text" class="form-control verificationData" data-datatype="text" required />
                                     <label for="nombre_madre">Nombre <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="apellido_madre" type="text" required />
+                                    <input id="apellido_madre" type="text" class="form-control verificationData" data-datatype="text" required />
                                     <label for="apellido_madre">Apellido <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
@@ -598,18 +598,35 @@ $(function() {
                             </div>
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="documento_madre" type="text" required/>
+                                    <input id="documento_madre" type="text" class="form-control verificationData" data-datatype="num" required/>
                                     <label for="documento_madre">Documento <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group input-field">
-                                    <input id="fecha_nacimiento_madre" type="text" class="datepicker" required/>
-                                    <label for="fecha_nacimiento_madre">Fecha de Nacimiento <span style="color: #960032;"><b>*</b></span></label>
+                                <div class="form-group input-field" style="margin-top: 0;">
+                                    <p style="display: inline; color: #9e9e9e;">fecha de nacimiento <span style="color: #960032;"><b>*</b></span></p>
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <input id="fecha_nacimiento_madre" type="text" required disabled />
+                                        </div>
+                                        <div class="col-4">
+                                            <button type="button" class="btn btn-primary ml-2 datepicker" data-actor="madre">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="col-4">
+                                <div class="form-group input-field">
+                                    <input id="edad_madre" type="number" class="form-control" required disabled/>
+                                    <label for="edad_madre">Edad <span style="color: #960032;"><b>*</b></span></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-4">
                                 <div class="form-group input-field">
                                     <select id="nacionalidad_madre">
@@ -617,14 +634,6 @@ $(function() {
                                         <option value="COL">Colombiana</option>
                                     </select>
                                     <label for="nacionalidad_madre">Nacionalidad <span style="color: #960032;"><b>*</b></span></label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="form-group input-field">
-                                    <input id="edad_madre" type="number" required/>
-                                    <label for="edad_madre">Edad <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
@@ -643,17 +652,19 @@ $(function() {
                             <div class="col-4">
                                 <div class="form-group input-field">
                                     <select id="nivel_instruccion_madre">
-                                        <option value="N" selected>Seleccionar...</option>
+                                        <option value="" selected>Seleccionar...</option>
+                                        <option value="I">Primaria</option>
                                         <option value="B">Bachiller</option>
                                         <option value="U">Estudios Universitarios</option>
                                         <option value="P">Post-Grado</option>
+                                        <option value="N">Ninguno</option>
                                     </select>
                                     <label for="nivel_instruccion_madre">Nivel de Instruccion</label>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <textarea id="ocupacion_madre" class="materialize-textarea" required></textarea>
+                                    <textarea id="ocupacion_madre" class="materialize-textarea verificationData" data-datatype="text" required></textarea>
                                     <label for="ocupacion_madre">Ocupación <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
@@ -661,13 +672,13 @@ $(function() {
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <textarea id="lugar_trabajo_madre" class="materialize-textarea" required></textarea>
+                                    <textarea id="lugar_trabajo_madre" class="materialize-textarea verificationData" data-datatype="text" required></textarea>
                                     <label for="lugar_trabajo_madre">Lugar de trabajo <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <textarea id="habilidad_madre" class="materialize-textarea"></textarea>
+                                    <textarea id="habilidad_madre" class="materialize-textarea verificationData" data-datatype="text"></textarea>
                                     <label for="habilidad_madre">Habilidad</label>
                                 </div>
                             </div>
@@ -680,42 +691,40 @@ $(function() {
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="form-group input-field">
-                                    <input id="telefono_movil_madre" type="number" required/>
-                                    <label for="telefono_movil_madre">Telefono Movil <span style="color: #960032;"><b>*</b></span></label>
+                                <div class="row">
+                                    <div class="col-7">
+                                        <div class="form-group input-field">
+                                            <select id="cod_phone_numbre_madre">
+                                                <option value="">--Selecciona Codigo--</option>
+                                                ${template_codigos}
+                                            </select>
+                                            <label for="cod_phone_numbre_madre">Codigo País <span style="color: #960032;"><b>*</b></span></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-5">
+                                        <div class="form-group input-field">
+                                            <input id="telefono_movil_madre" class="form-control verificationData" data-datatype="telf_movil" type="number" required/>
+                                            <label for="telefono_movil_madre">Telefono Movil <span style="color: #960032;"><b>*</b></span></label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="telefono_residencial_madre" type="number" />
+                                    <input id="telefono_residencial_madre" class="form-control verificationData" data-datatype="num" type="number" />
                                     <label for="telefono_residencial_madre">Telefono Residencial </label>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="telefono_trabajo_madre" type="number" />
+                                    <input id="telefono_trabajo_madre" class="form-control verificationData" data-datatype="num" type="number" />
                                     <label for="telefono_trabajo_madre">Telefono del lugar de trabajo </label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-4">
-                                <div class="form-group input-field">
-                                    <select id="religion_madre">
-                                        <option value="">--Selecciona una Religíon--</option>
-                                        ${template_religion}
-                                    </select>
-                                    <label for="religion_madre">Religión <span style="color: #960032;"><b>*</b></span></label>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div id="religion_madre_otro_container" style="display:none" class="form-group input-field">
-                                    <input id="otra_religion_madre" type="text" class="form-control" />
-                                    <label for="otra_religion_madre">Mencione religión <span style="color: #960032;"><b>*</b></span></label>
-                                </div>
-                            </div> 
                             <div class="col-4">
                                 <label>¿ Vive con el estudiante ? <span style="color: #960032;"><b>*</b></span></label>
                                 <div class="form-group pt-2">
@@ -733,6 +742,21 @@ $(function() {
                                     </span>
                                 </div>
                             </div>
+                            <div class="col-4">
+                                <div class="form-group input-field">
+                                    <select id="religion_madre">
+                                        <option value="">--Selecciona una Religíon--</option>
+                                        ${template_religion}
+                                    </select>
+                                    <label for="religion_madre">Religión <span style="color: #960032;"><b>*</b></span></label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div id="religion_madre_otro_container" style="display:none" class="form-group input-field">
+                                    <input id="otra_religion_madre" type="text" class="form-control verificationData" data-datatype="text" />
+                                    <label for="otra_religion_madre">Mencione religión <span style="color: #960032;"><b>*</b></span></label>
+                                </div>
+                            </div> 
                         </div>
                         <div class="row">
                             <div class="col-8">
@@ -827,10 +851,12 @@ $(function() {
                             <div class="col-4">
                                 <div class="form-group input-field">
                                     <select id="nivel_instruccion_padre">
-                                        <option value="N" selected>Seleccionar...</option>
+                                        <option value="" selected>Seleccionar...</option>
+                                        <option value="I">Primaria</option>
                                         <option value="B">Bachiller</option>
                                         <option value="U">Estudios Universitarios</option>
                                         <option value="P">Post-Grado</option>
+                                        <option value="N">Ninguno</option>
                                     </select>
                                     <label for="nivel_instruccion_padre">Nivel de Instruccion</label>
                                 </div>
@@ -1072,10 +1098,12 @@ $(function() {
                             <div class="col-4">
                                 <div class="form-group input-field">
                                     <select id="nivel_instruccion_representante" >
-                                        <option value="N" selected>Seleccionar...</option>
+                                        <option value="" selected>Seleccionar...</option>
+                                        <option value="I">Primaria</option>
                                         <option value="B">Bachiller</option>
                                         <option value="U">Estudios Universitarios</option>
                                         <option value="P">Post-Grado</option>
+                                        <option value="N">Ninguno</option>
                                     </select>
                                     <label for="nivel_instruccion_representante">Nivel de Instruccion</label>
                                 </div>
@@ -1177,14 +1205,6 @@ $(function() {
             `   
         }
     }
-
-    $(document).on('click', '.datepicker-done', function(e) {
-        let date = $(document).find('.datepicker').val();
-        var age = calculateAge(date);
-        $(document).find('#fechaNacimiento_estudiante').val(date);
-        $(document).find('#edad_estudiante').val(age);
-        M.updateTextFields();
-    })
 
     function procesSwitchs(checked, display, content, obj) {
         $(content).each((index, value) => {
@@ -1308,22 +1328,20 @@ $(function() {
 
     //otra religion estudiante
     $(document).on('change', '#religion_estudiante' ,function() {
-        let religion = $(document).find('#religion_estudiante').val();
-        if(religion == 10) {
-            $(document).find('#religion_estudiante_otro_container').css({'display' : 'block'});
-            $(document).find('#otra_religion_estudiante').attr('required', 'required');
-        } else {
-            $(document).find('#religion_estudiante_otro_container').css({'display' : 'none'});
-            $(document).find('#otra_religion_estudiante').removeAttr('required');
-        }
+        otherReligion('religion_estudiante');
     })
 
     //calculo y set de edad segun fecha de nacimiento.
-    /*$(document).on('change', '#fechaNacimiento_estudiante', function() {
-        var age = calculateAge($(document).find('#fechaNacimiento_estudiante').val());
-        $(document).find('#edad_estudiante').val(age);
+    $(document).on('click', '.datepicker-done', function(e) {
+        let elm = $(document).find('.datepicker')[0];
+        let date = $(elm).val();
+        let year = calculateAge(date);
+        let actor = $(elm).data('actor');
+
+        $(document).find('#fecha_nacimiento_'+actor).val(date);
+        $(document).find('#edad_'+actor).val(year);
         M.updateTextFields();
-    })*/
+    })
 
     $(document).on('submit', '#form1', function(e) {
         e.preventDefault();
@@ -1346,6 +1364,7 @@ $(function() {
         } else {
                 //foto estudiante
                 formData.append("foto_estudiante",  $(document).find('#foto-estudiante')[0].files[0]);
+                console.log(formData.getAll("foto_estudiante"));
 
                 //guardando datos
                 objData.estudiante = {
@@ -1353,7 +1372,7 @@ $(function() {
                     'apellido': $(document).find('#apellido_estudiante').val(),
                     'tipo_documento': $(document).find('#tipo_documento_estudiante').val(),
                     'documento': $(document).find('#documento_estudiante').val(),
-                    'fecha_nacimiento': DateGuionFormat($(document).find('#fechaNacimiento_estudiante').val()),
+                    'fecha_nacimiento': DateGuionFormat($(document).find('#fecha_nacimiento_estudiante').val()),
                     'edad': $(document).find('#edad_estudiante').val(),
                     'nacionalidad': $(document).find('#nacionalidad_estudiante').val(),
                     'email': $(document).find('#email_estudiante').val(),
@@ -1439,17 +1458,9 @@ $(function() {
         }
     });
 
-    //form 2
+    //otra religion estudiante
     $(document).on('change', '#religion_madre' ,function() {
-        let religion = $(document).find('# religion_madre').val();
-        if(religion == 9) {
-            $(document).find('#religion_madre_otro_container').css({'display' : 'block'});
-            $(document).find('#religion_madre_estudiante').attr('required', 'required');
-        } else {
-            $(document).find('#religion_madre_otro_container').css({'display' : 'none'});
-            $(document).find('#otra_ religion_madre').removeAttr('required');
-            $(document).find('#otra_ religion_madre').val('');
-        }
+        otherReligion('religion_madre');
     })
 
     $(document).on('submit', '#form2', function(e) {
@@ -1460,7 +1471,13 @@ $(function() {
         formData.append("foto_madre",  $(document).find('#foto-madre')[0].files[0]);
 
         var lengthFoto = $(document).find('#foto-madre')[0].files.length;
-        if(lengthFoto == 0) {
+        if(getInvalidData()) { //si es true entonces hay campos invalidos
+            $(document).find('.btnform').html('SIGUIENTE');
+            window.scrollTo({
+                top: 500,
+                behavior: "smooth"
+            });
+        } else if(lengthFoto == 0) {
             $(document).find('.btnform').html('SIGUIENTE');
             $(document).find('#alerta_foto').html(alert_Images('Debe Ingresar una foto, es requicito obligatorio', 'danger'))
             window.scrollTo({
@@ -1532,17 +1549,9 @@ $(function() {
         }
     })
 
-    //form 3
+    //otra religion estudiante
     $(document).on('change', '#religion_padre' ,function() {
-        let religion = $(document).find('#religion_padre').val();
-        if(religion == 9) {
-            $(document).find('#religion_padre_otro_container').css({'display' : 'block'});
-            $(document).find('#otra_religion_padre').attr('required', 'required');
-        } else {
-            $(document).find('#religion_padre_otro_container').css({'display' : 'none'});
-            $(document).find('#otra_religion_padre').removeAttr('required');
-            $(document).find('#otra_religion_padre').val('');
-        }
+        otherReligion('religion_padre');
     })
 
     $(document).on('submit', '#form3', function(e) {
@@ -1553,7 +1562,13 @@ $(function() {
         formData.append("foto_padre",  $(document).find('#foto-padre')[0].files[0]);
 
         var lengthFoto = $(document).find('#foto-padre')[0].files.length;
-        if(lengthFoto == 0) {
+        if(getInvalidData()) { //si es true entonces hay campos invalidos
+            $(document).find('.btnform').html('SIGUIENTE');
+            window.scrollTo({
+                top: 500,
+                behavior: "smooth"
+            });
+        } else if(lengthFoto == 0) {
             $(document).find('.btnform').html('SIGUIENTE');
             $(document).find('#alerta_foto').html(alert_Images('Debe Ingresar una foto, es requicito obligatorio', 'danger'))
             window.scrollTo({
@@ -1624,20 +1639,6 @@ $(function() {
             },1500);
         }
     })
-
-    //form 4 intercative
-
-    /*$(document).on('change', '#religion_representante' ,function() {
-        let religion = $(document).find('#religion_representante').val();
-        if(religion == 9) {
-            $(document).find('#religion_representante_otro_container').css({'display' : 'block'});
-            $(document).find('#religion_representante_estudiante').attr('required', 'required');
-        } else {
-            $(document).find('#religion_representante_otro_container').css({'display' : 'none'});
-            $(document).find('#otra_religion_representante').removeAttr('required');
-            $(document).find('#otra_religion_representante').val();
-        }
-    })*/
 
     $(document).on('click', '#selectRepresentante', function(e) {
         var swicth = handleSwicht ('selectRepresentante', ['seleccionar_representante'], ['seleccionar_parenteco'], true);
@@ -1821,6 +1822,11 @@ $(function() {
         $('select').formSelect();
     })
 
+    //otra religion estudiante
+    $(document).on('change', '#religion_representante' ,function() {
+        otherReligion('religion_representante');
+    })
+
     //form 4 submit
     $(document).on('submit', '#form4', function(e) {
         e.preventDefault();
@@ -1845,7 +1851,13 @@ $(function() {
         }
 
         var lengthFoto = $(document).find('#foto-representante')[0].files.length;
-        if(lengthFoto == 0) {
+        if(getInvalidData()) { //si es true entonces hay campos invalidos
+            $(document).find('.btnform').html('SIGUIENTE');
+            window.scrollTo({
+                top: 500,
+                behavior: "smooth"
+            });
+        } else if(lengthFoto == 0) {
             $(document).find('#alerta_foto').html(alert_Images('Debe Ingresar una foto, es requicito obligatorio', 'danger'))
             window.scrollTo({
                 top: 500,
@@ -2055,6 +2067,17 @@ $(function() {
         })
     }
 
+    function otherReligion(id) {
+        let religion = $(document).find('#'+id).val();
+        if(religion == 10) {
+            $(document).find('#'+id+'_otro_container').css({'display' : 'block'});
+            $(document).find('#otra_'+id).attr('required', 'required');
+        } else {
+            $(document).find('#'+id+'_otro_container').css({'display' : 'none'});
+            $(document).find('#otra_'+id).removeAttr('required');
+        }
+    }
+
     function generateTemplate_estados() {
         var template = '';
         $(objEstados).each((index, estado) => {
@@ -2084,7 +2107,7 @@ $(function() {
 
     function generateTemplate_codigos() {
         var template = '';
-        $(objPaises).each((index, pais) => {
+        $(objLatam).each((index, pais) => {
             template += `<option value="${pais.phonecode}">${'('+pais.phonecode +') '+pais.nicename}</option>`;
         });
 
