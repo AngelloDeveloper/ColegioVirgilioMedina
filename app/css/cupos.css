@@ -1,0 +1,50 @@
+.cardTurn {
+    padding: 15px;
+}
+
+.cardTurnMorning {
+    background: rgb(2,0,36);
+    background: linear-gradient(
+        141deg, 
+        rgba(2,0,36,1) 0%, 
+        rgba(25,71,138,1) 16%, 
+        rgba(51,153,255,1) 56%, 
+        rgba(50,154,255,0.5019257703081232) 
+        100%
+    );
+}
+
+.cardTurnAfternon {
+    background: rgb(233,24,46);
+    background: linear-gradient(
+        141deg, 
+        rgba(233,24,46,1) 0%, 
+        rgba(224,70,86,1) 18%, 
+        rgba(255,174,51,1) 46%, 
+        rgba(255,196,51,0.9641106442577031) 66%, 
+        rgba(255,225,51,0.8352591036414566) 87%
+    );
+}
+
+.cardTurn div span {
+    display: inline; 
+    color: #fff;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.cardTurn div img {
+    width: 120px; 
+    float: right;
+}
+
+.gradoItem {
+    width: 50%;
+    margin-top: 20px;
+    font-size: 25px;
+    color: #fff;
+    background-color: green;
+    padding: 8px;
+    border-radius: 10px;
+    text-align: center;
+}

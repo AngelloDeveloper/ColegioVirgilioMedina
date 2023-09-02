@@ -588,13 +588,13 @@ $(function() {
     })
 
     //function
-    function initMaterialInput() {
+    /*function initMaterialInput() { se migro a assets/materialize/js/init.js
         M.AutoInit();
         M.updateTextFields();
         M.FormSelect.init($('select'));
         M.Collapsible.init($('.collapsible'));
         M.Tabs.init($(document).find('.tabs'));
-    }
+    }*/
 
     const getDocenteData = async (objData) => {
         result = await $.post("../controllers/controller_docente.php", objData, function(response) {

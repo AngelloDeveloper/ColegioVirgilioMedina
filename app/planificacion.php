@@ -17,6 +17,7 @@
     $objLapsos = new Lapsos();
     $objSecciones = new Secciones();
     $objGrados = new Grados();
+    echo 'test';
     $objMaterias = new Materias();
     
     //Get data
