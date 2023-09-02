@@ -36,7 +36,7 @@
                     </div>
                     <div class="modal-footer">
                         <button id="btn_close_pre_inscripcion" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <a target="_blank" href="../processing/registro.php" class="btn" style="background-color: #DCBB05; color: #000;">Ir a la Pre-Inscripción</a>
+                        <a href="../processing/registro.php" class="btn" style="background-color: #DCBB05; color: #000;">Ir a la Pre-Inscripción</a>
                     </div>
                 </div>
             </div>
@@ -158,7 +158,6 @@
                                 </h4>
                                 <a  
                                     style="padding: 20px; margin-top: 50px; background-color: #DCBB05; color: #000;" 
-                                    target="_blank" 
                                     href="../processing/registro.php" 
                                     class="btn ir_preregistro">
                                         Ir a la Pre-Inscripción

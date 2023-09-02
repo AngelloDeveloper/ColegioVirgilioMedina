@@ -1,5 +1,5 @@
 <?php 
-    class Periodo extends Conexion {
+    class Cupos extends Conexion {
         //properties
         private $con;
         private $query;
@@ -15,28 +15,13 @@
             }
         }
 
-        public function getAllPeriodos() {
+        public function getAllCuposThisPeriodo($idperiodo) {
             $this->sql = " SELECT
                     *
                 FROM
-                    periodo_escolar
-            ";
-
-            $this->query = mysqli_query($this->con, $this->sql);
-            while ($row = mysqli_fetch_assoc($this->query)) { 
-                $rows[] = $row; 
-            } 
-            $this->result = $rows;
-            return $this->result;
-        }
-
-       public function getPeriodo() {
-            $this->sql = " SELECT
-                    *
-                FROM
-                    periodo_escolar
-                WHERE 
-                    estatus = 'Y'
+                    cupos
+                WHERE
+                    id_periodo = '{$idperiodo}'
             ";
 
             $this->query = mysqli_query($this->con, $this->sql);

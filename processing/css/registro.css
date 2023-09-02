@@ -1,7 +1,8 @@
 body {
-	/*background: rgb(17,17,17);
-	background: linear-gradient(90deg, rgba(17,17,17,1) 13%, rgba(10,101,7,1) 50%, rgba(17,17,17,1) 89%);*/
+    width: 100%;
+    height: auto;
 }
+
 
 .card {
     margin-top: 20px;
@@ -56,6 +57,7 @@ a.btn:hover {
     border: 2px solid #c0b4b4;
     border-radius: 100%;
     z-index: 2;
+    transition: all 0.5s ease-out;
 }
 
 .lineSecuencia {
@@ -78,6 +80,7 @@ a.btn:hover {
 }
 
 .gradientProgress {
+    margin-top: 90px;
     background: rgb(17,121,9);
     background: linear-gradient(303deg, rgba(17,121,9,1) 3%, rgba(14,138,54,1) 10%, rgba(255,255,255,1) 48%, rgba(255,255,255,1) 100%);
 }
@@ -153,7 +156,7 @@ a.btn:hover {
 
 /*estilos foto estudiantil*/
 .formBox {
-    margin: 80px 0px 20px;
+    margin: 40px 0px 20px;
     padding: 0px 50px;
     position: absolute;
 }
@@ -249,5 +252,68 @@ a.btn:hover {
 
 .datepicker-modal {
     overflow: auto !important;
+}
+
+/*cupos sections*/
+.turno_cupo {
+    cursor: pointer;
+    transition: all 0.5s ease-out;
+}
+.turno_cupo:hover {
+    background-color: rgba(20, 180, 14, .4);
+    transform: scale(1.05);
+}
+
+.cardTurn {
+    padding: 15px;
+}
+
+.cardTurnMorning {
+    background: rgb(2,0,36);
+    background: linear-gradient(
+        141deg, 
+        rgba(2,0,36,1) 0%, 
+        rgba(25,71,138,1) 16%, 
+        rgba(51,153,255,1) 56%, 
+        rgba(50,154,255,0.5019257703081232) 
+        100%
+    );
+}
+
+.cardTurnAfternon {
+    background: rgb(233,24,46);
+    background: linear-gradient(
+        141deg, 
+        rgba(233,24,46,1) 0%, 
+        rgba(224,70,86,1) 18%, 
+        rgba(255,174,51,1) 46%, 
+        rgba(255,196,51,0.9641106442577031) 66%, 
+        rgba(255,225,51,0.8352591036414566) 87%
+    );
+}
+
+.cardTurn div span {
+    display: inline; 
+    color: #fff;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.cardTurn div img {
+    width: 120px; 
+    float: right;
+}
+
+.btnAlternative {
+    background-color: #fff !important;
+    border: solid 2px #0F8B0B;
+    color: #0F8B0B !important;
+    border-radius: 20px;
+    padding: 5px 10px
+}
+
+.btnAlternative:hover {
+    background-color: #0F8B0B !important;
+    color: #fff !important;
 }
 

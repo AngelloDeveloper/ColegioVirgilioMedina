@@ -7,6 +7,8 @@ $(function() {
         'madre' : {},
         'padre' : {},
         'representante' : {},
+        'turn' : '',
+        'grado' : '',
         'type' : 'setPreRegistro'
     }
 
@@ -779,13 +781,13 @@ $(function() {
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="nombre_padre" type="text" required />
+                                    <input id="nombre_padre" class="form-control verificationData" data-datatype="text" type="text" required />
                                     <label for="nombre_padre">Nombre <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="apellido_padre" type="text" required />
+                                    <input id="apellido_padre" class="form-control verificationData" data-datatype="text" type="text" required />
                                     <label for="apellido_padre">Apellido <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
@@ -807,18 +809,35 @@ $(function() {
                             </div>
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="documento_padre" type="text" required/>
+                                    <input id="documento_padre" class="form-control verificationData" data-datatype="num" type="text" required/>
                                     <label for="documento_padre">Documento <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group input-field">
-                                    <input id="fecha_nacimiento_padre" type="text" class="datepicker" required/>
-                                    <label for="fecha_nacimiento_padre">Fecha de Nacimiento <span style="color: #960032;"><b>*</b></span></label>
+                                <div class="form-group input-field" style="margin-top: 0;">
+                                    <p style="display: inline; color: #9e9e9e;">fecha de nacimiento <span style="color: #960032;"><b>*</b></span></p>
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <input id="fecha_nacimiento_padre" type="text" required disabled />
+                                        </div>
+                                        <div class="col-4">
+                                            <button type="button" class="btn btn-primary ml-2 datepicker" data-actor="padre">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="col-4">
+                                <div class="form-group input-field">
+                                    <input id="edad_padre" type="number" class="form-control" required disabled/>
+                                    <label for="edad_padre">Edad <span style="color: #960032;"><b>*</b></span></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-4">
                                 <div class="form-group input-field">
                                     <select id="nacionalidad_padre">
@@ -826,14 +845,6 @@ $(function() {
                                         <option value="COL">Colombiana</option>
                                     </select>
                                     <label for="nacionalidad_padre">Nacionalidad <span style="color: #960032;"><b>*</b></span></label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="form-group input-field">
-                                    <input id="edad_padre" type="number" required/>
-                                    <label for="edad_padre">Edad <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
@@ -863,7 +874,7 @@ $(function() {
                             </div>
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <textarea id="ocupacion_padre" class="materialize-textarea" required></textarea>
+                                    <textarea id="ocupacion_padre" class="materialize-textarea verificationData" data-datatype="text" required></textarea>
                                     <label for="ocupacion_padre">Ocupación <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
@@ -871,13 +882,13 @@ $(function() {
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <textarea id="lugar_trabajo_padre" class="materialize-textarea" required></textarea>
+                                    <textarea id="lugar_trabajo_padre" class="materialize-textarea verificationData" data-datatype="text" required></textarea>
                                     <label for="lugar_trabajo_padre">Lugar de trabajo <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <textarea id="habilidad_padre" class="materialize-textarea" ></textarea>
+                                    <textarea id="habilidad_padre" class="materialize-textarea verificationData" data-datatype="text" ></textarea>
                                     <label for="habilidad_padre">Habilidad</label>
                                 </div>
                             </div>
@@ -890,42 +901,40 @@ $(function() {
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="form-group input-field">
-                                    <input id="telefono_movil_padre" type="number"  required/>
-                                    <label for="telefono_movil_padre">Telefono Movil <span style="color: #960032;"><b>*</b></span></label>
+                                <div class="row">
+                                    <div class="col-7">
+                                        <div class="form-group input-field">
+                                            <select id="cod_phone_numbre_padre">
+                                                <option value="">--Selecciona Codigo--</option>
+                                                ${template_codigos}
+                                            </select>
+                                            <label for="cod_phone_numbre_madre">Codigo País <span style="color: #960032;"><b>*</b></span></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-5">
+                                        <div class="form-group input-field">
+                                            <input id="telefono_movil_padre" class="form-control verificationData" data-datatype="telf_movil" type="number" required/>
+                                            <label for="telefono_movil_padre">Telefono Movil <span style="color: #960032;"><b>*</b></span></label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="telefono_residencial_padre" type="number" />
+                                    <input id="telefono_residencial_padre" class="form-control verificationData" data-datatype="num" type="number" />
                                     <label for="telefono_residencial_padre">Telefono Residencial </label>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group input-field">
                                     <label for="telefono_trabajo_padre">Telefono del lugar de trabajo </label>
-                                    <input id="telefono_trabajo_padre" type="number" />
+                                    <input id="telefono_trabajo_padre" class="form-control verificationData" data-datatype="num" type="number" />
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-4">
-                                <div class="form-group input-field">
-                                    <select id="religion_padre">
-                                        <option value="">--Selecciona una Religíon--</option>
-                                        ${template_religion}
-                                    </select>
-                                    <label for="religion_padre">Religión <span style="color: #960032;"><b>*</b></span></label>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div id="religion_padre_otro_container" style="display:none" class="form-group input-field">
-                                    <input id="otra_religion_padre" type="text" class="form-control" />
-                                    <label for="otra_religion_padre">Mencione religión <span style="color: #960032;"><b>*</b></span></label>
-                                </div>
-                            </div> 
                             <div class="col-4">
                                 <div class="form-group pt-2">
                                     <label>¿ Vive con el estudiante ? <span style="color: #960032;"><b>*</b></span></label>
@@ -945,6 +954,21 @@ $(function() {
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-4">
+                                <div class="form-group input-field">
+                                    <select id="religion_padre">
+                                        <option value="">--Selecciona una Religíon--</option>
+                                        ${template_religion}
+                                    </select>
+                                    <label for="religion_padre">Religión <span style="color: #960032;"><b>*</b></span></label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div id="religion_padre_otro_container" style="display:none" class="form-group input-field">
+                                    <input id="otra_religion_padre" type="text" class="form-control" />
+                                    <label for="otra_religion_padre">Mencione religión <span style="color: #960032;"><b>*</b></span></label>
+                                </div>
+                            </div> 
                         </div>
                         <div class="row">
                             <div class="col-8">
@@ -1025,13 +1049,13 @@ $(function() {
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="nombre_representante" type="text" required />
+                                    <input id="nombre_representante" class="form-control verificationData" data-datatype="text" type="text" required />
                                     <label for="nombre_representante">Nombre <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="apellido_representante" type="text" required />
+                                    <input id="apellido_representante" class="form-control verificationData" data-datatype="text" type="text" required />
                                     <label for="apellido_representante">Apellido <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
@@ -1054,18 +1078,35 @@ $(function() {
                             </div>
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="documento_representante" type="text" required/>
+                                    <input id="documento_representante" class="form-control verificationData" data-datatype="num" type="text" required/>
                                     <label for="documento_representante">Documento <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group input-field">
-                                    <input id="fecha_nacimiento_representante" type="text" class="datepicker" required/>
-                                    <label for="fecha_nacimiento_representante">Fecha de Nacimiento <span style="color: #960032;"><b>*</b></span></label>
+                                <div class="form-group input-field" style="margin-top: 0;">
+                                    <p style="display: inline; color: #9e9e9e;">fecha de nacimiento <span style="color: #960032;"><b>*</b></span></p>
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <input id="fecha_nacimiento_representante" type="text" required disabled />
+                                        </div>
+                                        <div class="col-4">
+                                            <button type="button" class="btn btn-primary ml-2 datepicker" data-actor="representante">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="col-4">
+                                <div class="form-group input-field">
+                                    <input id="edad_representante" type="number" class="form-control" required disabled/>
+                                    <label for="edad_representante">Edad <span style="color: #960032;"><b>*</b></span></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-4">
                                 <div class="form-group input-field">
                                     <select id="nacionalidad_representante">
@@ -1073,14 +1114,6 @@ $(function() {
                                         <option value="COL">Colombiana</option>
                                     </select>
                                     <label for="nacionalidad_representante">Nacionalidad <span style="color: #960032;"><b>*</b></span></label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="form-group input-field">
-                                    <input id="edad_representante" type="number" required/>
-                                    <label for="edad_representante">Edad <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
@@ -1110,7 +1143,7 @@ $(function() {
                             </div>
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <textarea id="ocupacion_representante" class="materialize-textarea" required></textarea>
+                                    <textarea id="ocupacion_representante" class="materialize-textarea verificationData" data-datatype="text" required></textarea>
                                     <label for="ocupacion_representante">Ocupación <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
@@ -1118,13 +1151,13 @@ $(function() {
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <textarea id="lugar_trabajo_representante" class="materialize-textarea" required></textarea>
+                                    <textarea id="lugar_trabajo_representante" class="materialize-textarea verificationData" data-dataType="text" required></textarea>
                                     <label for="lugar_trabajo_representante">Lugar de trabajo <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <textarea id="habilidad_representante" class="materialize-textarea"></textarea>
+                                    <textarea id="habilidad_representante" class="materialize-textarea verificationData" data-datatype="text"></textarea>
                                     <label for="habilidad_representante">Habilidad</label>
                                 </div>
                             </div>
@@ -1133,12 +1166,12 @@ $(function() {
                             <div class="col-4">
                                 <div class="form-group input-field">
                                     <label for="direccion_residencia_representante">Direccion de residencia <span style="color: #960032;"><b>*</b></span></label>
-                                    <textarea id="direccion_residencia_representante" class="materialize-textarea" required></textarea>
+                                    <textarea id="direccion_residencia_representante" class="materialize-textarea verificationData" data-datatype="text" required></textarea>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="telefono_movil_representante" type="number" required/>
+                                    <input id="telefono_movil_representante" type="number" class="form-control verificationData" data-datatype="telf_movil" required/>
                                     <label for="telefono_movil_representante">Telefono Movil <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
@@ -1146,33 +1179,18 @@ $(function() {
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="telefono_residencial_representante" type="number" />
+                                    <input id="telefono_residencial_representante" class="form-control verificationData" data-datatype="num" type="number" />
                                     <label for="telefono_residencial_representante">Telefono Residencial</label>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group input-field">
-                                    <input id="telefono_trabajo_representante" type="number" />
+                                    <input id="telefono_trabajo_representante" class="form-control verificationData" data-datatype="num" type="number" />
                                     <label for="telefono_trabajo_representante">Telefono del lugar de trabajo </label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-4">
-                                <div class="form-group input-field">
-                                    <select id="religion_representante">
-                                        <option value="">--Selecciona una Religíon--</option>
-                                        ${template_religion}
-                                    </select>
-                                    <label for="religion_representante">Religión <span style="color: #960032;"><b>*</b></span></label>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div id="religion_representante_otro_container" style="display:none" class="form-group input-field">
-                                    <input id="otra_religion_representante" type="text" class="form-control" />
-                                    <label for="otra_religion_representante">Mencione religión <span style="color: #960032;"><b>*</b></span></label>
-                                </div>
-                            </div>
                             <div class="col-4">
                                 <label>¿ Vive con el estudiante ? <span style="color: #960032;"><b>*</b></span></label>
                                 <div class="form-group">
@@ -1188,6 +1206,21 @@ $(function() {
                                             <span>No</span>
                                         </label>
                                     </span>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group input-field">
+                                    <select id="religion_representante">
+                                        <option value="">--Selecciona una Religíon--</option>
+                                        ${template_religion}
+                                    </select>
+                                    <label for="religion_representante">Religión <span style="color: #960032;"><b>*</b></span></label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div id="religion_representante_otro_container" style="display:none" class="form-group input-field">
+                                    <input id="otra_religion_representante" type="text" class="form-control verificationData" data-datatype="text" />
+                                    <label for="otra_religion_representante">Mencione religión <span style="color: #960032;"><b>*</b></span></label>
                                 </div>
                             </div>
                         </div>
@@ -1258,6 +1291,67 @@ $(function() {
             </div>
         `);
     }
+
+     /*turn cups*/
+     $('.turno_cupo').on('click', function() {
+        let elm = $(this)[0];
+        let turn = $(elm).data('turno');
+        let grado = $(elm).data('grado');
+
+        objData.turn = turn;
+        objData.grado = grado;
+        const img = turn == 'manana' ? 'river.png' : 'nature.png';
+
+        $('#imgTurn').html(`
+            <img src="../assets/img/pre-registro/${img}" style="
+                width: 160px;
+                position: absolute;
+                float: left;
+            ">
+        `);
+        $('#btn-navigation').html(`
+            <a id="btn-session" class="btn btn-md mt-4 btnReturnTurn">VOLVER</a>
+        `)
+        $('#turn_cups').css('display', 'none');
+        $('#pre_registro_forms').css('display', 'block');
+        
+    })
+
+    //btn return TURN
+    $(document).on('click', '.btnReturnTurn', function(e)  {
+        $('#btn-navigation').html(`
+            <a id="btn-session" class="btn btn-md mt-4" href="../landing-page/home.php">PAGINA PRINCIPAL</a>
+        `)
+        $('#turn_cups').css('display', 'block');
+        $('#pre_registro_forms').css('display', 'none');
+    })
+
+    //btn return TAP
+    $(document).on('click', '.btnAlternative', function(e) {
+        let elm = $(this)[0];
+        let tap = $(elm).data('tap');
+        switch (tap) {
+            case tap: '1'
+                $('.title-tap').html(arrFormularios.formulario1.title);
+                $('.formularios').html(arrFormularios.formulario1.form);
+            break;
+            case tap: '2'
+                $('.title-tap').html(arrFormularios.formulario2.title);
+                $('.formularios').html(arrFormularios.formulario2.form);
+            break;
+            case tap: '3'
+                $('.title-tap').html(arrFormularios.formulario3.title);
+                $('.formularios').html(arrFormularios.formulario3.form);
+            break;
+        }
+
+        $('.btn_return_tap').html(`
+            <button data-tap="${tap}" class="btnAlternative">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                atras
+            </button>
+        `)
+    })
 
     $(document).on('click', '#informeMedico', function(e) {
         handleSwicht ('informeMedico', 
@@ -1356,7 +1450,7 @@ $(function() {
             });
         } else if(lengthFoto == 0) {
             $(document).find('.btnform').html('SIGUIENTE');
-            $(document).find('#alerta_foto').html(alert_Images('Debe Ingresar una foto, es requicito obligatorio, Por favor verificar que la imagen cumple con los requerimientos indicados', 'danger'))
+            $(document).find('#alerta_foto').html(alert_Images('Debe Ingresar una foto', 'danger'))
             window.scrollTo({
                 top: 500,
                 behavior: "smooth"
@@ -1390,7 +1484,7 @@ $(function() {
                     'genero' : $(document).find('#masculino_estudiante').prop('checked') == true ? 'M' : 'F',
                     'lateralidad' : $(document).find('#diestro_estudiante').prop('checked') == true ? 'D' : 'I',
                     //'foto_estudiante' : formData,
-                    //'preview_foto' : $(document).find('#foto-estudiante')[0].files[0]
+                    'preview_foto' : $(document).find('#foto-estudiante')[0].files[0]
                 };
 
                 objData.detalle_estudiante = {
@@ -1442,6 +1536,12 @@ $(function() {
                         "color" : "#fff",
                     })
                     
+                    $('.btn_return_tap').html(`
+                        <button data-tap="1" class="btnAlternative">
+                            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                            atras
+                        </button>
+                    `)
                     $('.title-tap').html(arrFormularios.formulario2.title);
                     $('.formularios').html(arrFormularios.formulario2.form);
                     //M.AutoInit permite inicializar todos los componentes de Materialise con una sola llamada
@@ -1479,7 +1579,7 @@ $(function() {
             });
         } else if(lengthFoto == 0) {
             $(document).find('.btnform').html('SIGUIENTE');
-            $(document).find('#alerta_foto').html(alert_Images('Debe Ingresar una foto, es requicito obligatorio', 'danger'))
+            $(document).find('#alerta_foto').html(alert_Images('Debe Ingresar una foto', 'danger'))
             window.scrollTo({
                 top: 500,
                 behavior: "smooth"
@@ -1507,7 +1607,7 @@ $(function() {
                 'otra_religion' : $(document).find('#otra_religion_madre').val(),
                 'vive_estudiante' : $(document).find('#vive_estudiante_madre').prop('checked') == true ? 'Y' : 'N',
                 //'foto_madre' : formData,
-                //'preview_foto' : $(document).find('#foto-madre')[0].files[0]
+                'preview_foto' : $(document).find('#foto-madre')[0].files[0]
             };
 
             console.log(objData);
@@ -1534,6 +1634,12 @@ $(function() {
                     "background-color" : "rgb(33 109 30)",
                     "color" : "#fff",
                 })
+                $('.btn_return_tap').html(`
+                        <button data-tap="2" class="btnAlternative">
+                            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                            atras
+                        </button>
+                    `)
                 $('.title-tap').html(arrFormularios.formulario3.title);
                 $('.formularios').html(arrFormularios.formulario3.form);
                 //M.AutoInit permite inicializar todos los componentes de Materialise con una sola llamada
@@ -1570,7 +1676,7 @@ $(function() {
             });
         } else if(lengthFoto == 0) {
             $(document).find('.btnform').html('SIGUIENTE');
-            $(document).find('#alerta_foto').html(alert_Images('Debe Ingresar una foto, es requicito obligatorio', 'danger'))
+            $(document).find('#alerta_foto').html(alert_Images('Debe Ingresar una foto', 'danger'))
             window.scrollTo({
                 top: 500,
                 behavior: "smooth"
@@ -1598,7 +1704,7 @@ $(function() {
                 'otra_religion' : $(document).find('#otra_religion_padre').val(),
                 'vive_estudiante' : $(document).find('#vive_estudiante_padre').prop('checked') == true ? 'Y' : 'N',
                 //'foto_padre' : formData,
-                //'preview_foto' : $(document).find('#foto-padre')[0].files[0]
+                'preview_foto' : $(document).find('#foto-padre')[0].files[0]
             };
 
             console.log(objData);
@@ -1625,6 +1731,13 @@ $(function() {
                     "background-color" : "rgb(33 109 30)",
                     "color" : "#fff",
                 })
+
+                $('.btn_return_tap').html(`
+                    <button data-tap="3" class="btnAlternative">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                        atras
+                    </button>
+                `)
                 $('.title-tap').html(arrFormularios.formulario4.title);
                 $('.formularios').html(arrFormularios.formulario4.form);
                 //M.AutoInit permite inicializar todos los componentes de Materialise con una sola llamada
@@ -1641,7 +1754,16 @@ $(function() {
     })
 
     $(document).on('click', '#selectRepresentante', function(e) {
-        var swicth = handleSwicht ('selectRepresentante', ['seleccionar_representante'], ['seleccionar_parenteco'], true);
+        //['seleccionar_parenteco']
+        var swicth = handleSwicht ('selectRepresentante', 
+            [{'seleccionar_representante' : {}}],
+
+            {
+                true : {'seleccionar_parenteco' : 'none', 'seleccionar_representante' : 'block'},
+                false: {'seleccionar_parenteco' : 'block', 'seleccionar_representante' : 'none'}
+            },
+            true
+        );
         var selectMadre = $(document).find('#selectMadre').prop('checked');
         var divFoto = '';
         var divImg = '';
@@ -1665,6 +1787,7 @@ $(function() {
                 $(document).find('#telefono_residencial_representante').val(objData.madre.telefono_residencia);
                 $(document).find('#telefono_trabajo_representante').val(objData.madre.telefono_trabajo);
                 $(document).find('#religion_representante').val(objData.madre.religion);
+                $(document).find('#otra_religion_representante').val(objData.madre.otra_religion);
 
                 //preview foto
                 $(document).find("#foto-representante-preview div").html(objData.madre.preview_foto.name);
@@ -1677,6 +1800,13 @@ $(function() {
                     $(document).find('#vive_estudiante_representante_y').removeAttr('checked');
                     $(document).find('#vive_estudiante_representante_n').attr('checked', 'checked');
                 }
+
+                if(objData.padre.otra_religion == 10) {
+                    $(document).find('#religion_representante_otro_container').css('display', 'block');
+                } else {
+                    $(document).find('#religion_representante_otro_container').css('display', 'none');
+                }
+
             } else {
                 $(document).find('#nombre_representante').val(objData.padre.nombre);
                 $(document).find('#apellido_representante').val(objData.padre.apellido);
@@ -1695,6 +1825,7 @@ $(function() {
                 $(document).find('#telefono_residencial_representante').val(objData.padre.telefono_residencia);
                 $(document).find('#telefono_trabajo_representante').val(objData.padre.telefono_trabajo);
                 $(document).find('#religion_representante').val(objData.padre.religion);
+                $(document).find('#otra_religion_representante').val(objData.padre.otra_religion);
 
                 $(document).find("#foto-representante-preview div").html(objData.padre.preview_foto.name);
                 $(document).find("#foto-representante-preview img").attr('src', URL.createObjectURL(objData.padre.preview_foto));
@@ -1705,6 +1836,12 @@ $(function() {
                 } else {
                     $(document).find('#vive_estudiante_representante_y').removeAttr('checked');
                     $(document).find('#vive_estudiante_representante_n').attr('checked', 'checked');
+                }
+
+                if(objData.padre.otra_religion == 10) {
+                    $(document).find('#religion_representante_otro_container').css('display', 'block');
+                } else {
+                    $(document).find('#religion_representante_otro_container').css('display', 'none');
                 }
             }
             $("input[type='text']").attr('disabled', 'disabled');
@@ -1743,6 +1880,12 @@ $(function() {
             $("input[type='radio']").removeAttr('disabled', 'disabled');
             $("textarea").removeAttr('disabled');
             $("select").removeAttr('disabled');
+
+            //mantener desabilitado fecha y edad
+            let fechaRepresentante = $(document).find('#fecha_nacimiento_representante')[0];
+            let edadRepresentante = $(document).find('#edad_representante')[0];
+            $(fechaRepresentante).attr('disabled', 'disabled');
+            $(edadRepresentante).attr('disabled', 'disabled');
         }
 
         //función para reinicializar todas las etiquetas de Materialise en la página si está agregando entradas dinámicamente.
@@ -2033,13 +2176,13 @@ $(function() {
                                             "background-color" : '#f8d7da',
                                             "color" : '#721c24'
                                         });
-                                        $(document).find('#alerta_foto').html(alert_Images('Se requiere maximo un rostro en la imagen', 'danger'));
+                                        $(document).find('#alerta_foto').html(alert_Images('Se requiere maximo un rostro.', 'danger'));
                                     }
                                 });
                         } else {
                             elm.target.value = '';
                             $(loadFaceDetection).html('');
-                            $(document).find('#alerta_foto').html(alert_Images('El tamaño de la imagen supera el limite permitido', 'danger'));
+                            $(document).find('#alerta_foto').html(alert_Images('El peso exede el permitido', 'danger'));
                             $(document).find('#fitem3').css({
                                 "background-color" : '#f8d7da',
                                 "color" : '#721c24'
@@ -2048,7 +2191,7 @@ $(function() {
                     } else {
                         elm.target.value = '';
                         $(loadFaceDetection).html('');
-                        $(document).find('#alerta_foto').html(alert_Images('Las medidas deben ser: 3 x 4 cm o 354x473 pixeles', 'danger'));
+                        $(document).find('#alerta_foto').html(alert_Images('Las medidas no son las correctas', 'danger'));
                         $(document).find('#fitem2').css({
                             "background-color" : '#f8d7da',
                             "color" : '#721c24'
