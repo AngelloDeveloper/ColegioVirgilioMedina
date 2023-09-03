@@ -95,5 +95,17 @@ function getInvalidData() {
    return result;
 }
 
+function dataUnique(objDataUnique) {
+    const res = new Promise((resolve, reject) => {
+        $.post('../controllers/controller_unique_verifications.php',{type: 'unique', data: objDataUnique}, function(response) {
+            var resp = jQuery.parseJSON(response);
+            var result = resp.STATUS == 'SUCCESS' ? true : resp.METADATA;
+            return resolve(result);
+        })
+    })
+
+    return res;
+}
+
 asyncVerificationDataInput();
 asyncVerificationDataFiles();

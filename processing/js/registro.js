@@ -23,6 +23,7 @@ $(function() {
             form: `
                 <form id="form1" enctype="multipart/form-data">
                     <div class="container p-4">
+                        <span id="alerta_form"></span>
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group input-field">
@@ -569,6 +570,7 @@ $(function() {
             form: `
                 <form id="form2">
                     <div class="container p-4">
+                        <span id="alerta_form"></span>
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group input-field">
@@ -778,6 +780,7 @@ $(function() {
             form: `
                 <form id="form3">
                     <div class="container p-4">
+                        <span id="alerta_form"></span>
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group input-field">
@@ -988,6 +991,7 @@ $(function() {
             form: `
                 <form id="form4">
                     <div class="container p-4">
+                        <span id="alerta_form"></span>
                         <div class="row">
                             <div class="col-8">
                                 <div class="row">
@@ -1456,104 +1460,126 @@ $(function() {
                 behavior: "smooth"
             });
         } else {
-                //foto estudiante
-                formData.append("foto_estudiante",  $(document).find('#foto-estudiante')[0].files[0]);
-                console.log(formData.getAll("foto_estudiante"));
+            const unique = [
+                {'cedula': $(document).find('#documento_estudiante').val()},
+                {'email': $(document).find('#email_estudiante').val()},
+                {'telf_movil': $(document).find('#telefono_movil_estudiante').val()},
+                {'telf_residencia': $(document).find('#telefono_residencial_estudiante').val()}
+            ];
 
-                //guardando datos
-                objData.estudiante = {
-                    'nombre' : $(document).find('#nombre_estudiante').val(),
-                    'apellido': $(document).find('#apellido_estudiante').val(),
-                    'tipo_documento': $(document).find('#tipo_documento_estudiante').val(),
-                    'documento': $(document).find('#documento_estudiante').val(),
-                    'fecha_nacimiento': DateGuionFormat($(document).find('#fecha_nacimiento_estudiante').val()),
-                    'edad': $(document).find('#edad_estudiante').val(),
-                    'nacionalidad': $(document).find('#nacionalidad_estudiante').val(),
-                    'email': $(document).find('#email_estudiante').val(),
-                    'direccion': $(document).find('#direccion_estudiante').val(),
-                    'punto_referencia': $(document).find('#punto_referencia_estudiante').val(),
-                    'lugar_nacimiento' : $(document).find('#lugar_nacimiento_estudiante').val(),
-                    'estado': $(document).find('#estado_estudiante').val(),
-                    'municipio': $(document).find('#municipio_estudiante').val(),
-                    'telf_code' : $(document).find('#cod_phone_numbre').val(),
-                    'telf_movil': $(document).find('#telefono_movil_estudiante').val(),
-                    'telf_residencia': $(document).find('#telefono_residencial_estudiante').val(),
-                    'habilidades' : $(document).find('#habilidades_estudiante').val(),
-                    'religion' : $(document).find('#religion_estudiante').val(),
-                    'otra_religion' : $(document).find('#otra_religion_estudiante').val(),
-                    'genero' : $(document).find('#masculino_estudiante').prop('checked') == true ? 'M' : 'F',
-                    'lateralidad' : $(document).find('#diestro_estudiante').prop('checked') == true ? 'D' : 'I',
-                    //'foto_estudiante' : formData,
-                    'preview_foto' : $(document).find('#foto-estudiante')[0].files[0]
-                };
+            //VALIDACION DE DATOS EXISTENTES
+            dataUnique(unique)
+                .then((resp) => {
+                    console.log(resp);
+                    if(resp == true) {
+                            //foto estudiante
+                        formData.append("foto_estudiante",  $(document).find('#foto-estudiante')[0].files[0]);
+                        console.log(formData.getAll("foto_estudiante"));
 
-                objData.detalle_estudiante = {
-                    'talla_camisa' : $(document).find('#tallaCamisa_estudiante').val(),
-                    'talla_pantalon': $(document).find('#tallaPatalon_estudiante').val(),
-                    'estatura': $(document).find('#estatura_estudiante').val(),
-                    'peso': $(document).find('#peso_estudiante').val(),
-                    'grupo_sanguineo': $(document).find('#grupoSanguineo_estudiante').val(),
-                    'discapacidad': $(document).find('#discapacidad').prop('checked') == true ? 'Y' : 'N',
-                    'discapacidad_descripcion' : $(document).find('#discapacidadDescripcion').val(),
-                    'informeMedico': $(document).find('#informeMedico').prop('checked') == true ? 'Y' : 'N',
-                    'url_informe_medico' :  $(document).find('#informeMedicoDocumento').val(),
-                    'alergico' : $(document).find('#alergico').prop('checked') == true ? 'Y' : 'N',
-                    'alergia' : $(document).find('#alergicoDescripcion').val(),
-                    'enfermo' : $(document).find('#enfermedad').prop('checked') == true ? 'Y' : 'N',
-                    'enfermedad' : $(document).find('#enfermedadDescripcion').val(),
-                    'medicado' : $(document).find('#medicamentos').prop('checked') == true ? 'Y' : 'N',
-                    'medicamento' : $(document).find('#medicamentosDescripcion').val(),
-                    'convulsion' : $(document).find('#convulsion').prop('checked') == true ? 'Y' : 'N',
-                    'convulsion_observaciones' : $(document).find('#convulsionDescripcion').val(),
-                    'familiar_colegio' : $(document).find('#familiar_colegio').prop('checked') == true ? 'Y' : 'N',
-                    'familiar_colegioNombre' : $(document).find('#familiar_colegioNombre').val(),
-                    'familiar_colegioParentesco' : $(document).find('#familiar_colegioParentesco').val(),
-                    'familiar_colegioDescripcion' : $(document).find('#familiar_colegioDescripcion').val()
-                }
+                        //guardando datos
+                        objData.estudiante = {
+                            'nombre' : $(document).find('#nombre_estudiante').val(),
+                            'apellido': $(document).find('#apellido_estudiante').val(),
+                            'tipo_documento': $(document).find('#tipo_documento_estudiante').val(),
+                            'documento': $(document).find('#documento_estudiante').val(),
+                            'fecha_nacimiento': DateGuionFormat($(document).find('#fecha_nacimiento_estudiante').val()),
+                            'edad': $(document).find('#edad_estudiante').val(),
+                            'nacionalidad': $(document).find('#nacionalidad_estudiante').val(),
+                            'email': $(document).find('#email_estudiante').val(),
+                            'direccion': $(document).find('#direccion_estudiante').val(),
+                            'punto_referencia': $(document).find('#punto_referencia_estudiante').val(),
+                            'lugar_nacimiento' : $(document).find('#lugar_nacimiento_estudiante').val(),
+                            'estado': $(document).find('#estado_estudiante').val(),
+                            'municipio': $(document).find('#municipio_estudiante').val(),
+                            'telf_code' : $(document).find('#cod_phone_numbre').val(),
+                            'telf_movil': $(document).find('#telefono_movil_estudiante').val(),
+                            'telf_residencia': $(document).find('#telefono_residencial_estudiante').val(),
+                            'habilidades' : $(document).find('#habilidades_estudiante').val(),
+                            'religion' : $(document).find('#religion_estudiante').val(),
+                            'otra_religion' : $(document).find('#otra_religion_estudiante').val(),
+                            'genero' : $(document).find('#masculino_estudiante').prop('checked') == true ? 'M' : 'F',
+                            'lateralidad' : $(document).find('#diestro_estudiante').prop('checked') == true ? 'D' : 'I',
+                            //'foto_estudiante' : formData,
+                            'preview_foto' : $(document).find('#foto-estudiante')[0].files[0]
+                        };
 
-                console.log(objData);
+                        objData.detalle_estudiante = {
+                            'talla_camisa' : $(document).find('#tallaCamisa_estudiante').val(),
+                            'talla_pantalon': $(document).find('#tallaPatalon_estudiante').val(),
+                            'estatura': $(document).find('#estatura_estudiante').val(),
+                            'peso': $(document).find('#peso_estudiante').val(),
+                            'grupo_sanguineo': $(document).find('#grupoSanguineo_estudiante').val(),
+                            'discapacidad': $(document).find('#discapacidad').prop('checked') == true ? 'Y' : 'N',
+                            'discapacidad_descripcion' : $(document).find('#discapacidadDescripcion').val(),
+                            'informeMedico': $(document).find('#informeMedico').prop('checked') == true ? 'Y' : 'N',
+                            'url_informe_medico' :  $(document).find('#informeMedicoDocumento').val(),
+                            'alergico' : $(document).find('#alergico').prop('checked') == true ? 'Y' : 'N',
+                            'alergia' : $(document).find('#alergicoDescripcion').val(),
+                            'enfermo' : $(document).find('#enfermedad').prop('checked') == true ? 'Y' : 'N',
+                            'enfermedad' : $(document).find('#enfermedadDescripcion').val(),
+                            'medicado' : $(document).find('#medicamentos').prop('checked') == true ? 'Y' : 'N',
+                            'medicamento' : $(document).find('#medicamentosDescripcion').val(),
+                            'convulsion' : $(document).find('#convulsion').prop('checked') == true ? 'Y' : 'N',
+                            'convulsion_observaciones' : $(document).find('#convulsionDescripcion').val(),
+                            'familiar_colegio' : $(document).find('#familiar_colegio').prop('checked') == true ? 'Y' : 'N',
+                            'familiar_colegioNombre' : $(document).find('#familiar_colegioNombre').val(),
+                            'familiar_colegioParentesco' : $(document).find('#familiar_colegioParentesco').val(),
+                            'familiar_colegioDescripcion' : $(document).find('#familiar_colegioDescripcion').val()
+                        }
 
-                setTimeout(() => {
-                    //recopilar datos, procesarlos y guardarlos en base de datos
-                    $('#lineatap1').css({
-                        "background-color" : "#302E2C",
-                        "color" : "#F6CD15",
-                        "border-color" : "#F6CD15",
-                        "padding" : "14px 15px"
-                    });
-                    $('.lt1').css({
-                        "background-color" : "#F6CD15",
-                        "color" : "#302E2C",
-                    })
-                    $('#lineatap1').html(`<i style="font-size: 20px;" class="fa fa-check" aria-hidden="true"></i>`);
-                    $('#lineatap2').css({
-                        "background-color" : "#960032",
-                        "color" : "#fff",
-                        "border-color" : "#960032"
-                    });
-                    $('.lt2').css({
-                        "background-color" : "rgb(33 109 30)",
-                        "color" : "#fff",
-                    })
-                    
-                    $('.btn_return_tap').html(`
-                        <button data-tap="1" class="btnAlternative">
-                            <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                            atras
-                        </button>
-                    `)
-                    $('.title-tap').html(arrFormularios.formulario2.title);
-                    $('.formularios').html(arrFormularios.formulario2.form);
-                    //M.AutoInit permite inicializar todos los componentes de Materialise con una sola llamada
-                    M.AutoInit();
-                    initConfigDate();
-                    window.scroll({
-                        top: 100,
-                        left: 100,
-                        behavior: 'smooth'
-                    });
-                    uploadPhotography("foto-madre");
-                },1500);
+                        console.log(objData);
+
+                        setTimeout(() => {
+                            $(document).find('#alerta_form').html('');
+                            //recopilar datos, procesarlos y guardarlos en base de datos
+                            $('#lineatap1').css({
+                                "background-color" : "#302E2C",
+                                "color" : "#F6CD15",
+                                "border-color" : "#F6CD15",
+                                "padding" : "14px 15px"
+                            });
+                            $('.lt1').css({
+                                "background-color" : "#F6CD15",
+                                "color" : "#302E2C",
+                            })
+                            $('#lineatap1').html(`<i style="font-size: 20px;" class="fa fa-check" aria-hidden="true"></i>`);
+                            $('#lineatap2').css({
+                                "background-color" : "#960032",
+                                "color" : "#fff",
+                                "border-color" : "#960032"
+                            });
+                            $('.lt2').css({
+                                "background-color" : "rgb(33 109 30)",
+                                "color" : "#fff",
+                            })
+                            
+                            $('.btn_return_tap').html(`
+                                <button data-tap="1" class="btnAlternative">
+                                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                    atras
+                                </button>
+                            `)
+                            $('.title-tap').html(arrFormularios.formulario2.title);
+                            $('.formularios').html(arrFormularios.formulario2.form);
+                            //M.AutoInit permite inicializar todos los componentes de Materialise con una sola llamada
+                            M.AutoInit();
+                            initConfigDate();
+                            window.scroll({
+                                top: 100,
+                                left: 100,
+                                behavior: 'smooth'
+                            });
+                            uploadPhotography("foto-madre");
+                        },1500);
+                    } else {
+                        $(document).find('.btnform').html('SIGUIENTE');
+                        $(document).find('#alerta_form').html(alert_Images(`el ${resp.dato}:${resp.value} ya existe en nuestra base de datos, "Por favor verificar o ponerse en contacto con nuestro equipo de soporte."`, 'danger'))
+                        window.scrollTo({
+                            top: 500,
+                            behavior: "smooth"
+                        });
+                    }
+                })
             
         }
     });
