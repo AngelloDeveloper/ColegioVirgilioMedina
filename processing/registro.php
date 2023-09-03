@@ -7,6 +7,7 @@
     require('../model/class/cupos.class.php');
     require('../model/class/periodo.class.php');
     require('../model/class/grados.class.php');
+    require_once('../model/class/turno.class.php');
 
     //intancias
     $objParameter = new Parametros();
@@ -16,12 +17,14 @@
     $objPeriodo = new Periodo();
     $objCupos = new Cupos();
     $objGrados = new Grados();
+    $objTurno = new Turnos();
 
+    $arrTurnos = $objTurno->getAllTurnos();
     $arrGrados = $objGrados->getAllGrados();
-    /*echo "<pre>".json_encode($arrGrados, JSON_PRETTY_PRINT)."</pre>";
-    die();*/
     $arrPeriodo = $objPeriodo->getPeriodo();
-    $arrCupos = $objCupos->getAllCuposThisPeriodo($arrPeriodo[0]['id']);
+    $idperiodo = (int)$arrPeriodo[0]['id'];
+    $arrCuposManana = $objCupos->getCuposForPeriodo($idperiodo, $arrTurnos[0]['id']);
+    $arrCuposTarde  = $objCupos->getCuposForPeriodo($idperiodo, $arrTurnos[1]['id']);
     $arrEstados = $objEstados->getAllEstados();
     $arrReligiones = $objReligion->getAllReligiones();
     $arrLatam = $objPaises->getPisesZone();
@@ -99,26 +102,32 @@
                             </div> 
                         </div>
                         <div class="row">
-                            <?php foreach($arrCupos as $key => $cupo) { ?>
-                                <div class="col-6">
-                                    <div class="card turno_cupo" data-turno="manana" data-grado="<?= $arrGrados[$key]['id'] ?>" style="padding: 10px;">
+                            <div class="col-6">
+                                <?php foreach($arrGrados as $index => $grado) { 
+                                    $cupo = !empty($arrCuposManana) ? $arrCuposManana[$index]['cupo'] : 0;    
+                                ?>
+                                     <div class="card turno_cupo" data-turno="manana" data-grado="<?= $arrGrados[$index]['id'] ?>" style="padding: 10px;">
                                         <div class="card-body">
-                                            <span style="font-size: 20px;"><?= $arrGrados[$key]['formato'].' Año' ?></span>
-                                            <span style="font-size: 25px; float: right; color: #fff; border-radius: 10px; padding: 7px ;background-color:#0F8B0B;"><?= $cupo['manana'] ?></span>
+                                            <span style="font-size: 20px;"><?= $arrGrados[$index]['formato'].' Año' ?></span>
+                                            <span style="font-size: 25px; float: right; color: #fff; border-radius: 10px; padding: 7px ;background-color:#0F8B0B;"><?= $cupo ?></span>
                                             <span class="mr-4" style="font-size: 20px; float: right;">Cupos disponibles</span>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="card turno_cupo" data-turno="tarde" data-grado="<?= $arrGrados[$key]['id'] ?>" style="padding: 10px;">
+                                    </div> 
+                                <?php } ?> 
+                            </div> 
+                            <div class="col-6">
+                                <?php foreach($arrGrados as $index => $grado) { 
+                                    $cupo = !empty($arrCuposTarde) ? $arrCuposTarde[$index]['cupo'] : 0;    
+                                ?>
+                                     <div class="card turno_cupo" data-turno="tarde" data-grado="<?= $arrGrados[$index]['id'] ?>" style="padding: 10px;">
                                         <div class="card-body">
-                                            <span style="font-size: 20px;"><?= $arrGrados[$key]['formato'].' Año' ?></span>
-                                            <span style="font-size: 25px; float: right; color: #fff; border-radius: 10px; padding: 7px ;background-color:#0F8B0B;"><?= $cupo['tarde'] ?></span>
+                                            <span style="font-size: 20px;"><?= $arrGrados[$index]['formato'].' Año' ?></span>
+                                            <span style="font-size: 25px; float: right; color: #fff; border-radius: 10px; padding: 7px ;background-color:#0F8B0B;"><?= $cupo ?></span>
                                             <span class="mr-4" style="font-size: 20px; float: right;">Cupos disponibles</span>
                                         </div>
-                                    </div>
-                                </div>
-                            <?php } ?>
+                                    </div> 
+                                <?php } ?> 
+                            </div> 
                         </div>
                     </div>
                     <div class="col-2"></div>

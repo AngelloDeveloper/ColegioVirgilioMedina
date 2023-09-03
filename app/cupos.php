@@ -6,12 +6,23 @@
     require_once('../model/class/conexion.class.php');
     require_once('../model/class/secciones.class.php');
     require_once('../model/class/grados.class.php');
+    require_once('../model/class/cupos.class.php');
+    require_once('../model/class/periodo.class.php');
+    require_once('../model/class/turno.class.php');
 
     $objSecciones = new Secciones();
     $objGrados = new Grados();
+    $objCupos = new Cupos();
+    $objPeriodo = new Periodo();
+    $objTurno = new Turnos();
+
+    $periodo = $objPeriodo->getPeriodo()[0];
+    $idperiodo = (int)$objPeriodo->getPeriodo()[0]['id'];
     $arrSecciones = $objSecciones->getAllSecciones();
     $arrGrados = $objGrados->getAllGrados();
-
+    $arrTurnos = $objTurno->getAllTurnos();
+    $arrCuposManana = $objCupos->getCuposForPeriodo($idperiodo, $arrTurnos[0]['id']);
+    $arrCuposTarde  = $objCupos->getCuposForPeriodo($idperiodo, $arrTurnos[1]['id']);
 ?>
 <link rel="stylesheet" type="text/css" href="css/cupos.css" />
 <div class="content-body">
@@ -31,6 +42,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <h3 style="display: inline;">Cupos</h3>
+                                <span class="badge badge-pill gradient-8 ml-2" style="font-size: 16px; float: right;">Periodo: <?= $periodo['periodo'] ?></span>
                             </div>
                         </div>
                         <hr class="hr" />
@@ -52,7 +64,9 @@
                                                     
                                                         <form id="form-manana">
                                                             <div class="row">
-                                                                <?php foreach($arrGrados as $grado) { ?>                                            
+                                                                <?php foreach($arrGrados as $index => $grado) { 
+                                                                   $turno = !empty($arrCuposManana) ? $arrCuposManana[$index]['cupo'] : ''; 
+                                                                ?>                                            
                                                                     <div class="col-6">
                                                                         <div class="card">
                                                                             <div class="card-body">
@@ -62,7 +76,7 @@
                                                                                     </div>
                                                                                     <div class="col-6">
                                                                                         <label>Ingrese la cantidad de cupos</label>
-                                                                                        <input name="grado-<?= $grado['id'] ?>" placeholder="ejem: 20" type="number"  />
+                                                                                        <input name="<?= $grado['id'] ?>" value="<?= $turno ?>" placeholder="ejem: 20" type="number"  />
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -75,8 +89,11 @@
                                                                 <div class="col-9"></div>
                                                                 <div class="col-3">
                                                                     <center>    
-                                                                        <button type="submit" class="btn btn-success mb-1" style="color: #fff; background-color: #00B236; width:40%;">
+                                                                        <button type="submit" class="btn btn-success mb-1" style="color: #fff; background-color: #00B236; width:60%;">
                                                                             Guardar
+                                                                            <span class="btn-icon-right">
+                                                                                <i class="fa fa-check" aria-hidden="true"></i>
+                                                                            </span>
                                                                         </button>
                                                                     </center>
                                                                 </div>
@@ -96,7 +113,9 @@
                                                 <div class="collapsible-body">
                                                     <form id="form-tarde">
                                                         <div class="row">
-                                                            <?php foreach($arrGrados as $grado) { ?>                                            
+                                                            <?php foreach($arrGrados as $index => $grado) { 
+                                                                $turno = !empty($arrCuposTarde) ? $arrCuposTarde[$index]['cupo'] : '';    
+                                                            ?>                                            
                                                                 <div class="col-6">
                                                                     <div class="card">
                                                                         <div class="card-body">
@@ -106,7 +125,7 @@
                                                                                 </div>
                                                                                 <div class="col-6">
                                                                                     <label>Ingrese la cantidad de cupos</label>
-                                                                                    <input name="grado-<?= $grado['id'] ?>" placeholder="ejem: 20" type="number"  />
+                                                                                    <input name="<?= $grado['id'] ?>" value="<?= $turno ?>" placeholder="ejem: 20" type="number"  />
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -119,8 +138,11 @@
                                                             <div class="col-9"></div>
                                                             <div class="col-3">
                                                                 <center>    
-                                                                    <button type="submit" class="btn btn-success mb-1" style="color: #fff; background-color: #00B236; width:40%;">
+                                                                    <button type="submit" class="btn btn-success mb-1" style="color: #fff; background-color: #00B236; width:60%;">
                                                                         Guardar
+                                                                        <span class="btn-icon-right">
+                                                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                                                        </span>
                                                                     </button>
                                                                 </center>
                                                             </div>
@@ -140,10 +162,5 @@
     </div>
 </div>
 <!--variables-->
-<script>
-    /*var arrMaterias = <?= json_encode($arrMaterias) ?>;
-    var arrSecciones = <?= json_encode($arrSecciones) ?>;
-    var arrGrados = <?= json_encode($arrGrados) ?>;*/
-</script>
 <script src="js/cupos.js"></script>
 <?php require_once('utils/footer.php'); ?>
