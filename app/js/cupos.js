@@ -15,10 +15,26 @@ $(function() {
             objData: $(elm).serializeArray()
         };
 
-        $.post('../controllers/controller_cupos.php', obj, function(response) {
-            console.log(response);
+        Swal.fire({
+            title: 'Esta listo para continuar ?',
+            text: "Las configuraciónes que ha realizado seran guardadas",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#00B236',
+            cancelButtonColor: '#B20018',
+            cancelButtonText: 'Cancelar',
+            confirmButtonText: 'Continuar'
+        }).then((result) => {
+            $.post('../controllers/controller_cupos.php', obj, function(response) {
+                var resp = jQuery.parseJSON(response);
+                Swal.fire({
+                    title: resp.MESSAGES,
+                    icon: 'success',
+                    confirmButtonColor: '#e0bb66'
+                })
+            })
+            
         })
-
     })
 
     $('#form-tarde').submit((e) => {
@@ -31,8 +47,24 @@ $(function() {
             objData: $(elm).serializeArray()
         };
 
-        $.post('../controllers/controller_cupos.php', obj, function(response) {
-            console.log(response);
+        Swal.fire({
+            title: 'Esta listo para continuar ?',
+            text: "Las configuraciónes que ha realizado seran guardadas",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#00B236',
+            cancelButtonColor: '#B20018',
+            cancelButtonText: 'Cancelar',
+            confirmButtonText: 'Continuar'
+        }).then((result) => {
+            $.post('../controllers/controller_cupos.php', obj, function(response) {
+                var resp = jQuery.parseJSON(response);
+                Swal.fire({
+                    title: resp.MESSAGES,
+                    icon: 'success',
+                    confirmButtonColor: '#e0bb66'
+                })
+            })
         })
     })
 })

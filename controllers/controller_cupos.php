@@ -20,7 +20,7 @@
         if($result != 0) {
             $objCupos->UpdateCupos();
         } else {
-           $objCupos->addCupos();
+            $objCupos->addCupos();
         }
 
         echo json_encode([

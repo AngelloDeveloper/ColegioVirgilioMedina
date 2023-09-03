@@ -99,8 +99,8 @@
                     WHERE id_grado = {$this->objData['objData'][$i]['name']} AND turno = {$this->objData['turn']} AND id_periodo = {$this->objData['periodo']};
                 ";
                 $this->query  = mysqli_query($this->con, $this->sql);
-                var_dump($this->query);
             }
+            return $this->result;
         }
     }
 ?>
