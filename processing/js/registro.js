@@ -1470,7 +1470,6 @@ $(function() {
             //VALIDACION DE DATOS EXISTENTES
             dataUnique(unique)
                 .then((resp) => {
-                    console.log(resp);
                     if(resp == true) {
                             //foto estudiante
                         formData.append("foto_estudiante",  $(document).find('#foto-estudiante')[0].files[0]);
@@ -1611,73 +1610,93 @@ $(function() {
                 behavior: "smooth"
             });
         } else {
-            //datos
-            objData.madre = {
-                'nombre' : $(document).find('#nombre_madre').val(),
-                'apellido': $(document).find('#apellido_madre').val(),
-                'tipo_documento': $(document).find('#tipo_documento_madre').val(),
-                'documento': $(document).find('#documento_madre').val(),
-                'fecha_nacimiento': DateGuionFormat($(document).find('#fecha_nacimiento_madre').val()),
-                'nacionalidad': $(document).find('#nacionalidad_madre').val(),
-                'edad': $(document).find('#edad_madre').val(),
-                'estado_civil' : $(document).find('#estado_civil_madre').val(),
-                'nivel_instruccion' : $(document).find('#nivel_instruccion_madre').val(),
-                'ocupacion' : $(document).find('#ocupacion_madre').val(),
-                'lugar_trabajo' : $(document).find('#lugar_trabajo_madre').val(),
-                'habilidad' : $(document).find('#habilidad_madre').val(),
-                'direccion' : $(document).find('#direccion_residencia_madre').val(),
-                'telefono_movil' : $(document).find('#telefono_movil_madre').val(), 
-                'telefono_residencia' : $(document).find('#telefono_residencial_madre').val(),
-                'telefono_trabajo' : $(document).find('#telefono_trabajo_madre').val(),
-                'religion' : $(document).find('#religion_madre').val(),
-                'otra_religion' : $(document).find('#otra_religion_madre').val(),
-                'vive_estudiante' : $(document).find('#vive_estudiante_madre').prop('checked') == true ? 'Y' : 'N',
-                //'foto_madre' : formData,
-                'preview_foto' : $(document).find('#foto-madre')[0].files[0]
-            };
 
-            console.log(objData);
+            const unique = [
+                {'cedula': $(document).find('#documento_madre').val()},
+                {'telf_movil': $(document).find('#telefono_movil_madre').val()},
+                {'telf_residencia': $(document).find('#telefono_residencial_madre').val()}
+            ];
 
-            setTimeout(() => {
-                //recopilar datos, procesarlos y guardarlos en base de datos
-                $('#lineatap2').css({
-                    "background-color" : "#302E2C",
-                    "color" : "#F6CD15",
-                    "border-color" : "#F6CD15",
-                    "padding" : "14px 15px"
-                });
-                $('.lt2').css({
-                    "background-color" : "#F6CD15",
-                    "color" : "#302E2C",
+            //VALIDACION DE DATOS EXISTENTES
+            dataUnique(unique)
+                .then((resp) => {
+                    //datos
+                    if(resp == true) {
+                        objData.madre = {
+                            'nombre' : $(document).find('#nombre_madre').val(),
+                            'apellido': $(document).find('#apellido_madre').val(),
+                            'tipo_documento': $(document).find('#tipo_documento_madre').val(),
+                            'documento': $(document).find('#documento_madre').val(),
+                            'fecha_nacimiento': DateGuionFormat($(document).find('#fecha_nacimiento_madre').val()),
+                            'nacionalidad': $(document).find('#nacionalidad_madre').val(),
+                            'edad': $(document).find('#edad_madre').val(),
+                            'estado_civil' : $(document).find('#estado_civil_madre').val(),
+                            'nivel_instruccion' : $(document).find('#nivel_instruccion_madre').val(),
+                            'ocupacion' : $(document).find('#ocupacion_madre').val(),
+                            'lugar_trabajo' : $(document).find('#lugar_trabajo_madre').val(),
+                            'habilidad' : $(document).find('#habilidad_madre').val(),
+                            'direccion' : $(document).find('#direccion_residencia_madre').val(),
+                            'telefono_movil' : $(document).find('#telefono_movil_madre').val(), 
+                            'telefono_residencia' : $(document).find('#telefono_residencial_madre').val(),
+                            'telefono_trabajo' : $(document).find('#telefono_trabajo_madre').val(),
+                            'religion' : $(document).find('#religion_madre').val(),
+                            'otra_religion' : $(document).find('#otra_religion_madre').val(),
+                            'vive_estudiante' : $(document).find('#vive_estudiante_madre').prop('checked') == true ? 'Y' : 'N',
+                            //'foto_madre' : formData,
+                            'preview_foto' : $(document).find('#foto-madre')[0].files[0]
+                        };
+    
+                        console.log(objData);
+    
+                        setTimeout(() => {
+                            //recopilar datos, procesarlos y guardarlos en base de datos
+                            $('#lineatap2').css({
+                                "background-color" : "#302E2C",
+                                "color" : "#F6CD15",
+                                "border-color" : "#F6CD15",
+                                "padding" : "14px 15px"
+                            });
+                            $('.lt2').css({
+                                "background-color" : "#F6CD15",
+                                "color" : "#302E2C",
+                            })
+                            $('#lineatap2').html(`<i style="font-size: 20px;" class="fa fa-check" aria-hidden="true"></i>`);
+                            $('#lineatap3').css({
+                                "background-color" : "#960032",
+                                "color" : "#fff",
+                                "border-color" : "#960032"
+                            });
+                            $('.lt3').css({
+                                "background-color" : "rgb(33 109 30)",
+                                "color" : "#fff",
+                            })
+                            $('.btn_return_tap').html(`
+                                    <button data-tap="2" class="btnAlternative">
+                                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                        atras
+                                    </button>
+                                `)
+                            $('.title-tap').html(arrFormularios.formulario3.title);
+                            $('.formularios').html(arrFormularios.formulario3.form);
+                            //M.AutoInit permite inicializar todos los componentes de Materialise con una sola llamada
+                            M.AutoInit();
+                            initConfigDate();
+                            window.scroll({
+                                top: 100,
+                                left: 100,
+                                behavior: 'smooth'
+                            });
+                            uploadPhotography("foto-padre");
+                        },1500); 
+                    } else {
+                        $(document).find('.btnform').html('SIGUIENTE');
+                        $(document).find('#alerta_form').html(alert_Images(`el ${resp.dato}:${resp.value} ya existe en nuestra base de datos, "Por favor verificar o ponerse en contacto con nuestro equipo de soporte."`, 'danger'))
+                        window.scrollTo({
+                            top: 500,
+                            behavior: "smooth"
+                        });
+                    }
                 })
-                $('#lineatap2').html(`<i style="font-size: 20px;" class="fa fa-check" aria-hidden="true"></i>`);
-                $('#lineatap3').css({
-                    "background-color" : "#960032",
-                    "color" : "#fff",
-                    "border-color" : "#960032"
-                });
-                $('.lt3').css({
-                    "background-color" : "rgb(33 109 30)",
-                    "color" : "#fff",
-                })
-                $('.btn_return_tap').html(`
-                        <button data-tap="2" class="btnAlternative">
-                            <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                            atras
-                        </button>
-                    `)
-                $('.title-tap').html(arrFormularios.formulario3.title);
-                $('.formularios').html(arrFormularios.formulario3.form);
-                //M.AutoInit permite inicializar todos los componentes de Materialise con una sola llamada
-                M.AutoInit();
-                initConfigDate();
-                window.scroll({
-                    top: 100,
-                    left: 100,
-                    behavior: 'smooth'
-                });
-                uploadPhotography("foto-padre");
-            },1500);
         }
     })
 
