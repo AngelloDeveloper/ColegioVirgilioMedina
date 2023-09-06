@@ -1727,74 +1727,94 @@ $(function() {
                 behavior: "smooth"
             });
         } else {
-            //datos
-            objData.padre = {
-                'nombre' : $(document).find('#nombre_padre').val(),
-                'apellido': $(document).find('#apellido_padre').val(),
-                'tipo_documento': $(document).find('#tipo_documento_padre').val(),
-                'documento': $(document).find('#documento_padre').val(),
-                'fecha_nacimiento': DateGuionFormat($(document).find('#fecha_nacimiento_padre').val()),
-                'nacionalidad': $(document).find('#nacionalidad_padre').val(),
-                'edad': $(document).find('#edad_padre').val(),
-                'estado_civil' : $(document).find('#estado_civil_padre').val(),
-                'nivel_instruccion' : $(document).find('#nivel_instruccion_padre').val(),
-                'ocupacion' : $(document).find('#ocupacion_padre').val(),
-                'lugar_trabajo' : $(document).find('#lugar_trabajo_padre').val(),
-                'habilidad' : $(document).find('#habilidad_padre').val(),
-                'direccion' : $(document).find('#direccion_residencia_padre').val(),
-                'telefono_movil' : $(document).find('#telefono_movil_padre').val(), 
-                'telefono_residencia' : $(document).find('#telefono_residencial_padre').val(),
-                'telefono_trabajo' : $(document).find('#telefono_trabajo_padre').val(),
-                'religion' : $(document).find('#religion_padre').val(),
-                'otra_religion' : $(document).find('#otra_religion_padre').val(),
-                'vive_estudiante' : $(document).find('#vive_estudiante_padre').prop('checked') == true ? 'Y' : 'N',
-                //'foto_padre' : formData,
-                'preview_foto' : $(document).find('#foto-padre')[0].files[0]
-            };
 
-            console.log(objData);
+            const unique = [
+                {'cedula': $(document).find('#documento_padre').val()},
+                {'telf_movil': $(document).find('#telefono_movil_padre').val()},
+                {'telf_residencia': $(document).find('#telefono_residencial_padre').val()}
+            ];
 
-            setTimeout(() => {
-                //recopilar datos, procesarlos y guardarlos en base de datos
-                $('#lineatap3').css({
-                    "background-color" : "#302E2C",
-                    "color" : "#F6CD15",
-                    "border-color" : "#F6CD15",
-                    "padding" : "14px 15px"
-                });
-                $('.lt3').css({
-                    "background-color" : "#F6CD15",
-                    "color" : "#302E2C",
+            //VALIDACION DE DATOS EXISTENTES
+            dataUnique(unique)
+                .then((resp) => {
+                    //datos
+                    if(resp == true) {
+                        objData.padre = {
+                            'nombre' : $(document).find('#nombre_padre').val(),
+                            'apellido': $(document).find('#apellido_padre').val(),
+                            'tipo_documento': $(document).find('#tipo_documento_padre').val(),
+                            'documento': $(document).find('#documento_padre').val(),
+                            'fecha_nacimiento': DateGuionFormat($(document).find('#fecha_nacimiento_padre').val()),
+                            'nacionalidad': $(document).find('#nacionalidad_padre').val(),
+                            'edad': $(document).find('#edad_padre').val(),
+                            'estado_civil' : $(document).find('#estado_civil_padre').val(),
+                            'nivel_instruccion' : $(document).find('#nivel_instruccion_padre').val(),
+                            'ocupacion' : $(document).find('#ocupacion_padre').val(),
+                            'lugar_trabajo' : $(document).find('#lugar_trabajo_padre').val(),
+                            'habilidad' : $(document).find('#habilidad_padre').val(),
+                            'direccion' : $(document).find('#direccion_residencia_padre').val(),
+                            'telefono_movil' : $(document).find('#telefono_movil_padre').val(), 
+                            'telefono_residencia' : $(document).find('#telefono_residencial_padre').val(),
+                            'telefono_trabajo' : $(document).find('#telefono_trabajo_padre').val(),
+                            'religion' : $(document).find('#religion_padre').val(),
+                            'otra_religion' : $(document).find('#otra_religion_padre').val(),
+                            'vive_estudiante' : $(document).find('#vive_estudiante_padre').prop('checked') == true ? 'Y' : 'N',
+                            //'foto_padre' : formData,
+                            'preview_foto' : $(document).find('#foto-padre')[0].files[0]
+                        };
+    
+                        console.log(objData);
+    
+                        setTimeout(() => {
+                            //recopilar datos, procesarlos y guardarlos en base de datos
+                            $('#lineatap3').css({
+                                "background-color" : "#302E2C",
+                                "color" : "#F6CD15",
+                                "border-color" : "#F6CD15",
+                                "padding" : "14px 15px"
+                            });
+                            $('.lt3').css({
+                                "background-color" : "#F6CD15",
+                                "color" : "#302E2C",
+                            })
+                            $('#lineatap3').html(`<i style="font-size: 20px;" class="fa fa-check" aria-hidden="true"></i>`);
+                            $('#lineatap4').css({
+                                "background-color" : "#960032",
+                                "color" : "#fff",
+                                "border-color" : "#960032"
+                            });
+                            $('.lt4').css({
+                                "background-color" : "rgb(33 109 30)",
+                                "color" : "#fff",
+                            })
+    
+                            $('.btn_return_tap').html(`
+                                <button data-tap="3" class="btnAlternative">
+                                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                    atras
+                                </button>
+                            `)
+                            $('.title-tap').html(arrFormularios.formulario4.title);
+                            $('.formularios').html(arrFormularios.formulario4.form);
+                            //M.AutoInit permite inicializar todos los componentes de Materialise con una sola llamada
+                            M.AutoInit();
+                            initConfigDate();
+                            window.scroll({
+                                top: 100,
+                                left: 100,
+                                behavior: 'smooth'
+                            });
+                            uploadPhotography("foto-representante");
+                        },1500);
+                    }  else {
+                        $(document).find('.btnform').html('SIGUIENTE');
+                        $(document).find('#alerta_form').html(alert_Images(`el ${resp.dato}:${resp.value} ya existe en nuestra base de datos, "Por favor verificar o ponerse en contacto con nuestro equipo de soporte."`, 'danger'))
+                        window.scrollTo({
+                            top: 500,
+                            behavior: "smooth"
+                        });
+                    }
                 })
-                $('#lineatap3').html(`<i style="font-size: 20px;" class="fa fa-check" aria-hidden="true"></i>`);
-                $('#lineatap4').css({
-                    "background-color" : "#960032",
-                    "color" : "#fff",
-                    "border-color" : "#960032"
-                });
-                $('.lt4').css({
-                    "background-color" : "rgb(33 109 30)",
-                    "color" : "#fff",
-                })
-
-                $('.btn_return_tap').html(`
-                    <button data-tap="3" class="btnAlternative">
-                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                        atras
-                    </button>
-                `)
-                $('.title-tap').html(arrFormularios.formulario4.title);
-                $('.formularios').html(arrFormularios.formulario4.form);
-                //M.AutoInit permite inicializar todos los componentes de Materialise con una sola llamada
-                M.AutoInit();
-                initConfigDate();
-                window.scroll({
-                    top: 100,
-                    left: 100,
-                    behavior: 'smooth'
-                });
-                uploadPhotography("foto-representante");
-            },1500);
         }
     })
 
@@ -2052,91 +2072,112 @@ $(function() {
                 behavior: "smooth"
             });
         } else {
-            //datos
-            objData.representante = {
-                'nombre' : $(document).find('#nombre_representante').val(),
-                'apellido': $(document).find('#apellido_representante').val(),
-                'tipo_documento': $(document).find('#tipo_documento_representante').val(),
-                'documento': $(document).find('#documento_representante').val(),
-                'fecha_nacimiento': DateGuionFormat($(document).find('#fecha_nacimiento_representante').val()),
-                'nacionalidad': $(document).find('#nacionalidad_representante').val(),
-                'edad': $(document).find('#edad_representante').val(),
-                'estado_civil' : $(document).find('#estado_civil_representante').val(),
-                'nivel_instruccion' : $(document).find('#nivel_instruccion_representante').val(),
-                'ocupacion' : $(document).find('#ocupacion_representante').val(),
-                'lugar_trabajo' : $(document).find('#lugar_trabajo_representante').val(),
-                'habilidad' : $(document).find('#habilidad_representante').val(),
-                'direccion' : $(document).find('#direccion_residencia_representante').val(),
-                'telefono_movil' : $(document).find('#telefono_movil_representante').val(), 
-                'telefono_residencia' : $(document).find('#telefono_residencial_representante').val(),
-                'telefono_trabajo' : $(document).find('#telefono_trabajo_representante').val(),
-                'religion' : $(document).find('#religion_representante').val(),
-                'otra_religion' : $(document).find('#otra_religion_representante').val(),
-                'vive_estudiante' : $(document).find('#vive_estudiante_representante').prop('checked') == true ? 'Y' : 'N',
-                'parentesco' : parentesco,
-                //'foto_representante' : foto_representante,
-                //'preview_foto' : foto_preview
-            };
+            //VALIDACION DE DATOS EXISTENTES
+            const unique = [
+                {'cedula': $(document).find('#documento_representante').val()},
+                {'telf_movil': $(document).find('#telefono_movil_representante').val()},
+                {'telf_residencia': $(document).find('#telefono_residencial_representante').val()}
+            ];
 
-            console.log(objData);
+            dataUnique(unique)
+                .then((resp) => {
+                    //datos
+                    if(resp == true) {
+                        //datos
+                        objData.representante = {
+                            'nombre' : $(document).find('#nombre_representante').val(),
+                            'apellido': $(document).find('#apellido_representante').val(),
+                            'tipo_documento': $(document).find('#tipo_documento_representante').val(),
+                            'documento': $(document).find('#documento_representante').val(),
+                            'fecha_nacimiento': DateGuionFormat($(document).find('#fecha_nacimiento_representante').val()),
+                            'nacionalidad': $(document).find('#nacionalidad_representante').val(),
+                            'edad': $(document).find('#edad_representante').val(),
+                            'estado_civil' : $(document).find('#estado_civil_representante').val(),
+                            'nivel_instruccion' : $(document).find('#nivel_instruccion_representante').val(),
+                            'ocupacion' : $(document).find('#ocupacion_representante').val(),
+                            'lugar_trabajo' : $(document).find('#lugar_trabajo_representante').val(),
+                            'habilidad' : $(document).find('#habilidad_representante').val(),
+                            'direccion' : $(document).find('#direccion_residencia_representante').val(),
+                            'telefono_movil' : $(document).find('#telefono_movil_representante').val(), 
+                            'telefono_residencia' : $(document).find('#telefono_residencial_representante').val(),
+                            'telefono_trabajo' : $(document).find('#telefono_trabajo_representante').val(),
+                            'religion' : $(document).find('#religion_representante').val(),
+                            'otra_religion' : $(document).find('#otra_religion_representante').val(),
+                            'vive_estudiante' : $(document).find('#vive_estudiante_representante').prop('checked') == true ? 'Y' : 'N',
+                            'parentesco' : parentesco,
+                            //'foto_representante' : foto_representante,
+                            //'preview_foto' : foto_preview
+                        };
 
-            Swal.fire({
-                title: 'Esta listo para continuar ?',
-                text: "Los datos que ha suministrado seran guardados",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#00B236',
-                cancelButtonColor: '#B20018',
-                cancelButtonText: 'Cancelar',
-                confirmButtonText: 'Continuar'
-            }).then((result) => {
-                if(result.isConfirmed) {
-                    console.log('entramos');
-                    $.post("../controllers/controller_registro.php", objData, function(response) {
-                        var resp = jQuery.parseJSON(response);
-                        if(resp.STATUS == 'SUCCESS') {
-                            Swal.fire({
-                                    title: resp.MESSAGES,
-                                    text: 'Los datos seran procesados, el usuario sera habilitado una vez se formalice la inscripción',
-                                    icon: 'success',
-                                    confirmButtonColor: '#e0bb66'
-                            }).then((result2) => {
-                                if(result2.isConfirmed) {
-                                    $.post("../controllers/controller_registro.php", {type : 'downloadTemplatePreRegistro', id_estudiante : resp.DATA}, function(response) {
-                                        console.log(response);
-                                    })
-                                }
-                            })
-                        }
-                    });
+                        console.log(objData);
 
-                    /*$.ajax({
-                        type: "POST",
-                        enctype: 'multipart/form-data',
-                        url: '../controllers/controller_registro.php',
-                        data: objData,
-                        success: function(resp) {
-                            if(resp.STATUS == 'SUCCESS') {
-                                Swal.fire({
-                                        title: resp.MESSAGES,
-                                        text: 'Los datos seran procesados, el usuario sera habilitado una vez se formalice la inscripción',
-                                        icon: 'success',
-                                        confirmButtonColor: '#e0bb66'
-                                }).then((result2) => {
-                                    if(result2.isConfirmed) {
-                                        $.post("../controllers/controller_registro.php", {type : 'downloadTemplatePreRegistro', id_estudiante : resp.DATA}, function(response) {
-                                            console.log(response);
+                        Swal.fire({
+                            title: 'Esta listo para continuar ?',
+                            text: "Los datos que ha suministrado seran guardados",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#00B236',
+                            cancelButtonColor: '#B20018',
+                            cancelButtonText: 'Cancelar',
+                            confirmButtonText: 'Continuar'
+                        }).then((result) => {
+                            if(result.isConfirmed) {
+                                console.log('entramos');
+                                $.post("../controllers/controller_registro.php", objData, function(response) {
+                                    var resp = jQuery.parseJSON(response);
+                                    if(resp.STATUS == 'SUCCESS') {
+                                        Swal.fire({
+                                                title: resp.MESSAGES,
+                                                text: 'Los datos seran procesados, el usuario sera habilitado una vez se formalice la inscripción',
+                                                icon: 'success',
+                                                confirmButtonColor: '#e0bb66'
+                                        }).then((result2) => {
+                                            if(result2.isConfirmed) {
+                                                $.post("../controllers/controller_registro.php", {type : 'downloadTemplatePreRegistro', id_estudiante : resp.DATA}, function(response) {
+                                                    console.log(response);
+                                                })
+                                            }
                                         })
                                     }
-                                })
+                                });
+
+                                /*$.ajax({
+                                    type: "POST",
+                                    enctype: 'multipart/form-data',
+                                    url: '../controllers/controller_registro.php',
+                                    data: objData,
+                                    success: function(resp) {
+                                        if(resp.STATUS == 'SUCCESS') {
+                                            Swal.fire({
+                                                    title: resp.MESSAGES,
+                                                    text: 'Los datos seran procesados, el usuario sera habilitado una vez se formalice la inscripción',
+                                                    icon: 'success',
+                                                    confirmButtonColor: '#e0bb66'
+                                            }).then((result2) => {
+                                                if(result2.isConfirmed) {
+                                                    $.post("../controllers/controller_registro.php", {type : 'downloadTemplatePreRegistro', id_estudiante : resp.DATA}, function(response) {
+                                                        console.log(response);
+                                                    })
+                                                }
+                                            })
+                                        }
+                                    },
+                                    error: function(error) {
+                                    console.log(error);
+                                    }
+                                });*/
                             }
-                        },
-                        error: function(error) {
-                          console.log(error);
-                        }
-                      });*/
-                }
-            })
+                        })
+                    } else {
+                        $(document).find('.btnform').html('SIGUIENTE');
+                        $(document).find('#alerta_form').html(alert_Images(`el ${resp.dato}:${resp.value} ya existe en nuestra base de datos, "Por favor verificar o ponerse en contacto con nuestro equipo de soporte."`, 'danger'))
+                        window.scrollTo({
+                            top: 500,
+                            behavior: "smooth"
+                        });
+                    }
+                })
+            
         }
     })
 
