@@ -1338,23 +1338,34 @@ $(function() {
             case tap: '1'
                 $('.title-tap').html(arrFormularios.formulario1.title);
                 $('.formularios').html(arrFormularios.formulario1.form);
+                $('.btn_return_tap').html('');
+                // CREAR FUNCION QUE SETEE LOS DATOS EN CADA INPUT QUE SEA ESCALABLE A TODOS LOS FORMULARIOS
             break;
             case tap: '2'
                 $('.title-tap').html(arrFormularios.formulario2.title);
                 $('.formularios').html(arrFormularios.formulario2.form);
+                $('.btn_return_tap').html(`
+                    <button data-tap="${tap-1}" class="btnAlternative">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                        atras
+                    </button>
+                `)
+                // CREAR FUNCION QUE SETEE LOS DATOS EN CADA INPUT QUE SEA ESCALABLE A TODOS LOS FORMULARIOS
             break;
             case tap: '3'
                 $('.title-tap').html(arrFormularios.formulario3.title);
                 $('.formularios').html(arrFormularios.formulario3.form);
+                $('.btn_return_tap').html(`
+                    <button data-tap="${tap-1}" class="btnAlternative">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                        atras
+                    </button>
+                `)
+                // CREAR FUNCION QUE SETEE LOS DATOS EN CADA INPUT QUE SEA ESCALABLE A TODOS LOS FORMULARIOS
             break;
         }
 
-        $('.btn_return_tap').html(`
-            <button data-tap="${tap}" class="btnAlternative">
-                <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                atras
-            </button>
-        `)
+        initMaterialInput();        
     })
 
     $(document).on('click', '#informeMedico', function(e) {
