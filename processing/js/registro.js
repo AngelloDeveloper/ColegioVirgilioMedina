@@ -1339,7 +1339,83 @@ $(function() {
                 $('.title-tap').html(arrFormularios.formulario1.title);
                 $('.formularios').html(arrFormularios.formulario1.form);
                 $('.btn_return_tap').html('');
+                $(document).find('#lineatap2').attr('style', '');
+                $(document).find('.lt2').attr('style', '');
+                $(document).find('#lineatap1').html('1');
+                $(document).find('#lineatap1').attr('style', 'background-color: rgb(150, 0, 50); color: rgb(255, 255, 255); border-color: rgb(150, 0, 50);');
+                $(document).find('.lt1').attr('style', 'background-color: rgb(33, 109, 30); color: rgb(255, 255, 255)');
                 // CREAR FUNCION QUE SETEE LOS DATOS EN CADA INPUT QUE SEA ESCALABLE A TODOS LOS FORMULARIOS
+                //estudiante
+                $(document).find('#nombre_estudiante').val(objData.estudiante.nombre);
+                $(document).find('#apellido_estudiante').val(objData.estudiante.apellido);
+                $(document).find('#tipo_documento_estudiante').val(objData.estudiante.tipo_documento);
+                $(document).find('#documento_estudiante').val(objData.estudiante.documento);
+                $(document).find('#fecha_nacimiento_estudiante').val(DateSlashFormat(objData.estudiante.fecha_nacimiento));
+                $(document).find('#edad_estudiante').val(objData.estudiante.edad);
+                $(document).find('#nacionalidad_estudiante').val(objData.estudiante.nacionalidad);
+                $(document).find('#email_estudiante').val(objData.estudiante.email);
+                $(document).find('#direccion_estudiante').val(objData.estudiante.direccion);
+                $(document).find('#punto_referencia_estudiante').val(objData.estudiante.punto_referencia);
+                $(document).find('#lugar_nacimiento_estudiante').val(objData.estudiante.lugar_nacimiento);
+                $(document).find('#estado_estudiante').val(objData.estudiante.estado);
+                $(document).find('#municipio_estudiante').val(objData.estudiante.municipio);
+                $(document).find('#cod_phone_numbre').val(objData.estudiante.telf_code);
+                $(document).find('#telefono_movil_estudiante').val(objData.estudiante.telf_movil);
+                $(document).find('#telefono_residencial_estudiante').val(objData.estudiante.telf_residencia);
+                $(document).find('#habilidades_estudiante').val(objData.estudiante.habilidades);
+                $(document).find('#religion_estudiante').val(objData.estudiante.religion);
+                $(document).find('#otra_religion_estudiante').val(objData.estudiante.otra_religion);
+                objData.estudiante.genero == 'M' 
+                    ? $(document).find('#masculino_estudiante').prop('checked', true)
+                    : $(document).find('#femenino_estudiante').prop('checked', true);
+                objData.estudiante.lateralidad == 'D'
+                    ? $(document).find('#diestro_estudiante').prop('checked', true)
+                    : $(document).find('#zurdo_estudiante').prop('checked', true);
+                    //'preview_foto' : $(document).find('#foto-estudiante')[0].files[0]
+                //detalle estudiante
+                    $(document).find('#tallaCamisa_estudiante').val(objData.detalle_estudiante.talla_camisa);
+                    $(document).find('#tallaPatalon_estudiante').val(objData.detalle_estudiante.talla_pantalon);
+                    $(document).find('#estatura_estudiante').val(objData.detalle_estudiante.estatura);
+                    $(document).find('#peso_estudiante').val(objData.detalle_estudiante.peso);
+                    $(document).find('#grupoSanguineo_estudiante').val(objData.detalle_estudiante.grupo_sanguineo);
+                    objData.detalle_estudiante.discapacidad == 'Y'
+                        ? $(document).find('#discapacidad').prop('checked', true)
+                        : $(document).find('#discapacidad').prop('checked', false);
+                    $(document).find('#discapacidadDescripcion').val(objData.detalle_estudiante.discapacidad_descripcion);
+                    objData.detalle_estudiante.informeMedico == 'Y'
+                        ? $(document).find('#informeMedico').prop('checked', true) 
+                        : $(document).find('#informeMedico').prop('checked', false);
+                    $(document).find('#informeMedicoDocumento').val(objData.detalle_estudiante.url_informe_medic);
+                    objData.detalle_estudiante.alergico == 'Y'
+                        ? $(document).find('#alergico').prop('checked', true)
+                        : $(document).find('#alergico').prop('checked', false);
+                    $(document).find('#alergicoDescripcion').val(objData.detalle_estudiante.alergia);
+                    objData.detalle_estudiante.enfermo == 'Y'
+                        ? $(document).find('#enfermedad').prop('checked', true)
+                        : $(document).find('#enfermedad').prop('checked', false);
+                    $(document).find('#enfermedadDescripcion').val(objData.detalle_estudiante.enfermedad);
+                    objData.detalle_estudiante.medicado == 'Y'
+                        ? $(document).find('#medicamentos').prop('checked', true)
+                        : $(document).find('#medicamentos').prop('checked', false);
+                    $(document).find('#medicamentosDescripcion').val(objData.detalle_estudiante.medicamento);
+                    objData.detalle_estudiante.convulsion == 'Y'
+                        ? $(document).find('#convulsion').prop('checked', true)
+                        : $(document).find('#convulsion').prop('checked', false);
+                    $(document).find('#convulsionDescripcion').val(objData.detalle_estudiante.convulsion_observaciones);
+                    objData.detalle_estudiante.familiar_colegio == 'Y'
+                        ? $(document).find('#familiar_colegio').prop('checked', true)
+                        : $(document).find('#familiar_colegio').prop('checked', false);
+                    $(document).find('#familiar_colegioNombre').val(objData.detalle_estudiante.familiar_colegioNombre);
+                    $(document).find('#familiar_colegioParentesco').val(objData.detalle_estudiante.familiar_colegioParentesco);
+                    $(document).find('#familiar_colegioDescripcion').val(objData.detalle_estudiante.familiar_colegioDescripcion);
+                    $(document).find('#content_discapacidad').css('display', 'block');
+                    $(document).find('#content_alergico').css('display', 'block');
+                    $(document).find('#content_enfermedad').css('display', 'block');
+                    $(document).find('#content_medicamentos').css('display', 'block');
+                    $(document).find('#content_convulsion').css('display', 'block');
+                    $(document).find('#content_familiar_colegio').css('display', 'block');
+                    $(document).find('#content_familiar_colegio2').css('display', 'block');
+                    $(document).find('#content_familiar_colegio3').css('display', 'block');
             break;
             case tap: '2'
                 $('.title-tap').html(arrFormularios.formulario2.title);
@@ -1350,7 +1426,12 @@ $(function() {
                         atras
                     </button>
                 `)
-                // CREAR FUNCION QUE SETEE LOS DATOS EN CADA INPUT QUE SEA ESCALABLE A TODOS LOS FORMULARIOS
+                $(document).find('#lineatap3').attr('style', '');
+                $(document).find('.lt2').attr('style', '');
+                $(document).find('#lineatap1').html('2');
+                $(document).find('#lineatap2').attr('style', 'background-color: rgb(150, 0, 50); color: rgb(255, 255, 255); border-color: rgb(150, 0, 50);');
+                $(document).find('.lt2').attr('style', 'background-color: rgb(33, 109, 30); color: rgb(255, 255, 255)');
+                // CREAR FUNCION QUE SETEE LOS DATOS EN CADA INPUT QUE SEA ESCALABLE A TODOS LOS FORMULARIOS 
             break;
             case tap: '3'
                 $('.title-tap').html(arrFormularios.formulario3.title);
@@ -1361,11 +1442,17 @@ $(function() {
                         atras
                     </button>
                 `)
+                $(document).find('#lineatap4').attr('style', '');
+                $(document).find('.lt4').attr('style', '');
+                $(document).find('#lineatap1').html('3');
+                $(document).find('#lineatap3').attr('style', 'background-color: rgb(150, 0, 50); color: rgb(255, 255, 255); border-color: rgb(150, 0, 50);');
+                $(document).find('.lt3').attr('style', 'background-color: rgb(33, 109, 30); color: rgb(255, 255, 255)');
                 // CREAR FUNCION QUE SETEE LOS DATOS EN CADA INPUT QUE SEA ESCALABLE A TODOS LOS FORMULARIOS
             break;
         }
 
-        initMaterialInput();        
+        initMaterialInput(); 
+             
     })
 
     $(document).on('click', '#informeMedico', function(e) {
