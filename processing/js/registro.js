@@ -1358,7 +1358,9 @@ $(function() {
                 $(document).find('#punto_referencia_estudiante').val(objData.estudiante.punto_referencia);
                 $(document).find('#lugar_nacimiento_estudiante').val(objData.estudiante.lugar_nacimiento);
                 $(document).find('#estado_estudiante').val(objData.estudiante.estado);
-                $(document).find('#municipio_estudiante').val(objData.estudiante.municipio);
+                $(document).find('#estado_estudiante').trigger('change');
+                //el municipio se setea en el evento change de #estado_estudiante
+                
                 $(document).find('#cod_phone_numbre').val(objData.estudiante.telf_code);
                 $(document).find('#telefono_movil_estudiante').val(objData.estudiante.telf_movil);
                 $(document).find('#telefono_residencial_estudiante').val(objData.estudiante.telf_residencia);
@@ -1415,29 +1417,53 @@ $(function() {
                     $(document).find('#content_convulsion').css('display', 'block');
                     $(document).find('#content_familiar_colegio').css('display', 'block');
                     $(document).find('#content_familiar_colegio2').css('display', 'block');
-                    $(document).find('#content_familiar_colegio3').css('display', 'block');
+                    $(document).find('#content_familiar_colegio3').css('display', 'block');   
             break;
             case tap: '2'
                 $('.title-tap').html(arrFormularios.formulario2.title);
                 $('.formularios').html(arrFormularios.formulario2.form);
                 $('.btn_return_tap').html(`
-                    <button data-tap="${tap-1}" class="btnAlternative">
+                    <button data-tap="${tap}" class="btnAlternative">
                         <i class="fa fa-arrow-left" aria-hidden="true"></i>
                         atras
                     </button>
                 `)
                 $(document).find('#lineatap3').attr('style', '');
-                $(document).find('.lt2').attr('style', '');
-                $(document).find('#lineatap1').html('2');
+                $(document).find('.lt3').attr('style', '');
+                $(document).find('#lineatap2').html('2');
                 $(document).find('#lineatap2').attr('style', 'background-color: rgb(150, 0, 50); color: rgb(255, 255, 255); border-color: rgb(150, 0, 50);');
                 $(document).find('.lt2').attr('style', 'background-color: rgb(33, 109, 30); color: rgb(255, 255, 255)');
                 // CREAR FUNCION QUE SETEE LOS DATOS EN CADA INPUT QUE SEA ESCALABLE A TODOS LOS FORMULARIOS 
+
+                $(document).find('#nombre_madre').val(objData.madre.nombre),
+                $(document).find('#apellido_madre').val(objData.madre.apellido),
+                $(document).find('#tipo_documento_madre').val(objData.madre.tipo_documento),
+                $(document).find('#documento_madre').val(objData.madre.documento),
+                $(document).find('#fecha_nacimiento_madre').val(DateSlashFormat(objData.madre.fecha_nacimiento)),
+                $(document).find('#nacionalidad_madre').val(objData.madre.nacionalidad),
+                $(document).find('#edad_madre').val(objData.madre.edad),
+                $(document).find('#estado_civil_madre').val(objData.madre.estado_civil),
+                $(document).find('#nivel_instruccion_madre').val(objData.madre.nivel_instruccion),
+                $(document).find('#ocupacion_madre').val(objData.madre.ocupacion),
+                $(document).find('#lugar_trabajo_madre').val(objData.madre.lugar_nacimiento),
+                $(document).find('#habilidad_madre').val(objData.madre.habilidad),
+                $(document).find('#direccion_residencia_madre').val(objData.madre.direccion),
+                $(document).find('#telefono_movil_madre').val(objData.madre.telefono_movil), 
+                $(document).find('#telefono_residencial_madre').val(objData.madre.telefono_residencia),
+                $(document).find('#telefono_trabajo_madre').val(objData.madre.telefono_trabajo),
+                $(document).find('#religion_madre').val(objData.madre.religion),
+                $(document).find('#otra_religion_madre').val(objData.madre.otra_religion),
+                objData.madre.vive_estudiante == true 
+                    ? $(document).find('#vive_estudiante_madre').prop('checked', true)
+                    : $(document).find('#vive_estudiante_madre').prop('checked', false)
+                    //'foto_madre' : formData,
+                    //'preview_foto' : $(document).find('#foto-madre')[0].files[0]
             break;
             case tap: '3'
                 $('.title-tap').html(arrFormularios.formulario3.title);
                 $('.formularios').html(arrFormularios.formulario3.form);
                 $('.btn_return_tap').html(`
-                    <button data-tap="${tap-1}" class="btnAlternative">
+                    <button data-tap="${tap}" class="btnAlternative">
                         <i class="fa fa-arrow-left" aria-hidden="true"></i>
                         atras
                     </button>
@@ -1448,9 +1474,11 @@ $(function() {
                 $(document).find('#lineatap3').attr('style', 'background-color: rgb(150, 0, 50); color: rgb(255, 255, 255); border-color: rgb(150, 0, 50);');
                 $(document).find('.lt3').attr('style', 'background-color: rgb(33, 109, 30); color: rgb(255, 255, 255)');
                 // CREAR FUNCION QUE SETEE LOS DATOS EN CADA INPUT QUE SEA ESCALABLE A TODOS LOS FORMULARIOS
+
             break;
         }
 
+        initConfigDate();
         initMaterialInput(); 
         initConfigDate();
              
@@ -2280,21 +2308,35 @@ $(function() {
         }
     })
 
-    $(document).on('change', '#estado_estudiante', function(e) {
+
+    $(document).on('change', '#estado_estudiante', async function(e) {
+        console.log('change testing');
         var idEstado = e.target.value;
         var template = '';
-        getMunicipio(idEstado)
-            .then((response) => {
-                $(response).each((index, municipio) => {
-                    template += `
-                        <option value="${municipio.id_municipio}">${municipio.municipio}</option>
-                    `;
-                })
+        getMunicipio(idEstado).then((response) => {
+            $(response).each((index, municipio) => {
+                template += `
+                    <option value="${municipio.id_municipio}">${municipio.municipio}</option>
+                `;
+            })
+    
+            $(document).find('#municipio_estudiante').html(template);
+            console.log('testing');
+            console.log(objData.estudiante);
+            console.log(Object.keys(objData.estudiante).length)
+            if(Object.keys(objData.estudiante).length > 0) {
+                console.log(objData.estudiante);
+                console.log(objData.estudiante.municipio);
+                $(document).find('#municipio_estudiante').val(objData.estudiante.municipio)
+            } else {
+                console.log('el objeto no se esta llenando antes el trigger');
+            }
+            $('select').formSelect();
+            console.log('hola');
+        })
+    }) 
 
-                $(document).find('#municipio_estudiante').html(template);
-                $('select').formSelect();
-            });
-    })
+   
 
 
     //refactor foto estudiante
