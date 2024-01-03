@@ -64,6 +64,7 @@
     <!--<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>-->
 </head>
+    
 	<body>
         <header>
             <div class="container">
@@ -72,7 +73,23 @@
                         <img width="80" src="../assets/img/escudopng2.png" />
                     </div>
                     <div id="btn-navigation" class="col-md-6">
-                        <a id="btn-session" class="btn btn-md mt-4" href="../landing-page/home.php">PAGINA PRINCIPAL</a>
+                        <a id="btn-session" style="background-color: #DCBB05 !important; color: #000 !important;" class="btn btn-md mt-4 viewTutorial" href="#">VER TUTORIAL</a>
+                        <a id="btn-session" class="btn btn-md mt-4 mr-2" href="../landing-page/home.php">PAGINA PRINCIPAL</a>
+                        <style>
+                            .viewTutorial {
+                                transform-origin: 0 0;
+                                animation: viewTutorial 3s ease-in-out infinite alternate;
+                            }
+
+                            @keyframes viewTutorial {
+                                0% {
+                                    transform: scale(1.0);
+                                }
+                                50% {
+                                    transform: scale(1.1);
+                                }
+                            }
+                        </style>
                     </div>
                 </div>
             </div>
@@ -146,7 +163,15 @@
                             <div class="col-4">
                                 <div id="imgTurn" style="display: inline-block;"></div>
                             </div>
-                            <div class="col-3"></div>
+                            <div class="col-3">
+                                <div class="card" style="position: absolute; width: 80%; border: 1px solid #085c05;">
+                                    <div class="card-body">
+                                        <center>
+                                            <span id="anio_text" style="color: #085c05; font-size: 30px;font-weight: 600;"></span>
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         
                         
@@ -168,8 +193,20 @@
                         </div>
                        
                         <div class="p-4 mt-4">
-                            <h4 class="title-tap mb-2"></h4>
-                            <span class="btn_return_tap"></span>
+                            <div class="row">
+                                <div class="col-12">
+                                    <h4 class="title-tap mb-2"></h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <span class="btn_return_tap"></span>
+                                </div>
+                                <div class="col-6">
+                                    <span class="btn_next_tap"></span>
+                                </div>
+                            </div>
+                            
                             <div class="alert alert-warning mt-4" role="alert">
                                 Los campos con el simbolo (<span style="color: #960032;"><b> * </b></span>) son datos obligatorios
                             </div>

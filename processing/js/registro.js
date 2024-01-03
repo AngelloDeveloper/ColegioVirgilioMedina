@@ -1313,12 +1313,16 @@ $(function() {
                 float: left;
             ">
         `);
+        $('#anio_text').html(`${grado}° Año`);
         $('#btn-navigation').html(`
             <a id="btn-session" class="btn btn-md mt-4 btnReturnTurn">VOLVER</a>
         `)
         $('#turn_cups').css('display', 'none');
         $('#pre_registro_forms').css('display', 'block');
-        
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
     })
 
     //btn return TURN
@@ -1334,8 +1338,10 @@ $(function() {
     $(document).on('click', '.btnAlternative', function(e) {
         let elm = $(this)[0];
         let tap = $(elm).data('tap');
+        console.log(tap);
+
         switch (tap) {
-            case tap: '1'
+            case 1:
                 $('.title-tap').html(arrFormularios.formulario1.title);
                 $('.formularios').html(arrFormularios.formulario1.form);
                 $('.btn_return_tap').html('');
@@ -1419,11 +1425,12 @@ $(function() {
                     $(document).find('#content_familiar_colegio2').css('display', 'block');
                     $(document).find('#content_familiar_colegio3').css('display', 'block');   
             break;
-            case tap: '2'
+            case 2:
+                console.log('entramos a tap:' + tap);
                 $('.title-tap').html(arrFormularios.formulario2.title);
                 $('.formularios').html(arrFormularios.formulario2.form);
                 $('.btn_return_tap').html(`
-                    <button data-tap="${tap}" class="btnAlternative">
+                    <button data-tap="${tap-1}" class="btnAlternative">
                         <i class="fa fa-arrow-left" aria-hidden="true"></i>
                         atras
                     </button>
@@ -1459,7 +1466,7 @@ $(function() {
                     //'foto_madre' : formData,
                     //'preview_foto' : $(document).find('#foto-madre')[0].files[0]
             break;
-            case tap: '3'
+            case 3:
                 $('.title-tap').html(arrFormularios.formulario3.title);
                 $('.formularios').html(arrFormularios.formulario3.form);
                 $('.btn_return_tap').html(`
@@ -1798,11 +1805,11 @@ $(function() {
                                 "color" : "#fff",
                             })
                             $('.btn_return_tap').html(`
-                                    <button data-tap="2" class="btnAlternative">
-                                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                                        atras
-                                    </button>
-                                `)
+                                <button data-tap="2" class="btnAlternative">
+                                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                    atras
+                                </button>
+                            `)
                             $('.title-tap').html(arrFormularios.formulario3.title);
                             $('.formularios').html(arrFormularios.formulario3.form);
                             //M.AutoInit permite inicializar todos los componentes de Materialise con una sola llamada
@@ -2310,7 +2317,6 @@ $(function() {
 
 
     $(document).on('change', '#estado_estudiante', async function(e) {
-        console.log('change testing');
         var idEstado = e.target.value;
         var template = '';
         getMunicipio(idEstado).then((response) => {
@@ -2321,18 +2327,12 @@ $(function() {
             })
     
             $(document).find('#municipio_estudiante').html(template);
-            console.log('testing');
-            console.log(objData.estudiante);
-            console.log(Object.keys(objData.estudiante).length)
             if(Object.keys(objData.estudiante).length > 0) {
-                console.log(objData.estudiante);
-                console.log(objData.estudiante.municipio);
                 $(document).find('#municipio_estudiante').val(objData.estudiante.municipio)
             } else {
                 console.log('el objeto no se esta llenando antes el trigger');
             }
             $('select').formSelect();
-            console.log('hola');
         })
     }) 
 
