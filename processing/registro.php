@@ -163,14 +163,27 @@
                             <div class="col-5"></div>
                             <div class="col-4">
                                 <div id="imgTurn" style="display: inline-block;"></div>
+                                <style>
+                                    .animateImg {
+                                        animation: saturate-desaturate 3s infinite;
+                                    }
+
+                                    @keyframes saturate-desaturate {
+                                        0%, 100% {
+                                            filter: saturate(100%);
+                                            
+                                        }
+                                        50% {
+                                            filter: saturate(200%);
+                                        }
+                                    }
+                                </style>
                             </div>
                             <div class="col-3">
-                                <div class="card" style="position: absolute; width: 80%; border: 1px solid #085c05;">
-                                    <div class="card-body">
-                                        <center>
-                                            <span id="anio_text" style="color: #085c05; font-size: 30px;font-weight: 600;"></span>
-                                        </center>
-                                    </div>
+                                <div style="position: absolute; width: 80%; margin-top:50px;">
+                                    <center>
+                                        <span id="anio_text" style="color: #085c05; font-size: 25px;font-weight: 600; background-color:rgba(20, 180, 14, .4); border-radius: 20px; padding: 5px 15px;"></span>
+                                    </center>
                                 </div>
                             </div>
                         </div>

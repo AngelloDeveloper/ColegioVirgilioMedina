@@ -1307,7 +1307,7 @@ $(function() {
         const img = turn == 'manana' ? 'river.png' : 'nature.png';
 
         $('#imgTurn').html(`
-            <img src="../assets/img/pre-registro/${img}" style="
+            <img class="animateImg" src="../assets/img/pre-registro/${img}" style="
                 width: 160px;
                 position: absolute;
                 float: left;
@@ -2468,8 +2468,10 @@ $(function() {
 
     function generateTemplate_latam() {
         var template = '';
+        console.log('latam: ');
+        console.log(objLatam);
         $(objLatam).each((index, pais) => {
-            template += `<option value="${pais.iso3}">${pais.nicename}</option>`;
+            template += `<option value="${pais.alfa2}">${pais.name}</option>`;
         });
 
         return template;
