@@ -23,9 +23,10 @@
     $arrGrados = $objGrados->getAllGrados();
     $arrPeriodo = $objPeriodo->getPeriodo();
     $idperiodo = (int)$arrPeriodo[0]['id'];
-    $arrCuposManana = $objCupos->getCuposForPeriodo($idperiodo, $arrTurnos[0]['id']);
-    $arrCuposTarde  = $objCupos->getCuposForPeriodo($idperiodo, $arrTurnos[1]['id']);
+    $arrCuposManana = $objCupos->getCuposForPeriodo($idperiodo, $arrTurnos[0]['turno']);
+    $arrCuposTarde  = $objCupos->getCuposForPeriodo($idperiodo, $arrTurnos[1]['turno']);
     $arrEstados = $objEstados->getAllEstados();
+   
     $arrReligiones = $objReligion->getAllReligiones();
     $arrLatam = $objPaises->getPisesZone();
 
