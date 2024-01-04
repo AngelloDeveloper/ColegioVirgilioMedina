@@ -2718,7 +2718,7 @@ CREATE TABLE IF NOT EXISTS `periodo_escolar` (
   KEY `Índice 1` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla cvm.periodo_escolar: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla cvm.periodo_escolar: ~1 rows (aproximadamente)
 INSERT INTO `periodo_escolar` (`id`, `periodo`, `estatus`) VALUES
 	(1, '2023-2024', 'Y');
 
@@ -2791,7 +2791,8 @@ CREATE TABLE IF NOT EXISTS `religiones` (
 INSERT INTO `religiones` (`id`, `religion`) VALUES
 	(1, 'Catolicismo'),
 	(2, 'Protestantismo'),
-	(3, 'Iglesias Cristianas no Evangélicas');
+	(3, 'Iglesias Cristianas no Evangélicas'),
+	(4, 'Otra');
 
 -- Volcando estructura para tabla cvm.representantes
 CREATE TABLE IF NOT EXISTS `representantes` (

@@ -1460,7 +1460,7 @@ $(function() {
                 $(document).find('#telefono_trabajo_madre').val(objData.madre.telefono_trabajo),
                 $(document).find('#religion_madre').val(objData.madre.religion),
                 $(document).find('#otra_religion_madre').val(objData.madre.otra_religion),
-                objData.madre.vive_estudiante == true 
+                objData.madre.vive_estudiante == 'Y'
                     ? $(document).find('#vive_estudiante_madre').prop('checked', true)
                     : $(document).find('#vive_estudiante_madre').prop('checked', false)
                     //'foto_madre' : formData,
@@ -2373,7 +2373,6 @@ $(function() {
                 "color" : '#856404'
             });
             
-    
             //VALIDATIONS
             if(formatImages(elm, file)) {
                 previewBeforeUpload(idBoxImages, elm); //PREVIEW
@@ -2443,7 +2442,7 @@ $(function() {
 
     function otherReligion(id) {
         let religion = $(document).find('#'+id).val();
-        if(religion == 10) {
+        if(religion == 4) {
             $(document).find('#'+id+'_otro_container').css({'display' : 'block'});
             $(document).find('#otra_'+id).attr('required', 'required');
         } else {
