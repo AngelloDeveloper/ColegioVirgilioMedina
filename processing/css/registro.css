@@ -3,7 +3,6 @@ body {
     height: auto;
 }
 
-
 .card {
     margin-top: 20px;
 }
@@ -238,9 +237,9 @@ a.btn:hover {
 
 #load_facedetection {
     position: absolute;
-    z-index: 22;
-    left: 45%;
-    top: 45%;
+    z-index: 99;
+    left: 47%;
+    top: 28%;
 }
 
 .items_foto{

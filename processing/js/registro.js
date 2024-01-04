@@ -1605,7 +1605,7 @@ $(function() {
             dataUnique(unique)
                 .then((resp) => {
                     if(resp == true) {
-                            //foto estudiante
+                        //foto estudiante
                         formData.append("foto_estudiante",  $(document).find('#foto-estudiante')[0].files[0]);
                         console.log(formData.getAll("foto_estudiante"));
 
@@ -1636,6 +1636,8 @@ $(function() {
                             'preview_foto' : $(document).find('#foto-estudiante')[0].files[0]
                         };
 
+                        console.log(objData.estudiante);
+
                         objData.detalle_estudiante = {
                             'talla_camisa' : $(document).find('#tallaCamisa_estudiante').val(),
                             'talla_pantalon': $(document).find('#tallaPatalon_estudiante').val(),
@@ -1659,6 +1661,8 @@ $(function() {
                             'familiar_colegioParentesco' : $(document).find('#familiar_colegioParentesco').val(),
                             'familiar_colegioDescripcion' : $(document).find('#familiar_colegioDescripcion').val()
                         }
+
+                        console.log(objData.detalle_estudiante);
 
                         console.log(objData);
 
@@ -2470,8 +2474,19 @@ $(function() {
         var template = '';
         console.log('latam: ');
         console.log(objLatam);
+
+        // Encuentra Venezuela y quítala de objLatam
+        var venezuela = objLatam.find(pais => pais.iso3 === 'VEN');
+
+        // Agrega Venezuela primero si existe
+        if (venezuela) {
+            template += `<option value="${venezuela.iso3}">${venezuela.nicename} <span><b>*</b></span></option>`;
+        }
+
         $(objLatam).each((index, pais) => {
-            template += `<option value="${pais.alfa2}">${pais.name}</option>`;
+            if(pais.iso3 !== 'VEN') {
+                template += `<option value="${pais.iso3}">${pais.nicename}</option>`;
+            }
         });
 
         return template;
@@ -2479,8 +2494,19 @@ $(function() {
 
     function generateTemplate_codigos() {
         var template = '';
+
+        // Encuentra Venezuela y quítala de objLatam
+        var venezuelaCode = objLatam.find(pais => pais.iso3 === 'VEN');
+
+        // Agrega Venezuela primero si existe
+        if (venezuelaCode) {
+            template += `<option value="${venezuelaCode.phonecode}">${'('+venezuelaCode.phonecode +') '+venezuelaCode.nicename}<span><b>*</b></span></option>`;
+        }
+
         $(objLatam).each((index, pais) => {
-            template += `<option value="${pais.phonecode}">${'('+pais.phonecode +') '+pais.nicename}</option>`;
+            if(pais.iso3 !== 'VEN') {
+                template += `<option value="${pais.phonecode}">${'('+pais.phonecode +') '+pais.nicename}</option>`;
+            }
         });
 
         return template;
@@ -2500,11 +2526,12 @@ $(function() {
             <h4>Fotografia</h4>
             <span id="alerta_foto"></span>
             <div class="grid">
+                <span id="load_facedetection"></span>
                 <div class="form-element">
                     <input type="file" id="${id}" accept="image/*" />
                     <label for="${id}" id="${id + '-preview'}">
                         <img id="foto_img" src="../assets/img/images-empty.jpg" alt=""/>
-                        <span id="load_facedetection"></span>
+                        
                         <canvas id="canvas" width="200" height="200"></canvas>
                         <div>
                             <span>+</span>

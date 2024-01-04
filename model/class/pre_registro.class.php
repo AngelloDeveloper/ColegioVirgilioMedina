@@ -62,7 +62,9 @@
                     enfermo,
                     enfermedad,
                     medicado,
-                    medicamento
+                    medicamento,
+                    convulsion,
+                    convulsion_observaciones
                 ) 
                 VALUES (
                     '{$this->objData['detalle_estudiante']['talla_camisa']}',
@@ -77,7 +79,9 @@
                     '{$this->objData['detalle_estudiante']['enfermo']}',
                     '{$this->objData['detalle_estudiante']['enfermedad']}',
                     '{$this->objData['detalle_estudiante']['medicado']}',
-                    '{$this->objData['detalle_estudiante']['medicamento']}'
+                    '{$this->objData['detalle_estudiante']['medicamento']}',
+                    '{$this->objData['detalle_estudiante']['convulsion']}',
+                    '{$this->objData['detalle_estudiante']['convulsion_observaciones']}'
                 )
             ";
 
@@ -96,9 +100,16 @@
                     nacionalidad,
                     edad,
                     genero,
+                    telf_code,
+                    telf_movil,
+                    telf_residencia,
                     email,
                     direccion,
+                    punto_referencia,
                     fecha_nacimiento,
+                    habilidades,
+                    id_estado,
+                    id_municipio,
                     id_usuario,
                     id_detalles_estudiante,
                     id_representante,
@@ -113,9 +124,16 @@
                     '{$this->objData['estudiante']['nacionalidad']}',
                     '{$this->objData['estudiante']['edad']}',
                     '{$this->objData['estudiante']['genero']}',
+                    '{$this->objData['estudiante']['telf_code']}',
+                    '{$this->objData['estudiante']['telf_movil']}',
+                    '{$this->objData['estudiante']['telf_residencia']}',
                     '{$this->objData['estudiante']['email']}',
                     '{$this->objData['estudiante']['direccion']}',
+                    '{$this->objData['estudiante']['punto_referencia']}',
                     '{$this->objData['estudiante']['fecha_nacimiento']}',
+                    '{$this->objData['estudiante']['habilidades']}',
+                    '{$this->objData['estudiante']['estado']}',
+                    '{$this->objData['estudiante']['municipio']}',
                     '{$this->idUsuario}',
                     '{$this->idDetalleEstudiante}',
                     '{$this->idRepresentante}',

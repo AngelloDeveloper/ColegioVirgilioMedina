@@ -595,7 +595,7 @@ CREATE TABLE IF NOT EXISTS `cupos` (
   KEY `Índice 1` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla cvm.cupos: ~10 rows (aproximadamente)
+-- Volcando datos para la tabla cvm.cupos: ~9 rows (aproximadamente)
 INSERT INTO `cupos` (`id`, `id_grado`, `cupo`, `turno`, `id_periodo`) VALUES
 	(1, 1, 20, 'M', 1),
 	(2, 2, 15, 'M', 1),
@@ -706,9 +706,20 @@ CREATE TABLE IF NOT EXISTS `estudiantes` (
   `nacionalidad` enum('VEN','COL') DEFAULT NULL,
   `edad` varchar(50) DEFAULT NULL,
   `genero` enum('M','F') DEFAULT NULL,
+  `telf_code` varchar(50) DEFAULT NULL,
+  `telf_movil` varchar(50) DEFAULT NULL,
+  `telf_residencia` varchar(50) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `direccion` varchar(250) DEFAULT NULL,
+  `punto_referencia` varchar(250) DEFAULT NULL,
+  `lugar_nacimiento` varchar(250) DEFAULT NULL,
+  `estado` int(11) DEFAULT NULL,
+  `municipio` int(11) DEFAULT NULL,
+  `religion` varchar(250) DEFAULT NULL,
   `fecha_nacimiento` date DEFAULT NULL,
+  `habilidades` varchar(50) DEFAULT NULL,
+  `otra_religion` varchar(50) DEFAULT NULL,
+  `lateralidad` enum('D','I') DEFAULT NULL,
   `id_usuario` int(11) DEFAULT NULL,
   `id_detalles_estudiante` int(11) DEFAULT NULL,
   `id_representante` int(11) DEFAULT NULL,
@@ -719,13 +730,13 @@ CREATE TABLE IF NOT EXISTS `estudiantes` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Volcando datos para la tabla cvm.estudiantes: ~6 rows (aproximadamente)
-INSERT INTO `estudiantes` (`id`, `nombre`, `apellido`, `cedula`, `tipo_documento`, `nacionalidad`, `edad`, `genero`, `email`, `direccion`, `fecha_nacimiento`, `id_usuario`, `id_detalles_estudiante`, `id_representante`, `id_mama`, `id_papa`, `id_seccion`) VALUES
-	(1, 'Angello', 'Duran', '25463404', 'V', 'VEN', '26', 'M', 'angelloprogramador@gmail.com', 'test', '1997-01-13', 1, 1, 1, 1, 1, NULL),
-	(2, 'julian', 'duran', '25169112', 'V', 'VEN', '27', 'M', 'julian@gmail.com', 'test', '1995-03-28', 12, 2, 2, 2, 2, NULL),
-	(3, 'Angello', 'Duran', '25463404', 'V', 'VEN', '26', 'M', 'angelloprogramador@gmail.com', 'test', '1997-01-13', 15, 4, 3, 3, 3, NULL),
-	(4, 'test', 'test', '25463404', 'V', 'VEN', '25', 'M', 'angelloprogramador@gmail.com', 'test', '1956-02-22', 21, 5, 4, 4, 4, NULL),
-	(5, 'Angello', 'Duran', '25463404', 'V', 'VEN', '26', 'M', 'angelloprogramador@gmail.com', 'test', '1997-01-13', 24, 6, 5, 5, 5, NULL),
-	(6, 'Angello', 'Duran', '25463404', 'E', 'VEN', '17', 'M', 'test@gmail.com', 'test', '2023-03-23', 25, 7, 6, 6, 6, NULL);
+INSERT INTO `estudiantes` (`id`, `nombre`, `apellido`, `cedula`, `tipo_documento`, `nacionalidad`, `edad`, `genero`, `telf_code`, `telf_movil`, `telf_residencia`, `email`, `direccion`, `punto_referencia`, `lugar_nacimiento`, `estado`, `municipio`, `religion`, `fecha_nacimiento`, `habilidades`, `otra_religion`, `lateralidad`, `id_usuario`, `id_detalles_estudiante`, `id_representante`, `id_mama`, `id_papa`, `id_seccion`) VALUES
+	(1, 'Angello', 'Duran', '25463404', 'V', 'VEN', '26', 'M', NULL, NULL, NULL, 'angelloprogramador@gmail.com', 'test', NULL, NULL, NULL, NULL, NULL, '1997-01-13', NULL, NULL, NULL, 1, 1, 1, 1, 1, NULL),
+	(2, 'julian', 'duran', '25169112', 'V', 'VEN', '27', 'M', NULL, NULL, NULL, 'julian@gmail.com', 'test', NULL, NULL, NULL, NULL, NULL, '1995-03-28', NULL, NULL, NULL, 12, 2, 2, 2, 2, NULL),
+	(3, 'Angello', 'Duran', '25463404', 'V', 'VEN', '26', 'M', NULL, NULL, NULL, 'angelloprogramador@gmail.com', 'test', NULL, NULL, NULL, NULL, NULL, '1997-01-13', NULL, NULL, NULL, 15, 4, 3, 3, 3, NULL),
+	(4, 'test', 'test', '25463404', 'V', 'VEN', '25', 'M', NULL, NULL, NULL, 'angelloprogramador@gmail.com', 'test', NULL, NULL, NULL, NULL, NULL, '1956-02-22', NULL, NULL, NULL, 21, 5, 4, 4, 4, NULL),
+	(5, 'Angello', 'Duran', '25463404', 'V', 'VEN', '26', 'M', NULL, NULL, NULL, 'angelloprogramador@gmail.com', 'test', NULL, NULL, NULL, NULL, NULL, '1997-01-13', NULL, NULL, NULL, 24, 6, 5, 5, 5, NULL),
+	(6, 'Angello', 'Duran', '25463404', 'E', 'VEN', '17', 'M', NULL, NULL, NULL, 'test@gmail.com', 'test', NULL, NULL, NULL, NULL, NULL, '2023-03-23', NULL, NULL, NULL, 25, 7, 6, 6, 6, NULL);
 
 -- Volcando estructura para tabla cvm.estudiantes_detalles
 CREATE TABLE IF NOT EXISTS `estudiantes_detalles` (
@@ -738,7 +749,9 @@ CREATE TABLE IF NOT EXISTS `estudiantes_detalles` (
   `discapacidad` varchar(50) DEFAULT NULL,
   `url_informe_medico` varchar(250) DEFAULT NULL,
   `alergico` enum('Y','N') DEFAULT NULL,
+  `convulsion` enum('Y','N') DEFAULT NULL,
   `alergia` varchar(50) DEFAULT NULL,
+  `convulsion_observaciones` varchar(50) DEFAULT NULL,
   `enfermo` enum('Y','N') DEFAULT NULL,
   `enfermedad` varchar(50) DEFAULT NULL,
   `medicado` enum('Y','N') DEFAULT NULL,
@@ -747,14 +760,14 @@ CREATE TABLE IF NOT EXISTS `estudiantes_detalles` (
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Volcando datos para la tabla cvm.estudiantes_detalles: ~7 rows (aproximadamente)
-INSERT INTO `estudiantes_detalles` (`id`, `talla_camisa`, `talla_pantalon`, `estatura`, `peso`, `grupo_sanguineo`, `discapacidad`, `url_informe_medico`, `alergico`, `alergia`, `enfermo`, `enfermedad`, `medicado`, `medicamento`) VALUES
-	(1, 'N', 'N', '', '', 'N', '', '', 'N', '', 'N', '', 'N', ''),
-	(2, 'N', 'N', '', '', 'N', '', '', 'N', '', 'N', '', 'N', ''),
-	(3, 'S', 'S', '1.75', '56', 'A+', '', '', 'N', '', 'Y', 'hernia discal', 'Y', 'complejo B '),
-	(4, 'S', 'S', '1.75', '56', 'A+', '', '', 'N', '', 'Y', 'hernia discal', 'Y', 'complejo B'),
-	(5, 'S', 'M', '1.75', '55', 'A+', 'test', '', 'N', '', 'Y', 'hernia discal', 'Y', 'test'),
-	(6, 'S', 'S', '1.75', '56', 'A+', '', '', 'N', '', 'N', '', 'N', ''),
-	(7, 'S', 'S', '1.75', '56', 'O+', 'test', '', 'N', '', 'Y', 'hernia discal', 'Y', 'test');
+INSERT INTO `estudiantes_detalles` (`id`, `talla_camisa`, `talla_pantalon`, `estatura`, `peso`, `grupo_sanguineo`, `discapacidad`, `url_informe_medico`, `alergico`, `convulsion`, `alergia`, `convulsion_observaciones`, `enfermo`, `enfermedad`, `medicado`, `medicamento`) VALUES
+	(1, 'N', 'N', '', '', 'N', '', '', 'N', NULL, '', NULL, 'N', '', 'N', ''),
+	(2, 'N', 'N', '', '', 'N', '', '', 'N', NULL, '', NULL, 'N', '', 'N', ''),
+	(3, 'S', 'S', '1.75', '56', 'A+', '', '', 'N', NULL, '', NULL, 'Y', 'hernia discal', 'Y', 'complejo B '),
+	(4, 'S', 'S', '1.75', '56', 'A+', '', '', 'N', NULL, '', NULL, 'Y', 'hernia discal', 'Y', 'complejo B'),
+	(5, 'S', 'M', '1.75', '55', 'A+', 'test', '', 'N', NULL, '', NULL, 'Y', 'hernia discal', 'Y', 'test'),
+	(6, 'S', 'S', '1.75', '56', 'A+', '', '', 'N', NULL, '', NULL, 'N', '', 'N', ''),
+	(7, 'S', 'S', '1.75', '56', 'O+', 'test', '', 'N', NULL, '', NULL, 'Y', 'hernia discal', 'Y', 'test');
 
 -- Volcando estructura para tabla cvm.grados
 CREATE TABLE IF NOT EXISTS `grados` (
@@ -2774,7 +2787,7 @@ CREATE TABLE IF NOT EXISTS `religiones` (
   KEY `Índice 1` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla cvm.religiones: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla cvm.religiones: ~4 rows (aproximadamente)
 INSERT INTO `religiones` (`id`, `religion`) VALUES
 	(1, 'Catolicismo'),
 	(2, 'Protestantismo'),
@@ -2863,7 +2876,7 @@ INSERT INTO `sub_modulos` (`id`, `titulo`, `descripcion`, `status`, `id_modulo`,
 	(2, 'Docentes', 'Administracion de Docentes', 'Y', 2, 'docentes.php'),
 	(3, 'Estudiantes', 'Administracion de Estudiantes', 'Y', 2, 'estudiantes.php'),
 	(4, 'Planificación', 'Planificacion académica', 'Y', 3, 'planificacion.php'),
-	(5, 'Asignación de Materias', 'Asignar materia a docentes', 'N', 2, 'asignacion_materias_docentes.php');
+	(5, 'Asignación de Materias', 'Asignar materia a docentes', 'Y', 2, 'asignacion_materias_docentes.php');
 
 -- Volcando estructura para tabla cvm.tipos_usuarios
 CREATE TABLE IF NOT EXISTS `tipos_usuarios` (
