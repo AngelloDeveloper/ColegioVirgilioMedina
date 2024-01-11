@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versión del servidor:         10.4.28-MariaDB - mariadb.org binary distribution
+-- Versión del servidor:         10.4.27-MariaDB - mariadb.org binary distribution
 -- SO del servidor:              Win64
--- HeidiSQL Versión:             12.6.0.6765
+-- HeidiSQL Versión:             12.3.0.6589
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -13,11 +13,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
-
--- Volcando estructura de base de datos para cvm
-CREATE DATABASE IF NOT EXISTS `cvm` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
-USE `cvm`;
 
 -- Volcando estructura para tabla cvm.administrativos
 CREATE TABLE IF NOT EXISTS `administrativos` (
@@ -34,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `administrativos` (
   KEY `Índice 1` (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
--- Volcando datos para la tabla cvm.administrativos: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla cvm.administrativos: ~1 rows (aproximadamente)
 INSERT INTO `administrativos` (`id`, `nombre`, `apellido`, `cedula`, `telf_movil`, `email`, `direccion`, `nivel_instruccion`, `id_usuarios`, `estatus`) VALUES
 	(1, 'Angello', 'Duran', '25463404', '4247110785', 'angelloprogramador@gmail.com', 'la castra', 'U', 1, 'Y');
 
@@ -84,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `ciudades` (
   CONSTRAINT `ciudades_ibfk_1` FOREIGN KEY (`id_estado`) REFERENCES `estados` (`id_estado`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=523 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- Volcando datos para la tabla cvm.ciudades: ~498 rows (aproximadamente)
+-- Volcando datos para la tabla cvm.ciudades: ~461 rows (aproximadamente)
 INSERT INTO `ciudades` (`id_ciudad`, `id_estado`, `ciudad`, `capital`) VALUES
 	(1, 1, 'Maroa', 0),
 	(2, 1, 'Puerto Ayacucho', 1),
@@ -595,18 +590,18 @@ CREATE TABLE IF NOT EXISTS `cupos` (
   KEY `Índice 1` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla cvm.cupos: ~9 rows (aproximadamente)
+-- Volcando datos para la tabla cvm.cupos: ~10 rows (aproximadamente)
 INSERT INTO `cupos` (`id`, `id_grado`, `cupo`, `turno`, `id_periodo`) VALUES
 	(1, 1, 20, 'M', 1),
 	(2, 2, 15, 'M', 1),
 	(3, 3, 23, 'M', 1),
 	(4, 4, 17, 'M', 1),
-	(5, 5, 18, 'M', 1),
 	(6, 1, 15, 'T', 1),
 	(7, 2, 16, 'T', 1),
 	(8, 3, 18, 'T', 1),
 	(9, 4, 10, 'T', 1),
-	(10, 5, 10, 'T', 1);
+	(5, 5, 0, 'M', 1),
+	(10, 5, 12, 'T', 1);
 
 -- Volcando estructura para tabla cvm.docentes
 CREATE TABLE IF NOT EXISTS `docentes` (
@@ -713,8 +708,8 @@ CREATE TABLE IF NOT EXISTS `estudiantes` (
   `direccion` varchar(250) DEFAULT NULL,
   `punto_referencia` varchar(250) DEFAULT NULL,
   `lugar_nacimiento` varchar(250) DEFAULT NULL,
-  `estado` int(11) DEFAULT NULL,
-  `municipio` int(11) DEFAULT NULL,
+  `id_estado` int(11) DEFAULT NULL,
+  `id_municipio` int(11) DEFAULT NULL,
   `religion` varchar(250) DEFAULT NULL,
   `fecha_nacimiento` date DEFAULT NULL,
   `habilidades` varchar(50) DEFAULT NULL,
@@ -726,23 +721,28 @@ CREATE TABLE IF NOT EXISTS `estudiantes` (
   `id_mama` int(11) DEFAULT NULL,
   `id_papa` int(11) DEFAULT NULL,
   `id_seccion` int(11) DEFAULT NULL,
+  `foto` varchar(100) DEFAULT NULL,
   KEY `Índice 1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla cvm.estudiantes: ~6 rows (aproximadamente)
-INSERT INTO `estudiantes` (`id`, `nombre`, `apellido`, `cedula`, `tipo_documento`, `nacionalidad`, `edad`, `genero`, `telf_code`, `telf_movil`, `telf_residencia`, `email`, `direccion`, `punto_referencia`, `lugar_nacimiento`, `estado`, `municipio`, `religion`, `fecha_nacimiento`, `habilidades`, `otra_religion`, `lateralidad`, `id_usuario`, `id_detalles_estudiante`, `id_representante`, `id_mama`, `id_papa`, `id_seccion`) VALUES
-	(1, 'Angello', 'Duran', '25463404', 'V', 'VEN', '26', 'M', NULL, NULL, NULL, 'angelloprogramador@gmail.com', 'test', NULL, NULL, NULL, NULL, NULL, '1997-01-13', NULL, NULL, NULL, 1, 1, 1, 1, 1, NULL),
-	(2, 'julian', 'duran', '25169112', 'V', 'VEN', '27', 'M', NULL, NULL, NULL, 'julian@gmail.com', 'test', NULL, NULL, NULL, NULL, NULL, '1995-03-28', NULL, NULL, NULL, 12, 2, 2, 2, 2, NULL),
-	(3, 'Angello', 'Duran', '25463404', 'V', 'VEN', '26', 'M', NULL, NULL, NULL, 'angelloprogramador@gmail.com', 'test', NULL, NULL, NULL, NULL, NULL, '1997-01-13', NULL, NULL, NULL, 15, 4, 3, 3, 3, NULL),
-	(4, 'test', 'test', '25463404', 'V', 'VEN', '25', 'M', NULL, NULL, NULL, 'angelloprogramador@gmail.com', 'test', NULL, NULL, NULL, NULL, NULL, '1956-02-22', NULL, NULL, NULL, 21, 5, 4, 4, 4, NULL),
-	(5, 'Angello', 'Duran', '25463404', 'V', 'VEN', '26', 'M', NULL, NULL, NULL, 'angelloprogramador@gmail.com', 'test', NULL, NULL, NULL, NULL, NULL, '1997-01-13', NULL, NULL, NULL, 24, 6, 5, 5, 5, NULL),
-	(6, 'Angello', 'Duran', '25463404', 'E', 'VEN', '17', 'M', NULL, NULL, NULL, 'test@gmail.com', 'test', NULL, NULL, NULL, NULL, NULL, '2023-03-23', NULL, NULL, NULL, 25, 7, 6, 6, 6, NULL);
+-- Volcando datos para la tabla cvm.estudiantes: ~10 rows (aproximadamente)
+INSERT INTO `estudiantes` (`id`, `nombre`, `apellido`, `cedula`, `tipo_documento`, `nacionalidad`, `edad`, `genero`, `telf_code`, `telf_movil`, `telf_residencia`, `email`, `direccion`, `punto_referencia`, `lugar_nacimiento`, `id_estado`, `id_municipio`, `religion`, `fecha_nacimiento`, `habilidades`, `otra_religion`, `lateralidad`, `id_usuario`, `id_detalles_estudiante`, `id_representante`, `id_mama`, `id_papa`, `id_seccion`, `foto`) VALUES
+	(1, 'Angello', 'Duran', '25463404', 'V', 'VEN', '26', 'M', NULL, NULL, NULL, 'angelloprogramador@gmail.com', 'test', NULL, NULL, NULL, NULL, NULL, '1997-01-13', NULL, NULL, NULL, 1, 1, 1, 1, 1, NULL, NULL),
+	(2, 'julian', 'duran', '25169112', 'V', 'VEN', '27', 'M', NULL, NULL, NULL, 'julian@gmail.com', 'test', NULL, NULL, NULL, NULL, NULL, '1995-03-28', NULL, NULL, NULL, 12, 2, 2, 2, 2, NULL, NULL),
+	(3, 'Angello', 'Duran', '25463404', 'V', 'VEN', '26', 'M', NULL, NULL, NULL, 'angelloprogramador@gmail.com', 'test', NULL, NULL, NULL, NULL, NULL, '1997-01-13', NULL, NULL, NULL, 15, 4, 3, 3, 3, NULL, NULL),
+	(4, 'test', 'test', '25463404', 'V', 'VEN', '25', 'M', NULL, NULL, NULL, 'angelloprogramador@gmail.com', 'test', NULL, NULL, NULL, NULL, NULL, '1956-02-22', NULL, NULL, NULL, 21, 5, 4, 4, 4, NULL, NULL),
+	(5, 'Angello', 'Duran', '25463404', 'V', 'VEN', '26', 'M', NULL, NULL, NULL, 'angelloprogramador@gmail.com', 'test', NULL, NULL, NULL, NULL, NULL, '1997-01-13', NULL, NULL, NULL, 24, 6, 5, 5, 5, NULL, NULL),
+	(6, 'Angello', 'Duran', '25463404', 'E', 'VEN', '17', 'M', NULL, NULL, NULL, 'test@gmail.com', 'test', NULL, NULL, NULL, NULL, NULL, '2023-03-23', NULL, NULL, NULL, 25, 7, 6, 6, 6, NULL, NULL),
+	(7, 'angello', 'duran', '25463452', 'V', 'VEN', '60', 'F', 'undefined', '4264720250', '02761115599', 'test23@gmail.com', 'test', 'test', NULL, 19, 363, NULL, '1963-01-15', 'test', NULL, NULL, 33, 15, 14, 14, 14, NULL, 'C:xampphtdocsColegioVirgilioMedinamodelclass/../twp/nuevo.jpg'),
+	(19, 'angello', 'duran', '25', 'V', 'VEN', '62', 'F', 'undefined', '4264720256', '02761114455', 'test26@gmail.com', 'test', 'test', NULL, 19, 346, NULL, '1961-05-17', 'test', NULL, NULL, 45, 27, 26, 26, 26, NULL, 'nuevo.jpg'),
+	(24, 'angello', 'duran', '24463487', 'V', 'VEN', '56', 'F', 'undefined', '4264720456', '02764445566', 'test83@gmail.com', 'test', 'test', NULL, 19, 363, NULL, '1967-01-18', 'test', NULL, NULL, 50, 32, 31, 31, 31, NULL, 'nuevo.jpg'),
+	(25, 'pedro', 'perez', '25463416', 'V', 'VEN', '26', 'M', 'undefined', '4264728696', '0276111599', 'angelloprogramador26@gmail.com', 'carrizal test', 'test', NULL, 19, 363, NULL, '1997-01-13', 'musica', NULL, NULL, 51, 33, 32, 32, 32, NULL, 'nuevo.jpg');
 
 -- Volcando estructura para tabla cvm.estudiantes_detalles
 CREATE TABLE IF NOT EXISTS `estudiantes_detalles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `talla_camisa` enum('N','S','M','U','L','XL') DEFAULT NULL,
-  `talla_pantalon` enum('N','S','M','U','L','XL') DEFAULT NULL,
+  `talla_pantalon` enum('12','14','16','N','S','M','U','L','XL') DEFAULT NULL,
   `estatura` varchar(50) DEFAULT NULL,
   `peso` varchar(50) DEFAULT NULL,
   `grupo_sanguineo` enum('N','A+','O+','B+','AB+','A-','O-','B-','AB-') DEFAULT NULL,
@@ -757,9 +757,9 @@ CREATE TABLE IF NOT EXISTS `estudiantes_detalles` (
   `medicado` enum('Y','N') DEFAULT NULL,
   `medicamento` varchar(100) DEFAULT NULL,
   KEY `Índice 1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla cvm.estudiantes_detalles: ~7 rows (aproximadamente)
+-- Volcando datos para la tabla cvm.estudiantes_detalles: ~33 rows (aproximadamente)
 INSERT INTO `estudiantes_detalles` (`id`, `talla_camisa`, `talla_pantalon`, `estatura`, `peso`, `grupo_sanguineo`, `discapacidad`, `url_informe_medico`, `alergico`, `convulsion`, `alergia`, `convulsion_observaciones`, `enfermo`, `enfermedad`, `medicado`, `medicamento`) VALUES
 	(1, 'N', 'N', '', '', 'N', '', '', 'N', NULL, '', NULL, 'N', '', 'N', ''),
 	(2, 'N', 'N', '', '', 'N', '', '', 'N', NULL, '', NULL, 'N', '', 'N', ''),
@@ -767,7 +767,33 @@ INSERT INTO `estudiantes_detalles` (`id`, `talla_camisa`, `talla_pantalon`, `est
 	(4, 'S', 'S', '1.75', '56', 'A+', '', '', 'N', NULL, '', NULL, 'Y', 'hernia discal', 'Y', 'complejo B'),
 	(5, 'S', 'M', '1.75', '55', 'A+', 'test', '', 'N', NULL, '', NULL, 'Y', 'hernia discal', 'Y', 'test'),
 	(6, 'S', 'S', '1.75', '56', 'A+', '', '', 'N', NULL, '', NULL, 'N', '', 'N', ''),
-	(7, 'S', 'S', '1.75', '56', 'O+', 'test', '', 'N', NULL, '', NULL, 'Y', 'hernia discal', 'Y', 'test');
+	(7, 'S', 'S', '1.75', '56', 'O+', 'test', '', 'N', NULL, '', NULL, 'Y', 'hernia discal', 'Y', 'test'),
+	(8, 'S', 'S', '1.72', '52', 'A+', 'Y', '', 'Y', 'Y', 'polvo', 'no', 'Y', 'siatalgia', 'Y', 'complejo b'),
+	(9, 'S', '', '1.72', '52', 'A+', 'N', '', 'Y', 'Y', 'lacteos', 'no', 'Y', 'siatalgia', 'Y', 'complejo b '),
+	(10, 'S', '', '1.72', '52', 'A+', 'N', '', 'Y', 'Y', 'lacteos', 'no', 'Y', 'siatalgia', 'Y', 'complejo b '),
+	(11, 'S', '', '1.72', '52', 'A+', 'N', '', 'Y', 'Y', 'lacteos', 'no', 'Y', 'siatalgia', 'Y', 'complejo b '),
+	(12, 'S', '', '1.72', '52', 'A+', 'N', '', 'Y', 'Y', 'lacteos', 'no', 'Y', 'siatalgia', 'Y', 'complejo b '),
+	(13, 'S', '', '1.72', '52', 'A+', 'N', '', 'Y', 'Y', 'lacteos', 'no', 'Y', 'siatalgia', 'Y', 'complejo b '),
+	(14, 'S', '', '1.72', '52', 'A+', 'N', '', 'Y', 'Y', 'lacteos', 'no', 'Y', 'siatalgia', 'Y', 'complejo b '),
+	(15, 'S', '', '1.72', '52', 'A+', 'N', '', 'Y', 'Y', 'lacteos', 'no', 'Y', 'siatalgia', 'Y', 'complejo b '),
+	(16, 'S', '', '1.72', '52', 'A+', 'Y', '', 'Y', 'Y', 'test', 'test', 'Y', 'test', 'Y', 'test'),
+	(17, 'S', '', '1.72', '52', 'A+', 'Y', '', 'Y', 'Y', 'test', 'test', 'Y', 'test', 'Y', 'test'),
+	(18, 'S', '', '1.72', '52', 'A+', 'Y', '', 'Y', 'Y', 'test', 'test', 'Y', 'test', 'Y', 'test'),
+	(19, 'S', '', '1.72', '52', 'A+', 'Y', '', 'Y', 'Y', 'test', 'test', 'Y', 'test', 'Y', 'test'),
+	(20, 'S', '', '1.72', '52', 'A+', 'Y', '', 'Y', 'Y', 'test', 'test', 'Y', 'test', 'Y', 'test'),
+	(21, 'S', 'XL', '1.72', '52', 'A+', 'Y', '', 'Y', 'Y', 'test', 'test', 'Y', 'test', 'Y', 'test'),
+	(22, 'S', '14', '1.72', '52', 'A+', 'Y', '', 'Y', 'Y', 'test', 'test', 'Y', 'test', 'Y', 'test'),
+	(23, 'S', '14', '1.72', '52', 'A+', 'Y', '', 'Y', 'Y', 'test', 'test', 'Y', 'test', 'Y', 'test'),
+	(24, 'S', '14', '1.72', '52', 'A+', 'Y', '', 'Y', 'Y', 'test', 'test', 'Y', 'test', 'Y', 'test'),
+	(25, 'S', '14', '1.72', '52', 'A+', 'Y', '', 'Y', 'Y', 'test', 'test', 'Y', 'test', 'Y', 'test'),
+	(26, 'S', '14', '1.72', '52', 'A+', 'Y', '', 'Y', 'Y', 'test', 'test', 'Y', 'test', 'Y', 'test'),
+	(27, 'S', '14', '1.72', '52', 'A+', 'Y', '', 'Y', 'Y', 'test', 'test', 'Y', 'test', 'Y', 'test'),
+	(28, 'XL', 'L', '1.72', '52', 'A+', 'Y', '', 'Y', 'Y', 'test', 'test', 'Y', 'test', 'Y', 'test'),
+	(29, 'XL', 'L', '1.72', '52', 'A+', 'Y', '', 'Y', 'Y', 'test', 'test', 'Y', 'test', 'Y', 'test'),
+	(30, 'XL', 'L', '1.72', '52', 'A+', 'Y', '', 'Y', 'Y', 'test', 'test', 'Y', 'test', 'Y', 'test'),
+	(31, 'XL', 'L', '1.72', '52', 'A+', 'Y', '', 'Y', 'Y', 'test', 'test', 'Y', 'test', 'Y', 'test'),
+	(32, 'XL', 'L', '1.72', '52', 'A+', 'Y', '', 'Y', 'Y', 'test', 'test', 'Y', 'test', 'Y', 'test'),
+	(33, 'M', '16', '1.73', '52', 'A+', 'Y', '', 'Y', 'N', 'lacteos', '', 'Y', 'hernia discal', 'Y', 'complejo b');
 
 -- Volcando estructura para tabla cvm.grados
 CREATE TABLE IF NOT EXISTS `grados` (
@@ -822,17 +848,23 @@ CREATE TABLE IF NOT EXISTS `madres` (
   `telf_trabajo` varchar(50) DEFAULT NULL,
   `religion` varchar(50) DEFAULT NULL,
   `vive_estudiante` enum('Y','N') DEFAULT NULL,
+  `foto` varchar(100) DEFAULT NULL,
   KEY `Índice 1` (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
--- Volcando datos para la tabla cvm.madres: ~6 rows (aproximadamente)
-INSERT INTO `madres` (`id`, `nombre`, `apellido`, `cedula`, `tipo_documento`, `fecha_nacimiento`, `edad`, `nacionalidad`, `estado_civil`, `nivel_instruccion`, `ocupacion`, `lugar_trabajo`, `habilidad`, `direccion_residencia`, `telf_movil`, `telf_residencia`, `telf_trabajo`, `religion`, `vive_estudiante`) VALUES
-	(1, 'nileida', 'servita', '9240076', 'V', '2023-02-08', '56', 'VEN', 'N', 'N', 'test', 'test', '', 'test', '12345678', '', '', '', 'Y'),
-	(2, 'nileida', 'servita', '9240076', 'V', '2023-01-30', '55', 'VEN', 'C', 'U', 'test', 'test', 'test', 'test', '04247104587', '', '', '', 'Y'),
-	(3, 'nileida', 'servita', '9240076', 'V', '2023-02-09', '56', 'VEN', 'C', 'U', 'profesora de pre-escolar', 'unidad educativa blen san joan colinas', 'manualidades y musica', 'test', '5555', '5555', '5555', 'test', 'Y'),
-	(4, 'test', 'test', '9240076', 'V', '2023-02-14', '25', 'COL', 'S', 'B', 'test', 'test', 'test', 'test', '55555', '', '', '', 'Y'),
-	(5, 'nileida', 'servita', '9240076', 'E', '2023-03-13', '26', 'VEN', 'C', 'U', 'test', 'test', 'test', 'test', '555555', '55555', '55555', 'test', 'Y'),
-	(6, 'nileida', 'servita', '9240076', 'V', '2023-03-14', '55', 'VEN', 'S', 'B', 'test', 'test', 'test', 'test', '55555', '5555', '555555', 'test', 'Y');
+-- Volcando datos para la tabla cvm.madres: ~11 rows (aproximadamente)
+INSERT INTO `madres` (`id`, `nombre`, `apellido`, `cedula`, `tipo_documento`, `fecha_nacimiento`, `edad`, `nacionalidad`, `estado_civil`, `nivel_instruccion`, `ocupacion`, `lugar_trabajo`, `habilidad`, `direccion_residencia`, `telf_movil`, `telf_residencia`, `telf_trabajo`, `religion`, `vive_estudiante`, `foto`) VALUES
+	(1, 'nileida', 'servita', '9240076', 'V', '2023-02-08', '56', 'VEN', 'N', 'N', 'test', 'test', '', 'test', '12345678', '', '', '', 'Y', NULL),
+	(2, 'nileida', 'servita', '9240076', 'V', '2023-01-30', '55', 'VEN', 'C', 'U', 'test', 'test', 'test', 'test', '04247104587', '', '', '', 'Y', NULL),
+	(3, 'nileida', 'servita', '9240076', 'V', '2023-02-09', '56', 'VEN', 'C', 'U', 'profesora de pre-escolar', 'unidad educativa blen san joan colinas', 'manualidades y musica', 'test', '5555', '5555', '5555', 'test', 'Y', NULL),
+	(4, 'test', 'test', '9240076', 'V', '2023-02-14', '25', 'COL', 'S', 'B', 'test', 'test', 'test', 'test', '55555', '', '', '', 'Y', NULL),
+	(5, 'nileida', 'servita', '9240076', 'E', '2023-03-13', '26', 'VEN', 'C', 'U', 'test', 'test', 'test', 'test', '555555', '55555', '55555', 'test', 'Y', NULL),
+	(6, 'nileida', 'servita', '9240076', 'V', '2023-03-14', '55', 'VEN', 'S', 'B', 'test', 'test', 'test', 'test', '55555', '5555', '555555', 'test', 'Y', NULL),
+	(7, 'nileida', 'servita', '9240079', 'V', '1963-01-16', '60', 'VEN', 'C', 'U', 'test', 'test', 'test', 'test', '4249727838', '0276115598', '0276115599', '4', 'Y', ''),
+	(14, 'nileida', 'servita', '9240072', 'V', '1969-01-14', '54', 'VEN', 'S', 'P', 'test', 'test', 'test', 'test', '4249746852', '04271115587', '04271115587', '3', 'Y', 'C:xampphtdocsColegioVirgilioMedinamodelclass/../twp/Imagen de WhatsApp 2023-06-16 a las 09.55.58.jpg'),
+	(26, 'nileida', 'servita', '9240032', 'V', '1966-01-18', '57', 'VEN', 'C', 'U', 'test', 'test', 'test', 'test', '4264720257', '02761114455', '02761114455', '4', 'Y', 'Imagen de WhatsApp 2023-06-16 a las 09.55.58.jpg'),
+	(31, 'nileida', 'servita', '9240045', 'V', '1959-01-22', '64', 'VEN', 'C', 'U', 'test', 'test', 'test', 'test', '4249727836', '02764445566', '02764445566', '3', 'Y', 'Imagen de WhatsApp 2023-06-16 a las 09.55.58.jpg'),
+	(32, 'nileida', 'servita', '9240078', 'V', '1968-01-23', '55', 'VEN', 'C', 'U', 'docente de preescolar', 'escuela', 'manualidades', 'test', '4249727852', '02761118645', '02761118645', '1', 'Y', 'Imagen de WhatsApp 2023-06-16 a las 09.55.58.jpg');
 
 -- Volcando estructura para tabla cvm.materias
 CREATE TABLE IF NOT EXISTS `materias` (
@@ -1279,17 +1311,23 @@ CREATE TABLE IF NOT EXISTS `padres` (
   `telf_trabajo` varchar(50) DEFAULT NULL,
   `religion` varchar(50) DEFAULT NULL,
   `vive_estudiante` enum('Y','N') DEFAULT NULL,
+  `foto` varchar(100) DEFAULT NULL,
   KEY `Índice 1` (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
--- Volcando datos para la tabla cvm.padres: ~6 rows (aproximadamente)
-INSERT INTO `padres` (`id`, `nombre`, `apellido`, `cedula`, `tipo_documento`, `fecha_nacimiento`, `edad`, `nacionalidad`, `estado_civil`, `nivel_instruccion`, `ocupacion`, `lugar_trabajo`, `habilidad`, `direccion_residencia`, `telf_movil`, `telf_residencia`, `telf_trabajo`, `religion`, `vive_estudiante`) VALUES
-	(1, 'moises', 'duran', '9727838', 'V', '2023-02-09', '57', 'VEN', 'N', 'N', 'test', 'test', '', 'test', '555555555', '', '', '', 'Y'),
-	(2, 'moises', 'duran', '9727838', 'V', '2023-02-18', '56', 'VEN', 'C', 'P', 'test', 'test', 'test', 'test', '0424', '', '', '', 'Y'),
-	(3, 'moises', 'duran', '9727838', 'V', '2023-02-05', '57', 'VEN', 'C', 'P', 'directo ipas', 'IPASME', 'test', 'tetstt', '5555', '5555', '5555', 'test', 'Y'),
-	(4, 'moises', 'duran', '9727838', 'V', '2023-02-23', '555', 'COL', 'S', 'B', 'test', 'test', 'test', 'test', '5555', '', '', '', 'Y'),
-	(5, 'moises', 'duran', '555555', 'E', '2023-03-15', '26', 'VEN', 'C', 'U', 'test', 'test', 'tes', 'test', '555555', '55555', '55555', '555555', 'Y'),
-	(6, 'moises', 'duran', '5555', 'E', '2023-03-22', '20', 'VEN', 'S', 'U', 'test', 'test', 'test', 'test', '5555', '5555', '5555', 'test', 'Y');
+-- Volcando datos para la tabla cvm.padres: ~11 rows (aproximadamente)
+INSERT INTO `padres` (`id`, `nombre`, `apellido`, `cedula`, `tipo_documento`, `fecha_nacimiento`, `edad`, `nacionalidad`, `estado_civil`, `nivel_instruccion`, `ocupacion`, `lugar_trabajo`, `habilidad`, `direccion_residencia`, `telf_movil`, `telf_residencia`, `telf_trabajo`, `religion`, `vive_estudiante`, `foto`) VALUES
+	(1, 'moises', 'duran', '9727838', 'V', '2023-02-09', '57', 'VEN', 'N', 'N', 'test', 'test', '', 'test', '555555555', '', '', '', 'Y', NULL),
+	(2, 'moises', 'duran', '9727838', 'V', '2023-02-18', '56', 'VEN', 'C', 'P', 'test', 'test', 'test', 'test', '0424', '', '', '', 'Y', NULL),
+	(3, 'moises', 'duran', '9727838', 'V', '2023-02-05', '57', 'VEN', 'C', 'P', 'directo ipas', 'IPASME', 'test', 'tetstt', '5555', '5555', '5555', 'test', 'Y', NULL),
+	(4, 'moises', 'duran', '9727838', 'V', '2023-02-23', '555', 'COL', 'S', 'B', 'test', 'test', 'test', 'test', '5555', '', '', '', 'Y', NULL),
+	(5, 'moises', 'duran', '555555', 'E', '2023-03-15', '26', 'VEN', 'C', 'U', 'test', 'test', 'tes', 'test', '555555', '55555', '55555', '555555', 'Y', NULL),
+	(6, 'moises', 'duran', '5555', 'E', '2023-03-22', '20', 'VEN', 'S', 'U', 'test', 'test', 'test', 'test', '5555', '5555', '5555', 'test', 'Y', NULL),
+	(7, 'moises', 'duran', '9224717', 'V', '1967-01-18', '56', 'VEN', 'C', 'P', 'test', 'test', 'test', 'test', '4249788756', '02761115598', '02761115599', '4', 'Y', ''),
+	(14, 'moises', 'duran', '9224714', 'V', '1966-01-12', '57', 'VEN', 'C', 'P', 'test', 'test', 'test', 'test', '4249788732', '02763355789', '02763355789', '3', 'Y', 'C:xampphtdocsColegioVirgilioMedinamodelclass/../twp/WIN_20230519_18_29_39_Pro.jpg'),
+	(26, 'moises', 'duran', '9224718', 'V', '1964-01-15', '59', 'VEN', 'C', 'P', 'test', 'test', 'test', 'test', '4264720256', '02761114455', '02761114455', '4', 'Y', 'WIN_20230519_18_29_39_Pro.jpg'),
+	(31, 'moises', 'duran', '9224712', 'V', '1966-01-12', '57', 'VEN', 'C', 'P', 'test', 'test', 'test', 'test', '4249788712', '02764445566', '02764445566', '4', 'Y', 'WIN_20230519_18_29_39_Pro.jpg'),
+	(32, 'moises', 'duran', '9224715', 'V', '1958-01-20', '65', 'VEN', 'C', 'P', 'eden', 'ipas', 'musica', 'test', '4249788751', '02764567893', '02764567893', '1', 'Y', 'WIN_20230519_18_29_39_Pro.jpg');
 
 -- Volcando estructura para tabla cvm.paises
 CREATE TABLE IF NOT EXISTS `paises` (
@@ -1569,7 +1607,7 @@ CREATE TABLE IF NOT EXISTS `parroquias` (
   KEY `id_municipio` (`id_municipio`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1139 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- Volcando datos para la tabla cvm.parroquias: ~1.138 rows (aproximadamente)
+-- Volcando datos para la tabla cvm.parroquias: ~1.374 rows (aproximadamente)
 INSERT INTO `parroquias` (`id_parroquia`, `id_municipio`, `parroquia`) VALUES
 	(1, 1, 'Alto Orinoco'),
 	(2, 1, 'Huachamacare Acanaña'),
@@ -2816,17 +2854,22 @@ CREATE TABLE IF NOT EXISTS `representantes` (
   `religion` varchar(50) DEFAULT NULL,
   `vive_estudiante` enum('Y','N') DEFAULT NULL,
   `parentesco` varchar(50) DEFAULT NULL,
+  `foto` varchar(50) DEFAULT NULL,
   KEY `Índice 1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla cvm.representantes: ~6 rows (aproximadamente)
-INSERT INTO `representantes` (`id`, `nombre`, `apellido`, `cedula`, `tipo_documento`, `fecha_nacimiento`, `edad`, `nacionalidad`, `estado_civil`, `nivel_instruccion`, `ocupacion`, `lugar_trabajo`, `habilidad`, `direccion_residencia`, `telf_movil`, `telf_residencia`, `telf_trabajo`, `religion`, `vive_estudiante`, `parentesco`) VALUES
-	(1, 'nileida', 'servita', '9240076', 'V', '2023-02-08', '56', 'VEN', 'N', 'N', 'test', 'test', '', 'test', '12345678', '', '', '', 'N', 'Madre'),
-	(2, 'moises', 'duran', '9727838', 'V', '2023-02-18', '56', 'VEN', 'C', 'P', 'test', 'test', 'test', 'test', '0424', '', '', '', 'N', 'Padre'),
-	(3, 'nileida', 'servita', '9240076', 'V', '2023-02-09', '56', 'VEN', 'C', 'U', 'profesora de pre-escolar', 'unidad educativa blen san joan colinas', 'manualidades y musica', 'test', '5555', '5555', '5555', 'test', 'N', 'Madre'),
-	(4, 'moises', 'duran', '9727838', 'V', '2023-02-23', '555', 'COL', 'S', 'B', 'test', 'test', 'test', 'test', '5555', '', '', '', 'N', 'Padre'),
-	(5, 'nileida', 'servita', '9240076', 'E', '2023-03-13', '26', 'VEN', 'C', 'U', 'test', 'test', 'test', 'test', '555555', '55555', '55555', 'test', 'N', 'Madre'),
-	(6, 'moises', 'duran', '5555', 'E', '2023-03-22', '20', 'VEN', 'S', 'U', 'test', 'test', 'test', 'test', '5555', '5555', '5555', 'test', 'N', 'Padre');
+-- Volcando datos para la tabla cvm.representantes: ~11 rows (aproximadamente)
+INSERT INTO `representantes` (`id`, `nombre`, `apellido`, `cedula`, `tipo_documento`, `fecha_nacimiento`, `edad`, `nacionalidad`, `estado_civil`, `nivel_instruccion`, `ocupacion`, `lugar_trabajo`, `habilidad`, `direccion_residencia`, `telf_movil`, `telf_residencia`, `telf_trabajo`, `religion`, `vive_estudiante`, `parentesco`, `foto`) VALUES
+	(1, 'nileida', 'servita', '9240076', 'V', '2023-02-08', '56', 'VEN', 'N', 'N', 'test', 'test', '', 'test', '12345678', '', '', '', 'N', 'Madre', NULL),
+	(2, 'moises', 'duran', '9727838', 'V', '2023-02-18', '56', 'VEN', 'C', 'P', 'test', 'test', 'test', 'test', '0424', '', '', '', 'N', 'Padre', NULL),
+	(3, 'nileida', 'servita', '9240076', 'V', '2023-02-09', '56', 'VEN', 'C', 'U', 'profesora de pre-escolar', 'unidad educativa blen san joan colinas', 'manualidades y musica', 'test', '5555', '5555', '5555', 'test', 'N', 'Madre', NULL),
+	(4, 'moises', 'duran', '9727838', 'V', '2023-02-23', '555', 'COL', 'S', 'B', 'test', 'test', 'test', 'test', '5555', '', '', '', 'N', 'Padre', NULL),
+	(5, 'nileida', 'servita', '9240076', 'E', '2023-03-13', '26', 'VEN', 'C', 'U', 'test', 'test', 'test', 'test', '555555', '55555', '55555', 'test', 'N', 'Madre', NULL),
+	(6, 'moises', 'duran', '5555', 'E', '2023-03-22', '20', 'VEN', 'S', 'U', 'test', 'test', 'test', 'test', '5555', '5555', '5555', 'test', 'N', 'Padre', NULL),
+	(7, 'nileida', 'servita', '9240079', 'V', '1963-01-16', '60', 'VEN', 'C', 'U', 'test', 'test', 'test', 'test', '4249727838', '0276115598', '0276115599', '4', 'N', 'Madre', ''),
+	(14, 'henry', 'lozada', '95648213', 'V', '1978-01-18', '45', 'VEN', 'S', 'N', 'test', 'test', 'test', 'test', '4245642137', '02765684975', '02765684975', '1', 'N', 'Abuelo', NULL),
+	(31, 'nileida', 'servita', '9240045', 'V', '1959-01-22', '64', 'VEN', 'C', 'U', 'test', 'test', 'test', 'test', '4249727836', '02764445566', '02764445566', '3', 'N', 'Madre', NULL),
+	(32, 'nileida', 'servita', '9240078', 'V', '1968-01-23', '55', 'VEN', 'C', 'U', 'docente de preescolar', 'escuela', 'manualidades', 'test', '4249727852', '02761118645', '02761118645', '1', 'N', 'Madre', NULL);
 
 -- Volcando estructura para tabla cvm.secciones
 CREATE TABLE IF NOT EXISTS `secciones` (
@@ -2935,9 +2978,9 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `permisos` varchar(100) DEFAULT NULL,
   `id_tipo_usuario` int(11) DEFAULT NULL,
   KEY `Índice 1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla cvm.usuarios: ~25 rows (aproximadamente)
+-- Volcando datos para la tabla cvm.usuarios: ~51 rows (aproximadamente)
 INSERT INTO `usuarios` (`id`, `email`, `pass`, `estatus`, `permisos`, `id_tipo_usuario`) VALUES
 	(1, 'angelloprogramador@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'Y', '[R,U,D,I]', 2),
 	(2, 'elsecretodeloscielos@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'Y', '[R,U,D]', 3),
@@ -2963,7 +3006,33 @@ INSERT INTO `usuarios` (`id`, `email`, `pass`, `estatus`, `permisos`, `id_tipo_u
 	(22, 'angelloprogramador@gmail.com', '2f8f3307f02209ef5db66aec02d6bc05', 'Y', '[R,U]', 3),
 	(23, 'angelloprogramador@gmail.com', 'c5fe25896e49ddfe996db7508cf00534', 'Y', '[R,U]', 3),
 	(24, 'angelloprogramador@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(25, 'test@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4);
+	(25, 'test@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
+	(26, 'angelloprogramador23@gmail.com', 'f4e37a7986a4d838ba675d7b2217152c', 'N', '[R,U]', 4),
+	(27, 'test23@gmail.com', 'f4e37a7986a4d838ba675d7b2217152c', 'N', '[R,U]', 4),
+	(28, 'test23@gmail.com', 'f4e37a7986a4d838ba675d7b2217152c', 'N', '[R,U]', 4),
+	(29, 'test23@gmail.com', 'f4e37a7986a4d838ba675d7b2217152c', 'N', '[R,U]', 4),
+	(30, 'test23@gmail.com', 'f4e37a7986a4d838ba675d7b2217152c', 'N', '[R,U]', 4),
+	(31, 'test23@gmail.com', 'f4e37a7986a4d838ba675d7b2217152c', 'N', '[R,U]', 4),
+	(32, 'test23@gmail.com', 'f4e37a7986a4d838ba675d7b2217152c', 'N', '[R,U]', 4),
+	(33, 'test23@gmail.com', 'f4e37a7986a4d838ba675d7b2217152c', 'N', '[R,U]', 4),
+	(34, 'test26@gmail.com', '8e296a067a37563370ded05f5a3bf3ec', 'N', '[R,U]', 4),
+	(35, 'test26@gmail.com', '8e296a067a37563370ded05f5a3bf3ec', 'N', '[R,U]', 4),
+	(36, 'test26@gmail.com', '8e296a067a37563370ded05f5a3bf3ec', 'N', '[R,U]', 4),
+	(37, 'test26@gmail.com', '8e296a067a37563370ded05f5a3bf3ec', 'N', '[R,U]', 4),
+	(38, 'test26@gmail.com', '8e296a067a37563370ded05f5a3bf3ec', 'N', '[R,U]', 4),
+	(39, 'test26@gmail.com', '8e296a067a37563370ded05f5a3bf3ec', 'N', '[R,U]', 4),
+	(40, 'test26@gmail.com', '8e296a067a37563370ded05f5a3bf3ec', 'N', '[R,U]', 4),
+	(41, 'test26@gmail.com', '8e296a067a37563370ded05f5a3bf3ec', 'N', '[R,U]', 4),
+	(42, 'test26@gmail.com', '8e296a067a37563370ded05f5a3bf3ec', 'N', '[R,U]', 4),
+	(43, 'test26@gmail.com', '8e296a067a37563370ded05f5a3bf3ec', 'N', '[R,U]', 4),
+	(44, 'test26@gmail.com', '8e296a067a37563370ded05f5a3bf3ec', 'N', '[R,U]', 4),
+	(45, 'test26@gmail.com', '8e296a067a37563370ded05f5a3bf3ec', 'N', '[R,U]', 4),
+	(46, 'test83@gmail.com', '6f4c5d3207471d9dbae6db3c8f7c1909', 'N', '[R,U]', 4),
+	(47, 'test83@gmail.com', '6f4c5d3207471d9dbae6db3c8f7c1909', 'N', '[R,U]', 4),
+	(48, 'test83@gmail.com', '6f4c5d3207471d9dbae6db3c8f7c1909', 'N', '[R,U]', 4),
+	(49, 'test83@gmail.com', '6f4c5d3207471d9dbae6db3c8f7c1909', 'N', '[R,U]', 4),
+	(50, 'test83@gmail.com', '6f4c5d3207471d9dbae6db3c8f7c1909', 'N', '[R,U]', 4),
+	(51, 'angelloprogramador26@gmail.com', '374861a3ae2c8ee7af19cb03dd32e834', 'N', '[R,U]', 4);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
