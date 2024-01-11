@@ -90,7 +90,7 @@
             return $this->idDetalleEstudiante;
         }
 
-        public function reg_estudiante() {
+        public function reg_estudiante($photo) {
             $this->sql = "INSERT INTO 
                 estudiantes ( 
                     nombre, 
@@ -114,7 +114,8 @@
                     id_detalles_estudiante,
                     id_representante,
                     id_mama,
-                    id_papa
+                    id_papa,
+                    foto
                 ) 
                 VALUES (
                     '{$this->objData['estudiante']['nombre']}',
@@ -138,7 +139,8 @@
                     '{$this->idDetalleEstudiante}',
                     '{$this->idRepresentante}',
                     '{$this->idMadre}',
-                    '{$this->idPadre}'
+                    '{$this->idPadre}',
+                    '{$photo}'
                 )
             ";
 
@@ -147,7 +149,7 @@
             return $this->idEstudiante;
         }
 
-        public function reg_madre() {
+        public function reg_madre($photo) {
             $this->sql = "INSERT INTO 
                 madres ( 
                     nombre, 
@@ -167,7 +169,8 @@
                     telf_residencia,
                     telf_trabajo,
                     religion,
-                    vive_estudiante
+                    vive_estudiante,
+                    foto
                 ) 
                 VALUES (
                     '{$this->objData['madre']['nombre']}',
@@ -187,7 +190,8 @@
                     '{$this->objData['madre']['telefono_residencia']}',
                     '{$this->objData['madre']['telefono_trabajo']}',
                     '{$this->objData['madre']['religion']}',
-                    '{$this->objData['madre']['vive_estudiante']}'
+                    '{$this->objData['madre']['vive_estudiante']}',
+                    '{$photo}'
                 )
             ";
 
@@ -196,7 +200,7 @@
             return $this->idMadre;
         }
 
-        public function reg_padre() {
+        public function reg_padre($photo) {
             $this->sql = "INSERT INTO 
                 padres ( 
                     nombre, 
@@ -216,7 +220,8 @@
                     telf_residencia,
                     telf_trabajo,
                     religion,
-                    vive_estudiante
+                    vive_estudiante,
+                    foto
                 ) 
                 VALUES (
                     '{$this->objData['padre']['nombre']}',
@@ -236,7 +241,8 @@
                     '{$this->objData['padre']['telefono_residencia']}',
                     '{$this->objData['padre']['telefono_trabajo']}',
                     '{$this->objData['padre']['religion']}',
-                    '{$this->objData['padre']['vive_estudiante']}'
+                    '{$this->objData['padre']['vive_estudiante']}',
+                    '{$photo}'
                 )
             ";
 
@@ -245,7 +251,7 @@
             return $this->idPadre;
         }
 
-        public function reg_representante() {
+        public function reg_representante($photo='') {
             $this->sql = "INSERT INTO 
                 representantes ( 
                     nombre, 
@@ -308,6 +314,14 @@
                 estudiantes.email as estudiante_email,
                 estudiantes.direccion as estudiante_direccion,
                 estudiantes.fecha_nacimiento as estudiante_fecha_nacimiento,
+                estudiantes.habilidades as estudiante_habilidades,
+                estudiantes.telf_movil as estudiante_telf_movil,
+                estudiantes.telf_residencia as estudiante_telf_residencia,
+                estudiantes.foto as estudiante_foto,
+                estados.estado as estudiante_estado,
+                religiones.religion as estudiante_religion,
+                estudiantes.otra_religion as estudiante_otra_religion,
+                municipios.municipio as estudiante_municipio,
                 estudiantes_detalles.*,
                 madres.nombre as madre_nombre,
                 madres.apellido as madre_apellido,
@@ -327,6 +341,7 @@
                 madres.telf_trabajo as madre_telf_trabajo,
                 madres.religion as madre_religion,
                 madres.vive_estudiante as madre_vive_estudiante,
+                madres.foto as madre_foto,
                 padres.nombre as padre_nombre,
                 padres.apellido as padre_apellido,
                 padres.cedula as padre_cedula,
@@ -345,6 +360,7 @@
                 padres.telf_trabajo as padre_telf_trabajo,
                 padres.religion as padre_religion,
                 padres.vive_estudiante as padre_vive_estudiante,
+                padres.foto as padre_foto,
                 representantes.nombre as representantes_nombre,
                 representantes.apellido as representantes_apellido,
                 representantes.cedula as representantes_cedula,
@@ -368,10 +384,49 @@
                     LEFT JOIN madres ON estudiantes.id_mama = madres.id
                     LEFT JOIN padres ON estudiantes.id_papa = padres.id
                     LEFT JOIN representantes ON estudiantes.id_representante = representantes.id
+                    LEFT JOIN estados ON estudiantes.id_estado = estados.id_estado
+                    LEFT JOIN municipios ON estudiantes.id_municipio = municipios.id_municipio
+                    LEFT JOIN religiones ON estudiantes.religion = religiones.id
                 WHERE estudiantes.id = {$this->objData['id_estudiante']}";
             $this->query = mysqli_query($this->con, $this->sql);
             $this->result = mysqli_fetch_assoc($this->query);
             return $this->result;
+        }
+
+        public function uploadPhoto($file) {
+            $uploadDirectory = __DIR__ . '/../twp/';
+
+            // Asegúrate de que el directorio existe
+            if (!file_exists($uploadDirectory)) {
+                mkdir($uploadDirectory, 0777, true);
+            }
+
+            // Verifica si el archivo ha sido cargado
+            if (isset($file)) {
+                // Asegúrate de que el archivo se haya subido correctamente
+                if ($file['error']['preview_foto'] == UPLOAD_ERR_OK) {
+                    $tmpName = $file['tmp_name']['preview_foto'];
+                    $name = basename($file['name']['preview_foto']);
+                    $uploadPath = $uploadDirectory . $name;
+
+                    // Mueve el archivo al directorio de destino
+                    if (move_uploaded_file($tmpName, $uploadPath)) {
+                        // La ruta del archivo se almacena para usarla más tarde
+                        $this->result = $name;
+                        return $this->result;
+                    } else {
+                        // Manejo de errores
+                        // El archivo no se pudo mover al directorio de destino
+                    }
+                } else {
+                    // Manejo de errores
+                    // Error al subir el archivo
+                }
+            } else {
+                // El campo 'foto' no existe en $_FILES
+            }
+
+           
         }
 
     }

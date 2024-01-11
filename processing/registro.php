@@ -7,6 +7,7 @@
     require('../model/class/cupos.class.php');
     require('../model/class/periodo.class.php');
     require('../model/class/grados.class.php');
+    require('../model/class/secciones.class.php');
     require_once('../model/class/turno.class.php');
 
     //intancias
@@ -18,9 +19,11 @@
     $objCupos = new Cupos();
     $objGrados = new Grados();
     $objTurno = new Turnos();
+    $objSecciones = new Secciones();
 
     $arrTurnos = $objTurno->getAllTurnos();
     $arrGrados = $objGrados->getAllGrados();
+    $arrSecciones = $objSecciones->getAllSecciones();
     $arrPeriodo = $objPeriodo->getPeriodo();
     $idperiodo = (int)$arrPeriodo[0]['id'];
     $arrCuposManana = $objCupos->getCuposForPeriodo($idperiodo, $arrTurnos[0]['turno']);
@@ -122,20 +125,22 @@
                         <div class="row">
                             <div class="col-6">
                                 <?php foreach($arrGrados as $index => $grado) { 
-                                    $cupo = !empty($arrCuposManana) ? $arrCuposManana[$index]['cupo'] : 0;    
+                                    $cupo = !empty($arrCuposManana) ? $arrCuposManana[$index]['cupo'] : 0;  
+                                    if($arrGrados[$index]['id'] != 5) { 
                                 ?>
-                                     <div class="card turno_cupo" data-turno="manana" data-grado="<?= $arrGrados[$index]['id'] ?>" style="padding: 10px;">
+                                    <div class="card turno_cupo" data-turno="manana" data-grado="<?= $arrGrados[$index]['id'] ?>" style="padding: 10px;">
                                         <div class="card-body">
                                             <span style="font-size: 20px;"><?= $arrGrados[$index]['formato'].' Año' ?></span>
                                             <span style="font-size: 25px; float: right; color: #fff; border-radius: 10px; padding: 7px ;background-color:#0F8B0B;"><?= $cupo ?></span>
                                             <span class="mr-4" style="font-size: 20px; float: right;">Cupos disponibles</span>
                                         </div>
                                     </div> 
-                                <?php } ?> 
+                                <?php } } ?> 
                             </div> 
                             <div class="col-6">
                                 <?php foreach($arrGrados as $index => $grado) { 
-                                    $cupo = !empty($arrCuposTarde) ? $arrCuposTarde[$index]['cupo'] : 0;    
+                                    $cupo = !empty($arrCuposTarde) ? $arrCuposTarde[$index]['cupo'] : 0;
+                                    if($arrGrados[$index]['id'] != 5) {    
                                 ?>
                                      <div class="card turno_cupo" data-turno="tarde" data-grado="<?= $arrGrados[$index]['id'] ?>" style="padding: 10px;">
                                         <div class="card-body">
@@ -144,7 +149,7 @@
                                             <span class="mr-4" style="font-size: 20px; float: right;">Cupos disponibles</span>
                                         </div>
                                     </div> 
-                                <?php } ?> 
+                                <?php } }?> 
                             </div> 
                         </div>
                     </div>
@@ -247,6 +252,7 @@
             var objEstados =  <?= json_encode($arrEstados);?>;
             var objReligiones = <?= json_encode($arrReligiones);?>;
             var objLatam = <?= json_encode($arrLatam); ?>;
+            var objSecciones = <?= json_encode($arrSecciones)?>;
         </script>
         <script src="../assets/face-api/face-api.min.js"></script>
         <script src="../assets/js/src/validador-images.js?v="<?= rand(100, 500); ?>></script>

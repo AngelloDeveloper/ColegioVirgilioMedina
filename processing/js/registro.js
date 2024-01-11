@@ -12,10 +12,13 @@ $(function() {
         'type' : 'setPreRegistro'
     }
 
+    let turn;
+
     var template_estados = generateTemplate_estados();
     var template_religion = generateTemplate_religion();
     var template_codigos = generateTemplate_codigos();
     var template_latam = generateTemplate_latam();
+    var template_secciones = generateTemplate_secciones();
     
     const arrFormularios = {
         formulario1: {
@@ -24,6 +27,16 @@ $(function() {
                 <form id="form1" enctype="multipart/form-data">
                     <div class="container p-4">
                         <span id="alerta_form"></span>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="input-field">
+                                    <select id="seccion">
+                                        ${template_secciones}
+                                    </select>
+                                    <label>Sección <span style="color: #960032;"><b>*</b></span></label>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group input-field">
@@ -1299,12 +1312,17 @@ $(function() {
      /*turn cups*/
      $('.turno_cupo').on('click', function() {
         let elm = $(this)[0];
-        let turn = $(elm).data('turno');
+        turn = $(elm).data('turno');
         let grado = $(elm).data('grado');
 
         objData.turn = turn;
         objData.grado = grado;
         const img = turn == 'manana' ? 'river.png' : 'nature.png';
+
+        template_secciones = generateTemplate_secciones(turn);
+        console.log(template_secciones);
+        let elementSeccion = $(document).find('#seccion')[0];
+        $(elementSeccion).html(template_secciones);
 
         $('#imgTurn').html(`
             <img class="animateImg" src="../assets/img/pre-registro/${img}" style="
@@ -1710,7 +1728,7 @@ $(function() {
                         },1500);
                     } else {
                         $(document).find('.btnform').html('SIGUIENTE');
-                        $(document).find('#alerta_form').html(alert_Images(`el ${resp.dato}:${resp.value} ya existe en nuestra base de datos, "Por favor verificar o ponerse en contacto con nuestro equipo de soporte."`, 'danger'))
+                        $(document).find('#alerta_form').html(alert_Images(`el ${resp.dato}: <b>${resp.value}</b> ya existe en nuestra base de datos, "Por favor verificar o ponerse en contacto con nuestro equipo de soporte."`, 'danger'))
                         window.scrollTo({
                             top: 500,
                             behavior: "smooth"
@@ -1828,7 +1846,7 @@ $(function() {
                         },1500); 
                     } else {
                         $(document).find('.btnform').html('SIGUIENTE');
-                        $(document).find('#alerta_form').html(alert_Images(`el ${resp.dato}:${resp.value} ya existe en nuestra base de datos, "Por favor verificar o ponerse en contacto con nuestro equipo de soporte."`, 'danger'))
+                        $(document).find('#alerta_form').html(alert_Images(`el ${resp.dato}: <b>${resp.value}</b> ya existe en nuestra base de datos, "Por favor verificar o ponerse en contacto con nuestro equipo de soporte."`, 'danger'))
                         window.scrollTo({
                             top: 500,
                             behavior: "smooth"
@@ -1946,7 +1964,7 @@ $(function() {
                         },1500);
                     }  else {
                         $(document).find('.btnform').html('SIGUIENTE');
-                        $(document).find('#alerta_form').html(alert_Images(`el ${resp.dato}:${resp.value} ya existe en nuestra base de datos, "Por favor verificar o ponerse en contacto con nuestro equipo de soporte."`, 'danger'))
+                        $(document).find('#alerta_form').html(alert_Images(`el ${resp.dato}: <b>${resp.value}</b> ya existe en nuestra base de datos, "Por favor verificar o ponerse en contacto con nuestro equipo de soporte."`, 'danger'))
                         window.scrollTo({
                             top: 500,
                             behavior: "smooth"
@@ -2261,7 +2279,38 @@ $(function() {
                         }).then((result) => {
                             if(result.isConfirmed) {
                                 console.log('entramos');
-                                $.post("../controllers/controller_registro.php", objData, function(response) {
+                                let formDatax = new FormData();
+                                appendObjectToFormData(formDatax, objData);
+                                console.log(formDatax);
+                                $.ajax({
+                                    url: "../controllers/controller_registro.php",
+                                    type: "POST",
+                                    data: formDatax,
+                                    processData: false,  // Indica a jQuery que no procese los datos
+                                    contentType: false,  // Indica a jQuery que no establezca el tipo de contenido
+                                    success: function(response) {
+                                        console.log(response);
+                                        var resp = jQuery.parseJSON(response);
+                                        if(resp.STATUS == 'SUCCESS') {
+                                            Swal.fire({
+                                                title: resp.MESSAGES,
+                                                text: 'Los datos seran procesados, el usuario sera habilitado una vez se formalice la inscripción',
+                                                icon: 'success',
+                                                confirmButtonColor: '#e0bb66'
+                                            }).then((result2) => {
+                                                if(result2.isConfirmed) {
+                                                    $.post("../controllers/controller_registro.php", {type : 'downloadTemplatePreRegistro', id_estudiante : resp.DATA}, function(response) {
+                                                        console.log(response);
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    },
+                                    error: function(xhr, status, error) {
+                                        console.error("Error en la petición AJAX:", status, error);
+                                    }
+                                });
+                                /*$.post("../controllers/controller_registro.php", objData, function(response) {
                                     var resp = jQuery.parseJSON(response);
                                     if(resp.STATUS == 'SUCCESS') {
                                         Swal.fire({
@@ -2277,7 +2326,7 @@ $(function() {
                                             }
                                         })
                                     }
-                                });
+                                });*/
 
                                 /*$.ajax({
                                     type: "POST",
@@ -2308,7 +2357,7 @@ $(function() {
                         })
                     } else {
                         $(document).find('.btnform').html('SIGUIENTE');
-                        $(document).find('#alerta_form').html(alert_Images(`el ${resp.dato}:${resp.value} ya existe en nuestra base de datos, "Por favor verificar o ponerse en contacto con nuestro equipo de soporte."`, 'danger'))
+                        $(document).find('#alerta_form').html(alert_Images(`el ${resp.dato}: <b>${resp.value}</b> ya existe en nuestra base de datos, "Por favor verificar o ponerse en contacto con nuestro equipo de soporte."`, 'danger'))
                         window.scrollTo({
                             top: 500,
                             behavior: "smooth"
@@ -2469,6 +2518,25 @@ $(function() {
         return template;
     }
 
+    function generateTemplate_secciones(turno) {
+        let template = '';
+        console.log(objSecciones);
+        console.log('el turno');
+        console.log(turno);
+        $(objSecciones).each((index, seccion) => {
+            console.log(seccion);
+            if(turno != 'manana') {
+                if(seccion != 'C') {
+                    template += `<option value="${seccion.id}">${seccion.seccion}</option>`;
+                }
+            } else {
+                template += `<option value="${seccion.id}">${seccion.seccion}</option>`;
+            }
+        });
+
+        return template;
+    }
+
     function generateTemplate_latam() {
         var template = '';
         console.log('latam: ');
@@ -2551,6 +2619,26 @@ $(function() {
         `;
 
         return template;
+    }
+
+    //funcion para agregar todo el objeto al formData
+    function appendObjectToFormData(formData, obj, namespace) {
+        for (let property in obj) {
+            if (obj.hasOwnProperty(property)) {
+                const formKey = namespace ? `${namespace}[${property}]` : property;
+                
+                if (obj[property] instanceof File) {
+                    // Añadir archivos directamente
+                    formData.append(formKey, obj[property]);
+                } else if (typeof obj[property] === 'object' && obj[property] !== null) {
+                    // Recursión para objetos anidados
+                    appendObjectToFormData(formData, obj[property], formKey);
+                } else {
+                    // Añadir propiedades normales
+                    formData.append(formKey, obj[property]);
+                }
+            }
+        }
     }
         
 })   

@@ -24,19 +24,19 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header" style="display:block !important;">
-                        <center><h2 class="text-center">Incripciones Abiertas !!!</h2></center>
+                        <center><h2 class="text-center">Proceso de registro estudiantes regulares</h2></center>
                     </div>
                     <div class="modal-body">
                         <center><img src="../assets/img/escudopng2.png" style="width:100px;" /></center>
                         <br />
                         <p style="text-align: justify;">
-                            El proceso estará disponibles los dias <b>1, 2 y 5 de Junio</b>, No pierdas esta <b>Gran Oportunidad.</b>
-                            <br /><br /> Recuerda, al completar tu pre-inscripción se <b>descargará de manera automatica tu planilla</b>, la cual deberás imprimir y llevar como recaudo a la institución para formalizar la inscripción
+                            El proceso estará disponibles los dias del <b>8 al 15 de enero</b>, realizalo de manera oportuna
+                            <br /><br /> Recuerda, al completar tu registro se <b>descargará de manera automatica tu planilla</b>, la cual deberás imprimir y llevar como recaudo a la institución para formalizar la misma.
                         </p>
                     </div>
                     <div class="modal-footer">
                         <button id="btn_close_pre_inscripcion" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <a href="../processing/registro.php" class="btn" style="background-color: #DCBB05; color: #000;">Ir a la Pre-Inscripción</a>
+                        <a href="../processing/registro.php" class="btn" style="background-color: #DCBB05; color: #000;">Ir a la registro</a>
                     </div>
                 </div>
             </div>
@@ -143,7 +143,7 @@
             <div class="container">
                 <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
                     <p class="fs-5 fw-bold text-primary">Eventos</p>
-                    <h1 class="display-5 mb-5">Inscripciones Abiertas</h1>
+                    <h1 class="display-5 mb-5">Proceso de registro</h1>
                 </div>
                 <div class="col-12 wow fadeIn" data-wow-delay="0.3s" style="background: linear-gradient(303deg, rgba(17,121,9,1) 3%, rgba(14,138,54,1) 10%, rgba(255,255,255,1) 48%, rgba(255,255,255,1) 100%);">
                     <div class="text-center rounded py-5 px-4" style="box-shadow: 0 0 45px rgba(0,0,0,.08);">
@@ -153,14 +153,14 @@
                             </div>
                             <div class="col-8">
                                 <h4>
-                                El proceso estará disponibles los dias <b>1, 2 y 5 de Junio</b>, No pierdas esta <b>Gran Oportunidad.</b>
-                                <br /><br /> Recuerda, al completar tu pre-inscripción se <b>descargará de manera automatica tu planilla</b>, la cual deberás imprimir y llevar como recaudo a la institución para formalizar la inscripción
+                                El proceso estará disponibles los dias del <b>8 al 15 de Enero</b>, realizalo de manera oportuna
+                            <br /><br /> Recuerda, al completar tu registro se <b>descargará de manera automatica tu planilla</b>, la cual deberás imprimir y llevar como recaudo a la institución para formalizar la misma.
                                 </h4>
                                 <a  
                                     style="padding: 20px; margin-top: 50px; background-color: #DCBB05; color: #000;" 
                                     href="../processing/registro.php" 
                                     class="btn ir_preregistro">
-                                        Ir a la Pre-Inscripción
+                                        Ir al registro
                                 </a>
                             </div>
                             <style>
