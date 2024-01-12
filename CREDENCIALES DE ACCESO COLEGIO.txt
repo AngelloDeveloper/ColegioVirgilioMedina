@@ -1,0 +1,16 @@
+datos de acceso admin
+host: c1015.gconex.com:2087
+user: root
+clave: __eJjWTKbUi+b44
+
+
+datos de acceso al panel de usuario
+host: c1015.gconex.com:2083
+user: uecolegi
+clave: uu0VprGwwDaG
+
+credenciales ftp:
+host: uecolegiovirgiliomedinaramirez.com o 200.6.157.143
+usuario: cvm@uecolegiovirgiliomedinaramirez.com 
+clave: 8jbTocJn1KE2
+puerto: 21
