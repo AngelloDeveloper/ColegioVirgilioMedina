@@ -64,7 +64,11 @@
                     medicado,
                     medicamento,
                     convulsion,
-                    convulsion_observaciones
+                    convulsion_observaciones,
+                    familiar_colegio,
+                    familiar_nombre,
+                    parentesco,
+                    especificaciones
                 ) 
                 VALUES (
                     '{$this->objData['detalle_estudiante']['talla_camisa']}',
@@ -81,7 +85,11 @@
                     '{$this->objData['detalle_estudiante']['medicado']}',
                     '{$this->objData['detalle_estudiante']['medicamento']}',
                     '{$this->objData['detalle_estudiante']['convulsion']}',
-                    '{$this->objData['detalle_estudiante']['convulsion_observaciones']}'
+                    '{$this->objData['detalle_estudiante']['convulsion_observaciones']}',
+                    '{$this->objData['detalle_estudiante']['familiar_colegio']}',
+                    '{$this->objData['detalle_estudiante']['familiar_colegioNombre']}',
+                    '{$this->objData['detalle_estudiante']['familiar_colegioParentesco']}',
+                    '{$this->objData['detalle_estudiante']['familiar_colegioDescripcion']}'
                 )
             ";
 
@@ -106,6 +114,10 @@
                     email,
                     direccion,
                     punto_referencia,
+                    religion,
+                    otra_religion,
+                    lateralidad,
+                    lugar_nacimiento,
                     fecha_nacimiento,
                     habilidades,
                     id_estado,
@@ -131,6 +143,10 @@
                     '{$this->objData['estudiante']['email']}',
                     '{$this->objData['estudiante']['direccion']}',
                     '{$this->objData['estudiante']['punto_referencia']}',
+                    '{$this->objData['estudiante']['religion']}',
+                    '{$this->objData['estudiante']['otra_religion']}',
+                    '{$this->objData['estudiante']['lateralidad']}',
+                    '{$this->objData['estudiante']['lugar_nacimiento']}',
                     '{$this->objData['estudiante']['fecha_nacimiento']}',
                     '{$this->objData['estudiante']['habilidades']}',
                     '{$this->objData['estudiante']['estado']}',
@@ -321,6 +337,7 @@
                 estados.estado as estudiante_estado,
                 religiones.religion as estudiante_religion,
                 estudiantes.otra_religion as estudiante_otra_religion,
+                estudiantes.lateralidad as lateralidad,
                 municipios.municipio as estudiante_municipio,
                 estudiantes_detalles.*,
                 madres.nombre as madre_nombre,
@@ -394,7 +411,7 @@
         }
 
         public function uploadPhoto($file) {
-            $uploadDirectory = __DIR__ . '/../twp/';
+            $uploadDirectory = __DIR__ . '/../../twp/';
 
             // Asegúrate de que el directorio existe
             if (!file_exists($uploadDirectory)) {

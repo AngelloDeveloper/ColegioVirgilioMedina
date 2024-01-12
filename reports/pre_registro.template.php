@@ -18,7 +18,7 @@
             'P' => 'Postgrado'
         ];
 
-        $arrFechaNacimiento = explode('/', $objData['estudiante_fecha_nacimiento']);
+        $arrFechaNacimiento = explode('-', $objData['estudiante_fecha_nacimiento']);
         $arrGenero =  $objData['estudiante_genero'] == 'M' ? ['X',''] : ['','X'];
 
         //variables
@@ -59,9 +59,9 @@
         if($objData['familiar_colegio'] == 'Y') {
             $fam_col_SI = 'X';
             $fam_col_NO = '';
-            $nom_fam_col = $objData['nombre_fam_col'];
-            $parem_fam_col = $objData['parem_fam_col'];
-            $detalles_fam_col = $objData['detalles_fam_col'];
+            $nom_fam_col = $objData['familiar_nombre'];
+            $parem_fam_col = $objData['parentesco'];
+            $detalles_fam_col = $objData['especificaciones'];
         } else {
             $fam_col_SI = '';
             $fam_col_NO = 'X';

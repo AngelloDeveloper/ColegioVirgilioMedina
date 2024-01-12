@@ -1642,7 +1642,7 @@ $(function() {
                             'lugar_nacimiento' : $(document).find('#lugar_nacimiento_estudiante').val(),
                             'estado': $(document).find('#estado_estudiante').val(),
                             'municipio': $(document).find('#municipio_estudiante').val(),
-                            'telf_code' : $(document).find('#cod_phone_numbre').val(),
+                            'telf_code' : $(document).find('#cod_phone_numbre_estudiante').val(),
                             'telf_movil': $(document).find('#telefono_movil_estudiante').val(),
                             'telf_residencia': $(document).find('#telefono_residencial_estudiante').val(),
                             'habilidades' : $(document).find('#habilidades_estudiante').val(),

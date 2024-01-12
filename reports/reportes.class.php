@@ -22,7 +22,7 @@
             return $stylesheet;
         }
     
-        function generateReport($template, $stylesheet) {
+        function generateReport($template, $stylesheet, $filename='pre-registro') {
             $this->WriteHTML($stylesheet, \Mpdf\HTMLParserMode::HEADER_CSS);
             $this->WriteHTML($template, \Mpdf\HTMLParserMode::HTML_BODY);
             $this->output();
