@@ -9,7 +9,6 @@
     $objParameters = new Parametros();
 
     $arrParametros = $objParameters->getAllParameter();
-
 ?>
 <link rel="stylesheet" type="text/css" href="css/docentes.css" />
 <div class="content-body">
@@ -59,54 +58,55 @@
                                                             </span>
                                                         </button>
                                                     </div>
-                                                    <button id="btNewDocente" type="button" class="btn btn-sm mb-1 mr-2" style="color: #fff; background-color: #EE8127; float: right;">
-                                                        Editar
-                                                        <span class="btn-icon-right" style="padding: 0px !important;">
-                                                            <i class="fa fa-edit" aria-hidden="true"></i>
-                                                        </span>
-                                                    </button>
-                                                    <button id="btNewDocente" type="button" class="btn btn-sm mb-1 mr-2" style="color: #fff; background-color: #0E9DDF; float: left;">
-                                                        Reestablecer configuración
-                                                        <span class="btn-icon-right" style="padding: 0px !important;">
-                                                            <i class="fa fa-check" aria-hidden="true"></i>
-                                                        </span>
-                                                    </button>
                                                 </div>
                                             </div>
                                             <hr />
                                             <div class="row">
-                                                <?php foreach($arrParametros as $parametro) { ?>
-                                                    <?php if($parametro['general'] == 'Y') { 
-                                                        $status = $parametro['status'] == 'Y' ? 'checked="checked"' : '';   
-                                                    ?>
-                                                        <div class="col-3">
-                                                            <span class="switch">
-                                                                <label>
-                                                                Inactivo
-                                                                <input type="checkbox" id="informeMedico" <?= $status ?> />
-                                                                <span class="lever"></span>
-                                                                Activo
-                                                                </label>
-                                                            </span>
-                                                        </div>
-                                                        <div class="col-3">
-                                                            <p style="text-align: left;"><b><?= $parametro['parametro']; ?> :</b></p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <p style="text-align: left;"><?= $parametro['valor']; ?></p>
-                                                        </div>
-                                                        
-                                                    <?php } ?>
-                                                <?php } ?>
-                                            </div>
-                                            <div class="row">
                                                 <div class="col-12">
-                                                    <button id="btNewParameter" type="button" class="btn btn-sm mb-1" style="color: #fff; background-color: #DFA00E; float: right;">
-                                                        Guardar
-                                                        <span class="btn-icon-right" style="padding: 0px !important;">
-                                                            <i class="fa fa-check" aria-hidden="true"></i>
-                                                        </span>
-                                                    </button>
+                                                    <!--TABLE PARAMETROS GENERALES-->
+                                                    <table class="table table-striped">
+                                                        <tr>
+                                                            <th class="text-center">Parametro</th>
+                                                            <th class="text-center">Valor</th>
+                                                            <th class="text-center">Status</th>
+                                                            <th class="text-center">Acciones</th>
+                                                        </tr>
+                                                        <?php foreach($arrParametros as $key => $parametro) { ?>
+                                                            <tr>
+                                                                <td class="text-center"><?= $parametro['parametro']?></td>
+                                                                <td class="text-center">
+                                                                    <input class="form-control" value="<?= $parametro['valor']?>" />
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <?php 
+                                                                        $swicth_status = $parametro['status'] == 'Y' ? 'checked="checked"' : '';
+                                                                    ?>
+                                                                    <div class="form-group">
+                                                                        <center>
+                                                                            <label>¿ Posee Informe Médico ?</label>
+                                                                            <div>
+                                                                                <div class="switch">
+                                                                                    <label>
+                                                                                    No
+                                                                                    <input type="checkbox" id="informeMedico" <?= $swicth_status ?>>
+                                                                                    <span class="lever"></span>
+                                                                                    Si
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </center>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <center>
+                                                                        <button class="btn btn-sm btn-primary btnEdit" data-toggle="tooltip" data-placement="top" data-iddocente="10" title="" data-original-title="Editar">
+                                                                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                                        </button>
+                                                                    </center>
+                                                                </td>
+                                                            </tr>
+                                                        <?php } ?>
+                                                    </table>
                                                 </div>
                                             </div>
                                         </div>
@@ -126,7 +126,7 @@
                                         <div class="collapsible-body">
                                             <div class="row">
                                                 <?php foreach($arrParametros as $parametro) { ?>
-                                                    <?php if($parametro['general'] == 'N') { ?>
+                                                    <?php if($key == 'GENERAL' && $parametro['status'] == 'N') { ?>
                                                         <div class="col-4">
                                                             <p style="text-align: right;"><b><?= $parametro['parametro']; ?> :</b></p>
                                                         </div>

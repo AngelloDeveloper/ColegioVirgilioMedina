@@ -117,16 +117,17 @@
                                 <div class="card cardTurn cardTurnAfternon">
                                     <div class="card-body">
                                         <span>Tarde</span>
+                                        
                                         <img src="../assets/img/pre-registro/nature.png" />
                                     </div>
                                 </div>
                             </div> 
+                            
                         </div>
                         <div class="row">
-                            <!--<div class="col-6">
+                            <div class="col-6">
                                 <?php foreach($arrGrados as $index => $grado) { 
                                     $cupo = !empty($arrCuposManana) ? $arrCuposManana[$index]['cupo'] : 0;  
-                                    if($arrGrados[$index]['id'] != 5) { 
                                 ?>
                                     <div class="card turno_cupo" data-turno="manana" data-grado="<?= $arrGrados[$index]['id'] ?>" style="padding: 10px;">
                                         <div class="card-body">
@@ -135,42 +136,12 @@
                                             <span class="mr-4" style="font-size: 20px; float: right;">Cupos disponibles</span>
                                         </div>
                                     </div> 
-                                <?php } } ?> 
-                            </div> -->
+                                <?php } ?> 
+                            </div> 
                             <div class="col-6">
-                                <div class="card turno_cupo" data-turno="manana" data-seccion="1" data-grado="1" style="padding: 10px;">
-                                    <div class="card-body">
-                                        <span style="font-size: 20px;">1° Año Seccion A</span>
-                                        <!--<span style="font-size: 25px; float: right; color: #fff; border-radius: 10px; padding: 7px ;background-color:#0F8B0B;"><?= $cupo ?></span>
-                                        <span class="mr-4" style="font-size: 20px; float: right;">Cupos disponibles</span>-->
-                                    </div>
-                                </div> 
-                                <div class="card turno_cupo" data-turno="manana" data-seccion="1" data-grado="2" style="padding: 10px;">
-                                    <div class="card-body">
-                                        <span style="font-size: 20px;">2° Año Seccion A</span>
-                                        <!--<span style="font-size: 25px; float: right; color: #fff; border-radius: 10px; padding: 7px ;background-color:#0F8B0B;"><?= $cupo ?></span>
-                                        <span class="mr-4" style="font-size: 20px; float: right;">Cupos disponibles</span>-->
-                                    </div>
-                                </div> 
-                                <div class="card turno_cupo" data-turno="manana" data-seccion="1" data-grado="3" style="padding: 10px;">
-                                    <div class="card-body">
-                                        <span style="font-size: 20px;">3° Año Seccion A</span>
-                                        <!--<span style="font-size: 25px; float: right; color: #fff; border-radius: 10px; padding: 7px ;background-color:#0F8B0B;"><?= $cupo ?></span>
-                                        <span class="mr-4" style="font-size: 20px; float: right;">Cupos disponibles</span>-->
-                                    </div>
-                                </div> 
-                                <div class="card turno_cupo" data-turno="manana" data-seccion="1" data-grado="4" style="padding: 10px;">
-                                    <div class="card-body">
-                                        <span style="font-size: 20px;">4° Año Seccion A</span>
-                                        <!--<span style="font-size: 25px; float: right; color: #fff; border-radius: 10px; padding: 7px ;background-color:#0F8B0B;"><?= $cupo ?></span>
-                                        <span class="mr-4" style="font-size: 20px; float: right;">Cupos disponibles</span>-->
-                                    </div>
-                                </div> 
-                            </div>
-                            <!--<div class="col-6">
                                 <?php foreach($arrGrados as $index => $grado) { 
                                     $cupo = !empty($arrCuposTarde) ? $arrCuposTarde[$index]['cupo'] : 0;
-                                    if($arrGrados[$index]['id'] != 5) {    
+                                    
                                 ?>
                                      <div class="card turno_cupo" data-turno="tarde" data-grado="<?= $arrGrados[$index]['id'] ?>" style="padding: 10px;">
                                         <div class="card-body">
@@ -179,30 +150,7 @@
                                             <span class="mr-4" style="font-size: 20px; float: right;">Cupos disponibles</span>
                                         </div>
                                     </div> 
-                                <?php } }?> 
-                            </div>--> 
-                            <div class="col-6">
-                                <div class="card turno_cupo" data-turno="tarde" data-seccion="2" data-grado="1" style="padding: 10px;">
-                                    <div class="card-body">
-                                        <span style="font-size: 20px;">1° Año Seccion B</span>
-                                        <!--<span style="font-size: 25px; float: right; color: #fff; border-radius: 10px; padding: 7px ;background-color:#0F8B0B;"><?= $cupo ?></span>
-                                        <span class="mr-4" style="font-size: 20px; float: right;">Cupos disponibles</span>-->
-                                    </div>
-                                </div> 
-                                <div class="card turno_cupo" data-turno="tarde" data-seccion="3" data-grado="1" style="padding: 10px;">
-                                    <div class="card-body">
-                                        <span style="font-size: 20px;">1° Año Seccion C</span>
-                                        <!--<span style="font-size: 25px; float: right; color: #fff; border-radius: 10px; padding: 7px ;background-color:#0F8B0B;"><?= $cupo ?></span>
-                                        <span class="mr-4" style="font-size: 20px; float: right;">Cupos disponibles</span>-->
-                                    </div>
-                                </div> 
-                                <div class="card turno_cupo" data-turno="tarde" data-seccion="2" data-grado="2" style="padding: 10px;">
-                                    <div class="card-body">
-                                        <span style="font-size: 20px;">2° Año Seccion B</span>
-                                        <!--<span style="font-size: 25px; float: right; color: #fff; border-radius: 10px; padding: 7px ;background-color:#0F8B0B;"><?= $cupo ?></span>
-                                        <span class="mr-4" style="font-size: 20px; float: right;">Cupos disponibles</span>-->
-                                    </div>
-                                </div> 
+                                <?php } ?> 
                             </div>
                         </div>
                     </div>

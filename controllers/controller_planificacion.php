@@ -21,7 +21,7 @@
     if(!empty($_POST['type']) && $_POST['type'] == 'add_planificacion') {
         $objPeriodo = new Periodo();
         $_POST['id_docente'] = $_SESSION['user_data']['idDocente'];
-        $_POST['id_periodo'] = $objPeriodo->getPeriodo(['id'])['id'];
+        $_POST['id_periodo'] = $objPeriodo->getPeriodo()[0]['id'];
         $objPlanificacion = new Planificacion($_POST);
         $validation = $objPlanificacion->validarPlanificacion();
         if((int)$validation['total_porcentaje'] < 100) {
