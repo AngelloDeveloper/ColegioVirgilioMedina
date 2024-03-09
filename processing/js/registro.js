@@ -9,6 +9,7 @@ $(function() {
         'representante' : {},
         'turn' : '',
         'grado' : '',
+        'seccion':'',
         'type' : 'setPreRegistro'
     }
 
@@ -18,7 +19,7 @@ $(function() {
     var template_religion = generateTemplate_religion();
     var template_codigos = generateTemplate_codigos();
     var template_latam = generateTemplate_latam();
-    var template_secciones = generateTemplate_secciones();
+    //var template_secciones = generateTemplate_secciones();
     
     const arrFormularios = {
         formulario1: {
@@ -27,16 +28,6 @@ $(function() {
                 <form id="form1" enctype="multipart/form-data">
                     <div class="container p-4">
                         <span id="alerta_form"></span>
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="input-field">
-                                    <select id="seccion">
-                                        ${template_secciones}
-                                    </select>
-                                    <label>Sección <span style="color: #960032;"><b>*</b></span></label>
-                                </div>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group input-field">
@@ -1314,9 +1305,12 @@ $(function() {
         let elm = $(this)[0];
         turn = $(elm).data('turno');
         let grado = $(elm).data('grado');
+        let seccion = $(elm).data('seccion');
 
         objData.turn = turn;
         objData.grado = grado;
+        objData.seccion = seccion;
+        console.log(objData);
         const img = turn == 'manana' ? 'river.png' : 'nature.png';
 
         template_secciones = generateTemplate_secciones(turn);

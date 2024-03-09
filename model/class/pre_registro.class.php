@@ -127,6 +127,8 @@
                     id_representante,
                     id_mama,
                     id_papa,
+                    id_seccion,
+                    id_grado,
                     foto
                 ) 
                 VALUES (
@@ -156,6 +158,8 @@
                     '{$this->idRepresentante}',
                     '{$this->idMadre}',
                     '{$this->idPadre}',
+                    '{$this->objData['seccion']}',
+                    '{$this->objData['grado']}',
                     '{$photo}'
                 )
             ";
