@@ -60,6 +60,7 @@
 
             $this->query = mysqli_query($this->con, $this->sql);
             $count = mysqli_num_rows($this->query);
+           
             if($count != 0) {
                 while ($row = mysqli_fetch_assoc($this->query)) { 
                     $rows[] = $row; 
@@ -96,7 +97,7 @@
             for($i=0; $i <= 4; $i++) {
                 $this->sql = " UPDATE cupos
                     SET cupo = {$this->objData['objData'][$i]['value']}
-                    WHERE id_grado = {$this->objData['objData'][$i]['name']} AND turno = {$this->objData['turn']} AND id_periodo = {$this->objData['periodo']};
+                    WHERE id_grado = {$this->objData['objData'][$i]['name']} AND turno = '{$this->objData['turn']}' AND id_periodo = {$this->objData['periodo']};
                 ";
                 $this->query  = mysqli_query($this->con, $this->sql);
             }

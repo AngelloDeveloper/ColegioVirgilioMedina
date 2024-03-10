@@ -11,7 +11,8 @@ $(function() {
         const obj = {
             type: 'addCupos',
             periodo: '',
-            turn: 'manana',
+            turn: 'M',
+            description: 'mañana',
             objData: $(elm).serializeArray()
         };
 
@@ -43,7 +44,8 @@ $(function() {
         const obj = {
             type: 'addCupos',
             periodo: '',
-            turn: 'tarde',
+            turn: 'T',
+            description: 'tarde',
             objData: $(elm).serializeArray()
         };
 

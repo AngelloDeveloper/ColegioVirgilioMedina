@@ -21,8 +21,8 @@
     $arrSecciones = $objSecciones->getAllSecciones();
     $arrGrados = $objGrados->getAllGrados();
     $arrTurnos = $objTurno->getAllTurnos();
-    $arrCuposManana = $objCupos->getCuposForPeriodo($idperiodo, $arrTurnos[0]['id']);
-    $arrCuposTarde  = $objCupos->getCuposForPeriodo($idperiodo, $arrTurnos[1]['id']);
+    $arrCuposManana = $objCupos->getCuposForPeriodo($idperiodo, $arrTurnos[0]['turno']);
+    $arrCuposTarde  = $objCupos->getCuposForPeriodo($idperiodo, $arrTurnos[1]['turno']);
 ?>
 <link rel="stylesheet" type="text/css" href="css/cupos.css" />
 <div class="content-body">

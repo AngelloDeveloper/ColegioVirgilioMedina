@@ -34,6 +34,8 @@
     $arrLatam = $objPaises->getPisesZone();
 
     $param_pre_registro =  $objParameter->getParameter('PRE_REGISTRO');
+    $param_max_cupos = $objParameter->getParameter('MAX_CUPOS_GENERAL_SECTIONS');
+
     if($param_pre_registro['status'] != 'Y') {
         header("Location: notAvailable.php");
     }

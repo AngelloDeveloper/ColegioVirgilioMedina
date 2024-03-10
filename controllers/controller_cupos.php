@@ -11,10 +11,10 @@
     
 
     if(!empty($_POST) && $_POST['type'] == 'addCupos') {
-        $idturno = (int)$objTurnos->getTurnoId($_POST['turn'])['id'];
+        //$idturno = (int)$objTurnos->getTurnoId($_POST['turn'])['id'];
         $idperiodo = (int)$objPeriodo->getPeriodo()[0]['id'];
         $_POST['periodo'] = $idperiodo;
-        $_POST['turn'] = $idturno;
+        //$_POST['turn'] = $idturno;
         $objCupos = new Cupos($_POST);
         $result = $objCupos->getTurnoPeriodo();
         if($result != 0) {
