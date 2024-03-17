@@ -13,16 +13,13 @@
     $objSecciones = new Secciones();
     $objGrados = new Grados();
     $objCupos = new Cupos();
-    $objPeriodo = new Periodo();
     $objTurno = new Turnos();
 
-    $periodo = $objPeriodo->getPeriodo()[0];
-    $idperiodo = (int)$objPeriodo->getPeriodo()[0]['id'];
     $arrSecciones = $objSecciones->getAllSecciones();
+    $arrSeccioneGrados = $objSecciones->getGradosForSeccions();
     $arrGrados = $objGrados->getAllGrados();
     $arrTurnos = $objTurno->getAllTurnos();
-    $arrCuposManana = $objCupos->getCuposForPeriodo($idperiodo, $arrTurnos[0]['turno']);
-    $arrCuposTarde  = $objCupos->getCuposForPeriodo($idperiodo, $arrTurnos[1]['turno']);
+    $tempGrados = '';
 ?>
 <link rel="stylesheet" type="text/css" href="css/cupos.css" />
 <div class="content-body">
@@ -54,30 +51,53 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="row">
-                                    <?php foreach($arrSecciones as $index => $seccion) { ?>                                            
+                                    <?php foreach($arrSecciones as $index => $seccion) { 
+                                        $tempGrados = '';
+                                        foreach($arrSeccioneGrados as $grados) {
+                                            if($grados['id_seccion'] == $seccion['id']) {
+                                                foreach($arrGrados as $t_grados) {
+                                                    if($t_grados['id'] == $grados['id_grado']) {
+                                                        $tempGrados .= '<span style="color: #C9358A; font-size: 50px; font-weight: 800; margin-right: 5px;">'.$t_grados['formato'].'</span>';
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ?>                                            
                                         <div class="col-6">
-                                            <div class="card">
+                                            <div class="card" style="background: linear-gradient(90deg, rgba(255,255,255,1) 8%, rgba(12,116,149,1) 95%);">
                                                 <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <?php 
+                                                               $arrTurns = json_decode($seccion['turno'], true);
+                                                               $tempplate = '';
+                                                               foreach($arrTurns as $turno) {
+                                                                    if($turno == 'M') {
+                                                                       $tempplate .=  '<img width="40" title="Mañana" src="../assets/img/pre-registro/river.png" />';
+                                                                    }
+                                                                    if($turno == 'T') {
+                                                                        $tempplate .=  '<img width="40" title="Tarde" src="../assets/img/pre-registro/nature.png" />';
+                                                                    }
+                                                               } 
+
+                                                               echo $tempplate;
+                                                            ?> 
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <button style="float: right;" data-idseccion="<?= $seccion['id'] ?>" class="btn btn-sm btn-danger delSection" data-toggle="tooltip" data-placement="top" data-iddocente="10" title="" data-original-title="Eliminar">
+                                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                                            </button>
+                                                            <button style="float: right; margin-right:3px;" class="btn btn-sm btn-primary btnEdit" data-toggle="tooltip" data-placement="top" data-iddocente="10" title="" data-original-title="Editar">
+                                                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
                                                     <div class="row">
                                                         <div class="col-4">
                                                             <p class="gradoItem"><?= $seccion['seccion'] ?></p>
                                                         </div>
-                                                        <div class="col-4">
-                                                            <label for="seccion_multiple">Seccion</label>
-                                                            <select multiple id="select_grados" class="seccion" name="seccion">
-                                                                <option value="" disabled selected>Seleccionar...</option>
-                                                                <?php foreach($arrGrados as $grado) { ?>
-                                                                    <option value="<?= $grado['id'] ?>"><?= $grado['formato'] ?></option>
-                                                                <?php } ?>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-4">
-                                                            <label>Turno</label>
-                                                            <select id="select_turno">
-                                                                <?php foreach($arrTurnos as $turno) { ?>
-                                                                    <option value="<?= $turno['turno'] ?>"><?= $turno['description'] ?></option>
-                                                                <?php } ?>
-                                                            </select>
+                                                        <div class="col-8">
+                                                           <span style="float: right;"><?= $tempGrados ?></span>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -9,10 +9,6 @@ $(function() {
         $('.secondary').html(template);
         $('.secondary').show();
         initMaterialInput();
-
-        console.log('datos render');
-        console.log(objGrados);
-        console.log(objTurnos);
     });
 
     $(document).on('click', '#btnReturnSeccion' ,function(e) {
@@ -20,6 +16,83 @@ $(function() {
         $('.secondary').html('');
         $('.secondary').hide();
         initMaterialInput();
+    })
+
+    /*delete section*/
+    $(document).on('click', '.delSection', function(e) {
+        const elm = $(this)[0];
+        const idSection = $(elm).data('idseccion');
+
+        const objData = {
+            type: 'delete_seccion',
+            idSection: idSection
+        };
+        
+        Swal.fire({
+            title: 'Esta listo para continuar ?',
+            text: "El dato seleccionado seran borrado",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#00B236',
+            cancelButtonColor: '#B20018',
+            cancelButtonText: 'Cancelar',
+            confirmButtonText: 'Continuar'
+        }).then((result) => {
+            if(result.isConfirmed) {
+                $.post("../controllers/controller_secciones.php", objData, function(response) {
+                    var resp = jQuery.parseJSON(response);
+                    if(resp.STATUS == 'SUCCESS') {
+                        Swal.fire({
+                            title: resp.MESSAGES,
+                            text: 'Los datos fueron borrados exitosamente',
+                            icon: 'success',
+                            confirmButtonColor: '#e0bb66'
+                        }).then((resul) => {
+                            window.location.reload();
+                        })
+                    }
+                });
+            }
+        })
+    })
+
+    /*send formulario*/
+    $(document).on('submit','#form_seccion', function(e) {
+        e.preventDefault();
+        const objData = {
+            type: 'add_seccion',
+            seccion: $(document).find('#seccion_name').val().toUpperCase(),
+            turno: $(document).find('#seccion_turno').val(),
+            grados: $(document).find('#seccion_grados').val()
+        };
+
+        Swal.fire({
+            title: 'Esta listo para continuar ?',
+            text: "Los datos que ha suministrado seran guardados",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#00B236',
+            cancelButtonColor: '#B20018',
+            cancelButtonText: 'Cancelar',
+            confirmButtonText: 'Continuar'
+        }).then((result) => {
+            if(result.isConfirmed) {
+                $.post("../controllers/controller_secciones.php", objData, function(response) {
+                    var resp = jQuery.parseJSON(response);
+                    if(resp.STATUS == 'SUCCESS') {
+                        Swal.fire({
+                            title: resp.MESSAGES,
+                            text: 'Los datos se guardaron Exitosamente',
+                            icon: 'success',
+                            confirmButtonColor: '#e0bb66'
+                        }).then((resul) => {
+                            window.location.reload();
+                        })
+                    }
+                });
+                
+            }
+        })
     })
 
     function getTemplate(type, resp='', props='') {
@@ -59,30 +132,33 @@ $(function() {
                         <hr />
                         <div class="row p-4">
                             <div class="col-6">
-                                <form id="form">
+                                <form id="form_seccion">
                                     <input id="type" type="hidden" value="${type}" />
                                     <input id="idDocente" type="hidden" value="" />
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="form-group input-field">
-                                                <input value="" id="seccion" type="text" style="text-transform: uppercase;" required/>
+                                                <input value="" id="seccion_name" type="text" style="text-transform: uppercase;" required/>
                                                 <label for="seccion">Seccion</label>
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group input-field">
-                                                <select multiple id="seccion_multiple" class="seccion" name="seccion">
+                                                <select multiple id="seccion_grados" class="seccion" name="seccion">
                                                     <option value="" disabled selected>Seleccionar...</option>
                                                     ${select_grados}
                                                 </select>
-                                                <label for="seccion_multiple">Seccion</label>
+                                                <label for="seccion_multiple">Grados</label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="form-group input-field">
-                                                <select>${select_turno}</select>
+                                                <select multiple id="seccion_turno" class="turno" name="turno">
+                                                    <option value="" disabled selected>Seleccionar...</option>    
+                                                    ${select_turno}
+                                                </select>
                                                 <label for="turno">Turno</label>
                                             </div>
                                         </div>
