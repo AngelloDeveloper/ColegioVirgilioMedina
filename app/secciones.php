@@ -64,7 +64,7 @@
                                         }
                                     ?>                                            
                                         <div class="col-6">
-                                            <div class="card" style="background: linear-gradient(90deg, rgba(255,255,255,1) 8%, rgba(12,116,149,1) 95%);">
+                                            <div class="card" style="background: linear-gradient(230deg, #fcfcfc00, #f7e7ff);">
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col-6">
@@ -87,7 +87,7 @@
                                                             <button style="float: right;" data-idseccion="<?= $seccion['id'] ?>" class="btn btn-sm btn-danger delSection" data-toggle="tooltip" data-placement="top" data-iddocente="10" title="" data-original-title="Eliminar">
                                                                 <i class="fa fa-trash" aria-hidden="true"></i>
                                                             </button>
-                                                            <button style="float: right; margin-right:3px;" class="btn btn-sm btn-primary btnEdit" data-toggle="tooltip" data-placement="top" data-iddocente="10" title="" data-original-title="Editar">
+                                                            <button style="float: right; margin-right:3px;" data-idseccion="<?= $seccion['id'] ?>" class="btn btn-sm btn-primary editSection" data-toggle="tooltip" data-placement="top" data-iddocente="10" title="" data-original-title="Editar">
                                                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                                                             </button>
                                                         </div>
@@ -97,7 +97,7 @@
                                                             <p class="gradoItem"><?= $seccion['seccion'] ?></p>
                                                         </div>
                                                         <div class="col-8">
-                                                           <span style="float: right;"><?= $tempGrados ?></span>
+                                                           <span style="float: right; margin-top: 10px;"><?= $tempGrados ?></span>
                                                         </div>
                                                     </div>
                                                 </div>

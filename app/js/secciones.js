@@ -18,6 +18,17 @@ $(function() {
         initMaterialInput();
     })
 
+    /*editSection*/
+    $(document).on('click', '.editSection', function(e) {
+        const elm = $(this)[0];
+        const idSection = $(elm).data('idseccion');
+
+        const objData = {
+            type: 'edit_seccion',
+            idSection: idSection
+        };
+    })
+
     /*delete section*/
     $(document).on('click', '.delSection', function(e) {
         const elm = $(this)[0];
