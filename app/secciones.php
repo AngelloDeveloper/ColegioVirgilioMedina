@@ -52,35 +52,41 @@
                             <div class="col-12">
                                 <div class="row">
                                     <?php foreach($arrSecciones as $index => $seccion) { 
-                                        $tempGrados = '';
+                                        $tempGrados_M = '';
+                                        $tempGrados_T = '';
                                         foreach($arrSeccioneGrados as $grados) {
                                             if($grados['id_seccion'] == $seccion['id']) {
                                                 foreach($arrGrados as $t_grados) {
                                                     if($t_grados['id'] == $grados['id_grado']) {
-                                                        $tempGrados .= '<span style="color: #C9358A; font-size: 50px; font-weight: 800; margin-right: 5px;">'.$t_grados['formato'].'</span>';
+                                                        if($grados['turno'] == 'M') {
+                                                            $tempGrados_M .= $t_grados['formato'];
+                                                        }
+
+                                                        if($grados['turno'] == 'T') {
+                                                            $tempGrados_T .= $t_grados['formato'];
+                                                        }
                                                     }
                                                 }
                                             }
                                         }
                                     ?>                                            
                                         <div class="col-6">
-                                            <div class="card" style="background: linear-gradient(230deg, #fcfcfc00, #f7e7ff);">
+                                            <div class="card" style="background: linear-gradient(230deg, rgba(252,252,252,1) 8%, rgba(237,201,255,1) 93%); height: 220px;">
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col-6">
                                                             <?php 
                                                                $arrTurns = json_decode($seccion['turno'], true);
-                                                               $tempplate = '';
+                                                               $tempplate_M = '';
+                                                               $tempplate_T = '';
                                                                foreach($arrTurns as $turno) {
                                                                     if($turno == 'M') {
-                                                                       $tempplate .=  '<img width="40" title="Mañana" src="../assets/img/pre-registro/river.png" />';
+                                                                       $tempplate_M .=  '<img width="40" title="Mañana" src="../assets/img/pre-registro/river.png" />';
                                                                     }
                                                                     if($turno == 'T') {
-                                                                        $tempplate .=  '<img width="40" title="Tarde" src="../assets/img/pre-registro/nature.png" />';
+                                                                        $tempplate_T .=  '<img width="40" title="Tarde" src="../assets/img/pre-registro/nature.png" />';
                                                                     }
                                                                } 
-
-                                                               echo $tempplate;
                                                             ?> 
                                                         </div>
                                                         <div class="col-6">
@@ -97,7 +103,39 @@
                                                             <p class="gradoItem"><?= $seccion['seccion'] ?></p>
                                                         </div>
                                                         <div class="col-8">
-                                                           <span style="float: right; margin-top: 10px;"><?= $tempGrados ?></span>
+                                                            <!--grados M-->
+                                                            <?php if($tempGrados_M != '') { ?>
+                                                                <div class="row mb-2 mt-4" style="background: linear-gradient(141deg, rgba(2, 0, 36, 1) 0%, rgba(25, 71, 138, 1) 16%, rgba(51, 153, 255, 1) 56%, rgba(50, 154, 255, 0.5019257703081232) 100%); padding: 3px; border-radius: 30px">
+                                                                    
+                                                                    <div class="col-6">
+                                                                        <p style="margin-top: 7px; color: #fff; font-size: 15px">Mañana</p>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <span style="float: right; margin-top: 10px;">
+                                                                            <span style="color: #C9358A; font-size: 20px; font-weight: 800; margin-right: 5px;">
+                                                                                <?= $tempGrados_M ?>
+                                                                            </span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            <?php } ?>
+                                                            
+                                                            <!--grados T-->
+                                                            <?php if($tempGrados_T != '') { ?>
+                                                                <div class="row" style="background: linear-gradient(141deg, rgba(233, 24, 46, 1) 0%, rgba(224, 70, 86, 1) 18%, rgba(255, 174, 51, 1) 46%, rgba(255, 196, 51, 0.9641106442577031) 66%, rgba(255, 225, 51, 0.8352591036414566) 87%); padding: 3px; border-radius: 30px">
+                                                                    
+                                                                    <div class="col-6">
+                                                                        <p style="margin-top: 7px; color: #fff; font-size: 15px;">Tarde</p>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <span style="float: right; margin-top: 10px;">
+                                                                            <span style="color: #C9358A; font-size: 20px; font-weight: 800; margin-right: 5px;">
+                                                                                <?= $tempGrados_T ?>
+                                                                            </span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            <?php } ?>
                                                         </div>
                                                     </div>
                                                 </div>

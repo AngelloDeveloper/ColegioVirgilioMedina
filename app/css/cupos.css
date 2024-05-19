@@ -41,10 +41,11 @@
 .gradoItem {
     width: 50%;
     margin-top: 20px;
-    font-size: 25px;
+    font-size: 180px;
     color: #fff;
-    background-color: green;
     padding: 8px;
     border-radius: 10px;
     text-align: center;
+    position: relative;
+    bottom: 110px;
 }

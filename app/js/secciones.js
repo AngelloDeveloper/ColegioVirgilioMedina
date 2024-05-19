@@ -73,9 +73,11 @@ $(function() {
         const objData = {
             type: 'add_seccion',
             seccion: $(document).find('#seccion_name').val().toUpperCase(),
-            turno: $(document).find('#seccion_turno').val(),
             grados: $(document).find('#seccion_grados').val()
         };
+
+        console.log('objeto de datos');
+        console.log(objData);
 
         Swal.fire({
             title: 'Esta listo para continuar ?',
@@ -108,21 +110,23 @@ $(function() {
 
     function getTemplate(type, resp='', props='') {
         var template = '';
-        var select_grados = '';
+        var select_grados_M = '';
+        var select_grados_T = '';
         var select_turno = '';
+
         switch (type) {
             case 'add_seccion':
                 var prefix = '<span class="badge badge-pill gradient-3 ml-2"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo</span>';
                 objGrados.map((value, index) => {
-                    select_grados += `
-                        <option value="${value.id}">${value.formato}</option>
+                    select_grados_M += `
+                        <option value="${value.id}-${objTurnos[0].turno}">${value.formato}</option>
                     `;                                
                 })
 
-                objTurnos.map((value, index) => {
-                    select_turno += `
-                        <option value="${value.turno}">${value.description}</option>
-                    `;
+                objGrados.map((value, index) => {
+                    select_grados_T += `
+                        <option value="${value.id}-${objTurnos[1].turno}">${value.formato}</option>
+                    `;                                
                 })
                 
                 template = `
@@ -156,14 +160,20 @@ $(function() {
                                         <div class="col-6">
                                             <div class="form-group input-field">
                                                 <select multiple id="seccion_grados" class="seccion" name="seccion">
-                                                    <option value="" disabled selected>Seleccionar...</option>
-                                                    ${select_grados}
+                                                    <optgroup label="Turno ( Mañana )">
+                                                        <option value="" disabled selected>Seleccionar...</option>
+                                                        ${select_grados_M}
+                                                    </optgroup>
+                                                    <optgroup label="Turno ( Tarde )">
+                                                        <option value="" disabled selected>Seleccionar...</option>
+                                                        ${select_grados_T}
+                                                    </optgroup>
                                                 </select>
                                                 <label for="seccion_multiple">Grados</label>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <!--<div class="row">
                                         <div class="col-6">
                                             <div class="form-group input-field">
                                                 <select multiple id="seccion_turno" class="turno" name="turno">
@@ -173,7 +183,7 @@ $(function() {
                                                 <label for="turno">Turno</label>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <br /><br /><hr />
                                     <div class="row">
                                         <div class="col-12">

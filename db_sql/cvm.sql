@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versión del servidor:         10.4.28-MariaDB - mariadb.org binary distribution
+-- Versión del servidor:         10.4.27-MariaDB - mariadb.org binary distribution
 -- SO del servidor:              Win64
--- HeidiSQL Versión:             12.6.0.6765
+-- HeidiSQL Versión:             12.3.0.6589
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -13,11 +13,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
-
--- Volcando estructura de base de datos para cvm
-CREATE DATABASE IF NOT EXISTS `cvm` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
-USE `cvm`;
 
 -- Volcando estructura para tabla cvm.administrativos
 CREATE TABLE IF NOT EXISTS `administrativos` (
@@ -34,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `administrativos` (
   KEY `Índice 1` (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
--- Volcando datos para la tabla cvm.administrativos: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla cvm.administrativos: ~1 rows (aproximadamente)
 INSERT INTO `administrativos` (`id`, `nombre`, `apellido`, `cedula`, `telf_movil`, `email`, `direccion`, `nivel_instruccion`, `id_usuarios`, `estatus`) VALUES
 	(1, 'Angello', 'Duran', '25463404', '4247110785', 'angelloprogramador@gmail.com', 'la castra', 'U', 1, 'Y');
 
@@ -84,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `ciudades` (
   CONSTRAINT `ciudades_ibfk_1` FOREIGN KEY (`id_estado`) REFERENCES `estados` (`id_estado`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=523 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- Volcando datos para la tabla cvm.ciudades: ~498 rows (aproximadamente)
+-- Volcando datos para la tabla cvm.ciudades: ~537 rows (aproximadamente)
 INSERT INTO `ciudades` (`id_ciudad`, `id_estado`, `ciudad`, `capital`) VALUES
 	(1, 1, 'Maroa', 0),
 	(2, 1, 'Puerto Ayacucho', 1),
@@ -593,20 +588,20 @@ CREATE TABLE IF NOT EXISTS `cupos` (
   `turno` enum('M','T','N') DEFAULT NULL,
   `id_periodo` int(11) DEFAULT 0,
   KEY `Índice 1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla cvm.cupos: ~9 rows (aproximadamente)
+-- Volcando datos para la tabla cvm.cupos: ~10 rows (aproximadamente)
 INSERT INTO `cupos` (`id`, `id_grado`, `cupo`, `turno`, `id_periodo`) VALUES
-	(1, 1, 20, 'M', 1),
-	(2, 2, 15, 'M', 1),
-	(3, 3, 23, 'M', 1),
-	(4, 4, 17, 'M', 1),
-	(5, 5, 18, 'M', 1),
-	(6, 1, 15, 'T', 1),
-	(7, 2, 16, 'T', 1),
-	(8, 3, 18, 'T', 1),
-	(9, 4, 10, 'T', 1),
-	(10, 5, 10, 'T', 1);
+	(36, 1, 15, 'M', 1),
+	(37, 2, 15, 'M', 1),
+	(38, 3, 15, 'M', 1),
+	(39, 4, 15, 'M', 1),
+	(40, 5, 15, 'M', 1),
+	(41, 1, 30, 'T', 1),
+	(42, 2, 30, 'T', 1),
+	(43, 3, 30, 'T', 1),
+	(44, 4, 30, 'T', 1),
+	(45, 5, 30, 'T', 1);
 
 -- Volcando estructura para tabla cvm.docentes
 CREATE TABLE IF NOT EXISTS `docentes` (
@@ -713,28 +708,25 @@ CREATE TABLE IF NOT EXISTS `estudiantes` (
   `direccion` varchar(250) DEFAULT NULL,
   `punto_referencia` varchar(250) DEFAULT NULL,
   `lugar_nacimiento` varchar(250) DEFAULT NULL,
-  `estado` int(11) DEFAULT NULL,
-  `municipio` int(11) DEFAULT NULL,
+  `id_estado` int(11) DEFAULT NULL,
+  `id_municipio` int(11) DEFAULT NULL,
   `religion` varchar(250) DEFAULT NULL,
   `fecha_nacimiento` date DEFAULT NULL,
   `habilidades` varchar(50) DEFAULT NULL,
   `otra_religion` varchar(50) DEFAULT NULL,
   `lateralidad` enum('D','I') DEFAULT NULL,
   `id_usuario` int(11) DEFAULT NULL,
-  `id_estado` int(11) DEFAULT NULL,
-  `id_municipio` int(11) DEFAULT NULL,
   `id_detalles_estudiante` int(11) DEFAULT NULL,
   `id_representante` int(11) DEFAULT NULL,
   `id_mama` int(11) DEFAULT NULL,
   `id_papa` int(11) DEFAULT NULL,
   `id_seccion` int(11) DEFAULT NULL,
-  `foto` varchar(50) DEFAULT NULL,
+  `id_grado` int(11) DEFAULT NULL,
+  `foto` varchar(100) DEFAULT NULL,
   KEY `Índice 1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Volcando datos para la tabla cvm.estudiantes: ~0 rows (aproximadamente)
-INSERT INTO `estudiantes` (`id`, `nombre`, `apellido`, `cedula`, `tipo_documento`, `nacionalidad`, `edad`, `genero`, `telf_code`, `telf_movil`, `telf_residencia`, `email`, `direccion`, `punto_referencia`, `lugar_nacimiento`, `estado`, `municipio`, `religion`, `fecha_nacimiento`, `habilidades`, `otra_religion`, `lateralidad`, `id_usuario`, `id_estado`, `id_municipio`, `id_detalles_estudiante`, `id_representante`, `id_mama`, `id_papa`, `id_seccion`, `foto`) VALUES
-	(1, 'Angello Moises', 'Durán Servitá', '25463404', 'V', 'VEN', '26', 'M', '58', '4264720250', '02761115599', 'angelloprogramador75@gmail.com', 'test', 'test', 'HCS', NULL, NULL, '4', '1997-01-13', 'test', 'pastafarismo', 'D', 59, 19, 363, 1, 1, 1, 1, NULL, 'face.png');
 
 -- Volcando estructura para tabla cvm.estudiantes_detalles
 CREATE TABLE IF NOT EXISTS `estudiantes_detalles` (
@@ -762,8 +754,6 @@ CREATE TABLE IF NOT EXISTS `estudiantes_detalles` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Volcando datos para la tabla cvm.estudiantes_detalles: ~0 rows (aproximadamente)
-INSERT INTO `estudiantes_detalles` (`id`, `talla_camisa`, `talla_pantalon`, `estatura`, `peso`, `grupo_sanguineo`, `discapacidad`, `url_informe_medico`, `alergico`, `convulsion`, `alergia`, `convulsion_observaciones`, `enfermo`, `enfermedad`, `medicado`, `medicamento`, `familiar_colegio`, `familiar_nombre`, `parentesco`, `especificaciones`) VALUES
-	(1, 'L', 'M', '1.72', '52', 'A+', 'Y', '', 'Y', 'Y', 'lacteos', 'momentos de ausencia', 'Y', 'siatalgia', 'Y', 'complejo b', 'Y', 'miguel', 'Tio', 'profesor de matematicas');
 
 -- Volcando estructura para tabla cvm.grados
 CREATE TABLE IF NOT EXISTS `grados` (
@@ -818,13 +808,11 @@ CREATE TABLE IF NOT EXISTS `madres` (
   `telf_trabajo` varchar(50) DEFAULT NULL,
   `religion` varchar(50) DEFAULT NULL,
   `vive_estudiante` enum('Y','N') DEFAULT NULL,
-  `foto` varchar(50) DEFAULT NULL,
+  `foto` varchar(100) DEFAULT NULL,
   KEY `Índice 1` (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Volcando datos para la tabla cvm.madres: ~0 rows (aproximadamente)
-INSERT INTO `madres` (`id`, `nombre`, `apellido`, `cedula`, `tipo_documento`, `fecha_nacimiento`, `edad`, `nacionalidad`, `estado_civil`, `nivel_instruccion`, `ocupacion`, `lugar_trabajo`, `habilidad`, `direccion_residencia`, `telf_movil`, `telf_residencia`, `telf_trabajo`, `religion`, `vive_estudiante`, `foto`) VALUES
-	(1, 'nileida', 'servita', '9240076', 'V', '2024-01-16', '1', 'VEN', 'C', 'U', 'test', 'test', 'test', 'test', '4264720250', '02761115599', '02761115599', '4', 'Y', 'face.png');
 
 -- Volcando estructura para tabla cvm.materias
 CREATE TABLE IF NOT EXISTS `materias` (
@@ -858,13 +846,14 @@ CREATE TABLE IF NOT EXISTS `modulos` (
   `descripcion` varchar(50) DEFAULT NULL,
   `status` enum('Y','N') DEFAULT NULL,
   KEY `Índice 1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla cvm.modulos: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla cvm.modulos: ~4 rows (aproximadamente)
 INSERT INTO `modulos` (`id`, `titulo`, `descripcion`, `status`) VALUES
 	(1, 'Inicio', 'Pagina principal', 'Y'),
 	(2, 'Administracion', 'Administracion del Sistema', 'Y'),
-	(3, 'Academicos', 'Gestion Académica', 'Y');
+	(3, 'Academicos', 'Gestion Académica', 'Y'),
+	(4, 'Parametros', 'Parametros del Colegio', 'Y');
 
 -- Volcando estructura para tabla cvm.municipios
 CREATE TABLE IF NOT EXISTS `municipios` (
@@ -1271,13 +1260,11 @@ CREATE TABLE IF NOT EXISTS `padres` (
   `telf_trabajo` varchar(50) DEFAULT NULL,
   `religion` varchar(50) DEFAULT NULL,
   `vive_estudiante` enum('Y','N') DEFAULT NULL,
-  `foto` varchar(50) DEFAULT NULL,
+  `foto` varchar(100) DEFAULT NULL,
   KEY `Índice 1` (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- Volcando datos para la tabla cvm.padres: ~0 rows (aproximadamente)
-INSERT INTO `padres` (`id`, `nombre`, `apellido`, `cedula`, `tipo_documento`, `fecha_nacimiento`, `edad`, `nacionalidad`, `estado_civil`, `nivel_instruccion`, `ocupacion`, `lugar_trabajo`, `habilidad`, `direccion_residencia`, `telf_movil`, `telf_residencia`, `telf_trabajo`, `religion`, `vive_estudiante`, `foto`) VALUES
-	(1, 'moises', 'duran', '9224717', 'V', '2024-01-12', '0', 'VEN', 'C', 'P', 'test', 'test', 'test', 'test', '4264720250', '02761115599', '02761115599', '4', 'Y', 'face.png');
 
 -- Volcando estructura para tabla cvm.paises
 CREATE TABLE IF NOT EXISTS `paises` (
@@ -1540,13 +1527,16 @@ INSERT INTO `paises` (`id`, `iso`, `name`, `nicename`, `iso3`, `numcode`, `phone
 CREATE TABLE IF NOT EXISTS `parametros` (
   `id` int(11) DEFAULT NULL,
   `parametro` varchar(50) DEFAULT NULL,
-  `status` enum('Y','N') DEFAULT NULL
+  `status` enum('Y','N') DEFAULT NULL,
+  `valor` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla cvm.parametros: ~2 rows (aproximadamente)
-INSERT INTO `parametros` (`id`, `parametro`, `status`) VALUES
-	(1, 'MOBILE_RESTRICTION', 'Y'),
-	(2, 'PRE_REGISTRO', 'Y');
+-- Volcando datos para la tabla cvm.parametros: ~5 rows (aproximadamente)
+INSERT INTO `parametros` (`id`, `parametro`, `status`, `valor`) VALUES
+	(3, 'MOBILE_RESTRICTION', 'Y', ''),
+	(2, 'PRE_REGISTRO', 'Y', ''),
+	(1, 'GENERAL', 'N', ''),
+	(4, 'MAX_CUPOS_GENERAL_SECTIONS', 'Y', '30');
 
 -- Volcando estructura para tabla cvm.parroquias
 CREATE TABLE IF NOT EXISTS `parroquias` (
@@ -1557,7 +1547,7 @@ CREATE TABLE IF NOT EXISTS `parroquias` (
   KEY `id_municipio` (`id_municipio`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1139 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- Volcando datos para la tabla cvm.parroquias: ~1.138 rows (aproximadamente)
+-- Volcando datos para la tabla cvm.parroquias: ~1.054 rows (aproximadamente)
 INSERT INTO `parroquias` (`id_parroquia`, `id_municipio`, `parroquia`) VALUES
 	(1, 1, 'Alto Orinoco'),
 	(2, 1, 'Huachamacare Acanaña'),
@@ -2706,7 +2696,7 @@ CREATE TABLE IF NOT EXISTS `periodo_escolar` (
   KEY `Índice 1` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla cvm.periodo_escolar: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla cvm.periodo_escolar: ~1 rows (aproximadamente)
 INSERT INTO `periodo_escolar` (`id`, `periodo`, `estatus`) VALUES
 	(1, '2023-2024', 'Y');
 
@@ -2722,15 +2712,16 @@ CREATE TABLE IF NOT EXISTS `planificacion` (
   `id_lapso` int(11) DEFAULT NULL,
   `id_grado` int(11) DEFAULT NULL,
   KEY `Índice 1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla cvm.planificacion: ~5 rows (aproximadamente)
+-- Volcando datos para la tabla cvm.planificacion: ~6 rows (aproximadamente)
 INSERT INTO `planificacion` (`id`, `titulo`, `descripcion`, `porcentaje`, `id_periodo`, `id_materia`, `id_docente`, `id_lapso`, `id_grado`) VALUES
 	(1, 'ecuaciones cuadraticas', 'test', 25, 1, 3, 10, 1, 2),
 	(2, 'test', 'test', 25, 1, 3, 10, 1, 2),
 	(3, 'test', 'test', 25, 1, 3, 10, 1, 2),
 	(4, 'test', 'test', 25, 1, 3, 10, 1, 2),
-	(5, 'gatitos felices', 'goldos', 25, 1, 8, 10, 1, 1);
+	(5, 'gatitos felices', 'goldos', 25, 1, 8, 10, 1, 1),
+	(6, 'test', 'test', 10, 1, 3, 1, 1, 2);
 
 -- Volcando estructura para tabla cvm.planificacion_actividades
 CREATE TABLE IF NOT EXISTS `planificacion_actividades` (
@@ -2739,9 +2730,9 @@ CREATE TABLE IF NOT EXISTS `planificacion_actividades` (
   `porcentaje` int(11) DEFAULT NULL,
   `id_planificacion` int(11) DEFAULT NULL,
   KEY `Índice 1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla cvm.planificacion_actividades: ~8 rows (aproximadamente)
+-- Volcando datos para la tabla cvm.planificacion_actividades: ~9 rows (aproximadamente)
 INSERT INTO `planificacion_actividades` (`id`, `actividad`, `porcentaje`, `id_planificacion`) VALUES
 	(1, 'taller', 5, 1),
 	(2, 'examen', 20, 1),
@@ -2750,7 +2741,8 @@ INSERT INTO `planificacion_actividades` (`id`, `actividad`, `porcentaje`, `id_pl
 	(5, 'test', 25, 4),
 	(6, 'comer', 5, 5),
 	(7, 'dormir', 15, 5),
-	(8, 'tarea', 5, 5);
+	(8, 'tarea', 5, 5),
+	(9, 'test', 10, 6);
 
 -- Volcando estructura para tabla cvm.planificacion_secciones
 CREATE TABLE IF NOT EXISTS `planificacion_secciones` (
@@ -2758,15 +2750,16 @@ CREATE TABLE IF NOT EXISTS `planificacion_secciones` (
   `id_planificacion` int(11) DEFAULT 0,
   `id_seccion` int(11) DEFAULT 0,
   KEY `Índice 1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla cvm.planificacion_secciones: ~5 rows (aproximadamente)
+-- Volcando datos para la tabla cvm.planificacion_secciones: ~6 rows (aproximadamente)
 INSERT INTO `planificacion_secciones` (`id`, `id_planificacion`, `id_seccion`) VALUES
 	(1, 1, 1),
 	(2, 2, 1),
 	(3, 3, 1),
 	(4, 4, 1),
-	(5, 5, 1);
+	(5, 5, 1),
+	(6, 6, 2);
 
 -- Volcando estructura para tabla cvm.religiones
 CREATE TABLE IF NOT EXISTS `religiones` (
@@ -2804,25 +2797,25 @@ CREATE TABLE IF NOT EXISTS `representantes` (
   `religion` varchar(50) DEFAULT NULL,
   `vive_estudiante` enum('Y','N') DEFAULT NULL,
   `parentesco` varchar(50) DEFAULT NULL,
+  `foto` varchar(50) DEFAULT NULL,
   KEY `Índice 1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Volcando datos para la tabla cvm.representantes: ~0 rows (aproximadamente)
-INSERT INTO `representantes` (`id`, `nombre`, `apellido`, `cedula`, `tipo_documento`, `fecha_nacimiento`, `edad`, `nacionalidad`, `estado_civil`, `nivel_instruccion`, `ocupacion`, `lugar_trabajo`, `habilidad`, `direccion_residencia`, `telf_movil`, `telf_residencia`, `telf_trabajo`, `religion`, `vive_estudiante`, `parentesco`) VALUES
-	(1, 'moises', 'duran', '9224717', 'V', '2024-01-12', '0', 'VEN', 'C', 'P', 'test', 'test', 'test', 'test', '4264720250', '02761115599', '02761115599', '4', 'N', 'Padre');
 
 -- Volcando estructura para tabla cvm.secciones
 CREATE TABLE IF NOT EXISTS `secciones` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `seccion` enum('A','B','C') DEFAULT NULL,
+  `seccion` varchar(50) DEFAULT NULL,
+  `turno` varchar(50) DEFAULT NULL,
   KEY `Índice 1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Volcando datos para la tabla cvm.secciones: ~3 rows (aproximadamente)
-INSERT INTO `secciones` (`id`, `seccion`) VALUES
-	(1, 'A'),
-	(2, 'B'),
-	(3, 'C');
+INSERT INTO `secciones` (`id`, `seccion`, `turno`) VALUES
+	(22, 'A', '["M","T"]'),
+	(23, 'B', '["T"]'),
+	(25, 'C', '["M","T"]');
 
 -- Volcando estructura para tabla cvm.seccion_grado
 CREATE TABLE IF NOT EXISTS `seccion_grado` (
@@ -2830,18 +2823,20 @@ CREATE TABLE IF NOT EXISTS `seccion_grado` (
   `id_seccion` int(11) DEFAULT 0,
   `id_grado` int(11) DEFAULT 0,
   KEY `Índice 1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla cvm.seccion_grado: ~8 rows (aproximadamente)
+-- Volcando datos para la tabla cvm.seccion_grado: ~10 rows (aproximadamente)
 INSERT INTO `seccion_grado` (`id`, `id_seccion`, `id_grado`) VALUES
-	(1, 1, 1),
-	(2, 1, 2),
-	(3, 1, 3),
-	(4, 1, 4),
-	(5, 1, 5),
-	(6, 2, 1),
-	(7, 2, 2),
-	(8, 2, 3);
+	(31, 22, 1),
+	(32, 22, 2),
+	(33, 22, 3),
+	(34, 23, 1),
+	(35, 23, 2),
+	(38, 25, 1),
+	(39, 25, 2),
+	(40, 25, 3),
+	(41, 25, 4),
+	(42, 25, 5);
 
 -- Volcando estructura para tabla cvm.sub_modulos
 CREATE TABLE IF NOT EXISTS `sub_modulos` (
@@ -2852,15 +2847,18 @@ CREATE TABLE IF NOT EXISTS `sub_modulos` (
   `id_modulo` int(11) DEFAULT NULL,
   `url` varchar(100) DEFAULT NULL,
   KEY `Índice 1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla cvm.sub_modulos: ~5 rows (aproximadamente)
+-- Volcando datos para la tabla cvm.sub_modulos: ~8 rows (aproximadamente)
 INSERT INTO `sub_modulos` (`id`, `titulo`, `descripcion`, `status`, `id_modulo`, `url`) VALUES
 	(1, 'Inicio', 'Pagina principal', 'Y', 1, 'index.php'),
 	(2, 'Docentes', 'Administracion de Docentes', 'Y', 2, 'docentes.php'),
 	(3, 'Estudiantes', 'Administracion de Estudiantes', 'Y', 2, 'estudiantes.php'),
 	(4, 'Planificación', 'Planificacion académica', 'Y', 3, 'planificacion.php'),
-	(5, 'Asignación de Materias', 'Asignar materia a docentes', 'Y', 2, 'asignacion_materias_docentes.php');
+	(5, 'Asignación de Materias', 'Asignar materia a docentes', 'Y', 2, 'asignacion_materias_docentes.php'),
+	(6, 'Parametros Generales', 'Parametros de Registro', 'Y', 4, 'parametros.php'),
+	(7, 'Cupos Pre-Registro', 'Asignacion de cupos por seccion', 'Y', 2, 'cupos.php'),
+	(8, 'Secciones', 'Creacion de Secciones', 'Y', 2, 'secciones.php');
 
 -- Volcando estructura para tabla cvm.tipos_usuarios
 CREATE TABLE IF NOT EXISTS `tipos_usuarios` (
@@ -2897,9 +2895,9 @@ CREATE TABLE IF NOT EXISTS `tusuarios_smodulos` (
   `id_sub_modulo` int(11) DEFAULT NULL,
   `access` enum('Y','N') DEFAULT NULL,
   KEY `Índice 1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla cvm.tusuarios_smodulos: ~7 rows (aproximadamente)
+-- Volcando datos para la tabla cvm.tusuarios_smodulos: ~15 rows (aproximadamente)
 INSERT INTO `tusuarios_smodulos` (`id`, `id_tipo_usuario`, `id_sub_modulo`, `access`) VALUES
 	(1, 4, 1, 'Y'),
 	(2, 4, 2, 'Y'),
@@ -2907,7 +2905,15 @@ INSERT INTO `tusuarios_smodulos` (`id`, `id_tipo_usuario`, `id_sub_modulo`, `acc
 	(4, 3, 4, 'Y'),
 	(5, 2, 1, 'Y'),
 	(6, 2, 2, 'Y'),
-	(8, 2, 5, 'Y');
+	(8, 2, 5, 'Y'),
+	(9, 1, 1, 'Y'),
+	(10, 1, 2, 'Y'),
+	(11, 1, 3, 'Y'),
+	(12, 1, 4, 'Y'),
+	(13, 1, 5, 'Y'),
+	(14, 1, 6, 'Y'),
+	(15, 1, 7, 'Y'),
+	(16, 1, 8, 'Y');
 
 -- Volcando estructura para tabla cvm.usuarios
 CREATE TABLE IF NOT EXISTS `usuarios` (
@@ -2918,11 +2924,11 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `permisos` varchar(100) DEFAULT NULL,
   `id_tipo_usuario` int(11) DEFAULT NULL,
   KEY `Índice 1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla cvm.usuarios: ~58 rows (aproximadamente)
+-- Volcando datos para la tabla cvm.usuarios: ~51 rows (aproximadamente)
 INSERT INTO `usuarios` (`id`, `email`, `pass`, `estatus`, `permisos`, `id_tipo_usuario`) VALUES
-	(1, 'angelloprogramador@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'Y', '[R,U,D,I]', 2),
+	(1, 'angelloprogramador@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'Y', '[R,U,D,I]', 1),
 	(2, 'elsecretodeloscielos@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'Y', '[R,U,D]', 3),
 	(3, 'joel4e@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'Y', '[R,U,D]', 3),
 	(4, 'jondoe@gmail.com', 'a1b04ef4203bd3e4c22489d0c406e685', 'Y', '[R,U]', 3),
@@ -2947,40 +2953,32 @@ INSERT INTO `usuarios` (`id`, `email`, `pass`, `estatus`, `permisos`, `id_tipo_u
 	(23, 'angelloprogramador@gmail.com', 'c5fe25896e49ddfe996db7508cf00534', 'Y', '[R,U]', 3),
 	(24, 'angelloprogramador@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
 	(25, 'test@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(26, 'angelloprogramador53@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(27, 'angelloprogramador53@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(28, 'angelloprogramador53@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(29, 'angelloprogramador53@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(30, 'angelloprogramador79@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(31, 'angelloprogramador79@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(32, 'angelloprogramador75@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(33, 'angelloprogramador75@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(34, 'angelloprogramador75@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(35, 'angelloprogramador75@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(36, 'angelloprogramador75@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(37, 'angelloprogramador75@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(38, 'angelloprogramador75@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(39, 'angelloprogramador75@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(40, 'angelloprogramador75@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(41, 'angelloprogramador75@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(42, 'angelloprogramador75@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(43, 'angelloprogramador75@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(44, 'angelloprogramador75@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(45, 'angelloprogramador75@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(46, 'angelloprogramador75@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(47, 'angelloprogramador75@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(48, 'angelloprogramador96@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(49, 'angelloprogramador75@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(50, 'angelloprogramador96@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(51, 'angelloprogramador75@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(52, 'angelloprogramador75@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(53, 'angelloprogramador75@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(54, 'angelloprogramador75@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(55, 'angelloprogramador75@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(56, 'angelloprogramador75@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(57, 'angelloprogramador75@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(58, 'angelloprogramador75@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4),
-	(59, 'angelloprogramador75@gmail.com', '3ee171f0b0aabdc0c979f18775213bf7', 'N', '[R,U]', 4);
+	(26, 'angelloprogramador23@gmail.com', 'f4e37a7986a4d838ba675d7b2217152c', 'N', '[R,U]', 4),
+	(27, 'test23@gmail.com', 'f4e37a7986a4d838ba675d7b2217152c', 'N', '[R,U]', 4),
+	(28, 'test23@gmail.com', 'f4e37a7986a4d838ba675d7b2217152c', 'N', '[R,U]', 4),
+	(29, 'test23@gmail.com', 'f4e37a7986a4d838ba675d7b2217152c', 'N', '[R,U]', 4),
+	(30, 'test23@gmail.com', 'f4e37a7986a4d838ba675d7b2217152c', 'N', '[R,U]', 4),
+	(31, 'test23@gmail.com', 'f4e37a7986a4d838ba675d7b2217152c', 'N', '[R,U]', 4),
+	(32, 'test23@gmail.com', 'f4e37a7986a4d838ba675d7b2217152c', 'N', '[R,U]', 4),
+	(33, 'test23@gmail.com', 'f4e37a7986a4d838ba675d7b2217152c', 'N', '[R,U]', 4),
+	(34, 'test26@gmail.com', '8e296a067a37563370ded05f5a3bf3ec', 'N', '[R,U]', 4),
+	(35, 'test26@gmail.com', '8e296a067a37563370ded05f5a3bf3ec', 'N', '[R,U]', 4),
+	(36, 'test26@gmail.com', '8e296a067a37563370ded05f5a3bf3ec', 'N', '[R,U]', 4),
+	(37, 'test26@gmail.com', '8e296a067a37563370ded05f5a3bf3ec', 'N', '[R,U]', 4),
+	(38, 'test26@gmail.com', '8e296a067a37563370ded05f5a3bf3ec', 'N', '[R,U]', 4),
+	(39, 'test26@gmail.com', '8e296a067a37563370ded05f5a3bf3ec', 'N', '[R,U]', 4),
+	(40, 'test26@gmail.com', '8e296a067a37563370ded05f5a3bf3ec', 'N', '[R,U]', 4),
+	(41, 'test26@gmail.com', '8e296a067a37563370ded05f5a3bf3ec', 'N', '[R,U]', 4),
+	(42, 'test26@gmail.com', '8e296a067a37563370ded05f5a3bf3ec', 'N', '[R,U]', 4),
+	(43, 'test26@gmail.com', '8e296a067a37563370ded05f5a3bf3ec', 'N', '[R,U]', 4),
+	(44, 'test26@gmail.com', '8e296a067a37563370ded05f5a3bf3ec', 'N', '[R,U]', 4),
+	(45, 'test26@gmail.com', '8e296a067a37563370ded05f5a3bf3ec', 'N', '[R,U]', 4),
+	(46, 'test83@gmail.com', '6f4c5d3207471d9dbae6db3c8f7c1909', 'N', '[R,U]', 4),
+	(47, 'test83@gmail.com', '6f4c5d3207471d9dbae6db3c8f7c1909', 'N', '[R,U]', 4),
+	(48, 'test83@gmail.com', '6f4c5d3207471d9dbae6db3c8f7c1909', 'N', '[R,U]', 4),
+	(49, 'test83@gmail.com', '6f4c5d3207471d9dbae6db3c8f7c1909', 'N', '[R,U]', 4),
+	(50, 'test83@gmail.com', '6f4c5d3207471d9dbae6db3c8f7c1909', 'N', '[R,U]', 4),
+	(51, 'angelloprogramador26@gmail.com', '374861a3ae2c8ee7af19cb03dd32e834', 'N', '[R,U]', 4);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

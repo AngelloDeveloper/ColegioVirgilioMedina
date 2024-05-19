@@ -18,6 +18,9 @@
         public function getAllSecciones() {
             $this->sql = " SELECT * FROM secciones";
             $this->query = mysqli_query($this->con, $this->sql);
+            if(mysqli_num_rows($this->query) == 0) {
+                return [];
+            }
             while ($row = mysqli_fetch_assoc($this->query)) { 
                 $rows[] = $row; 
             } 
@@ -28,6 +31,9 @@
         public function getGradosForSeccions() {
             $this->sql = " SELECT * FROM seccion_grado";
             $this->query = mysqli_query($this->con, $this->sql);
+            if(mysqli_num_rows($this->query) == 0) {
+                return [];
+            }
             while ($row = mysqli_fetch_assoc($this->query)) { 
                 $rows[] = $row; 
             } 
@@ -61,7 +67,9 @@
         }
 
         public function addSeccion() {
-            $turns = json_encode($this->objData['turno']);
+
+            //$turns = json_encode($this->objData['turno']);
+            $turns = json_encode($this->uniqueTurns($this->objData['grados']));
             $this->sql = "INSERT INTO 
                 secciones ( 
                     seccion,
@@ -80,14 +88,17 @@
 
         public function addSeccionGrados($idSeccion, $arrGrados) {
             foreach($arrGrados as $grado) {
+                $explodeTurn = explode('-', $grado);
                 $this->sql = "INSERT INTO 
                     seccion_grado ( 
                         id_seccion,
-                        id_grado
+                        id_grado,
+                        turno
                     ) 
                     VALUES (
                         '{$idSeccion}',
-                        '{$grado}'
+                        '{$explodeTurn[0]}',
+                        '{$explodeTurn[1]}'
                     )
                 ";
 
@@ -108,6 +119,29 @@
             $this->result = mysqli_insert_id($this->con);
 
             return $this->result;
+        }
+
+        protected function uniqueTurns($arrgrados) {
+            $gradosTurn = [];
+            $arrResult = [];
+            $return = [];
+            foreach($arrgrados as $index => $grado) {
+               $explod = explode('-', $grado);
+               $gradosTurn[$index] = $explod[1];
+            }
+
+            $arrResult = array_unique($gradosTurn);
+            if(count($arrResult) == 1) {
+                foreach($arrResult as $value) {
+                    $return = [$value];
+                }
+            } 
+
+            if(count($arrResult) == 2) {
+                $return = ["M","T"];
+            }
+
+            return $return;
         }
     }
 ?>
