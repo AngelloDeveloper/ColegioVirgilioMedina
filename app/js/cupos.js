@@ -69,4 +69,57 @@ $(function() {
             })
         })
     })
+
+    $('.swicth_active_section').on('click', function() {
+        const elm = $(this)[0];
+        const swicth = $(elm).prop('checked');
+        const elmchecks = $(elm).parent().parent().parent().parent().prev()[0];
+        if(swicth) {
+            $(elmchecks).find('p').show();
+        } else {
+            $(elmchecks).find('p').hide();
+        }
+    })
+
+    $('.morning').on('click', function() {
+        const elm = $(this)[0];
+        const check = $(elm).prop('checked');
+        console.log('checked: ', check);
+        const elmchecks = $(elm).parent().parent().parent().parent().parent().next()[0];
+        console.log(elmchecks);
+        let template = `
+            <div class="input-field col s6 cupo_m">
+                <input id="last_name" type="text" class="validate">
+                <label for="last_name">Cupo Mañana</label>
+            </div>
+        `;
+        if(check) {
+            $(elmchecks).find('.content_inputs').append(template);
+        } else {
+            $(elmchecks).find('.cupo_m').remove();
+        }
+
+        initMaterialInput();
+    })
+
+    $('.afternon').on('click', function() {
+        const elm = $(this)[0];
+        const check = $(elm).prop('checked');
+        console.log('checked: ', check);
+        const elmchecks = $(elm).parent().parent().parent().parent().parent().next()[0];
+        console.log(elmchecks);
+        let template = `
+            <div class="input-field col s6 cupo_t">
+                <input  type="text" class="validate">
+                <label>Cupo Tarde</label>
+            </div>
+        `;
+        if(check) {
+            $(elmchecks).find('.content_inputs').append(template);
+        } else {
+            $(elmchecks).find('.cupo_t').remove();
+        }
+
+        initMaterialInput();
+    })
 })

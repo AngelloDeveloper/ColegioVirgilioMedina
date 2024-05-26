@@ -25,6 +25,7 @@
     $arrCuposTarde  = $objCupos->getCuposForPeriodo($idperiodo, $arrTurnos[1]['turno']);
 ?>
 <link rel="stylesheet" type="text/css" href="css/cupos.css" />
+
 <div class="content-body">
     <div class="row page-titles mx-0">
         <div class="col p-md-0">
@@ -51,105 +52,68 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <ul class="collapsible">
-                                            <li>
+                                            <?php foreach($arrGrados as $index => $grado) { ?>
+                                                <li>
                                                 <div class="collapsible-header gradient-materias bannerList">
                                                     <div class="row" style="width:100%;">
                                                         <div class="col-12">
-                                                            <img width="80" class="img-icons-listPlanificacion ml-4 mr-2" src="../assets/img/pre-registro/river.png" />
-                                                            <span style="font-size: 18px;">Mañana</span>
+                                                            <!--<img width="80" class="img-icons-listPlanificacion ml-4 mr-2" src="../assets/img/pre-registro/river.png" />-->
+                                                            <span style="font-size: 18px; color: #EA3AAA;"><?= $grado['formato'].'Año' ?></span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="collapsible-body">
-                                                    
-                                                        <form id="form-manana">
-                                                            <div class="row">
-                                                                <?php foreach($arrGrados as $index => $grado) { 
-                                                                   $turno = !empty($arrCuposManana) ? $arrCuposManana[$index]['cupo'] : ''; 
-                                                                ?>                                            
-                                                                    <div class="col-6">
-                                                                        <div class="card">
-                                                                            <div class="card-body">
-                                                                                <div class="row">
-                                                                                    <div class="col-6">
-                                                                                        <p class="gradoItem"><?= $grado['formato'].' año' ?></p>
-                                                                                    </div>
-                                                                                    <div class="col-6">
-                                                                                        <label>Ingrese la cantidad de cupos</label>
-                                                                                        <input name="<?= $grado['id'] ?>" value="<?= $turno ?>" placeholder="ejem: 20" type="number"  />
+                                                    <div class="row">
+                                                        <?php foreach($arrSecciones as $index => $seccion) { ?>
+                                                            <div class="col-4">
+                                                                <div class="card turno_cupo" style="padding: 10px;">
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="col-2">
+                                                                                <span style="font-size: 35px;position: absolute;"><?= $seccion['seccion'] ?></span>
+                                                                            </div>
+                                                                            <div class="col-8">
+                                                                                <!--checks-->
+                                                                                <center>
+                                                                                    <p class="turns" style="display: none;">
+                                                                                        <label>
+                                                                                            <input type="checkbox" class="morning filled-in" />
+                                                                                            <span style="font-size: 12px;">Mañana</span>
+                                                                                        </label>
+                                                                                        <label>
+                                                                                            <input type="checkbox" class="afternon filled-in" />
+                                                                                            <span style="font-size: 12px;">Tarde</span>
+                                                                                        </label>
+                                                                                    </p>
+                                                                                </center>
+                                                                            </div>
+                                                                            <div class="col-2">
+                                                                                <div>
+                                                                                    <div class="switch">
+                                                                                        <label>
+                                                                                            <input type="checkbox" class="swicth_active_section" />
+                                                                                            <span class="lever"></span>
+                                                                                        </label>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
+                                                                        <div class="row">
+                                                                            <div class="col-12">
+                                                                                <span class="content_inputs"></span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--<span style="font-size: 25px; float: right; color: #fff; border-radius: 10px; padding: 7px ;background-color:#0F8B0B;">15</span>
+                                                                        <span class="mr-4" style="font-size: 20px; float: right;">Cupos</span>-->
                                                                     </div>
-                                                                <?php } ?>
-                                                            </div>
-                                                            <hr />
-                                                            <div class="row">
-                                                                <div class="col-9"></div>
-                                                                <div class="col-3">
-                                                                    <center>    
-                                                                        <button type="submit" class="btn btn-success mb-1" style="color: #fff; background-color: #00B236; width:60%;">
-                                                                            Guardar
-                                                                            <span class="btn-icon-right">
-                                                                                <i class="fa fa-check" aria-hidden="true"></i>
-                                                                            </span>
-                                                                        </button>
-                                                                    </center>
                                                                 </div>
                                                             </div>
-                                                        </form>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="collapsible-header gradient-materias bannerList">
-                                                    <div class="row" style="width:100%;">
-                                                        <div class="col-12">
-                                                            <img width="80" class="img-icons-listPlanificacion ml-4 mr-2" src="../assets/img/pre-registro/nature.png" />
-                                                            <span style="font-size: 18px;">Tarde</span>
-                                                        </div>
+                                                        <?php } ?>
                                                     </div>
                                                 </div>
-                                                <div class="collapsible-body">
-                                                    <form id="form-tarde">
-                                                        <div class="row">
-                                                            <?php foreach($arrGrados as $index => $grado) { 
-                                                                $turno = !empty($arrCuposTarde) ? $arrCuposTarde[$index]['cupo'] : '';    
-                                                            ?>                                            
-                                                                <div class="col-6">
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <div class="row">
-                                                                                <div class="col-6">
-                                                                                    <p class="gradoItem"><?= $grado['formato'].' año' ?></p>
-                                                                                </div>
-                                                                                <div class="col-6">
-                                                                                    <label>Ingrese la cantidad de cupos</label>
-                                                                                    <input name="<?= $grado['id'] ?>" value="<?= $turno ?>" placeholder="ejem: 20" type="number"  />
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                        <hr />
-                                                        <div class="row">
-                                                            <div class="col-9"></div>
-                                                            <div class="col-3">
-                                                                <center>    
-                                                                    <button type="submit" class="btn btn-success mb-1" style="color: #fff; background-color: #00B236; width:60%;">
-                                                                        Guardar
-                                                                        <span class="btn-icon-right">
-                                                                            <i class="fa fa-check" aria-hidden="true"></i>
-                                                                        </span>
-                                                                    </button>
-                                                                </center>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
                                             </li>
+                                            <?php } ?>
+                                            
                                         </ul>
                                     </div>
                                 </div>
