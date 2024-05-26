@@ -86,7 +86,7 @@
             return $this->addSeccionGrados($this->result, $this->objData['grados']);
         }
 
-        public function addSeccionGrados($idSeccion, $arrGrados) {
+        protected function addSeccionGrados($idSeccion, $arrGrados) {
             foreach($arrGrados as $grado) {
                 $explodeTurn = explode('-', $grado);
                 $this->sql = "INSERT INTO 
@@ -109,12 +109,28 @@
             return true;
         }
 
+        public function updateSeccion() {
+            //secciones
+            $turns = json_encode($this->uniqueTurns($this->objData['grados']));
+            $this->sql = "UPDATE secciones SET seccion = '{$this->objData['seccion']}', turno = '{$turns}' WHERE id = '{$this->objData['id']}'";
+            $this->query = mysqli_query($this->con, $this->sql);
+            $this->result = mysqli_insert_id($this->con);
+            //delete section_grado
+            $this->deleteSectionGrado($this->objData['id']);
+            //add section grados
+            return $this->addSeccionGrados($this->objData['id'], $this->objData['grados']);
+        }
+
         public function deleteSeccion() {
             $this->sql = "DELETE FROM  secciones WHERE id = '{$this->objData['idSection']}'";
             $this->query = mysqli_query($this->con, $this->sql);
             $this->result = mysqli_insert_id($this->con);
 
-            $this->sql = "DELETE FROM  seccion_grado WHERE id_seccion = '{$this->objData['idSection']}'";
+            return $this->deleteSectionGrado($this->objData['idSection']);
+        }
+
+        protected function deleteSectionGrado($idSection) {
+            $this->sql = "DELETE FROM seccion_grado WHERE id_seccion = '{$idSection}'";
             $this->query = mysqli_query($this->con, $this->sql);
             $this->result = mysqli_insert_id($this->con);
 
