@@ -130,6 +130,7 @@
                             <div class="col-6">
                                 <?php foreach($arrGrados as $index => $grado) { 
                                     $cupo = !empty($arrCuposManana) ? $arrCuposManana[$index]['cupo'] : 0;  
+                                    
                                 ?>
                                     <div class="card turno_cupo" data-turno="manana" data-grado="<?= $arrGrados[$index]['id'] ?>" style="padding: 10px;">
                                         <div class="card-body">
